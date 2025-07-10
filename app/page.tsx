@@ -1,0 +1,684 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import {
+  ChevronDown,
+  Calendar,
+  Award,
+  Users,
+  Code,
+  ExternalLink,
+  User,
+  MapPin,
+  Phone,
+  Mail,
+  GraduationCap,
+  Cake,
+  Wrench,
+  Github,
+  BookOpen,
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+
+interface TimelineItem {
+  id: string
+  title: string
+  organization?: string
+  period: string
+  type: "award" | "activity" | "education" | "upcoming"
+  description: string
+  details?: string // Add this new field for additional description
+  award?: string
+  link?: string
+  contribution?: string
+  order: number // 시간순 정렬을 위한 순서
+}
+
+// 시간 역순으로 정렬된 타임라인 데이터 (최신부터)
+const timelineData: TimelineItem[] = [
+  {
+    id: "mini-project",
+    title: "2025 I-Mini Project",
+    period: "2025-1",
+    type: "award",
+    description: "FE 개발 및 팀장으로 참여",
+    details: "편향 없는 뉴스 소비를 위한 이슈 요약 서비스 ISSUE ONE을 기획하고 개발했습니다.", // Add this line
+    award: "대상 수상",
+    link: "https://blog.naver.com/rlawls1448/223913885215", // 여기에 실제 링크 입력
+    contribution: "React와 TypeScript를 활용한 프론트엔드 개발 담당, 팀원들과의 협업을 통한 프로젝트 관리 및 일정 조율",
+    order: 1,
+  },
+  {
+    id: "kseb-bootcamp",
+    title: "KSEB 부트캠프 4기",
+    period: "2024 겨울 ~ 현재 ",
+    type: "education",
+    description: "KSEB 부트캠프 4기 참여",
+    details: "교내 연계 부트캠프에 참여하여, 기초부터 실무까지 개발 전반에 대한 내용을 폭넓게 배우고 있습니다.", // Add this line
+    award: "우수 교육생 수상",
+    link: "https://blog.naver.com/rlawls1448/223814972761", // 여기에 실제 링크 입력
+    contribution: "백엔드 개발 과정 수료, Django를 활용한 웹 애플리케이션 개발 프로젝트 완성",
+    order: 2,
+  },
+  {
+    id: "debug-president",
+    title: "코딩 동아리 DEBUG",
+    organization: "인하대학교",
+    period: "2025-1",
+    type: "activity",
+    description: "학과 코딩 동아리 DEBUG 회장 활동",
+    details:
+      "사라졌던 학과 개발 동아리 DEBUG를 부활시켜 운영을 재개하고, 후배들을 대상으로 기초 코딩 멘토링을 진행하며 성공적으로 첫 활동을 마무리했습니다.", // Add this line
+    link: "https://blog.naver.com/rlawls1448/223908879860",
+    order: 3,
+  },
+  {
+    id: "scholarship-2",
+    title: "국토정보공사 발전 장려 장학생",
+    period: "2025-1",
+    type: "award",
+    description: "2번째 국토정보공사 발전 장려 장학생 선정",
+    link: "https://blog.naver.com/rlawls1448/223842792230",
+    order: 4,
+  },
+  {
+    id: "likelion",
+    title: "멋쟁이사자처럼 13기",
+    period: "2025-1 ~ 현재",
+    type: "education",
+    description: "BE 파트 참여",
+    details:
+      "멋쟁이사자처럼 백엔드 트랙에 참여하여 Django 기반 웹 개발 교육을 이수하고, 다양한 협동 과제를 통해 GitHub Flow 기반의 협업 방식에 익숙해졌습니다.", // Add this line
+    link: "https://blog.naver.com/rlawls1448/223815192434",
+    order: 5,
+  },
+  {
+    id: "kt-supporters",
+    title: "KT 대학생 IT 서포터즈 2기",
+    period: "2024 겨울",
+    type: "activity",
+    description: "중학생 대상 AI 코딩 교육 봉사 커리큘럼 기획팀 부팀장",
+    details:
+      "도서산간 지역 중학생을 대상으로 코딩 커리큘럼을 기획·제작하고, 직접 방문해 교육 봉사와 진로 멘토링을 진행했습니다.", // Add this line
+    link: "https://blog.naver.com/rlawls1448/223815131854",
+    order: 6,
+  },
+  {
+    id: "curvism",
+    title: "커비이심 서포터즈 1기",
+    period: "2024-2",
+    type: "activity",
+    description: "커비이심 서포터즈 1기 수료",
+    link: "https://blog.naver.com/rlawls1448/223674626853",
+    order: 7,
+  },
+  {
+    id: "inha-study",
+    title: "인하동동 그룹 스터디",
+    period: "2024-2",
+    type: "activity",
+    description: "인하동동 그룹 스터디 팀장",
+    details:
+      "전공 과목을 중심으로 동기 및 후배들과 그룹 스터디를 운영하며 학습 내용 정리, 질의응답, 진도 관리 등을 주도했습니다.", // Add this line
+    link: "https://blog.naver.com/rlawls1448/223603614252",
+    order: 8,
+  },
+  {
+    id: "inha-workshop",
+    title: "인하공방 동아리",
+    period: "2024-2",
+    type: "activity",
+    description: "제어/설계 동아리 활동",
+    details: "자율주행 기술 관련 오픈 스터디 참여", // Add this line
+    link: "https://blog.naver.com/rlawls1448/223785118853?trackingCode=blog_bloghome_searchlist",
+    order: 9,
+  },
+  {
+    id: "scholarship",
+    title: "국토정보공사 발전 장려 장학생",
+    period: "2024-2",
+    type: "award",
+    description: "국토정보공사 발전 장려 장학생 선정",
+    link: "https://blog.naver.com/rlawls1448/223636051928",
+    order: 10,
+  },
+  {
+    id: "data-creator",
+    title: "2024 데이터 크리에이터 캠프",
+    period: "2024 여름",
+    type: "education",
+    description: "인공지능 및 데이터 분석 대회 스타터 과정 수료",
+    details: "ResNet 기반 CNN 모델로 패션 이미지 분류 프로젝트 수행", // Add this line
+    link: "https://blog.naver.com/rlawls1448/223681491796",
+    order: 11,
+  },
+  {
+    id: "digital-twin",
+    title: "2024 농어촌 디지털트윈 서비스 아이디어 경진대회",
+    period: "2024년 여름",
+    type: "award",
+    //description: "농어촌 디지털트윈 서비스 아이디어 경진대회 참여",
+    details: "농촌 고령층의 건강, 일정, 커뮤니티 참여를 통합 관리할 수 있는 디지털 트윈 플랫폼을 제안했습니다.", // Add this line
+    award: "장려상 수상",
+    link: "https://blog.naver.com/rlawls1448/223674643082",
+    order: 12,
+  },
+  {
+    id: "spatial-info-6",
+    title: "제 6회 공간정보 활용 경진대회",
+    period: "2024년 여름",
+    type: "award",
+    description: "팀장 참여",
+    details:
+      "실시간 교통 상황을 기반으로 응급차량의 이동 경로를 최적화하고, 민간 차량 흐름을 효율적으로 유도하는 시스템을 제안했습니다.", // Add this line
+    award: "최우수상 수상",
+    link: "https://blog.naver.com/rlawls1448/223675136871",
+    order: 13,
+  },
+  {
+    id: "dinnoz",
+    title: "DINNOZ 1기 우수 서포터즈",
+    period: "2024 여름",
+    type: "award",
+    description: "IT 박람회 DINNOZ 1기 우수 서포터즈 수료",
+    details:
+      "콘텐츠 기획 및 미션 수행 전반에 적극 참여. 뽑아주신 마음에 보답하고 싶어, 모든 미션에 정성을 다해 임했습니다.", // Add this line
+    link: "https://blog.naver.com/rlawls1448/223672365443",
+    order: 14,
+  },
+  {
+    id: "smart-living",
+    title: "부천시 스마트리빙랩 시민 참여단",
+    period: "2024 여름",
+    type: "activity",
+    description: "부천시 스마트리빙랩 시민 참여단 팀장 수료",
+    details:
+      "시민의 실질적인 의견이 어떻게 도시 설계에 반영되는지를 직접 경험하고, 조별 논의 및 제안 활동에 참여했습니다.", // Add this line
+    link: "https://blog.naver.com/rlawls1448/223554607352",
+    order: 15,
+  },
+  {
+    id: "research-group",
+    title: "교수-학생 전공심화 연구모임",
+    period: "2020-2",
+    type: "activity",
+    description: "인천대학교",
+    details: "코로나 방역 관련 아이디어로 교수-학생 전공심화 연구모임 참여", // Add this line
+    link: "https://blog.naver.com/rlawls1448/222176617026",
+    order: 16,
+  },
+  {
+    id: "maker-contest",
+    title: "제 5회 INU(교내) 메이커 경진대회",
+    period: "2020-2",
+    type: "award",
+    description: "제 5회 INU(교내) 메이커 경진대회 팀장",
+    details: "1학년 새내기 팀으로 교내 메이커 경진대회에서 우수상 수상, 코로나 대응 아이디어 기획 및 구현", // Add this line
+    award: "우수상 수상",
+    link: "https://blog.naver.com/rlawls1448/222223758063",
+    order: 17,
+  },
+  {
+    id: "coding-start",
+    title: "코딩 첫 시작",
+    period: "2018년",
+    type: "education",
+    description: "고등학교 코딩 동아리 - 프로젝트 대회",
+    details:
+      "아두이노로 구현한 스마트홈 프로젝트 경험이 처음 코딩을 접한 계기이자, IT 분야로 진로를 정하게 된 중요한 출발점이었습니다.", // Add this line
+    award: "최우수상 수상",
+    link: "https://blog.naver.com/rlawls1448/223554607352",
+    order: 18,
+  },
+].sort((a, b) => a.order - b.order)
+
+const upcomingProjects = [
+  {
+    id: "upcoming-1",
+    title: "인하대 해커톤",
+    period: "2025 여름",
+    description: "FamiLog - 가족판 썸원 개발 예정 - BE",
+  },
+  {
+    id: "upcoming-2",
+    title: "멋쟁이사자처럼 중앙 해커톤",
+    period: "2025년 여름",
+    description: "기획 미정",
+  },
+  {
+    id: "upcoming-3",
+    title: "KSEB 산학협력 프로젝트",
+    period: "2025년 여름",
+    description: "Smart WMS 개발 예정 - BE/FE",
+  },
+]
+
+export default function Portfolio() {
+  const [mottoVisible, setMottoVisible] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMottoVisible(true)
+    }, 2000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case "award":
+        return <Award className="w-5 h-5" />
+      case "activity":
+        return <Users className="w-5 h-5" />
+      case "education":
+        return <Code className="w-5 h-5" />
+      default:
+        return <Calendar className="w-5 h-5" />
+    }
+  }
+
+  const getTypeColor = (type: string) => {
+    switch (type) {
+      case "award":
+        return "bg-yellow-500"
+      case "activity":
+        return "bg-green-500"
+      case "education":
+        return "bg-blue-500"
+      default:
+        return "bg-gray-500"
+    }
+  }
+
+  const getTypeBadgeColor = (type: string) => {
+    switch (type) {
+      case "award":
+        return "bg-yellow-100 text-yellow-800"
+      case "activity":
+        return "bg-green-100 text-green-800"
+      case "education":
+        return "bg-blue-100 text-blue-800"
+      default:
+        return "bg-gray-100 text-gray-800"
+    }
+  }
+
+  const getTypeLabel = (type: string) => {
+    switch (type) {
+      case "award":
+        return "수상"
+      case "activity":
+        return "활동"
+      case "education":
+        return "교육"
+      default:
+        return "기타"
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-blue-100">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold text-blue-900">Portfolio</h1>
+            <div className="hidden md:flex space-x-8">
+              {["About", "Skills", "Timeline", "Contact"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-300 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">안녕하세요!</h1>
+            <p className="text-xl md:text-2xl text-gray-700 mb-8">
+              🌱 개발자 꿈나무 <span className="text-blue-600 font-semibold">김진</span>입니다.
+            </p>
+          </div>
+
+          <Button
+            size="lg"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            더 알아보기
+            <ChevronDown className="ml-2 w-5 h-5" />
+          </Button>
+        </div>
+      </section>
+
+      {/* Motto Section */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <div
+            className={`transition-all duration-1000 ease-out ${
+              mottoVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+            }`}
+          >
+            <div className="bg-white rounded-2xl p-12 shadow-lg border border-blue-100">
+              <p className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">"시작이 반이다 🔥"</p>
+              <p className="text-xl text-gray-700">어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.</p>
+              <p className="text-gray-600 mt-4">
+                비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.
+                <br />
+                그래서 저는 완벽한 준비보단, 먼저 움직이는 사람이고자 합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Me Section */}
+      <section id="about" className="py-20 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
+                <User className="w-4 h-4 text-white" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">ABOUT ME</h2>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <User className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 font-medium">이름</p>
+                <p className="text-lg font-semibold text-gray-900">김진</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Cake className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 font-medium">생년월일</p>
+                <p className="text-lg font-semibold text-gray-900">01.03.20</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 font-medium">위치</p>
+                <p className="text-lg font-semibold text-gray-900">인천광역시</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Phone className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 font-medium">연락처</p>
+                <p className="text-lg font-semibold text-gray-900">010-8948-3847</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Mail className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 font-medium">이메일</p>
+                <p className="text-lg font-semibold text-gray-900">rlawls1448@naver.com</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <GraduationCap className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-sm text-gray-500 font-medium">학력</p>
+                <p className="text-lg font-semibold text-gray-900">인하대학교</p>
+                <p className="text-sm text-gray-500">(주) 공간정보공학 / (복) 인공지능공학</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-6 bg-blue-600">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                <Wrench className="w-4 h-4 text-blue-600" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white">SKILLS</h2>
+            </div>
+          </div>
+
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <div className="mb-12">
+              <div className="flex items-center mb-6">
+                <span className="text-2xl mr-3">📚</span>
+                <h3 className="text-2xl font-bold text-gray-900">Studying</h3>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Badge className="bg-blue-600 text-white px-4 py-2 text-sm font-medium">TypeScript</Badge>
+                <Badge className="bg-gray-800 text-white px-4 py-2 text-sm font-medium">Django</Badge>
+                <Badge className="bg-green-600 text-white px-4 py-2 text-sm font-medium">Node.js</Badge>
+                <Badge className="bg-green-500 text-white px-4 py-2 text-sm font-medium">Spring Boot</Badge>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center mb-6">
+                <span className="text-2xl mr-3">🔧</span>
+                <h3 className="text-2xl font-bold text-gray-900">Tools</h3>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Badge className="bg-green-600 text-white px-4 py-2 text-sm font-medium">MongoDB</Badge>
+                <Badge className="bg-blue-500 text-white px-4 py-2 text-sm font-medium">MySQL</Badge>
+                <Badge className="bg-green-500 text-white px-4 py-2 text-sm font-medium">QGIS</Badge>
+                <Badge className="bg-blue-600 text-white px-4 py-2 text-sm font-medium">ARCGIS</Badge>
+                <Badge className="bg-blue-400 text-white px-4 py-2 text-sm font-medium">React</Badge>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline Section */}
+      <section id="timeline" className="py-20 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-0 mb-0">타임라인</h2>
+            <p className="text-gray-600 mt-6">
+              {"아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다."}
+              <br />
+              {"하지만 지금까지 제가 몰입해온 활동들을 정리하며, 어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다."}
+              <br />
+              {"이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다."}
+            </p>
+          </div>
+
+          {/* Main Timeline */}
+          <div className="relative">
+            {/* Timeline Cards */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+              {timelineData.map((item, index) => (
+                <div key={item.id} className="relative">
+                  {/* Unified Card Size */}
+                  <Card className="bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 border-l-4 border-l-blue-500 h-80 relative">
+                    <CardContent className="p-6 h-full flex flex-col">
+                      {/* Timeline number in top right corner */}
+                      <div className="absolute top-4 right-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                        {index + 1}
+                      </div>
+
+                      {/* Header */}
+                      <div className="flex items-start justify-between mb-4 pr-10">
+                        <div
+                          className={`w-12 h-12 ${getTypeColor(item.type)} rounded-lg flex items-center justify-center text-white flex-shrink-0`}
+                        >
+                          {getTypeIcon(item.type)}
+                        </div>
+                        <div className="text-right">
+                          <Badge className={getTypeBadgeColor(item.type)}>{getTypeLabel(item.type)}</Badge>
+                          <p className="text-sm text-gray-500 mt-1">{item.period}</p>
+                        </div>
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1">
+                        <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2">{item.title}</h3>
+                        {item.organization && <p className="text-sm text-gray-500 mb-2">{item.organization}</p>}
+                        <p className="text-gray-600 mb-2 text-sm line-clamp-2">{item.description}</p>
+
+                        {/* Add this section for additional details */}
+                        {item.details && (
+                          <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3">
+                            <p className="text-blue-800 text-xs">{item.details}</p>
+                          </div>
+                        )}
+
+                        {/* Award section remains the same */}
+                        {item.award && (
+                          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2 mb-3">
+                            <div className="flex items-center">
+                              <Award className="w-4 h-4 text-yellow-600 mr-2" />
+                              <span className="text-yellow-800 font-medium text-xs">{item.award}</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Button */}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full border-blue-300 text-blue-600 hover:bg-blue-50 bg-transparent mt-auto"
+                        onClick={() => window.open(item.link, "_blank")}
+                      >
+                        자세히보기
+                        <ExternalLink className="ml-2 w-4 h-4" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Upcoming Projects */}
+      <div className="mb-16 mt-8">
+        <h3 className="text-2xl font-bold text-blue-600 mb-8 text-center">🚀 2025년 여름방학 예정 프로젝트</h3>
+        <div className="text-center mb-16">
+          <p className="text-gray-600 mt-4">
+            {"여름방학엔 세 가지 프로젝트를 앞두고 있습니다. 그 과정에서 많이 부딪히며 경험치를 쌓아가려 합니다."}
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {upcomingProjects.map((project) => (
+            <Card
+              key={project.id}
+              className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 hover:shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+                    <Calendar className="w-5 h-5 text-white" />
+                  </div>
+                  <Badge className="bg-blue-500 text-white">예정</Badge>
+                </div>
+                <h4 className="font-bold text-lg text-gray-900 mb-2">{project.title}</h4>
+                <p className="text-gray-600 mb-3">{project.description}</p>
+                <p className="text-sm text-blue-600 font-medium">{project.period}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Contact Me Section */}
+      <section id="contact" className="py-20 px-6 bg-blue-600">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Contact Me</h2>
+            <p className="text-xl text-blue-100 mb-8">뽑아주신다면 최선을 다하겠습니다.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+            <Card className="bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Github className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">GitHub</h3>
+                <p className="text-gray-600 mb-4">github.com/Jinacker</p>
+                <p className="text-sm text-gray-500">소스 코드 저장소</p>
+                <Button
+                  className="mt-4 bg-gray-900 hover:bg-gray-800 text-white"
+                  onClick={() => window.open("https://github.com/Jinacker", "_blank")}
+                >
+                  방문하기
+                  <ExternalLink className="ml-2 w-4 h-4" />
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Blog</h3>
+                <p className="text-gray-600 mb-4">blog.naver.com/rlawls1448</p>
+                <p className="text-sm text-gray-500">기록의 습관화</p>
+                <Button
+                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white"
+                  onClick={() => window.open("https://blog.naver.com/rlawls1448", "_blank")}
+                >
+                  방문하기
+                  <ExternalLink className="ml-2 w-4 h-4" />
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center">
+            <div className="border-t border-gray-700 pt-6 mt-6">
+              <p className="text-gray-400 text-sm">© 2025 김진의 포트폴리오. All rights reserved.</p>
+              <p className="text-gray-500 text-xs mt-2">이 포트폴리오는 지속적으로 업데이트됩니다.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
