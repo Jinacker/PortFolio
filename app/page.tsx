@@ -278,7 +278,7 @@ const projectData: ProjectItem[] = [
   },
   {
     id: "smart-wms",
-    title: "🚚 RL 기반 AMR 경로 최적화 · 클라우드형 Smart WMS",
+    title: "🚚 RL 기반 AMR 경로 최적화 · 클라우드형 WMS",
     period: "2025 여름",
     description: "KSEB 4기 신세계 I&C 산학 프로젝트",
     tech: "Spring Boot 기반 BE + FE 보조",
@@ -695,7 +695,7 @@ export default function Portfolio() {
                   {/* Content */}
                   <div className="flex-1">
                     <h3
-                      className={`font-bold text-lg text-gray-900 mb-2 ${project.id === "smart-wms" ? "line-clamp-1 text-sm" : "line-clamp-2"}`}
+                      className={`font-bold text-gray-900 mb-2 ${project.id === "smart-wms" ? "text-sm" : "line-clamp-2 text-lg"}`}
                     >
                       {project.title}
                     </h3>
