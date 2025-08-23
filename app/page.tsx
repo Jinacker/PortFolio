@@ -261,7 +261,7 @@ const projectData: ProjectItem[] = [
     id: "issue-one",
     title: "📰 이슈 요약 플랫폼: ISSUE ONE",
     period: "2025-1",
-    description: "I-Mini Project 대상 수상! FE 및 팀장",
+    description: "I-Mini Project 대상 수상!",
     tech: "FE 및 팀장",
     status: "completed",
     award: "대상 수상",
@@ -283,6 +283,7 @@ const projectData: ProjectItem[] = [
     description: "KSEB 4기 신세계 I&C 산학 프로젝트",
     tech: "Spring Boot 기반 BE + FE 보조",
     status: "completed",
+    award: "수상",
     link: "https://github.com/KSEB-4th-Project-3rd-Team",
   },
   {
@@ -324,7 +325,7 @@ export default function Portfolio() {
       case "education":
         return <Code className="w-5 h-5" />
       default:
-        return <Calendar className="w-5 h-5" />
+        return <Calendar className="w-4 h-4" />
     }
   }
 
@@ -693,7 +694,11 @@ export default function Portfolio() {
 
                   {/* Content */}
                   <div className="flex-1">
-                    <h3 className="font-bold text-lg text-gray-900 mb-2 line-clamp-2">{project.title}</h3>
+                    <h3
+                      className={`font-bold text-lg text-gray-900 mb-2 ${project.id === "smart-wms" ? "line-clamp-1 text-sm" : "line-clamp-2"}`}
+                    >
+                      {project.title}
+                    </h3>
                     <p className="text-gray-600 mb-3 text-sm line-clamp-2">{project.description}</p>
 
                     {/* Tech Stack */}
