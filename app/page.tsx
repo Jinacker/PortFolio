@@ -262,7 +262,7 @@ const projectData: ProjectItem[] = [
     title: "📰 이슈 요약 플랫폼: ISSUE ONE",
     period: "2025-1",
     description: "I-Mini Project 대상 수상!",
-    tech: "FE 및 팀장",
+    tech: "React 기반 FE 및 팀장",
     status: "completed",
     award: "대상 수상",
     link: "https://github.com/KSEB-4-E",
