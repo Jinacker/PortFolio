@@ -743,11 +743,11 @@ export default function Portfolio() {
                     {/* Content */}
                     <div className="flex-1">
                       <h3
-                        className={`font-bold text-gray-900 mb-2 ${project.id === "smart-wms" ? "text-base leading-tight" : "line-clamp-2 text-lg"}`}
+                        className={`font-bold text-gray-900 mb-2 ${project.id === "smart-wms" ? "text-sm leading-tight" : "text-base leading-tight"}`}
                       >
                         {project.title}
                       </h3>
-                      <p className="text-gray-600 mb-3 text-sm line-clamp-2">{project.description}</p>
+                      <p className="text-gray-600 mb-3 text-sm">{project.description}</p>
 
                       {/* Tech Stack */}
                       <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3">
