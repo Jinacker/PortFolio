@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import {
   ChevronDown,
   Calendar,
@@ -280,11 +280,20 @@ const projectData: ProjectItem[] = [
     id: "smart-wms",
     title: "🚚 RL 기반 AMR 경로 최적화 · 클라우드형 WMS",
     period: "2025 여름",
-    description: "KSEB 4기 신세계 I&C 산학 프로젝트",
+    description: "K-Paas 공모전 출품작 완료",
     tech: "Spring Boot 기반 BE + FE 보조",
     status: "completed",
     award: "수상",
     link: "https://github.com/KSEB-4th-Project-3rd-Team",
+  },
+  {
+    id: "trust-network",
+    title: "👬 지역 기반 신뢰 네트워크 플랫폼: 건너건너",
+    period: "2025 여름",
+    description: "멋쟁이사자처럼 중앙해커톤 완료",
+    tech: "Django 기반 BE - 1대1 채팅 파트",
+    status: "completed",
+    link: "https://github.com/Team-Hawaiian-Pizza",
   },
   {
     id: "shelter-map",
@@ -295,24 +304,52 @@ const projectData: ProjectItem[] = [
     status: "in-progress",
     link: "https://github.com/ShymPyo",
   },
-  {
-    id: "trust-network",
-    title: "👬 지역 기반 신뢰 네트워크 플랫폼: 건너건너",
-    period: "2025 여름 ~ 현재 개발중",
-    description: "멋쟁이사자처럼 중앙해커톤",
-    tech: "Django 기반 BE - 1대1 채팅 파트",
-    status: "in-progress",
-    link: "https://github.com/Team-Hawaiian-Pizza",
-  },
 ]
+
+// 섹션별 애니메이션을 위한 커스텀 훅
+const useScrollAnimation = () => {
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
+  const observerRef = useRef<IntersectionObserver | null>(null)
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => new Set([...prev, entry.target.id]))
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      },
+    )
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect()
+      }
+    }
+  }, [])
+
+  const observeElement = (element: HTMLElement | null) => {
+    if (element && observerRef.current) {
+      observerRef.current.observe(element)
+    }
+  }
+
+  return { visibleSections, observeElement }
+}
 
 export default function Portfolio() {
   const [mottoVisible, setMottoVisible] = useState(false)
+  const { visibleSections, observeElement } = useScrollAnimation()
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setMottoVisible(true)
-    }, 1000) // 2000에서 1000으로 변경
+    }, 1000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -569,7 +606,7 @@ export default function Portfolio() {
       </section>
 
       {/* Timeline Section */}
-      <section id="timeline" className="py-20 px-6 bg-gray-50">
+      <section id="timeline" className="py-20 px-6 bg-gray-50" ref={observeElement}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center mb-4">
@@ -589,12 +626,18 @@ export default function Portfolio() {
 
           {/* Main Timeline */}
           <div className="relative">
-            {/* Timeline Cards */}
+            {/* Timeline Cards - 섹션이 보이면 모든 카드가 한번에 나타남 */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
               {timelineData.map((item, index) => (
                 <div key={item.id} className="relative">
-                  {/* Unified Card Size */}
-                  <Card className="bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 border-l-4 border-l-blue-500 h-80 relative">
+                  <Card
+                    className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-80 relative transform ${
+                      visibleSections.has("timeline") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                    }`}
+                    style={{
+                      transitionDelay: visibleSections.has("timeline") ? `${index * 50}ms` : "0ms",
+                    }}
+                  >
                     <CardContent className="p-6 h-full flex flex-col">
                       {/* Timeline number in top right corner */}
                       <div className="absolute top-4 right-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
@@ -658,7 +701,7 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 bg-white">
+      <section id="projects" className="py-20 px-6 bg-white" ref={observeElement}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center mb-4">
@@ -675,67 +718,73 @@ export default function Portfolio() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projectData.map((project) => (
-              <Card
-                key={project.id}
-                className="bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 border-l-4 border-l-blue-500 h-72 relative"
-              >
-                <CardContent className="p-6 h-full flex flex-col">
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white flex-shrink-0">
-                      <Folder className="w-5 h-5" />
-                    </div>
-                    <div className="text-right">
-                      {getStatusBadge(project.status)}
-                      <p className="text-sm text-gray-500 mt-1">{project.period}</p>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1">
-                    <h3
-                      className={`font-bold text-gray-900 mb-2 ${project.id === "smart-wms" ? "text-sm" : "line-clamp-2 text-lg"}`}
-                    >
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-600 mb-3 text-sm line-clamp-2">{project.description}</p>
-
-                    {/* Tech Stack */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3">
-                      <p className="text-blue-800 text-xs font-medium">{project.tech}</p>
-                    </div>
-
-                    {/* Award section */}
-                    {project.award && (
-                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2 mb-3">
-                        <div className="flex items-center">
-                          <Award className="w-4 h-4 text-yellow-600 mr-2" />
-                          <span className="text-yellow-800 font-medium text-xs">{project.award}</span>
-                        </div>
+            {projectData.map((project, index) => (
+              <div key={project.id}>
+                <Card
+                  className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-72 relative transform ${
+                    visibleSections.has("projects") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                  }`}
+                  style={{
+                    transitionDelay: visibleSections.has("projects") ? `${index * 60}ms` : "0ms",
+                  }}
+                >
+                  <CardContent className="p-6 h-full flex flex-col">
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white flex-shrink-0">
+                        <Folder className="w-5 h-5" />
                       </div>
-                    )}
-                  </div>
+                      <div className="text-right">
+                        {getStatusBadge(project.status)}
+                        <p className="text-sm text-gray-500 mt-1">{project.period}</p>
+                      </div>
+                    </div>
 
-                  {/* Button */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full border-blue-300 text-blue-600 hover:bg-blue-50 bg-transparent mt-auto"
-                    onClick={() => window.open(project.link, "_blank")}
-                  >
-                    GitHub 보기
-                    <ExternalLink className="ml-2 w-4 h-4" />
-                  </Button>
-                </CardContent>
-              </Card>
+                    {/* Content */}
+                    <div className="flex-1">
+                      <h3
+                        className={`font-bold text-gray-900 mb-2 ${project.id === "smart-wms" ? "text-base leading-tight" : "line-clamp-2 text-lg"}`}
+                      >
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-600 mb-3 text-sm line-clamp-2">{project.description}</p>
+
+                      {/* Tech Stack */}
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3">
+                        <p className="text-blue-800 text-xs font-medium">{project.tech}</p>
+                      </div>
+
+                      {/* Award section */}
+                      {project.award && (
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-2 mb-3">
+                          <div className="flex items-center">
+                            <Award className="w-4 h-4 text-yellow-600 mr-2" />
+                            <span className="text-yellow-800 font-medium text-xs">{project.award}</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Button */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full border-blue-300 text-blue-600 hover:bg-blue-50 bg-transparent mt-auto"
+                      onClick={() => window.open(project.link, "_blank")}
+                    >
+                      GitHub 보기
+                      <ExternalLink className="ml-2 w-4 h-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Contact Me Section */}
-      <section id="contact" className="py-20 px-6 bg-blue-600">
+      <section id="contact" className="py-20 px-6 bg-blue-600" ref={observeElement}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Contact Me</h2>
@@ -743,7 +792,14 @@ export default function Portfolio() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-            <Card className="bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+            <Card
+              className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 cursor-pointer transform ${
+                visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
+              style={{
+                transitionDelay: visibleSections.has("contact") ? "0ms" : "0ms",
+              }}
+            >
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Github className="w-8 h-8 text-white" />
@@ -761,7 +817,14 @@ export default function Portfolio() {
               </CardContent>
             </Card>
 
-            <Card className="bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+            <Card
+              className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 cursor-pointer transform ${
+                visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+              }`}
+              style={{
+                transitionDelay: visibleSections.has("contact") ? "100ms" : "0ms",
+              }}
+            >
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <BookOpen className="w-8 h-8 text-white" />
