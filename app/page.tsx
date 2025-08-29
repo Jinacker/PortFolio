@@ -261,7 +261,7 @@ const projectData: ProjectItem[] = [
     id: "issue-one",
     title: "📰 이슈 요약 플랫폼: ISSUE ONE",
     period: "2025-1",
-    description: "I-Mini Project 대상 수상!",
+    description: "I-Mini Project 출품작",
     tech: "React 기반 FE 및 팀장",
     status: "completed",
     award: "대상 수상",
@@ -280,17 +280,17 @@ const projectData: ProjectItem[] = [
     id: "smart-wms",
     title: "🚚 RL 기반 AMR 경로 최적화 · 클라우드형 WMS",
     period: "2025 여름",
-    description: "K-Paas 공모전 출품작 완료",
+    description: "신세계 I&C 산학협력 프로젝트 출품작",
     tech: "Spring Boot 기반 BE + FE 보조",
     status: "completed",
-    award: "수상",
+    award: "우수상 수상",
     link: "https://github.com/KSEB-4th-Project-3rd-Team",
   },
   {
     id: "trust-network",
     title: "👬 지역 기반 신뢰 네트워크 플랫폼: 건너건너",
     period: "2025 여름",
-    description: "멋쟁이사자처럼 중앙해커톤 완료",
+    description: "멋쟁이사자처럼 중앙해커톤",
     tech: "Django 기반 BE - 1대1 채팅 파트",
     status: "completed",
     link: "https://github.com/Team-Hawaiian-Pizza",
@@ -787,8 +787,12 @@ export default function Portfolio() {
       <section id="contact" className="py-20 px-6 bg-blue-600" ref={observeElement}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Contact Me</h2>
-            <p className="text-xl text-blue-100 mb-8">뽑아주신다면 최선을 다하겠습니다.</p>
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
+                <Phone className="w-4 h-4 text-blue-600" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white">Contact Me</h2>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
