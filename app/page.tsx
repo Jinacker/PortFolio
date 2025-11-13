@@ -86,7 +86,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: "smart-living",
-    title: "부천시 스마트리빙랩 시 참여단",
+    title: "부천시 스마트리빙랩 시민 참여단",
     period: "2024 여름",
     type: "activity",
     description: "부천시 스마트리빙랩 시민 참여단 팀장 수료",
@@ -281,7 +281,7 @@ const timelineData: TimelineItem[] = [
     period: "2025-여름",
     type: "award",
     description: "Spring Boot BE",
-    details: "실제 창고 운영 흐름을 디지털로 정리하는 WMS 프로젝트였습니다. 현장의 동선을 구조화하는 과정에서 운영 관점의 문제 해결을 배웠습니다.",
+    details: "창고 운영을 시스템으로 녹여내는 WMS 프로젝트였습니다.백엔드에서 입·출고, 재고, 작업 상태 같은 도메인 흐름을 정리하며 운영 로직을 안정적으로 모델링하는 경험을 얻었습니다.",
     award: "우수상",
     link: "https://github.com/KSEB-4th-Project-3rd-Team",
     order: 22,
@@ -297,15 +297,24 @@ const timelineData: TimelineItem[] = [
     order: 23,
   },
   {
+    id: "scholarship-grade-1",
+    title: "성적 우수장학금 수상",
+    period: "2025-1학기",
+    type: "award",
+    description: "3분의2 교내 성적 우수 장학금을 수상했습니다.",
+    link: "https://blog.naver.com/rlawls1448/224005262527",
+    order: 24,
+  },
+  {
     id: "debug-president-2",
     title: "코딩 동아리 DEBUG",
     organization: "인하대학교",
     period: "2025-2학기",
     type: "activity",
-    description: "학과 코딩 동아리 DEBUG 회장 활동",
-    details: "1학기 디버그의 성공적인 마무리 후, 운영 및 커리큘럼 개선 후 2학기 활동 진행중입니다. 후배들을 대상으로 코딩 수업을 강의하고 있습니다.",
+    description: "학과 코딩 동아리 DEBUG 회장",
+    details: "1학기 디버그의 성공적인 마무리 후, 운영 및 커리큘럼 개선 후 2학기 활동 진행중입니다. 후배들을 대상으로 코딩 입문 수업을 강의하고 있습니다.",
     link: "https://blog.naver.com/rlawls1448/224005303699",
-    order: 24,
+    order: 25,
   },
   {
     id: "umc-9th",
@@ -314,16 +323,16 @@ const timelineData: TimelineItem[] = [
     type: "activity",
     description: "Node 서버 파트에서 팀 단위 개발 흐름과 협업 구조를 익히고 있습니다.",
     link: "https://blog.naver.com/rlawls1448/224005292835",
-    order: 25,
+    order: 26,
   },
   {
     id: "katsu-map",
     title: "돈가스 지도 — 1인 개발 프로젝트 / 앱 출시",
     period: "2025-11",
     type: "development",
-    description: "서울 돈가스 맛집을 지도 기반으로 탐색하는 개인 프로젝트입니다. 기획부터 개발, 출시까지 혼자 완주한 첫 서비스입니다.",
-    link: "https://github.com/Katsu-Map",
-    order: 26,
+    details: "서울 돈가스 맛집을 지도 기반으로 탐색하는 개인 프로젝트입니다. 기획부터 개발, 출시까지 혼자 완주한 첫 서비스입니다.",
+    link: "https://apps.apple.com/kr/app/%EB%8F%88%EA%B0%80%EC%8A%A4-%EC%A7%80%EB%8F%84/id6755211452",
+    order: 27,
   },
 ].sort((a, b) => b.order - a.order) // a.order - b.order에서 b.order - a.order로 변경
 
@@ -427,6 +436,7 @@ export default function Portfolio() {
     "<div>이 막연하지만 <strong>소중한 목표</strong>가 저를 나아가게 하는 가장 큰 <strong class='text-blue-600'>원동력</strong>입니다.</div>"
   ];
   const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
 
   useEffect(() => {
     setHasMounted(true);
@@ -821,7 +831,7 @@ export default function Portfolio() {
               <h2 className="text-4xl md:text-3xl font-bold text-gray-900">김진의 여정</h2>
             </div>
             <div className="max-w-2xl mx-auto">
-              <p className="text-gray-600 mt-6 text-left">
+              <p className="text-gray-600 mt-12 text-left">
                 {"아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다."}
                 <br />
                 {"하지만 지금까지 제가 몰입해온 활동들을 정리하며,"}
@@ -833,11 +843,64 @@ export default function Portfolio() {
             </div>
           </div>
 
+          {/* Filter Buttons */}
+          <div className="flex justify-center flex-wrap gap-2 mb-8">
+            <Button
+              size="sm"
+              variant={!selectedFilter ? "default" : "outline"}
+              onClick={() => setSelectedFilter(null)}
+              className="rounded-full"
+            >
+              All
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedFilter === 'award' ? "default" : "outline"}
+              onClick={() => setSelectedFilter('award')}
+              className="rounded-full"
+            >
+              수상
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedFilter === 'development' ? "default" : "outline"}
+              onClick={() => setSelectedFilter('development')}
+              className="rounded-full"
+            >
+              개발
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedFilter === 'activity' ? "default" : "outline"}
+              onClick={() => setSelectedFilter('activity')}
+              className="rounded-full"
+            >
+              활동
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedFilter === 'education' ? "default" : "outline"}
+              onClick={() => setSelectedFilter('education')}
+              className="rounded-full"
+            >
+              교육
+            </Button>
+          </div>
+
           {/* Main Timeline */}
           <div className="relative">
             {/* Timeline Cards - 섹션이 보이면 모든 카드가 한번에 나타남 */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-              {timelineData.map((item, index) => (
+              {(
+                selectedFilter
+                  ? timelineData.filter(item => {
+                      if (selectedFilter === 'development') {
+                        return item.type === 'development' || item.id === 'smart-wms-project' || item.id === 'mini-project';
+                      }
+                      return item.type === selectedFilter;
+                    })
+                  : timelineData
+              ).map((item, index) => (
                 <div key={item.id} className="relative">
                   <Card
                     className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-80 relative transform ${
