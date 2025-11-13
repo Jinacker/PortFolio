@@ -343,18 +343,23 @@ const useScrollAnimation = () => {
 }
 
 export default function Portfolio() {
+  const [hasMounted, setHasMounted] = useState(false);
   const [mottoVisible, setMottoVisible] = useState(false)
   const [scrollEnabled, setScrollEnabled] = useState(false)
   const { visibleSections, observeElement } = useScrollAnimation()
   const [activeIndex, setActiveIndex] = useState(0);
   const introTexts = [
-    "떠오른 발상을 실제 동작하는 서비스로 빚어내는 너무나도 재미있어 개발자의 길을 선택한 <span class='text-blue-600 font-semibold'>김진</span>입니다.",
-    "2025년부터 본격적으로 웹 개발에 입문했습니다.<br/>매일 새로운 것을 배우는 재미에 푹 빠져 열심히 성장 중입니다!",
-    "백엔드 개발을 집중적으로 공부하고 있으며,<br/>취미로 프론트엔드와 웹 디자이너의 역할도 맡아가며 역량을 넓히고 있습니다.",
-    "궁극적으로는 특정 기술에 얽매이지 않고,<br/>혼자서도 뭐든 뚝딱 만들어낼 수 있는 풀스택 역량을 손에 넣고 싶습니다.",
-    "이 막연하지만 소중한 목표가 저를 나아가게 하는 가장 큰 원동력입니다."
+    "<div>떠오른 <strong>발상</strong>을 실제 동작하는 <strong>서비스</strong>로 빚어내는 이 과정이</div><div class='mt-6'>너무나도 재미있어 개발자의 길을 선택한 <span class='text-blue-600 font-semibold'>김진</span>입니다.</div>",
+    "<div>2025년 3월부터 본격적으로 웹 개발에 <strong>입문</strong>했습니다.</div><div class='mt-6'>매일 새로운 것을 배우는 재미에 푹 빠져 열심히 <strong class='text-blue-600'>성장</strong> 중입니다.</div>",
+    "<div><strong class='text-blue-600'>백엔드 개발</strong>을 집중적으로 공부하고 있으며,</div><div class='mt-6'><strong>프론트엔드</strong>와 <strong>웹 디자이너</strong>의 역할도 맡아가며 역량을 넓히고 있습니다.</div>",
+    "<div><strong>궁극적으로는</strong> 특정 기술에 얽매이지 않고,</div><div class='mt-6'>혼자서도 뭐든 뚝딱 만들어낼 수 있는 <strong class='text-blue-600'>풀스택 역량</strong>을 손에 넣고 싶습니다.</div>",
+    "<div>이 막연하지만 소중한 목표가 저를 나아가게 하는 가장 큰 <strong class='text-blue-600'>원동력</strong>입니다.</div>"
   ];
   const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -500,7 +505,7 @@ export default function Portfolio() {
       </section>
 
       {/* Motto Section */}
-      <section id="motto" className="py-40 px-6 bg-gray-50">
+      <section id="motto" className="py-40 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-32">
             <span className="text-blue-600">김진</span>은 이런 사람입니다
@@ -604,16 +609,16 @@ export default function Portfolio() {
           </h2>
 
           {/* Additional Introduction */}
-          <div className="relative mt-96" style={{ height: `${introTexts.length * 100}vh` }}>
+          <div className="relative mt-96" style={{ height: `${introTexts.length * 50}vh` }}>
             <div className="sticky top-1/2 -translate-y-1/2 px-6">
               <div className="text-center max-w-3xl mx-auto">
-                <p className="text-3xl md:text-4xl font-medium leading-relaxed text-gray-800">
+                <div className="text-lg md:text-xl font-medium leading-relaxed text-gray-800">
                   <span
                     key={activeIndex}
                     className="inline-block animate-slide-in"
                     dangerouslySetInnerHTML={{ __html: introTexts[activeIndex] }}
                   />
-                </p>
+                </div>
               </div>
             </div>
             <div className="absolute top-0 left-0 w-full">
@@ -622,7 +627,7 @@ export default function Portfolio() {
                   key={index}
                   data-index={index}
                   ref={(el) => (triggerRefs.current[index] = el)}
-                  className="h-screen"
+                  className="h-[50vh]"
                 />
               ))}
             </div>
@@ -638,11 +643,11 @@ export default function Portfolio() {
               <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
                 <Wrench className="w-4 h-4 text-blue-600" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white">SKILLS</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-white">김진은 이런걸 공부하고 있어요</h2>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-[400px_1fr] gap-12 items-center">
+          <div className="grid lg:grid-cols-[500px_1fr] gap-12 items-center">
             {/* Left Side - Skills & Tools */}
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
               <div className="mb-10">
@@ -653,7 +658,7 @@ export default function Portfolio() {
                 <div className="flex justify-center">
                   <a href="https://skillicons.dev" className="hover:opacity-90 transition-opacity">
                     <img
-                      src="https://skillicons.dev/icons?i=nodejs,express,spring,django,react,mongodb,mysql,redis,aws&perline=3"
+                      src="https://skillicons.dev/icons?i=nodejs,express,spring,django,react,mongodb,mysql,redis,aws,postgres,gcp,nest&perline=3"
                       alt="Tech Stack"
                       className="w-full"
                     />
@@ -771,10 +776,10 @@ export default function Portfolio() {
                 <div key={item.id} className="relative">
                   <Card
                     className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-80 relative transform ${
-                      visibleSections.has("timeline") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                      hasMounted && visibleSections.has("timeline") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}
                     style={{
-                      transitionDelay: visibleSections.has("timeline") ? `${index * 50}ms` : "0ms",
+                      transitionDelay: hasMounted && visibleSections.has("timeline") ? `${index * 50}ms` : "0ms",
                     }}
                   >
                     <CardContent className="p-6 h-full flex flex-col">
@@ -861,10 +866,10 @@ export default function Portfolio() {
               <div key={project.id}>
                 <Card
                   className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-72 relative transform ${
-                    visibleSections.has("projects") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                    hasMounted && visibleSections.has("projects") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                   }`}
                   style={{
-                    transitionDelay: visibleSections.has("projects") ? `${index * 60}ms` : "0ms",
+                    transitionDelay: hasMounted && visibleSections.has("projects") ? `${index * 60}ms` : "0ms",
                   }}
                 >
                   <CardContent className="p-6 h-full flex flex-col">
@@ -937,10 +942,10 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
             <Card
               className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 cursor-pointer transform ${
-                visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                hasMounted && visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{
-                transitionDelay: visibleSections.has("contact") ? "0ms" : "0ms",
+                transitionDelay: hasMounted && visibleSections.has("contact") ? "0ms" : "0ms",
               }}
             >
               <CardContent className="p-8 text-center">
@@ -962,10 +967,10 @@ export default function Portfolio() {
 
             <Card
               className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 cursor-pointer transform ${
-                visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                hasMounted && visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{
-                transitionDelay: visibleSections.has("contact") ? "100ms" : "0ms",
+                transitionDelay: hasMounted && visibleSections.has("contact") ? "100ms" : "0ms",
               }}
             >
               <CardContent className="p-8 text-center">
