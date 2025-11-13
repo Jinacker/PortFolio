@@ -28,9 +28,10 @@ interface TimelineItem {
   title: string
   organization?: string
   period: string
-  type: "award" | "activity" | "education" | "upcoming"
+  type: "award" | "activity" | "education" | "upcoming" | "development"
   description: string
   details?: string // Add this new field for additional description
+  role?: string // Add this new field for role information
   award?: string
   link?: string
   contribution?: string
@@ -85,7 +86,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: "smart-living",
-    title: "부천시 스마트리빙랩 시 참여단",
+    title: "부천시 스마트리빙랩 시민 참여단",
     period: "2024 여름",
     type: "activity",
     description: "부천시 스마트리빙랩 시민 참여단 팀장 수료",
@@ -254,6 +255,85 @@ const timelineData: TimelineItem[] = [
     contribution: "React와 TypeScript를 활용한 프론트엔드 개발 담당, 팀원들과의 협업을 통한 프로젝트 관리 및 일정 조율",
     order: 19,
   },
+  {
+    id: "familog-hackathon",
+    title: "FamiLog — 멋쟁이사자처럼 인하대 해커톤",
+    period: "2025-여름",
+    type: "development",
+    description: "Django BE",
+    details: "가족이 하루 질문을 통해 소통하는 기록 서비스입니다. 짧은 시간 안에 팀과 함께 MVP를 완성해가는 과정이 핵심 경험이었습니다.",
+    link: "https://github.com/LikeLion-13th-E-TEAM-Inha-Hackathon",
+    order: 20,
+  },
+  {
+    id: "shympyo-app",
+    title: "쉼표 — 무더위 쉼터 지도",
+    period: "2025-여름",
+    type: "development",
+    description: "React Native 앱 개발",
+    details: "주변의 무더위 쉼터를 가장 빠르게 찾을 수 있는 위치 기반 서비스입니다. 사용자에게 필요한 순간에 ‘바로 보이는’ 정보를 만드는 데 집중했습니다.",
+    link: "https://github.com/ShymPyo",
+    order: 21,
+  },
+  {
+    id: "smart-wms-project",
+    title: "Smart WMS — 신세계 산학프로젝트",
+    period: "2025-여름",
+    type: "award",
+    description: "Spring Boot BE",
+    details: "창고 운영을 시스템으로 녹여내는 WMS 프로젝트였습니다.백엔드에서 입·출고, 재고, 작업 상태 같은 도메인 흐름을 정리하며 운영 로직을 안정적으로 모델링하는 경험을 얻었습니다.",
+    award: "우수상",
+    link: "https://github.com/KSEB-4th-Project-3rd-Team",
+    order: 22,
+  },
+  {
+    id: "geonneogeonneo-hackathon",
+    title: "건너건너 — 멋쟁이사자처럼 중앙 해커톤",
+    period: "2025-여름",
+    type: "development",
+    description: "Django BE - 채팅 개발",
+    details: "지인 기반의 신뢰 네트워크를 잇는 서비스입니다. 사람 사이의 흐름이 끊기지 않는 경험을 만드는 데 집중했습니다.",
+    link: "https://github.com/Team-Hawaiian-Pizza",
+    order: 23,
+  },
+  {
+    id: "scholarship-grade-1",
+    title: "성적 우수장학금 수상",
+    period: "2025-1학기",
+    type: "award",
+    description: "3분의2 교내 성적 우수 장학금을 수상했습니다.",
+    link: "https://blog.naver.com/rlawls1448/224005262527",
+    order: 24,
+  },
+  {
+    id: "debug-president-2",
+    title: "코딩 동아리 DEBUG",
+    organization: "인하대학교",
+    period: "2025-2학기",
+    type: "activity",
+    description: "학과 코딩 동아리 DEBUG 회장",
+    details: "1학기 디버그의 성공적인 마무리 후, 운영 및 커리큘럼 개선 후 2학기 활동 진행중입니다. 후배들을 대상으로 코딩 입문 수업을 강의하고 있습니다.",
+    link: "https://blog.naver.com/rlawls1448/224005303699",
+    order: 25,
+  },
+  {
+    id: "umc-9th",
+    title: "UMC 9기 YB",
+    period: "2025-9 ~ 현재",
+    type: "activity",
+    description: "Node 서버 파트에서 팀 단위 개발 흐름과 협업 구조를 익히고 있습니다.",
+    link: "https://blog.naver.com/rlawls1448/224005292835",
+    order: 26,
+  },
+  {
+    id: "katsu-map",
+    title: "돈가스 지도 — 1인 개발 프로젝트 / 앱 출시",
+    period: "2025-11",
+    type: "development",
+    details: "서울 돈가스 맛집을 지도 기반으로 탐색하는 개인 프로젝트입니다. 기획부터 개발, 출시까지 혼자 완주한 첫 서비스입니다.",
+    link: "https://apps.apple.com/kr/app/%EB%8F%88%EA%B0%80%EC%8A%A4-%EC%A7%80%EB%8F%84/id6755211452",
+    order: 27,
+  },
 ].sort((a, b) => b.order - a.order) // a.order - b.order에서 b.order - a.order로 변경
 
 const projectData: ProjectItem[] = [
@@ -299,10 +379,19 @@ const projectData: ProjectItem[] = [
     id: "shelter-map",
     title: "🕊 무더위 쉼터 지도: 쉼표",
     period: "2025 여름 ~ 현재 개발중",
-    description: "K-Paas 공모전 출품작",
+    description: "K-Paas 공모전 출품작 / 스토어 출시 준비중",
     tech: "React Native 기반 FE",
-    status: "in-progress",
+    status: "completed",
     link: "https://github.com/ShymPyo",
+  },
+  {
+    id: "katsu-map-project",
+    title: "돈가스 지도 — 1인 개발 프로젝트 / 앱 출시",
+    period: "2025-11",
+    description: "아직 일주일만에 만든 MVP라 장기적으로 운영하며 업그레이드 할 예정입니다.",
+    tech: "React Native / Nest.js",
+    status: "completed",
+    link: "https://github.com/Katsu-Map",
   },
 ]
 
@@ -343,15 +432,79 @@ const useScrollAnimation = () => {
 }
 
 export default function Portfolio() {
+  const [hasMounted, setHasMounted] = useState(false);
   const [mottoVisible, setMottoVisible] = useState(false)
+  const [scrollEnabled, setScrollEnabled] = useState(false)
   const { visibleSections, observeElement } = useScrollAnimation()
+  const [activeIndex, setActiveIndex] = useState(0);
+  const introTexts = [
+    "<div>떠오른 <strong>발상</strong>을 실제 동작하는 <strong>서비스</strong>로 빚어내는 이 과정이</div><div class='mt-6'>너무나도 재미있어 개발자의 길을 선택한 <span class='text-blue-600 font-semibold'>김진</span>입니다.</div>",
+    "<div>2025년 3월부터 본격적으로 웹 개발에 <strong>입문</strong>했습니다.</div><div class='mt-6'>매일 새로운 것을 배우는 재미에 푹 빠져 열심히 <strong class='text-blue-600'>성장</strong> 중입니다.</div>",
+    "<div><strong class='text-blue-600'>백엔드 개발</strong>을 집중적으로 공부하고 있으며,</div><div class='mt-6'><strong>프론트엔드</strong>와 <strong>웹 디자이너</strong>의 역할도 맡아가며 역량을 넓히고 있습니다.</div>",
+    "<div><strong>궁극적으로는</strong> 특정 기술에 얽매이지 않고,</div><div class='mt-6'>혼자서도 뭐든 뚝딱 만들어낼 수 있는 <strong class='text-blue-600'>풀스택 역량</strong>을 손에 넣고 싶습니다.</div>",
+    "<div>이 막연하지만 <strong>소중한 목표</strong>가 저를 나아가게 하는 가장 큰 <strong class='text-blue-600'>원동력</strong>입니다.</div>"
+  ];
+  const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMottoVisible(true)
-    }, 1000)
-    return () => clearTimeout(timer)
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
+            setActiveIndex(index);
+          }
+        });
+      },
+      {
+        rootMargin: '-50% 0px -50% 0px',
+        threshold: 0,
+      }
+    );
+
+    const currentRefs = triggerRefs.current;
+    currentRefs.forEach((ref) => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      currentRefs.forEach((ref) => {
+        if (ref) {
+          observer.unobserve(ref);
+        }
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!scrollEnabled) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [scrollEnabled])
+
+  const handleExploreClick = () => {
+    setScrollEnabled(true)
+    setMottoVisible(true)
+    setTimeout(() => {
+      document.getElementById("motto")?.scrollIntoView({ behavior: "smooth" })
+    }, 100)
+  }
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -361,6 +514,8 @@ export default function Portfolio() {
         return <Users className="w-5 h-5" />
       case "education":
         return <Code className="w-5 h-5" />
+      case "development":
+        return <Wrench className="w-5 h-5" />
       default:
         return <Calendar className="w-4 h-4" />
     }
@@ -374,6 +529,8 @@ export default function Portfolio() {
         return "bg-green-500"
       case "education":
         return "bg-blue-500"
+      case "development":
+        return "bg-purple-500"
       default:
         return "bg-gray-500"
     }
@@ -387,6 +544,8 @@ export default function Portfolio() {
         return "bg-green-100 text-green-800"
       case "education":
         return "bg-blue-100 text-blue-800"
+      case "development":
+        return "bg-purple-100 text-purple-800"
       default:
         return "bg-gray-100 text-gray-800"
     }
@@ -400,6 +559,8 @@ export default function Portfolio() {
         return "활동"
       case "education":
         return "교육"
+      case "development":
+        return "개발"
       default:
         return "기타"
     }
@@ -418,62 +579,42 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-blue-100">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-blue-900">Portfolio</h1>
-            <div className="hidden md:flex space-x-8">
-              {["About", "Skills", "Timeline", "Projects", "Contact"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-20 w-72 h-72 bg-blue-300 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">안녕하세요!</h1>
-            <p className="text-xl md:text-2xl text-gray-700 mb-8">
-              🌱 개발자 꿈나무 <span className="text-blue-600 font-semibold">김진</span>입니다.
-            </p>
-          </div>
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-48">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-60">
+            저는 <span className="text-blue-600 font-semibold">김진</span>입니다
+          </h1>
 
           <Button
             size="lg"
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
-            onClick={() => document.getElementById("motto")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={handleExploreClick}
           >
-            더 알아보기
+            네..?
             <ChevronDown className="ml-2 w-5 h-5" />
           </Button>
         </div>
       </section>
 
       {/* Motto Section */}
-      <section id="motto" className="py-20 px-6 bg-gray-50">
+      <section id="motto" className="py-40 px-6">
         <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-32">
+            <span className="text-blue-600">김진</span>은 이런 사람입니다
+          </h2>
           <div
             className={`transition-all duration-1000 ease-out ${
-              mottoVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+              mottoVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"
             }`}
           >
-            <div className="bg-white rounded-2xl p-12 shadow-lg border border-blue-100">
-              <p className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">"시작이 반이다 🔥"</p>
+            <div className="bg-white rounded-2xl p-16 shadow-lg border border-blue-100 text-left">
+              <p className="text-3xl md:text-4xl font-bold text-blue-600 mb-8 text-center">"시작이 반이다 🔥"</p>
               <p className="text-xl text-gray-700">어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.</p>
               <p className="text-gray-600 mt-4">
                 비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.
@@ -486,15 +627,12 @@ export default function Portfolio() {
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="py-20 px-6 bg-white">
+      <section id="about" className="py-32 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
-                <User className="w-4 h-4 text-white" />
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">ABOUT ME</h2>
-            </div>
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              저는 <span className="text-blue-600">김진</span>입니다
+            </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -549,14 +687,44 @@ export default function Portfolio() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-none">
                 <GraduationCap className="w-6 h-6 text-blue-600" />
               </div>
-              <div>
+              <div className="pt-3">
                 <p className="text-sm text-gray-500 font-medium">학력</p>
-                <p className="text-lg font-semibold text-gray-900">인하대학교</p>
-                <p className="text-sm text-gray-500">(주) 공간정보공학 / (복) 인공지능공학</p>
+                <p className="text-lg font-semibold text-gray-900">인하대학교 재학</p>
+                <p className="text-sm text-gray-500 whitespace-nowrap">(주) 공간정보공학과 / (복) 인공지능공학과</p>
+                <p className="text-sm text-gray-500">(부) 디자인융합과</p>
               </div>
+            </div>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mt-96 mb-[32rem]">
+            <span className="text-blue-600">김진</span>은 개발자가 되고싶습니다.
+          </h2>
+
+          {/* Additional Introduction */}
+          <div className="relative mt-96" style={{ height: `${introTexts.length * 50}vh` }}>
+            <div className="sticky top-1/2 -translate-y-1/2 px-6">
+              <div className="text-center max-w-3xl mx-auto">
+                <div className="text-xl md:text-2xl font-medium leading-relaxed text-gray-800">
+                  <span
+                    key={activeIndex}
+                    className="inline-block animate-slide-in"
+                    dangerouslySetInnerHTML={{ __html: introTexts[activeIndex] }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="absolute top-0 left-0 w-full">
+              {introTexts.map((_, index) => (
+                <div
+                  key={index}
+                  data-index={index}
+                  ref={(el) => (triggerRefs.current[index] = el)}
+                  className="h-[50vh]"
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -564,78 +732,188 @@ export default function Portfolio() {
 
       {/* Skills Section */}
       <section id="skills" className="py-20 px-6 bg-blue-600">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
                 <Wrench className="w-4 h-4 text-blue-600" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white">SKILLS</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-white">김진은 이런걸 공부하고 있습니다</h2>
             </div>
           </div>
 
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <div className="mb-12">
-              <div className="flex items-center mb-6">
-                <span className="text-2xl mr-3">📚</span>
-                <h3 className="text-2xl font-bold text-gray-900">Studying</h3>
+            <div className="grid md:grid-cols-2 gap-12 items-start">
+              {/* Left Side - 다루고 있는 기술 */}
+              <div>
+                <div className="flex items-center mb-6">
+                  <span className="text-2xl mr-3">⚙️</span>
+                  <h3 className="text-xl font-bold text-gray-900">다루고 있는 기술</h3>
+                </div>
+                <div className="flex justify-center">
+                  <a href="https://skillicons.dev" className="hover:opacity-90 transition-opacity">
+                    <img
+                      src="https://skillicons.dev/icons?i=nodejs,express,spring,django,react,mongodb,mysql,redis,aws,postgres,gcp,nest&perline=6"
+                      alt="Tech Stack"
+                      className="w-full"
+                    />
+                  </a>
+                </div>
               </div>
-              <div className="flex flex-wrap gap-3">
-                <Badge className="bg-blue-600 text-white px-4 py-2 text-sm font-medium">TypeScript</Badge>
-                <Badge className="bg-gray-800 text-white px-4 py-2 text-sm font-medium">Django</Badge>
-                <Badge className="bg-green-600 text-white px-4 py-2 text-sm font-medium">Node.js</Badge>
-                <Badge className="bg-green-500 text-white px-4 py-2 text-sm font-medium">Spring Boot</Badge>
-              </div>
-            </div>
 
-            <div>
-              <div className="flex items-center mb-6">
-                <span className="text-2xl mr-3">🔧</span>
-                <h3 className="text-2xl font-bold text-gray-900">Tools</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Badge className="bg-green-600 text-white px-4 py-2 text-sm font-medium">MongoDB</Badge>
-                <Badge className="bg-blue-500 text-white px-4 py-2 text-sm font-medium">MySQL</Badge>
-                <Badge className="bg-green-500 text-white px-4 py-2 text-sm font-medium">QGIS</Badge>
-                <Badge className="bg-blue-600 text-white px-4 py-2 text-sm font-medium">ARCGIS</Badge>
-                <Badge className="bg-blue-400 text-white px-4 py-2 text-sm font-medium">React</Badge>
+              {/* Right Side - 활용 툴 */}
+              <div>
+                <div className="flex items-center mb-6">
+                  <span className="text-1xl mr-3">🛠️</span>
+                  <h3 className="text-xl font-bold text-gray-900">활용 툴</h3>
+                </div>
+                <div className="flex flex-wrap gap-2 justify-center items-center">
+                  <img
+                    src="https://img.shields.io/badge/QGIS-589632?style=for-the-badge&logo=QGIS&logoColor=white"
+                    alt="QGIS"
+                    className="h-10"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/ARCGIS-2C7AC3?style=for-the-badge&logo=ARCGIS&logoColor=white"
+                    alt="ARCGIS"
+                    className="h-10"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"
+                    alt="Git"
+                    className="h-10"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"
+                    alt="GitHub"
+                    className="h-10"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"
+                    alt="Docker"
+                    className="h-10"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"
+                    alt="Vercel"
+                    className="h-10"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"
+                    alt="Postman"
+                    className="h-10"
+                  />
+                </div>
               </div>
             </div>
           </div>
+
+          <p className="text-white text-2xl leading-loose my-24 text-left">
+            기술은 결국 사람을 향해야 한다고 믿습니다.<br/>
+            저는 <strong>공간정보 기술과 웹 개발을 결합해</strong><br/>
+            누군가의 일상에서 ‘조금 더 편리한 순간’을 만드는 서비스를 만들고 있습니다.<br/>
+            특히 JavaScript를 주력으로 다양한 웹 개발 역량을 확장하고 있습니다.
+          </p>
+        </div>
+      </section>
+
+      {/* New Section */}
+      <section className="pt-96 pb-48 px-6 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+            <span className="text-blue-600">김진</span>은 열심히 합니다
+          </h2>
         </div>
       </section>
 
       {/* Timeline Section */}
-      <section id="timeline" className="py-20 px-6 bg-gray-50" ref={observeElement}>
+      <section id="timeline" className="py-20 px-6 bg-white" ref={observeElement}>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
                 <Calendar className="w-4 h-4 text-white" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">TIMELINE</h2>
+              <h2 className="text-4xl md:text-3xl font-bold text-gray-900">김진의 여정</h2>
             </div>
-            <p className="text-gray-600 mt-6">
-              {"아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다."}
-              <br />
-              {"하지만 지금까지 제가 몰입해온 활동들을 정리하며, 어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다."}
-              <br />
-              {"이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다."}
-            </p>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-gray-600 mt-12 text-left">
+                {"아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다."}
+                <br />
+                {"하지만 지금까지 제가 몰입해온 활동들을 정리하며,"}
+                <br />
+                {"어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다."}
+                <br />
+                {"이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다."}
+              </p>
+            </div>
+          </div>
+
+          {/* Filter Buttons */}
+          <div className="flex justify-center flex-wrap gap-2 mb-8">
+            <Button
+              size="sm"
+              variant={!selectedFilter ? "default" : "outline"}
+              onClick={() => setSelectedFilter(null)}
+              className="rounded-full"
+            >
+              All
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedFilter === 'award' ? "default" : "outline"}
+              onClick={() => setSelectedFilter('award')}
+              className="rounded-full"
+            >
+              수상
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedFilter === 'development' ? "default" : "outline"}
+              onClick={() => setSelectedFilter('development')}
+              className="rounded-full"
+            >
+              개발
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedFilter === 'activity' ? "default" : "outline"}
+              onClick={() => setSelectedFilter('activity')}
+              className="rounded-full"
+            >
+              활동
+            </Button>
+            <Button
+              size="sm"
+              variant={selectedFilter === 'education' ? "default" : "outline"}
+              onClick={() => setSelectedFilter('education')}
+              className="rounded-full"
+            >
+              교육
+            </Button>
           </div>
 
           {/* Main Timeline */}
           <div className="relative">
             {/* Timeline Cards - 섹션이 보이면 모든 카드가 한번에 나타남 */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
-              {timelineData.map((item, index) => (
+              {(
+                selectedFilter
+                  ? timelineData.filter(item => {
+                      if (selectedFilter === 'development') {
+                        return item.type === 'development' || item.id === 'smart-wms-project' || item.id === 'mini-project';
+                      }
+                      return item.type === selectedFilter;
+                    })
+                  : timelineData
+              ).map((item, index) => (
                 <div key={item.id} className="relative">
                   <Card
                     className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-80 relative transform ${
-                      visibleSections.has("timeline") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                      hasMounted && visibleSections.has("timeline") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}
                     style={{
-                      transitionDelay: visibleSections.has("timeline") ? `${index * 50}ms` : "0ms",
+                      transitionDelay: hasMounted && visibleSections.has("timeline") ? `${index * 50}ms` : "0ms",
                     }}
                   >
                     <CardContent className="p-6 h-full flex flex-col">
@@ -708,7 +986,7 @@ export default function Portfolio() {
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
                 <Folder className="w-4 h-4 text-white" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">PROJECTS</h2>
+              <h2 className="text-4xl md:text-3xl font-bold text-gray-900">김진의 프로젝트</h2>
             </div>
             <p className="text-gray-600 mt-6">
               무언가를 함께 만들어가는 경험이 가장 즐겁습니다. 🚀
@@ -722,10 +1000,10 @@ export default function Portfolio() {
               <div key={project.id}>
                 <Card
                   className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-72 relative transform ${
-                    visibleSections.has("projects") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                    hasMounted && visibleSections.has("projects") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                   }`}
                   style={{
-                    transitionDelay: visibleSections.has("projects") ? `${index * 60}ms` : "0ms",
+                    transitionDelay: hasMounted && visibleSections.has("projects") ? `${index * 60}ms` : "0ms",
                   }}
                 >
                   <CardContent className="p-6 h-full flex flex-col">
@@ -784,24 +1062,25 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Me Section */}
-      <section id="contact" className="py-20 px-6 bg-blue-600" ref={observeElement}>
+      <section id="contact" className="pt-96 pb-[24rem] px-6 bg-blue-600" ref={observeElement}>
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
-                <Phone className="w-4 h-4 text-blue-600" />
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white">Contact Me</h2>
-            </div>
+          <div className="text-center mb-64">
+            <h2 className="text-5xl md:text-7xl font-bold text-white">
+              저는 <span className="text-gray-900">김진</span>입니다
+            </h2>
           </div>
+
+          <p className="text-center text-xl text-white mb-64">
+            혹시 김진이 더 궁금해지셨나요?
+          </p>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
             <Card
               className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 cursor-pointer transform ${
-                visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                hasMounted && visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{
-                transitionDelay: visibleSections.has("contact") ? "0ms" : "0ms",
+                transitionDelay: hasMounted && visibleSections.has("contact") ? "0ms" : "0ms",
               }}
             >
               <CardContent className="p-8 text-center">
@@ -823,10 +1102,10 @@ export default function Portfolio() {
 
             <Card
               className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 cursor-pointer transform ${
-                visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                hasMounted && visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{
-                transitionDelay: visibleSections.has("contact") ? "100ms" : "0ms",
+                transitionDelay: hasMounted && visibleSections.has("contact") ? "100ms" : "0ms",
               }}
             >
               <CardContent className="p-8 text-center">
