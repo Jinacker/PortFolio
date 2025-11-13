@@ -23,6 +23,28 @@ export const metadata: Metadata = {
   title: "Jin Portfolio",
   description: "개발자 꿈나무 김진의 포트폴리오",
   generator: "v0.dev",
+  openGraph: {
+    title: "Jin Portfolio",
+    description: "개발자 꿈나무 김진의 포트폴리오",
+    url: "https://jinportfolio.vercel.app",
+    siteName: "Jin Portfolio",
+    images: [
+      {
+        url: "/favicon-32x32.png",
+        width: 32,
+        height: 32,
+        alt: "Jin Portfolio Logo",
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Jin Portfolio",
+    description: "개발자 꿈나무 김진의 포트폴리오",
+    images: ["/favicon-32x32.png"],
+  },
 }
 
 export default function RootLayout({
