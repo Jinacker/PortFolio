@@ -449,7 +449,8 @@ export default function Portfolio() {
           <div className="mb-8">
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">안녕하세요!</h1>
             <p className="text-xl md:text-2xl text-gray-700 mb-8">
-              🌱 개발자 꿈나무 <span className="text-blue-600 font-semibold">김진</span>입니다.
+              떠오른 발상을 실제 동작하는 서비스로 빚어내는 이 과정이 너무나도 재미있어 개발자의 길을 선택한{" "}
+              <span className="text-blue-600 font-semibold">김진</span>입니다 !
             </p>
           </div>
 
@@ -555,7 +556,8 @@ export default function Portfolio() {
               <div>
                 <p className="text-sm text-gray-500 font-medium">학력</p>
                 <p className="text-lg font-semibold text-gray-900">인하대학교</p>
-                <p className="text-sm text-gray-500">(주) 공간정보공학 / (복) 인공지능공학</p>
+                <p className="text-sm text-gray-500 whitespace-nowrap">(주) 공간정보공학과 / (복) 인공지능공학과</p>
+                <p className="text-sm text-gray-500">(부) 디자인융합과</p>
               </div>
             </div>
           </div>
