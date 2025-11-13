@@ -28,9 +28,10 @@ interface TimelineItem {
   title: string
   organization?: string
   period: string
-  type: "award" | "activity" | "education" | "upcoming"
+  type: "award" | "activity" | "education" | "upcoming" | "development"
   description: string
   details?: string // Add this new field for additional description
+  role?: string // Add this new field for role information
   award?: string
   link?: string
   contribution?: string
@@ -254,6 +255,76 @@ const timelineData: TimelineItem[] = [
     contribution: "React와 TypeScript를 활용한 프론트엔드 개발 담당, 팀원들과의 협업을 통한 프로젝트 관리 및 일정 조율",
     order: 19,
   },
+  {
+    id: "familog-hackathon",
+    title: "FamiLog — 멋쟁이사자처럼 인하대 해커톤",
+    period: "2025-여름",
+    type: "development",
+    description: "Django BE",
+    details: "가족이 하루 질문을 통해 소통하는 기록 서비스입니다. 짧은 시간 안에 팀과 함께 MVP를 완성해가는 과정이 핵심 경험이었습니다.",
+    link: "https://github.com/LikeLion-13th-E-TEAM-Inha-Hackathon",
+    order: 20,
+  },
+  {
+    id: "shympyo-app",
+    title: "쉼표 — 무더위 쉼터 지도",
+    period: "2025-여름",
+    type: "development",
+    description: "React Native 앱 개발",
+    details: "주변의 무더위 쉼터를 가장 빠르게 찾을 수 있는 위치 기반 서비스입니다. 사용자에게 필요한 순간에 ‘바로 보이는’ 정보를 만드는 데 집중했습니다.",
+    link: "https://github.com/ShymPyo",
+    order: 21,
+  },
+  {
+    id: "smart-wms-project",
+    title: "Smart WMS — 산학프로젝트",
+    period: "2025-여름",
+    type: "award",
+    description: "Spring Boot BE",
+    details: "실제 창고 운영 흐름을 디지털로 정리하는 WMS 프로젝트였습니다. 현장의 동선을 구조화하는 과정에서 운영 관점의 문제 해결을 배웠습니다.",
+    award: "우수상",
+    link: "https://github.com/KSEB-4th-Project-3rd-Team",
+    order: 22,
+  },
+  {
+    id: "geonneogeonneo-hackathon",
+    title: "건너건너 — 멋쟁이사자처럼 중앙 해커톤",
+    period: "2025-여름",
+    type: "development",
+    description: "Django BE - 채팅 개발",
+    details: "지인 기반의 신뢰 네트워크를 잇는 서비스입니다. 사람 사이의 흐름이 끊기지 않는 경험을 만드는 데 집중했습니다.",
+    link: "https://github.com/Team-Hawaiian-Pizza",
+    order: 23,
+  },
+  {
+    id: "debug-president-2",
+    title: "코딩 동아리 DEBUG",
+    organization: "인하대학교",
+    period: "2025-2학기",
+    type: "activity",
+    description: "학과 코딩 동아리 DEBUG 회장 활동",
+    details: "1학기 디버그의 성공적인 마무리 후, 운영 및 커리큘럼 개선 후 2학기 활동 진행중입니다. 후배들을 대상으로 코딩 수업을 강의하고 있습니다.",
+    link: "https://blog.naver.com/rlawls1448/224005303699",
+    order: 24,
+  },
+  {
+    id: "umc-9th",
+    title: "UMC 9기 YB",
+    period: "2025-9 ~ 현재",
+    type: "activity",
+    description: "Node 서버 파트에서 팀 단위 개발 흐름과 협업 구조를 익히고 있습니다.",
+    link: "https://blog.naver.com/rlawls1448/224005292835",
+    order: 25,
+  },
+  {
+    id: "katsu-map",
+    title: "돈가스 지도 — 1인 개발 프로젝트 / 앱 출시",
+    period: "2025-11",
+    type: "development",
+    description: "서울 돈가스 맛집을 지도 기반으로 탐색하는 개인 프로젝트입니다. 기획부터 개발, 출시까지 혼자 완주한 첫 서비스입니다.",
+    link: "https://github.com/Katsu-Map",
+    order: 26,
+  },
 ].sort((a, b) => b.order - a.order) // a.order - b.order에서 b.order - a.order로 변경
 
 const projectData: ProjectItem[] = [
@@ -299,9 +370,9 @@ const projectData: ProjectItem[] = [
     id: "shelter-map",
     title: "🕊 무더위 쉼터 지도: 쉼표",
     period: "2025 여름 ~ 현재 개발중",
-    description: "K-Paas 공모전 출품작",
+    description: "K-Paas 공모전 출품작 / 스토어 출시 준비중",
     tech: "React Native 기반 FE",
-    status: "in-progress",
+    status: "completed",
     link: "https://github.com/ShymPyo",
   },
 ]
@@ -424,6 +495,8 @@ export default function Portfolio() {
         return <Users className="w-5 h-5" />
       case "education":
         return <Code className="w-5 h-5" />
+      case "development":
+        return <Wrench className="w-5 h-5" />
       default:
         return <Calendar className="w-4 h-4" />
     }
@@ -437,6 +510,8 @@ export default function Portfolio() {
         return "bg-green-500"
       case "education":
         return "bg-blue-500"
+      case "development":
+        return "bg-purple-500"
       default:
         return "bg-gray-500"
     }
@@ -450,6 +525,8 @@ export default function Portfolio() {
         return "bg-green-100 text-green-800"
       case "education":
         return "bg-blue-100 text-blue-800"
+      case "development":
+        return "bg-purple-100 text-purple-800"
       default:
         return "bg-gray-100 text-gray-800"
     }
@@ -463,6 +540,8 @@ export default function Portfolio() {
         return "활동"
       case "education":
         return "교육"
+      case "development":
+        return "개발"
       default:
         return "기타"
     }
@@ -515,8 +594,8 @@ export default function Portfolio() {
               mottoVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"
             }`}
           >
-            <div className="bg-white rounded-2xl p-16 shadow-lg border border-blue-100">
-              <p className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">"시작이 반이다 🔥"</p>
+            <div className="bg-white rounded-2xl p-16 shadow-lg border border-blue-100 text-left">
+              <p className="text-3xl md:text-4xl font-bold text-blue-600 mb-8 text-center">"시작이 반이다 🔥"</p>
               <p className="text-xl text-gray-700">어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.</p>
               <p className="text-gray-600 mt-4">
                 비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.
@@ -734,19 +813,24 @@ export default function Portfolio() {
       {/* Timeline Section */}
       <section id="timeline" className="py-20 px-6 bg-white" ref={observeElement}>
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
                 <Calendar className="w-4 h-4 text-white" />
               </div>
-              <h2 className="text-4xl md:text-3xl font-bold text-gray-900">김진의 여정</h2>            </div>
-            <p className="text-gray-600 mt-6">
-              {"아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다."}
-              <br />
-              {"하지만 지금까지 제가 몰입해온 활동들을 정리하며, 어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다."}
-              <br />
-              {"이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다."}
-            </p>
+              <h2 className="text-4xl md:text-3xl font-bold text-gray-900">김진의 여정</h2>
+            </div>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-gray-600 mt-6 text-left">
+                {"아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다."}
+                <br />
+                {"하지만 지금까지 제가 몰입해온 활동들을 정리하며,"}
+                <br />
+                {"어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다."}
+                <br />
+                {"이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다."}
+              </p>
+            </div>
           </div>
 
           {/* Main Timeline */}
