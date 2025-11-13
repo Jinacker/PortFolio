@@ -344,14 +344,72 @@ const useScrollAnimation = () => {
 
 export default function Portfolio() {
   const [mottoVisible, setMottoVisible] = useState(false)
+  const [scrollEnabled, setScrollEnabled] = useState(false)
   const { visibleSections, observeElement } = useScrollAnimation()
+  const [activeIndex, setActiveIndex] = useState(0);
+  const introTexts = [
+    "떠오른 발상을 실제 동작하는 서비스로 빚어내는 너무나도 재미있어 개발자의 길을 선택한 <span class='text-blue-600 font-semibold'>김진</span>입니다.",
+    "2025년부터 본격적으로 웹 개발에 입문했습니다.<br/>매일 새로운 것을 배우는 재미에 푹 빠져 열심히 성장 중입니다!",
+    "백엔드 개발을 집중적으로 공부하고 있으며,<br/>취미로 프론트엔드와 웹 디자이너의 역할도 맡아가며 역량을 넓히고 있습니다.",
+    "궁극적으로는 특정 기술에 얽매이지 않고,<br/>혼자서도 뭐든 뚝딱 만들어낼 수 있는 풀스택 역량을 손에 넣고 싶습니다.",
+    "이 막연하지만 소중한 목표가 저를 나아가게 하는 가장 큰 원동력입니다."
+  ];
+  const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMottoVisible(true)
-    }, 1000)
-    return () => clearTimeout(timer)
+    window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
+            setActiveIndex(index);
+          }
+        });
+      },
+      {
+        rootMargin: '-50% 0px -50% 0px',
+        threshold: 0,
+      }
+    );
+
+    const currentRefs = triggerRefs.current;
+    currentRefs.forEach((ref) => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      currentRefs.forEach((ref) => {
+        if (ref) {
+          observer.unobserve(ref);
+        }
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!scrollEnabled) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [scrollEnabled])
+
+  const handleExploreClick = () => {
+    setScrollEnabled(true)
+    setMottoVisible(true)
+    setTimeout(() => {
+      document.getElementById("motto")?.scrollIntoView({ behavior: "smooth" })
+    }, 100)
+  }
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -418,62 +476,41 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-blue-100">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-blue-900">Portfolio</h1>
-            <div className="hidden md:flex space-x-8">
-              {["About", "Skills", "Timeline", "Projects", "Contact"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-gray-600 hover:text-blue-600 transition-colors font-medium"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-20 left-20 w-72 h-72 bg-blue-300 rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">안녕하세요!</h1>
-            <p className="text-xl md:text-2xl text-gray-700 mb-8">
-              떠오른 발상을 실제 동작하는 서비스로 빚어내는 이 과정이 너무나도 재미있어 개발자의 길을 선택한{" "}
-              <span className="text-blue-600 font-semibold">김진</span>입니다 !
-            </p>
-          </div>
+        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-48">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-60">
+            저는 <span className="text-blue-600 font-semibold">김진</span>입니다
+          </h1>
 
           <Button
             size="lg"
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
-            onClick={() => document.getElementById("motto")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={handleExploreClick}
           >
-            더 알아보기
+            네..?
             <ChevronDown className="ml-2 w-5 h-5" />
           </Button>
         </div>
       </section>
 
       {/* Motto Section */}
-      <section id="motto" className="py-20 px-6 bg-gray-50">
+      <section id="motto" className="py-40 px-6 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-32">
+            <span className="text-blue-600">김진</span>은 이런 사람입니다
+          </h2>
           <div
             className={`transition-all duration-1000 ease-out ${
-              mottoVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+              mottoVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"
             }`}
           >
-            <div className="bg-white rounded-2xl p-12 shadow-lg border border-blue-100">
+            <div className="bg-white rounded-2xl p-16 shadow-lg border border-blue-100">
               <p className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">"시작이 반이다 🔥"</p>
               <p className="text-xl text-gray-700">어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.</p>
               <p className="text-gray-600 mt-4">
@@ -494,7 +531,7 @@ export default function Portfolio() {
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
                 <User className="w-4 h-4 text-white" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">ABOUT ME</h2>
+              <h2 className="text-3xl md:text-2xl font-bold text-gray-900">김진에 대하여</h2>
             </div>
           </div>
 
@@ -550,15 +587,44 @@ export default function Portfolio() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-none">
                 <GraduationCap className="w-6 h-6 text-blue-600" />
               </div>
-              <div>
+              <div className="pt-3">
                 <p className="text-sm text-gray-500 font-medium">학력</p>
-                <p className="text-lg font-semibold text-gray-900">인하대학교</p>
+                <p className="text-lg font-semibold text-gray-900">인하대학교 재학</p>
                 <p className="text-sm text-gray-500 whitespace-nowrap">(주) 공간정보공학과 / (복) 인공지능공학과</p>
                 <p className="text-sm text-gray-500">(부) 디자인융합과</p>
               </div>
+            </div>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mt-96 mb-[32rem]">
+            <span className="text-blue-600">김진</span>은 개발자가 되고싶습니다.
+          </h2>
+
+          {/* Additional Introduction */}
+          <div className="relative mt-96" style={{ height: `${introTexts.length * 100}vh` }}>
+            <div className="sticky top-1/2 -translate-y-1/2 px-6">
+              <div className="text-center max-w-3xl mx-auto">
+                <p className="text-3xl md:text-4xl font-medium leading-relaxed text-gray-800">
+                  <span
+                    key={activeIndex}
+                    className="inline-block animate-slide-in"
+                    dangerouslySetInnerHTML={{ __html: introTexts[activeIndex] }}
+                  />
+                </p>
+              </div>
+            </div>
+            <div className="absolute top-0 left-0 w-full">
+              {introTexts.map((_, index) => (
+                <div
+                  key={index}
+                  data-index={index}
+                  ref={(el) => (triggerRefs.current[index] = el)}
+                  className="h-screen"
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -566,7 +632,7 @@ export default function Portfolio() {
 
       {/* Skills Section */}
       <section id="skills" className="py-20 px-6 bg-blue-600">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
@@ -576,31 +642,102 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <div className="mb-12">
-              <div className="flex items-center mb-6">
-                <span className="text-2xl mr-3">📚</span>
-                <h3 className="text-2xl font-bold text-gray-900">Studying</h3>
+          <div className="grid lg:grid-cols-[400px_1fr] gap-12 items-center">
+            {/* Left Side - Skills & Tools */}
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+              <div className="mb-10">
+                <div className="flex items-center mb-6">
+                  <span className="text-2xl mr-3">⚙️</span>
+                  <h3 className="text-xl font-bold text-gray-900">다루고 있는 기술</h3>
+                </div>
+                <div className="flex justify-center">
+                  <a href="https://skillicons.dev" className="hover:opacity-90 transition-opacity">
+                    <img
+                      src="https://skillicons.dev/icons?i=nodejs,express,spring,django,react,mongodb,mysql,redis,aws&perline=3"
+                      alt="Tech Stack"
+                      className="w-full"
+                    />
+                  </a>
+                </div>
               </div>
-              <div className="flex flex-wrap gap-3">
-                <Badge className="bg-blue-600 text-white px-4 py-2 text-sm font-medium">TypeScript</Badge>
-                <Badge className="bg-gray-800 text-white px-4 py-2 text-sm font-medium">Django</Badge>
-                <Badge className="bg-green-600 text-white px-4 py-2 text-sm font-medium">Node.js</Badge>
-                <Badge className="bg-green-500 text-white px-4 py-2 text-sm font-medium">Spring Boot</Badge>
+
+              <div>
+                <div className="flex items-center mb-6">
+                  <span className="text-2xl mr-3">🛠️</span>
+                  <h3 className="text-xl font-bold text-gray-900">활용 툴</h3>
+                </div>
+                <div className="flex flex-wrap gap-2 justify-center items-center">
+                  <img
+                    src="https://img.shields.io/badge/QGIS-589632?style=for-the-badge&logo=QGIS&logoColor=white"
+                    alt="QGIS"
+                    className="h-7"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/ARCGIS-2C7AC3?style=for-the-badge&logo=ARCGIS&logoColor=white"
+                    alt="ARCGIS"
+                    className="h-7"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"
+                    alt="Git"
+                    className="h-7"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"
+                    alt="GitHub"
+                    className="h-7"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"
+                    alt="Docker"
+                    className="h-7"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"
+                    alt="Vercel"
+                    className="h-7"
+                  />
+                  <img
+                    src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"
+                    alt="Postman"
+                    className="h-7"
+                  />
+                </div>
               </div>
             </div>
 
-            <div>
-              <div className="flex items-center mb-6">
-                <span className="text-2xl mr-3">🔧</span>
-                <h3 className="text-2xl font-bold text-gray-900">Tools</h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Badge className="bg-green-600 text-white px-4 py-2 text-sm font-medium">MongoDB</Badge>
-                <Badge className="bg-blue-500 text-white px-4 py-2 text-sm font-medium">MySQL</Badge>
-                <Badge className="bg-green-500 text-white px-4 py-2 text-sm font-medium">QGIS</Badge>
-                <Badge className="bg-blue-600 text-white px-4 py-2 text-sm font-medium">ARCGIS</Badge>
-                <Badge className="bg-blue-400 text-white px-4 py-2 text-sm font-medium">React</Badge>
+            {/* Right Side - Introduction */}
+            <div className="flex flex-col justify-center px-4">
+              <div className="space-y-6 text-gray-100">
+                <p className="flex items-start text-xl leading-relaxed">
+                  <span className="text-white mr-4 mt-2 flex-shrink-0">•</span>
+                  <span>
+                    떠오른 발상을 실제 동작하는 서비스로 빚어내는 이 과정이 너무나도 재미있어.. 개발자의 길을 선택한{" "}
+                    <span className="text-white font-semibold">김진</span>입니다 !
+                  </span>
+                </p>
+                <p className="flex items-start text-xl leading-relaxed">
+                  <span className="text-white mr-4 mt-2 flex-shrink-0">•</span>
+                  <span>2025년부터 본격적으로 웹 개발에 입문했습니다. 매일 새로운 것을 배우는 재미에 푹 빠져 열심히 성장 중입니다!</span>
+                </p>
+                <p className="flex items-start text-xl leading-relaxed">
+                  <span className="text-white mr-4 mt-2 flex-shrink-0">•</span>
+                  <span>
+                    백엔드 개발을 집중적으로 공부하고 있으며, 취미로 프론트엔드와 웹 디자이너의 역할도 맡아가며 역량을 넓히고
+                    있습니다.
+                  </span>
+                </p>
+                <p className="flex items-start text-xl leading-relaxed">
+                  <span className="text-white mr-4 mt-2 flex-shrink-0">•</span>
+                  <span>
+                    궁극적으로는.. 특정 기술에 얽매이지 않고, 혼자서도 뭐든 뚝딱 만들어낼 수 있는 풀스택 역량을 손에 넣고
+                    싶습니다.
+                  </span>
+                </p>
+                <p className="flex items-start text-xl leading-relaxed">
+                  <span className="text-white mr-4 mt-2 flex-shrink-0">•</span>
+                  <span>이 막연하지만 소중한 목표가 저를 나아가게 하는 가장 큰 원동력입니다.</span>
+                </p>
               </div>
             </div>
           </div>
