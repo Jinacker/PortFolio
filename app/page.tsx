@@ -722,15 +722,24 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* New Section */}
+      <section className="pt-96 pb-48 px-6 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+            <span className="text-blue-600">김진</span>은 열심히 합니다
+          </h2>
+        </div>
+      </section>
+
       {/* Timeline Section */}
-      <section id="timeline" className="py-20 px-6 bg-gray-50" ref={observeElement}>
+      <section id="timeline" className="py-20 px-6 bg-white" ref={observeElement}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center mb-4">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
                 <Calendar className="w-4 h-4 text-white" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">김진은 열심히 합니다</h2>            </div>
+              <h2 className="text-4xl md:text-3xl font-bold text-gray-900">김진의 여정</h2>            </div>
             <p className="text-gray-600 mt-6">
               {"아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다."}
               <br />
@@ -824,7 +833,7 @@ export default function Portfolio() {
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
                 <Folder className="w-4 h-4 text-white" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">PROJECTS</h2>
+              <h2 className="text-4xl md:text-3xl font-bold text-gray-900">김진의 프로젝트</h2>
             </div>
             <p className="text-gray-600 mt-6">
               무언가를 함께 만들어가는 경험이 가장 즐겁습니다. 🚀
