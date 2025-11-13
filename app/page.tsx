@@ -277,7 +277,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: "smart-wms-project",
-    title: "Smart WMS — 산학프로젝트",
+    title: "Smart WMS — 신세계 산학프로젝트",
     period: "2025-여름",
     type: "award",
     description: "Spring Boot BE",
@@ -383,6 +383,15 @@ const projectData: ProjectItem[] = [
     tech: "React Native 기반 FE",
     status: "completed",
     link: "https://github.com/ShymPyo",
+  },
+  {
+    id: "katsu-map-project",
+    title: "돈가스 지도 — 1인 개발 프로젝트 / 앱 출시",
+    period: "2025-11",
+    description: "아직 일주일만에 만든 MVP라 장기적으로 운영하며 업그레이드 할 예정입니다.",
+    tech: "React Native / Nest.js",
+    status: "completed",
+    link: "https://github.com/Katsu-Map",
   },
 ]
 
@@ -618,15 +627,12 @@ export default function Portfolio() {
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="py-20 px-6 bg-white">
+      <section id="about" className="py-32 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
-                <User className="w-4 h-4 text-white" />
-              </div>
-              <h2 className="text-3xl md:text-2xl font-bold text-gray-900">김진에 대하여</h2>
-            </div>
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              저는 <span className="text-blue-600">김진</span>입니다
+            </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -1056,16 +1062,17 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Me Section */}
-      <section id="contact" className="py-20 px-6 bg-blue-600" ref={observeElement}>
+      <section id="contact" className="pt-96 pb-[24rem] px-6 bg-blue-600" ref={observeElement}>
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-3">
-                <Phone className="w-4 h-4 text-blue-600" />
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white">Contact Me</h2>
-            </div>
+          <div className="text-center mb-64">
+            <h2 className="text-5xl md:text-7xl font-bold text-white">
+              저는 <span className="text-gray-900">김진</span>입니다
+            </h2>
           </div>
+
+          <p className="text-center text-xl text-white mb-64">
+            혹시 김진이 더 궁금해지셨나요?
+          </p>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
             <Card
