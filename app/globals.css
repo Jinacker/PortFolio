@@ -92,3 +92,127 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.typewriter-h1, .typewriter-h2 {
+    font-family: var(--font-tmoney);
+    position: relative;
+    text-align: center;
+}
+.typewriter-h1 {
+    font-weight: 400;
+    font-size: 1.875rem;
+    color: hsl(var(--secondary-foreground));
+    height: 2.25rem;
+    text-align: left;
+}
+.typewriter-h2 {
+    margin-top: 1rem;
+    font-weight: 800;
+    font-size: 4rem; /* Changed from 6rem */
+    color: hsl(var(--chart-3)); /* Changed from --foreground */
+    height: 4rem; /* Changed from 6rem */
+}
+
+.typewriter-1::before {
+    content: "";
+    animation: typing-line1 1.4s forwards;
+}
+.typewriter-1::after {
+    content: '';
+    position: absolute;
+    right: -5px; top: 0;
+    border-right: 3px solid hsl(var(--foreground));
+    animation: blink 0.75s step-end 2 forwards; /* Blink 2 times then hide */
+}
+
+.typewriter-2 {
+    display: inline-block;
+    opacity: 0;
+    animation: show 0s 1s forwards;
+}
+.typewriter-2::before {
+    content: "";
+    animation: typing-line2 1s 1.3s forwards;
+}
+.typewriter-2::after {
+    content: '';
+    position: absolute;
+    right: -5px; top: 0;
+    border-right: 3px solid hsl(var(--foreground));
+    animation: blink 0.75s 1.6s step-end 2 forwards; /* Blink 2 times then hide */
+}
+
+@keyframes show { to { opacity: 1; } }
+@keyframes blink { 50% { border-color: transparent; } 100% { border-color: transparent; } }
+
+@keyframes typing-line1 {
+    0% { content: ""; }
+    11% { content: "개"; }
+    22% { content: "개발"; }
+    33% { content: "개발자"; }
+    44% { content: "개발자 "; }
+    55% { content: "개발자 꿈"; }
+    66% { content: "개발자 꿈나"; }
+    77% { content: "개발자 꿈나무"; }
+    88% { content: "개발자 꿈나무 "; }
+    100% { content: "개발자 꿈나무 🌱"; }
+}
+@keyframes typing-line2 {
+    0% { content: ""; }
+    14% { content: "김"; }
+    28% { content: "김진"; }
+    42% { content: "김진 "; }
+    56% { content: "김진 입"; }
+    70% { content: "김진 입니"; }
+    84% { content: "김진 입니다"; }
+    100% { content: "김진 입니다!"; }
+}
+
+.slide-in-container {
+    margin-top: 3rem;
+    overflow: hidden; 
+    font-family: var(--font-tmoney);
+    font-size: 1.125rem; /* text-lg */
+    color: hsl(var(--muted-foreground));
+    position: relative;
+}
+
+.slide-in-left, .slide-in-right {
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.slide-in-left {
+    animation-name: slide-in-right-anim; /* Changed from slide-in-left-anim */
+    animation-duration: 1s;
+    animation-delay: 3s; 
+}
+
+.slide-in-right {
+    margin-top: 1rem;
+    animation-name: slide-in-left-anim; /* Changed from slide-in-right-anim */
+    animation-duration: 1s;
+    animation-delay: 3.2s;
+}
+
+@keyframes slide-in-left-anim {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right-anim {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

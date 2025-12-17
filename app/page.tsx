@@ -1,5 +1,6 @@
 "use client"
 
+import { CiViewList } from "react-icons/ci";
 import { useState, useEffect, useRef } from "react"
 import {
   Calendar,
@@ -438,7 +439,7 @@ export default function Portfolio() {
   const introTexts = [
     "<div>떠오른 <strong>발상</strong>을 실제 동작하는 <strong>서비스</strong>로 빚어내는 이 과정이</br>너무나도 재미있어 개발자의 길을 선택했습니다.</div>",
     "<div>2025년 3월부터 본격적으로 웹 개발에 <strong>입문</strong>했습니다.</br>매일 새로운 것을 배우는 재미에 푹 빠져 열심히 <strong>성장</strong> 중입니다.</div>",
-    "<div><strong>백엔드 개발</strong>을 집중적으로 공부하고 있으며,</br><strong>프론트엔드</strong>와 <strong>디자인</strong> 역할도 맡아가며 역량을 넓히고 있습니다.</div>",
+    "<div><strong>백엔드 개발</strong>을 집중적으로 공부하고 있으며,</br><strong>프론트엔드</strong>와 <strong>디자인</strong>도 맡아가며 역량을 넓히고 있습니다.</div>",
     "<div>특정 기술에 얽매이지 않고,</br>혼자서도 뭐든 만들어낼 수 있는 <strong>풀스택 역량</strong>을 목표로 합니다.</div>",
     "<div>이 목표가 저를 나아가게 하는 가장 큰 <strong>원동력</strong>입니다.</div>"
   ];
@@ -535,25 +536,33 @@ export default function Portfolio() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-            김진
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-            백엔드 개발자를 꿈꾸는<br />
-            풀스택 역량을 키워가는 개발자입니다
-          </p>
+        <div>
+            <h1 className="typewriter-h1"><span className="typewriter-1"></span></h1>
+            <h2 className="typewriter-h2"><span className="typewriter-2"></span></h2>
+
+            <div className="slide-in-container">
+              <p className="slide-in-left">
+                  떠오른 발상을 실제 동작하는 서비스로 빚어내는 이 과정이<br/>
+                  너무나도 재미있어 개발자의 길을 선택했습니다.
+              </p>
+              <p className="slide-in-right">
+                  <span className="text-blue-600 font-bold">백엔드 개발</span>을 집중적으로 공부하고 있으며,<br/>
+                  프론트엔드와 디자인도 맡아가며 역량을 넓히고 있습니다.
+              </p>
+            </div>
         </div>
       </section>
 
       {/* Navigation Links - Sticky */}
       <div className="w-full flex justify-center sticky top-6 z-50 -mt-20 pb-12">
-        <div className="bg-white/95 backdrop-blur-md border-2 border-gray-300 rounded-full shadow-lg px-6 py-3">
+        <div className="bg-gray-200/40 backdrop-blur-md border border-gray-300/30 rounded-full shadow-lg px-6 py-3">
           <div className="flex gap-6 md:gap-8 text-sm md:text-base font-medium">
-            <a href="#about" className="text-gray-700 hover:text-gray-900 transition">About</a>
-            <a href="#skills" className="text-gray-700 hover:text-gray-900 transition">Skills</a>
-            <a href="#experience" className="text-gray-700 hover:text-gray-900 transition">Experience</a>
-            <a href="#contact" className="text-gray-700 hover:text-gray-900 transition">Contact</a>
+            <a href="#about" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-4">
+                <CiViewList className="w-8 h-8" /> About
+            </a>
+            <a href="#skills" className="text-gray-800 hover:text-gray-900 transition">Skills</a>
+            <a href="#experience" className="text-gray-800 hover:text-gray-900 transition">Experience</a>
+            <a href="#contact" className="text-gray-800 hover:text-gray-900 transition">Contact</a>
           </div>
         </div>
       </div>
@@ -565,8 +574,8 @@ export default function Portfolio() {
             "시작이 반이다 🔥"
           </h2>
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-            어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.
-            비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.
+            어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.<br></br>
+            비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.<br></br>
             그래서 저는 완벽한 준비보단, 먼저 움직이는 사람이고자 합니다.
           </p>
         </div>
