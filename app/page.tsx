@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { FaHandFist } from "react-icons/fa6"; // FaHandFist 아이콘 추가
 import {
   Calendar,
   Award,
@@ -65,10 +66,10 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: "maker-contest",
-    title: "제 5회 INU(교내) 메이커 경진대회",
+    title: "제 5회 INU 메이커 경진대회",
     period: "2020-2",
     type: "award" as const,
-    details: "1학년 새내기 팀으로 교내 메이커 경진대회에서 우수상 수상, 코로나 대응 아이디어 기획 및 구현",
+    details: "팀장으로 교내 메이커 경진대회에서 우수상 수상, 코로나 대응 아이디어 기획 및 구현",
     award: "우수상 수상",
     link: "https://blog.naver.com/rlawls1448/222223758063",
     order: 2,
@@ -638,6 +639,25 @@ export default function Portfolio() {
             </div>
           </div>
 
+          <div className="flex items-start space-x-4 pt-16">
+            <div className="flex flex-col items-center flex-none"> {/* 아이콘 박스와 텍스트를 세로로 정렬 */}
+              <div className="w-20 h-20 bg-blue-100 rounded-lg flex items-center justify-center"> {/* 크기 더 키우고 */}
+                <FaHandFist className="w-10 h-10 text-blue-600" /> {/* 아이콘 크기 더 키우고 */}
+              </div>
+              <p className="text-sm text-gray-500 font-medium mt-2">좌우명</p> {/* 아이콘 아래로 텍스트 이동 */}
+            </div>
+            <div className="mt-[-0.5rem]"> {/* 음수 마진으로 위로 올리기 */}
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">
+                "시작이 반이다 🔥"
+              </h3>
+              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.<br></br>
+                비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.<br></br>
+                그래서 저는 완벽한 준비보단, 먼저 움직이는 사람이고자 합니다.
+              </p>
+            </div>
+          </div>
+
 
         </div>
       </section>
@@ -653,79 +673,112 @@ export default function Portfolio() {
             </h2>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
-              {/* Left Side - 다루고 있는 기술 */}
+          <div className="max-w-3xl mx-auto">
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed text-left mb-12 mt-12">
+              <strong>기술</strong>은 결국 <strong>사람</strong>을 향해야 한다고 생각합니다.<br></br>
+              <strong>사람들</strong>의 일상에 실제로 도움이 되는 <strong className="text-blue-600">가치</strong>를 만들어내고 싶습니다.
+            </p>
+          </div>
+
+
+
+                    {/* Box 1: 프론트엔드 & 백엔드 */}
+                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm mb-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-4">프론트엔드</h3>
+                          <div className="flex flex-wrap gap-2">
+                            <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
+                            <img src="https://img.shields.io/badge/React%20Native-000000?style=for-the-badge&logo=react&logoColor=white"/>
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-4">백엔드</h3>
+                          <div className="flex flex-wrap gap-2">
+                            <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                    {/* 설명 문단 */}
+                                                  <div className="max-w-3xl mx-auto">
+                                                    <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-left mb-12">
+                                                      <strong>프론트엔드와 백엔드</strong>를 모두 경험하며, 화면부터 서버·데이터 흐름까지 <strong>전체 구조를 이해하고 개발합니다.</strong><br></br>
+                                                      React 기반 UI 구현뿐 아니라 <strong>API 설계와 서버 개발</strong> 경험이 있으며,
+                                                      기획 요구사항을 기술 구조로 옮기는 과정에 익숙합니다.<br></br>
+                                                      현재는 <strong>TypeScript 기반의 Node.js 백엔드 개발</strong>에 집중하며 역량을 확장하고 있습니다.
+                                                    </p>
+                                                  </div>          {/* Box 2: 인프라 & 협업 */}
+          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <div className="flex items-center mb-4 md:mb-6 justify-center md:justify-start">
-                  <span className="text-xl md:text-2xl mr-2 md:mr-3">⚙️</span>
-                  <h3 className="text-base md:text-lg font-bold text-gray-900">다루고 있는 기술</h3>
-                </div>
-                <div className="flex justify-center">
-                  <a href="https://skillicons.dev" className="hover:opacity-90 transition-opacity">
-                    <img
-                      src="https://skillicons.dev/icons?i=nodejs,express,spring,django,react,mongodb,mysql,redis,aws,postgres,gcp,nest&perline=6"
-                      alt="Tech Stack"
-                      className="w-full max-w-md"
-                    />
-                  </a>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">인프라 & 플랫폼</h3>
+                <div className="flex flex-wrap gap-2">
+                  <img src="https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon%20aws&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Google%20Cloud-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
                 </div>
               </div>
-
-              {/* Right Side - 활용 툴 */}
               <div>
-                <div className="flex items-center mb-4 md:mb-6 justify-center md:justify-start">
-                  <span className="text-xl md:text-2xl mr-2 md:mr-3">🛠️</span>
-                  <h3 className="text-base md:text-lg font-bold text-gray-900">활용 툴</h3>
-                </div>
-                <div className="flex flex-wrap gap-2 justify-center items-center">
-                  <img
-                    src="https://img.shields.io/badge/QGIS-589632?style=for-the-badge&logo=QGIS&logoColor=white"
-                    alt="QGIS"
-                    className="h-8 md:h-10"
-                  />
-                  <img
-                    src="https://img.shields.io/badge/ARCGIS-2C7AC3?style=for-the-badge&logo=ARCGIS&logoColor=white"
-                    alt="ARCGIS"
-                    className="h-8 md:h-10"
-                  />
-                  <img
-                    src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"
-                    alt="Git"
-                    className="h-8 md:h-10"
-                  />
-                  <img
-                    src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"
-                    alt="GitHub"
-                    className="h-8 md:h-10"
-                  />
-                  <img
-                    src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"
-                    alt="Docker"
-                    className="h-8 md:h-10"
-                  />
-                  <img
-                    src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"
-                    alt="Vercel"
-                    className="h-8 md:h-10"
-                  />
-                  <img
-                    src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white"
-                    alt="Postman"
-                    className="h-8 md:h-10"
-                  />
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">협업 & 개발 도구</h3>
+                <div className="flex flex-wrap gap-2">
+                  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Postman-EF5B25?style=for-the-badge&logo=postman&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Slack-36C5F0?style=for-the-badge&logo=slack&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Figma-A259FF?style=for-the-badge&logo=figma&logoColor=white"/>
                 </div>
               </div>
             </div>
           </div>
 
-          <p className="text-gray-700 text-base md:text-lg leading-relaxed my-16 md:my-24 text-left px-4">
-            기술은 결국 사람을 향해야 한다고 믿습니다.<br></br>
-            {' '}저는 <strong>공간정보 기술과 웹 개발을 결합해</strong><br></br>
-            {' '}누군가의 일상에서 '조금 더 편리한 순간'을 만드는 서비스를 만들고 있습니다.<br></br>
-            {' '}특히 JavaScript를 주력으로 다양한 웹 개발 역량을 확장하고 있습니다.
-          </p>
-        </div>
+          {/* 설명 문단 2 */}
+          <div className="max-w-3xl mx-auto">
+            <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-left mb-12">
+              <strong>로그와 모니터링 도구</strong>를 활용해 서비스 상태를 파악하고,
+               문제 상황을 <strong>빠르게 인지하고 대응</strong>하려 노력합니다.<br></br>
+              또한 <strong>백오피스를 직접 운영</strong>하며,
+               사용자가 <strong>안정적이고 편리하게 서비스를 이용할 수 있는 환경</strong>을 고민합니다. <br></br>
+               배포 환경과 서버 상태를 지속적으로 점검하며, 운영 관점에서 문제를 예방하는 개발을 지향합니다.
+            </p>
+          </div>
+
+          {/* Box 3: 데이터베이스 & 공간정보 */}
+          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-4">데이터베이스</h3>
+                          <div className="flex flex-wrap gap-2">
+                            <img src="https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/MongoDB-4DB33D?style=for-the-badge&logo=mongodb&logoColor=white"/>
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 mb-4">공간정보</h3>
+                          <div className="flex flex-wrap gap-2">
+                            <img src="https://img.shields.io/badge/QGIS-589632?style=for-the-badge&logo=qgis&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/ArcGIS-2C7AC3?style=for-the-badge&logo=arcgis&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/PostGIS-336791?style=for-the-badge&logo=postgresql&logoColor=white"/>
+                          </div>
+                        </div>
+                      </div>
+                              </div>
+                    
+                              {/* 설명 문단 3 */}
+                              <div className="max-w-3xl mx-auto">
+                                <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-left mb-12 mt-12">
+                                  <strong>공간 데이터</strong>를 활용해 <strong>위치 기반 맥락</strong>을 서비스 기능에 반영할 수 있습니다.<br></br>
+                                  <strong>지도·좌표 정보와 사용자 행동</strong>을 연결해, 실제 사용 상황에 맞는 기능을 설계합니다.<br></br>
+                                  <strong>공간정보</strong>를 단순한 데이터가 아닌, <strong>사용자 경험을 확장하는 요소</strong>로 활용합니다.
+                                </p>
+                              </div>
+                    
+                                      </div>
       </section>
 
       {/* Experience Section (Timeline + Projects) */}
