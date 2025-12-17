@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { FaHandFist } from "react-icons/fa6"; // FaHandFist 아이콘 추가
 import {
   Calendar,
   Award,
@@ -635,6 +636,25 @@ export default function Portfolio() {
                 <p className="text-xs md:text-sm text-gray-500">(주) 공간정보공학과 / (복) 인공지능공학과</p>
                 <p className="text-xs md:text-sm text-gray-500">(부) 디자인융합과</p>
               </div>
+            </div>
+          </div>
+
+          <div className="flex items-start space-x-4 pt-16">
+            <div className="flex flex-col items-center flex-none"> {/* 아이콘 박스와 텍스트를 세로로 정렬 */}
+              <div className="w-20 h-20 bg-blue-100 rounded-lg flex items-center justify-center"> {/* 크기 더 키우고 */}
+                <FaHandFist className="w-10 h-10 text-blue-600" /> {/* 아이콘 크기 더 키우고 */}
+              </div>
+              <p className="text-sm text-gray-500 font-medium mt-2">좌우명</p> {/* 아이콘 아래로 텍스트 이동 */}
+            </div>
+            <div className="pt-0">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                "시작이 반이다 🔥"
+              </h3>
+              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.<br></br>
+                비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.<br></br>
+                그래서 저는 완벽한 준비보단, 먼저 움직이는 사람이고자 합니다.
+              </p>
             </div>
           </div>
 
