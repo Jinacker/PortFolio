@@ -115,14 +115,14 @@ body {
 
 .typewriter-1::before {
     content: "";
-    animation: typing-line1 1.4s forwards;
+    animation: typing-line1 0.9s forwards;
 }
 .typewriter-1::after {
     content: '';
     position: absolute;
     right: -5px; top: 0;
     border-right: 3px solid hsl(var(--foreground));
-    animation: blink 0.75s step-end 2 forwards; /* Blink 2 times then hide */
+    animation: blink 0.75s step-end 1 forwards; /* Blink 1 time then hide */
 }
 
 .typewriter-2 {
@@ -132,14 +132,14 @@ body {
 }
 .typewriter-2::before {
     content: "";
-    animation: typing-line2 1s 1.3s forwards;
+    animation: typing-line2 0.7s 1s forwards;
 }
 .typewriter-2::after {
     content: '';
     position: absolute;
     right: -5px; top: 0;
     border-right: 3px solid hsl(var(--foreground));
-    animation: blink 0.75s 1.6s step-end 2 forwards; /* Blink 2 times then hide */
+    animation: blink 0.75s 1s step-end 1 forwards; /* Blink 1 time then hide */
 }
 
 @keyframes show { to { opacity: 1; } }
@@ -165,7 +165,7 @@ body {
     56% { content: "김진 입"; }
     70% { content: "김진 입니"; }
     84% { content: "김진 입니다"; }
-    100% { content: "김진 입니다!"; }
+    100% { content: "김진 입니다."; }
 }
 
 .slide-in-container {
@@ -183,16 +183,16 @@ body {
 }
 
 .slide-in-left {
-    animation-name: slide-in-right-anim; /* Changed from slide-in-left-anim */
+    animation-name: slide-in-right-anim;
     animation-duration: 1s;
-    animation-delay: 3s; 
+    animation-delay: 2.0s; 
 }
 
 .slide-in-right {
     margin-top: 1rem;
-    animation-name: slide-in-left-anim; /* Changed from slide-in-right-anim */
+    animation-name: slide-in-left-anim;
     animation-duration: 1s;
-    animation-delay: 3.2s;
+    animation-delay: 2.2s;
 }
 
 @keyframes slide-in-left-anim {

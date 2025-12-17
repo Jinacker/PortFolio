@@ -1,6 +1,5 @@
 "use client"
 
-import { CiViewList } from "react-icons/ci";
 import { useState, useEffect, useRef } from "react"
 import {
   Calendar,
@@ -35,6 +34,7 @@ interface TimelineItem {
   award?: string
   link?: string
   contribution?: string
+  responsibility?: string
   order: number // 시간순 정렬을 위한 순서
 }
 
@@ -68,7 +68,6 @@ const timelineData: TimelineItem[] = [
     title: "제 5회 INU(교내) 메이커 경진대회",
     period: "2020-2",
     type: "award" as const,
-    description: "제 5회 INU(교내) 메이커 경진대회 팀장",
     details: "1학년 새내기 팀으로 교내 메이커 경진대회에서 우수상 수상, 코로나 대응 아이디어 기획 및 구현",
     award: "우수상 수상",
     link: "https://blog.naver.com/rlawls1448/222223758063",
@@ -280,8 +279,7 @@ const timelineData: TimelineItem[] = [
     title: "Smart WMS — 신세계 산학프로젝트",
     period: "2025-여름",
     type: "award" as const,
-    description: "Spring Boot BE",
-    details: "창고 운영을 시스템으로 녹여내는 WMS 프로젝트였습니다.백엔드에서 입·출고, 재고, 작업 상태 같은 도메인 흐름을 정리하며 운영 로직을 안정적으로 모델링하는 경험을 얻었습니다.",
+    details: "백엔드에서 입·출고, 재고, 작업 상태 같은 도메인 흐름을 정리하며 운영 로직을 안정적으로 모델링하는 경험을 얻었습니다.",
     award: "우수상",
     link: "https://github.com/KSEB-4th-Project-3rd-Team",
     order: 22,
@@ -436,13 +434,7 @@ export default function Portfolio() {
   const [hasMounted, setHasMounted] = useState(false);
   const { visibleSections, observeElement } = useScrollAnimation()
   const [activeTab, setActiveTab] = useState<'timeline' | 'projects'>('timeline');
-  const introTexts = [
-    "<div>떠오른 <strong>발상</strong>을 실제 동작하는 <strong>서비스</strong>로 빚어내는 이 과정이</br>너무나도 재미있어 개발자의 길을 선택했습니다.</div>",
-    "<div>2025년 3월부터 본격적으로 웹 개발에 <strong>입문</strong>했습니다.</br>매일 새로운 것을 배우는 재미에 푹 빠져 열심히 <strong>성장</strong> 중입니다.</div>",
-    "<div><strong>백엔드 개발</strong>을 집중적으로 공부하고 있으며,</br><strong>프론트엔드</strong>와 <strong>디자인</strong>도 맡아가며 역량을 넓히고 있습니다.</div>",
-    "<div>특정 기술에 얽매이지 않고,</br>혼자서도 뭐든 만들어낼 수 있는 <strong>풀스택 역량</strong>을 목표로 합니다.</div>",
-    "<div>이 목표가 저를 나아가게 하는 가장 큰 <strong>원동력</strong>입니다.</div>"
-  ];
+
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
 
   useEffect(() => {
@@ -547,7 +539,7 @@ export default function Portfolio() {
               </p>
               <p className="slide-in-right">
                   <span className="text-blue-600 font-bold">백엔드 개발</span>을 집중적으로 공부하고 있으며,<br/>
-                  프론트엔드와 디자인도 맡아가며 역량을 넓히고 있습니다.
+                  프론트엔드와 웹디자인도 맡아가며 역량을 넓히고 있습니다.
               </p>
             </div>
         </div>
@@ -556,37 +548,29 @@ export default function Portfolio() {
       {/* Navigation Links - Sticky */}
       <div className="w-full flex justify-center sticky top-6 z-50 -mt-20 pb-12">
         <div className="bg-gray-200/40 backdrop-blur-md border border-gray-300/30 rounded-full shadow-lg px-6 py-3">
-          <div className="flex gap-6 md:gap-8 text-sm md:text-base font-medium">
-            <a href="#about" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-4">
-                <CiViewList className="w-8 h-8" /> About
+          <div className="flex gap-8 md:gap-10 text-sm md:text-base font-medium">
+            <a href="#about" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2">
+                <User className="w-5 h-5" /> 소개
             </a>
-            <a href="#skills" className="text-gray-800 hover:text-gray-900 transition">Skills</a>
-            <a href="#experience" className="text-gray-800 hover:text-gray-900 transition">Experience</a>
-            <a href="#contact" className="text-gray-800 hover:text-gray-900 transition">Contact</a>
+            <a href="#skills" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2">
+                <Code className="w-5 h-5" /> 기술
+            </a>
+            <a href="#experience" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2">
+                <BookOpen className="w-5 h-5" /> 경험
+            </a>
+            <a href="#contact" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2">
+                <Mail className="w-5 h-5" /> 문의
+            </a>
           </div>
         </div>
       </div>
-
-      {/* Motto Section */}
-      <section id="motto" className="py-32 px-6 bg-gray-50">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-8">
-            "시작이 반이다 🔥"
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-            어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.<br></br>
-            비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.<br></br>
-            그래서 저는 완벽한 준비보단, 먼저 움직이는 사람이고자 합니다.
-          </p>
-        </div>
-      </section>
 
       {/* About Me Section */}
       <section id="about" className="py-32 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <div className="mb-16 md:mb-24">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              About
+            <h2 className="flex items-center gap-x-4 text-4xl md:text-5xl font-bold text-gray-900">
+              <User className="w-8 h-8 md:w-10 md:h-10 text-blue-600" /> 소개
             </h2>
           </div>
 
@@ -597,7 +581,7 @@ export default function Portfolio() {
               </div>
               <div>
                 <p className="text-xs md:text-sm text-gray-500 font-medium">이름</p>
-                <p className="text-base md:text-lg font-semibold text-gray-900">김진</p>
+                <p className="text-sm md:text-base font-semibold text-gray-900">김진</p>
               </div>
             </div>
 
@@ -607,7 +591,7 @@ export default function Portfolio() {
               </div>
               <div>
                 <p className="text-xs md:text-sm text-gray-500 font-medium">생년월일</p>
-                <p className="text-base md:text-lg font-semibold text-gray-900">01.03.20</p>
+                <p className="text-sm md:text-base font-semibold text-gray-900">01.03.20</p>
               </div>
             </div>
 
@@ -617,7 +601,7 @@ export default function Portfolio() {
               </div>
               <div>
                 <p className="text-xs md:text-sm text-gray-500 font-medium">위치</p>
-                <p className="text-base md:text-lg font-semibold text-gray-900">인천광역시</p>
+                <p className="text-sm md:text-base font-semibold text-gray-900">인천광역시</p>
               </div>
             </div>
 
@@ -627,7 +611,7 @@ export default function Portfolio() {
               </div>
               <div>
                 <p className="text-xs md:text-sm text-gray-500 font-medium">연락처</p>
-                <p className="text-base md:text-lg font-semibold text-gray-900">010-8948-3847</p>
+                <p className="text-sm md:text-base font-semibold text-gray-900">010-8948-3847</p>
               </div>
             </div>
 
@@ -647,35 +631,26 @@ export default function Portfolio() {
               </div>
               <div className="pt-3">
                 <p className="text-sm text-gray-500 font-medium">학력</p>
-                <p className="text-base md:text-lg font-semibold text-gray-900">인하대학교 재학</p>
+                <p className="text-sm md:text-base font-semibold text-gray-900">인하대학교 재학</p>
                 <p className="text-xs md:text-sm text-gray-500">(주) 공간정보공학과 / (복) 인공지능공학과</p>
                 <p className="text-xs md:text-sm text-gray-500">(부) 디자인융합과</p>
               </div>
             </div>
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mt-32 md:mt-48 mb-32 md:mb-48 px-4">
-            개발자를 꿈꿉니다
-          </h2>
 
-          {/* Additional Introduction */}
-          <div className="max-w-3xl mx-auto space-y-6 px-6">
-            {introTexts.map((text, index) => (
-              <div
-                key={index}
-                className="text-lg md:text-xl leading-relaxed text-gray-700"
-                dangerouslySetInnerHTML={{ __html: text }}
-              />
-            ))}
-          </div>
         </div>
       </section>
 
+
+
       {/* Skills Section */}
       <section id="skills" className="py-32 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">Skills</h2>
+            <h2 className="flex items-center gap-x-4 text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+              <Code className="w-8 h-8 md:w-10 md:h-10 text-blue-600" /> 기술
+            </h2>
           </div>
 
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
@@ -684,7 +659,7 @@ export default function Portfolio() {
               <div>
                 <div className="flex items-center mb-4 md:mb-6 justify-center md:justify-start">
                   <span className="text-xl md:text-2xl mr-2 md:mr-3">⚙️</span>
-                  <h3 className="text-lg md:text-xl font-bold text-gray-900">다루고 있는 기술</h3>
+                  <h3 className="text-base md:text-lg font-bold text-gray-900">다루고 있는 기술</h3>
                 </div>
                 <div className="flex justify-center">
                   <a href="https://skillicons.dev" className="hover:opacity-90 transition-opacity">
@@ -701,7 +676,7 @@ export default function Portfolio() {
               <div>
                 <div className="flex items-center mb-4 md:mb-6 justify-center md:justify-start">
                   <span className="text-xl md:text-2xl mr-2 md:mr-3">🛠️</span>
-                  <h3 className="text-lg md:text-xl font-bold text-gray-900">활용 툴</h3>
+                  <h3 className="text-base md:text-lg font-bold text-gray-900">활용 툴</h3>
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center items-center">
                   <img
@@ -744,7 +719,7 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <p className="text-gray-700 text-lg md:text-xl leading-relaxed my-16 md:my-24 text-left px-4">
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed my-16 md:my-24 text-left px-4">
             기술은 결국 사람을 향해야 한다고 믿습니다.<br></br>
             {' '}저는 <strong>공간정보 기술과 웹 개발을 결합해</strong><br></br>
             {' '}누군가의 일상에서 '조금 더 편리한 순간'을 만드는 서비스를 만들고 있습니다.<br></br>
@@ -755,14 +730,16 @@ export default function Portfolio() {
 
       {/* Experience Section (Timeline + Projects) */}
       <section id="experience" className="py-32 px-6 bg-white" ref={observeElement}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-16">Experience</h2>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="flex items-center gap-x-4 text-4xl md:text-5xl font-bold text-gray-900 mb-16">
+            <BookOpen className="w-8 h-8 md:w-10 md:h-10 text-blue-600" /> 경험
+          </h2>
 
           {/* Tab Buttons */}
           <div className="flex gap-4 mb-12 border-b border-gray-200">
             <button
               onClick={() => setActiveTab('timeline')}
-              className={`pb-4 px-2 text-lg font-medium transition-colors ${
+              className={`pb-4 px-2 text-base font-medium transition-colors ${
                 activeTab === 'timeline'
                   ? 'text-gray-900 border-b-2 border-gray-900'
                   : 'text-gray-500 hover:text-gray-700'
@@ -772,7 +749,7 @@ export default function Portfolio() {
             </button>
             <button
               onClick={() => setActiveTab('projects')}
-              className={`pb-4 px-2 text-lg font-medium transition-colors ${
+              className={`pb-4 px-2 text-base font-medium transition-colors ${
                 activeTab === 'projects'
                   ? 'text-gray-900 border-b-2 border-gray-900'
                   : 'text-gray-500 hover:text-gray-700'
@@ -786,8 +763,7 @@ export default function Portfolio() {
           {activeTab === 'timeline' && (
             <div>
               <div className="max-w-2xl mx-auto mb-12 px-4">
-                <p className="text-gray-600 text-left text-sm md:text-base leading-relaxed">
-                  아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다.<br></br>
+                                  <p className="text-gray-600 text-left text-xs md:text-sm leading-relaxed">                  아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다.<br></br>
                   {' '}하지만 지금까지 제가 몰입해온 활동들을 정리하며,<br></br>
                   {' '}어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다.<br></br>
                   {' '}이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다.
@@ -882,7 +858,7 @@ export default function Portfolio() {
 
                       {/* Content */}
                       <div className="flex-1">
-                        <h3 className="font-bold text-base md:text-lg text-gray-900 mb-2 line-clamp-2">{item.title}</h3>
+                        <h3 className="font-bold text-sm md:text-base text-gray-900 mb-2 line-clamp-2">{item.title}</h3>
                         {item.organization && <p className="text-xs md:text-sm text-gray-500 mb-2">{item.organization}</p>}
                         <p className="text-gray-600 mb-2 text-xs md:text-sm line-clamp-2">{item.description}</p>
 
@@ -927,7 +903,7 @@ export default function Portfolio() {
           {activeTab === 'projects' && (
             <div>
               <div className="max-w-2xl mx-auto mb-12 px-4">
-                <p className="text-gray-600 text-center text-sm md:text-base leading-relaxed">
+                <p className="text-gray-600 text-center text-xs md:text-sm leading-relaxed">
                   무언가를 함께 만들어가는 경험이 가장 즐겁습니다. 🚀<br></br>
                   {' '}아이디어가 현실이 되는 그 순간이 너무 좋네요 :)
                 </p>
@@ -1005,12 +981,12 @@ export default function Portfolio() {
       <section id="contact" className="py-32 px-6 bg-gray-50" ref={observeElement}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 px-4">
-              Contact
+            <h2 className="flex items-center justify-center gap-x-4 text-4xl md:text-5xl font-bold text-gray-900 px-4">
+              <Mail className="w-8 h-8 md:w-10 md:h-10 text-blue-600" /> 문의
             </h2>
           </div>
 
-          <p className="text-center text-lg md:text-xl text-gray-600 mb-16 px-4">
+          <p className="text-center text-base md:text-lg text-gray-600 mb-16 px-4">
             혹시 김진이 더 궁금해지셨나요?
           </p>
 
@@ -1027,8 +1003,8 @@ export default function Portfolio() {
                 <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Github className="w-7 h-7 md:w-8 md:h-8 text-white" />
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">GitHub</h3>
-                <p className="text-sm md:text-base text-gray-600 mb-2 md:mb-4 break-all">github.com/Jinacker</p>
+                <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2">GitHub</h3>
+                <p className="text-sm text-gray-600 mb-2 md:mb-4 break-all">github.com/Jinacker</p>
                 <p className="text-xs md:text-sm text-gray-500">소스 코드 저장소</p>
                 <Button
                   className="mt-3 md:mt-4 bg-gray-900 hover:bg-gray-800 text-white text-sm md:text-base"
@@ -1053,8 +1029,8 @@ export default function Portfolio() {
                 <div className="w-14 h-14 md:w-16 md:h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <BookOpen className="w-7 h-7 md:w-8 md:h-8 text-white" />
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">Blog</h3>
-                <p className="text-sm md:text-base text-gray-600 mb-2 md:mb-4 break-all">blog.naver.com/rlawls1448</p>
+                <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2">Blog</h3>
+                <p className="text-sm text-gray-600 mb-2 md:mb-4 break-all">blog.naver.com/rlawls1448</p>
                 <p className="text-xs md:text-sm text-gray-500">기록의 습관화</p>
                 <Button
                   className="mt-3 md:mt-4 bg-blue-600 hover:bg-blue-700 text-white text-sm md:text-base"
