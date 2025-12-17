@@ -66,10 +66,10 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: "maker-contest",
-    title: "제 5회 INU(교내) 메이커 경진대회",
+    title: "제 5회 INU 메이커 경진대회",
     period: "2020-2",
     type: "award" as const,
-    details: "1학년 새내기 팀으로 교내 메이커 경진대회에서 우수상 수상, 코로나 대응 아이디어 기획 및 구현",
+    details: "팀장으로 교내 메이커 경진대회에서 우수상 수상, 코로나 대응 아이디어 기획 및 구현",
     award: "우수상 수상",
     link: "https://blog.naver.com/rlawls1448/222223758063",
     order: 2,
@@ -646,11 +646,11 @@ export default function Portfolio() {
               </div>
               <p className="text-sm text-gray-500 font-medium mt-2">좌우명</p> {/* 아이콘 아래로 텍스트 이동 */}
             </div>
-            <div className="pt-0">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+            <div className="mt-[0 rem]"> {/* 음수 마진으로 위로 올리기 */}
+              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">
                 "시작이 반이다 🔥"
               </h3>
-              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                 어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.<br></br>
                 비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.<br></br>
                 그래서 저는 완벽한 준비보단, 먼저 움직이는 사람이고자 합니다.
@@ -672,6 +672,8 @@ export default function Portfolio() {
               <Code className="w-8 h-8 md:w-10 md:h-10 text-blue-600" /> 기술
             </h2>
           </div>
+
+
 
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
