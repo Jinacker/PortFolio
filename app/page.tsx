@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react"
 import {
-  ChevronDown,
   Calendar,
   Award,
   Users,
@@ -434,18 +433,15 @@ const useScrollAnimation = () => {
 
 export default function Portfolio() {
   const [hasMounted, setHasMounted] = useState(false);
-  const [mottoVisible, setMottoVisible] = useState(false)
-  const [scrollEnabled, setScrollEnabled] = useState(false)
   const { visibleSections, observeElement } = useScrollAnimation()
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState<'timeline' | 'projects'>('timeline');
   const introTexts = [
-    "<div>떠오른 <strong>발상</strong>을 실제 동작하는 <strong>서비스</strong>로 빚어내는 이 과정이</br>너무나도 재미있어 개발자의 길을 선택한 <span class='text-blue-600 font-semibold'>김진</span>입니다.</div>",
-    "<div>2025년 3월부터 본격적으로 웹 개발에 <strong>입문</strong>했습니다.</br>매일 새로운 것을 배우는 재미에 푹 빠져 열심히 <strong class='text-blue-600'>성장</strong> 중입니다.</div>",
-    "<div><strong class='text-blue-600'>백엔드 개발</strong>을 집중적으로 공부하고 있으며,</br><strong>프론트엔드</strong>와 <strong>웹 디자이너</strong>의 역할도 맡아가며 역량을 넓히고 있습니다.</div>",
-    "<div><strong>궁극적으로는</strong> 특정 기술에 얽매이지 않고,</br>혼자서도 뭐든 뚝딱 만들어낼 수 있는 <strong class='text-blue-600'>풀스택 역량</strong>을 손에 넣고 싶습니다.</div>",
-    "<div>이 막연하지만 <strong>소중한 목표</strong>가 저를 나아가게 하는 가장 큰 <strong class='text-blue-600'>원동력</strong>입니다.</div>"
+    "<div>떠오른 <strong>발상</strong>을 실제 동작하는 <strong>서비스</strong>로 빚어내는 이 과정이</br>너무나도 재미있어 개발자의 길을 선택했습니다.</div>",
+    "<div>2025년 3월부터 본격적으로 웹 개발에 <strong>입문</strong>했습니다.</br>매일 새로운 것을 배우는 재미에 푹 빠져 열심히 <strong>성장</strong> 중입니다.</div>",
+    "<div><strong>백엔드 개발</strong>을 집중적으로 공부하고 있으며,</br><strong>프론트엔드</strong>와 <strong>디자인</strong> 역할도 맡아가며 역량을 넓히고 있습니다.</div>",
+    "<div>특정 기술에 얽매이지 않고,</br>혼자서도 뭐든 만들어낼 수 있는 <strong>풀스택 역량</strong>을 목표로 합니다.</div>",
+    "<div>이 목표가 저를 나아가게 하는 가장 큰 <strong>원동력</strong>입니다.</div>"
   ];
-  const triggerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
 
   useEffect(() => {
@@ -461,61 +457,8 @@ export default function Portfolio() {
 
     // 상태 초기화
     setHasMounted(true);
-    setMottoVisible(false);
-    setScrollEnabled(false);
-    setActiveIndex(0);
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
-            setActiveIndex(index);
-          }
-        });
-      },
-      {
-        rootMargin: '-50% 0px -50% 0px',
-        threshold: 0,
-      }
-    );
-
-    const currentRefs = triggerRefs.current;
-    currentRefs.forEach((ref) => {
-      if (ref) {
-        observer.observe(ref);
-      }
-    });
-
-    return () => {
-      currentRefs.forEach((ref) => {
-        if (ref) {
-          observer.unobserve(ref);
-        }
-      });
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!scrollEnabled) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "auto"
-    }
-    return () => {
-      document.body.style.overflow = "auto"
-    }
-  }, [scrollEnabled])
-
-  const handleExploreClick = () => {
-    setScrollEnabled(true)
-    setMottoVisible(true)
-    setTimeout(() => {
-      document.getElementById("motto")?.scrollIntoView({ behavior: "smooth" })
-    }, 100)
-  }
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -591,57 +534,50 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-300 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-200 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-24 md:mt-48">
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-32 md:mb-60">
-            저는 <span className="text-blue-600 font-semibold">김진</span>입니다
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+            김진
           </h1>
-
-          <Button
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 md:px-8 py-2 md:py-3 rounded-full text-base md:text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300"
-            onClick={handleExploreClick}
-          >
-            네..?
-            <ChevronDown className="ml-2 w-4 h-4 md:w-5 md:h-5" />
-          </Button>
+          <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
+            백엔드 개발자를 꿈꾸는<br />
+            풀스택 역량을 키워가는 개발자입니다
+          </p>
         </div>
       </section>
 
-      {/* Motto Section */}
-      <section id="motto" className="py-20 md:py-40 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-16 md:mb-32">
-            <span className="text-blue-600">김진</span>은 이런 사람입니다
-          </h2>
-          <div
-            className={`transition-all duration-1000 ease-out ${
-              mottoVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"
-            }`}
-          >
-            <div className="bg-white rounded-2xl p-8 md:p-16 shadow-lg border border-blue-100 text-left">
-              <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-600 mb-6 md:mb-8 text-center">"시작이 반이다 🔥"</p>
-              <p className="text-lg md:text-xl text-gray-700">어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.<br></br></p>
-              <p className="text-sm md:text-base text-gray-600 mt-4 leading-relaxed">
-                비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.
-                {' '}그래서 저는 완벽한 준비보단, 먼저 움직이는 사람이고자 합니다.
-              </p>
-            </div>
+      {/* Navigation Links - Sticky */}
+      <div className="w-full flex justify-center sticky top-6 z-50 -mt-20 pb-12">
+        <div className="bg-white/95 backdrop-blur-md border-2 border-gray-300 rounded-full shadow-lg px-6 py-3">
+          <div className="flex gap-6 md:gap-8 text-sm md:text-base font-medium">
+            <a href="#about" className="text-gray-700 hover:text-gray-900 transition">About</a>
+            <a href="#skills" className="text-gray-700 hover:text-gray-900 transition">Skills</a>
+            <a href="#experience" className="text-gray-700 hover:text-gray-900 transition">Experience</a>
+            <a href="#contact" className="text-gray-700 hover:text-gray-900 transition">Contact</a>
           </div>
+        </div>
+      </div>
+
+      {/* Motto Section */}
+      <section id="motto" className="py-32 px-6 bg-gray-50">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-8">
+            "시작이 반이다 🔥"
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+            어떤 일이든 시작이 가장 어렵고도 중요한 순간이라고 믿습니다.
+            비록 서툴더라도, 시작이 있어야 배움과 성장이 따라온다고 생각합니다.
+            그래서 저는 완벽한 준비보단, 먼저 움직이는 사람이고자 합니다.
+          </p>
         </div>
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="py-20 md:py-32 px-6 bg-white">
+      <section id="about" className="py-32 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16 md:mb-24">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
-              저는 <span className="text-blue-600">김진</span>입니다
+          <div className="mb-16 md:mb-24">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              About
             </h2>
           </div>
 
@@ -709,50 +645,31 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 text-center mt-48 md:mt-96 mb-64 md:mb-[32rem] px-4">
-            <span className="text-blue-600">김진</span>은 개발자가 되고싶습니다.
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mt-32 md:mt-48 mb-32 md:mb-48 px-4">
+            개발자를 꿈꿉니다
           </h2>
 
           {/* Additional Introduction */}
-          <div className="relative mt-48 md:mt-96" style={{ height: `${introTexts.length * 50}vh` }}>
-            <div className="sticky top-1/2 -translate-y-1/2 px-6">
-              <div className="text-center max-w-3xl mx-auto">
-                <div className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed text-gray-800">
-                  <span
-                    key={activeIndex}
-                    className="inline-block animate-slide-in"
-                    dangerouslySetInnerHTML={{ __html: introTexts[activeIndex] }}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-0 left-0 w-full">
-              {introTexts.map((_, index) => (
-                <div
-                  key={index}
-                  data-index={index}
-                  ref={(el) => (triggerRefs.current[index] = el)}
-                  className="h-[50vh]"
-                />
-              ))}
-            </div>
+          <div className="max-w-3xl mx-auto space-y-6 px-6">
+            {introTexts.map((text, index) => (
+              <div
+                key={index}
+                className="text-lg md:text-xl leading-relaxed text-gray-700"
+                dangerouslySetInnerHTML={{ __html: text }}
+              />
+            ))}
           </div>
         </div>
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 px-6 bg-blue-600">
+      <section id="skills" className="py-32 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4 flex-wrap gap-2 px-4">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                <Wrench className="w-4 h-4 text-blue-600" />
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">김진은 이런걸 공부하고 있습니다</h2>
-            </div>
+          <div className="mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">Skills</h2>
           </div>
 
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-lg">
+          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
             <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
               {/* Left Side - 다루고 있는 기술 */}
               <div>
@@ -818,7 +735,7 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <p className="text-white text-lg md:text-xl lg:text-2xl leading-relaxed md:leading-loose my-16 md:my-24 text-left px-4">
+          <p className="text-gray-700 text-lg md:text-xl leading-relaxed my-16 md:my-24 text-left px-4">
             기술은 결국 사람을 향해야 한다고 믿습니다.<br></br>
             {' '}저는 <strong>공간정보 기술과 웹 개발을 결합해</strong><br></br>
             {' '}누군가의 일상에서 '조금 더 편리한 순간'을 만드는 서비스를 만들고 있습니다.<br></br>
@@ -827,37 +744,49 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* New Section */}
-      <section className="pt-48 md:pt-96 pb-24 md:pb-48 px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
-            <span className="text-blue-600">김진</span>은 열심히 합니다
-          </h2>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section id="timeline" className="py-20 px-6 bg-white" ref={observeElement}>
+      {/* Experience Section (Timeline + Projects) */}
+      <section id="experience" className="py-32 px-6 bg-white" ref={observeElement}>
         <div className="max-w-6xl mx-auto">
-          <div className="mb-16">
-            <div className="flex items-center justify-center mb-4 gap-3 px-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <Calendar className="w-4 h-4 text-white" />
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">김진의 여정</h2>
-            </div>
-            <div className="max-w-2xl mx-auto px-4">
-              <p className="text-gray-600 mt-12 text-left text-sm md:text-base leading-relaxed">
-                아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다.<br></br>
-                {' '}하지만 지금까지 제가 몰입해온 활동들을 정리하며,<br></br>
-                {' '}어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다.<br></br>
-                {' '}이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다.
-              </p>
-            </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-16">Experience</h2>
+
+          {/* Tab Buttons */}
+          <div className="flex gap-4 mb-12 border-b border-gray-200">
+            <button
+              onClick={() => setActiveTab('timeline')}
+              className={`pb-4 px-2 text-lg font-medium transition-colors ${
+                activeTab === 'timeline'
+                  ? 'text-gray-900 border-b-2 border-gray-900'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              경험 ({timelineData.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('projects')}
+              className={`pb-4 px-2 text-lg font-medium transition-colors ${
+                activeTab === 'projects'
+                  ? 'text-gray-900 border-b-2 border-gray-900'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              프로젝트 ({projectData.length})
+            </button>
           </div>
 
-          {/* Filter Buttons */}
-          <div className="flex justify-center flex-wrap gap-2 mb-8 px-4">
+          {/* Timeline Tab Content */}
+          {activeTab === 'timeline' && (
+            <div>
+              <div className="max-w-2xl mx-auto mb-12 px-4">
+                <p className="text-gray-600 text-left text-sm md:text-base leading-relaxed">
+                  아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다.<br></br>
+                  {' '}하지만 지금까지 제가 몰입해온 활동들을 정리하며,<br></br>
+                  {' '}어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다.<br></br>
+                  {' '}이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다.
+                </p>
+              </div>
+
+              {/* Filter Buttons */}
+              <div className="flex justify-center flex-wrap gap-2 mb-8 px-4">
             <Button
               size="sm"
               variant={!selectedFilter ? "default" : "outline"}
@@ -917,10 +846,10 @@ export default function Portfolio() {
                 <div key={item.id} className="relative">
                   <Card
                     className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-80 relative transform ${
-                      hasMounted && visibleSections.has("timeline") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                      hasMounted && visibleSections.has("experience") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}
                     style={{
-                      transitionDelay: hasMounted && visibleSections.has("timeline") ? `${index * 50}ms` : "0ms",
+                      transitionDelay: hasMounted && visibleSections.has("experience") ? `${index * 50}ms` : "0ms",
                     }}
                   >
                     <CardContent className="p-4 md:p-6 h-full flex flex-col">
@@ -982,34 +911,28 @@ export default function Portfolio() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 bg-white" ref={observeElement}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center mb-4 gap-3 px-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <Folder className="w-4 h-4 text-white" />
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900">김진의 프로젝트</h2>
             </div>
-            <p className="text-sm md:text-base text-gray-600 mt-6 px-4 leading-relaxed">
-              무언가를 함께 만들어가는 경험이 가장 즐겁습니다. 🚀<br></br>
-              {' '}아이디어가 현실이 되는 그 순간이 너무 좋네요 :)
-            </p>
-          </div>
+          )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-2 md:px-0">
+          {/* Projects Tab Content */}
+          {activeTab === 'projects' && (
+            <div>
+              <div className="max-w-2xl mx-auto mb-12 px-4">
+                <p className="text-gray-600 text-center text-sm md:text-base leading-relaxed">
+                  무언가를 함께 만들어가는 경험이 가장 즐겁습니다. 🚀<br></br>
+                  {' '}아이디어가 현실이 되는 그 순간이 너무 좋네요 :)
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-2 md:px-0">
             {projectData.map((project, index) => (
               <div key={project.id}>
                 <Card
                   className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-72 relative transform ${
-                    hasMounted && visibleSections.has("projects") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                    hasMounted && visibleSections.has("experience") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                   }`}
                   style={{
-                    transitionDelay: hasMounted && visibleSections.has("projects") ? `${index * 60}ms` : "0ms",
+                    transitionDelay: hasMounted && visibleSections.has("experience") ? `${index * 60}ms` : "0ms",
                   }}
                 >
                   <CardContent className="p-4 md:p-6 h-full flex flex-col">
@@ -1063,20 +986,22 @@ export default function Portfolio() {
                 </Card>
               </div>
             ))}
-          </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Contact Me Section */}
-      <section id="contact" className="pt-48 md:pt-96 pb-48 md:pb-[24rem] px-6 bg-blue-600" ref={observeElement}>
+      <section id="contact" className="py-32 px-6 bg-gray-50" ref={observeElement}>
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-32 md:mb-64">
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white px-4">
-              저는 <span className="text-gray-900">김진</span>입니다
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 px-4">
+              Contact
             </h2>
           </div>
 
-          <p className="text-center text-lg md:text-xl text-white mb-32 md:mb-64 px-4">
+          <p className="text-center text-lg md:text-xl text-gray-600 mb-16 px-4">
             혹시 김진이 더 궁금해지셨나요?
           </p>
 
