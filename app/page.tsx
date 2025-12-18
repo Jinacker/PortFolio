@@ -273,7 +273,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: "shympyo-app",
-    title: "쉼표 — 무더위 쉼터 지도",
+    title: "쉼표 - 무더위 쉼터 지도",
     period: "2025-여름",
     type: "development" as const,
     description: "React Native 앱 개발",
@@ -417,7 +417,7 @@ const frontendTimelineData = [
   },
   {
     id: 3,
-    title: "쉼표 — 무더위 쉼터 지도",
+    title: "쉼표, 무더위 쉼터 지도",
     period: "2025년 8월 ~ 11월",
     description: "React Native를 활용한 첫 앱 개발 프로젝트로, 사용자 경험(UX)에 대해 많은 것을 배웠습니다.",
   },
@@ -439,18 +439,24 @@ const frontendTimelineData = [
 const backendTimelineData = [
   {
     id: 1,
-    title: "Django 학습",
-    period: "2024년 겨울",
-    description: "KSEB 부트캠프에서 Django를 배우며 웹 애플리케이션 개발의 기초를 다졌습니다.",
+    title: "백엔드 입문",
+    period: "2025년 3월 ~ 11월",
+    description: "멋쟁이사자처럼 인하대 BE 파트로 참여해, Django 기반으로 백엔드 개발에 처음 입문했습니다.",
   },
   {
     id: 2,
+    title: "FamiLog",
+    period: "2025년 7월",
+    description: "처음으로 백엔드 역할을 맡아 실제 프로젝트를 진행했습니다.",
+  },
+  {
+    id: 3,
     title: "Spring Boot 프로젝트",
     period: "2025년 여름",
     description: "Smart WMS 프로젝트에서 Spring Boot로 백엔드를 개발하며 실무 경험을 쌓았습니다.",
   },
   {
-    id: 3,
+    id: 4,
     title: "NestJS 학습 및 적용",
     period: "2025년 11월",
     description: "돈가스 지도 프로젝트에서 NestJS를 활용하여 TypeScript 기반 백엔드를 구축했습니다.",
@@ -504,6 +510,7 @@ export default function Portfolio() {
   const [isShympyoModalOpen, setIsShympyoModalOpen] = useState(false);
   const [isMakerFaireModalOpen, setIsMakerFaireModalOpen] = useState(false);
   const [isKatsuMapModalOpen, setIsKatsuMapModalOpen] = useState(false);
+  const [isFamiLogModalOpen, setIsFamiLogModalOpen] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -1136,11 +1143,41 @@ export default function Portfolio() {
                         }}
                       ></span>
 
-                      <h4 className="text-sm font-bold text-green-600 mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-xs text-gray-500 mb-2">{item.period}</p>
-                      <p className="text-xs text-gray-700">{item.description}</p>
+                      {item.id === 2 ? (
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="flex-1 pr-3">
+                            <h4 className="text-sm font-bold text-green-600 mb-1">
+                              {item.title}
+                            </h4>
+                            <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                            <p className="text-xs text-gray-700">{item.description}</p>
+                          </div>
+                          <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                            <img
+                              src="/projects/FamiLog.png"
+                              alt="FamiLog"
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <h4 className="text-sm font-bold text-green-600 mb-1">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                          <p className="text-xs text-gray-700">{item.description}</p>
+                        </>
+                      )}
+                      {/* FamiLog 자세히 보기 버튼 */}
+                      {item.id === 2 && (
+                        <button
+                          onClick={() => setIsFamiLogModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -2374,6 +2411,268 @@ export default function Portfolio() {
                     실제 사용자들이 제가 만든 앱을 사용한다는 것만으로 가슴이 벅차오릅니다. <br></br>
                     운영하며 쏟아지는 피드백을 UI/UX 개선과 기능 추가로 빠르게 반영하고 있으며,
                     개발이 단순한 구현을 넘어 책임과 애착이 필요한 일이라는 점을 깊이 느끼고 있습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* FamiLog Modal */}
+      {isFamiLogModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsFamiLogModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsFamiLogModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4">
+              <img
+                src="/projects/FamiLog_detail.png"
+                alt="FamiLog"
+                className="w-full h-auto rounded-t-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">FamiLog</h2>
+              <p className="text-lg text-gray-600 mb-6">가족 소통을 위한 질문·기록 기반 커뮤니케이션 웹 서비스 (Backend)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.07</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">개발 인원</p>
+                  <p className="text-base font-semibold text-gray-900"><span className="text-blue-600 font-bold">백엔드 2명</span> / 프론트엔드 2명</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">[ 🦁 멋쟁이사자처럼 인하대 해커톤 ]<br></br>가족 구성원 간 소통을 돕는 질문 추천·답변 공유 기능을 갖춘 웹 기반 커뮤니케이션 플랫폼. (가족판 썸원)</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
+                  <a
+                    href="https://github.com/LikeLion-13th-E-TEAM-Inha-Hackathon"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    github.com/LikeLion-13th-E-TEAM-Inha-Hackathon
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Framework:</strong> Django REST Framework</p>
+                  <p className="text-sm text-gray-700"><strong>Authentication:</strong> JWT (djangorestframework-simplejwt)</p>
+                  <p className="text-sm text-gray-700"><strong>Database:</strong> SQLite</p>
+                  <p className="text-sm text-gray-700"><strong>Deployment:</strong> Render</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 (Backend)</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">RESTful API 서버 전체 설계 및 구축</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">JWT 기반 인증·인가 시스템 구현</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">백엔드 파트 담당 2명 중 1명으로 프로젝트 핵심 기능 개발 주도</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">Django Model 설계 및 관계형 DB 구조 정의</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">User, Question, Answer 등 핵심 엔티티 설계</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">ForeignKey, OneToOneField 등 정규화된 데이터베이스 관계 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Django ORM을 활용한 CRUD 기능 구현</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">JWT 기반 인증·인가 시스템</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">djangorestframework-simplejwt 활용하여 Access Token / Refresh Token 발급·갱신 구조 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Token 검증 및 사용자 인증 미들웨어 처리</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">로그인 / 회원가입 / 로그아웃 엔드포인트 설계</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">질문·답변 API 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">질문 목록 조회, 랜덤 질문 추천 API</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">답변 등록, 수정, 삭제 API 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">질문·답변 간 관계를 활용한 필터링 및 조회 로직 구성</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">Serializer를 통한 데이터 검증·직렬화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">ModelSerializer 활용한 엔티티↔JSON 변환 구조 작성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Validation 로직 추가로 프론트에서 받은 요청 데이터의 무결성 보장</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">nested serializer 활용한 복합적인 데이터 구조 관리</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">View 설계 및 HTTP 메서드 처리</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">APIView / ViewSet 기반으로 RESTful API 엔드포인트 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">GET, POST, PUT/PATCH, DELETE 메서드별 로직 구성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">권한·인증 데코레이터(@permission_classes) 적용</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 기술적 고민 및 학습 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기술적 고민 및 학습</h3>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">백엔드 기본 개념 습득 (Django, DRF)</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">MTV 패턴, ORM, Serializer, View 등 Django/DRF 핵심 개념 학습</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">프론트엔드와의 협업 경험을 통해 REST API 설계 원칙 이해</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">JWT 인증 구조 이해</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Access Token과 Refresh Token의 역할 구분, 토큰 갱신 흐름 파악</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">인증·인가가 어떻게 서버에서 처리되는지 경험</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">팀 협업 및 버전 관리</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">백엔드 2명, 프론트엔드 2명이 함께 작업하는 협업 프로젝트</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Git을 활용한 브랜치 관리, PR 리뷰 경험</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">프론트-백 연동 및 배포</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Render를 활용한 서버 배포 및 실제 운영 환경 경험</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">프론트엔드 팀과 API 명세서 기반 소통, 데이터 형식 맞춰가며 협업</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 프로젝트 후기</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    처음으로 백엔드 개발자 역할을 맡아 진행한 프로젝트로, Django와 DRF의 기본 구조를 직접 경험하며 백엔드에 대한 이해를 넓힐 수 있었습니다. <br></br>
+                    특히, 프론트엔드 팀과 협업하며 API 설계 및 데이터 구조를 맞춰가는 과정에서 실전적인 개발 경험을 쌓았고, JWT 기반 인증 시스템 구축을 통해 서버 보안의 중요성을 체감했습니다. <br></br>
+                    비록 해커톤이라는 짧은 기간 동안 진행된 프로젝트였지만, 협업의 중요성과 백엔드 개발자로서의 역할을 명확히 이해할 수 있는 소중한 경험이었습니다.
                   </p>
                 </div>
               </div>
