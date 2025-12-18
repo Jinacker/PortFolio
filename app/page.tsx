@@ -23,6 +23,7 @@ import {
   FileText,
   ChevronDown,
   ChevronUp,
+  X,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -404,15 +405,15 @@ const projectData: ProjectItem[] = [
 const frontendTimelineData = [
   {
     id: 1,
-    title: "React 기초 학습",
+    title: "프론트엔드 입문",
     period: "2025년 2월",
-    description: "인프런 한입 리액트 강의를 완강하며 React의 기초부터 실전까지 학습했습니다.",
+    description: "인프런 한입 리액트 강의를 완강하며 웹 개발에 처음 입문했고,\nReact의 기초부터 실전까지 학습했습니다.",
   },
   {
     id: 2,
-    title: "Next.js 프로젝트",
-    period: "2025년",
-    description: "Next.js로 포트폴리오 웹사이트를 제작하며 SSR과 라우팅을 경험했습니다.",
+    title: "ISSUE ONE (🥇대상 수상)",
+    period: "2025년 3월 ~ 6월",
+    description: "강의 기반 구현에서 벗어나, 기획부터 설계·구현까지 전 과정을 직접 결정한 첫 프로젝트였습니다.",
   },
   {
     id: 3,
@@ -487,6 +488,7 @@ export default function Portfolio() {
 
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
   const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
+  const [isIssueOneModalOpen, setIsIssueOneModalOpen] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -949,11 +951,41 @@ export default function Portfolio() {
                         }}
                       ></span>
 
-                      <h4 className="text-sm font-bold text-blue-600 mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-xs text-gray-500 mb-2">{item.period}</p>
-                      <p className="text-xs text-gray-700">{item.description}</p>
+                                              {item.id === 2 ? (
+                                                <div className="flex justify-between items-start mb-3">
+                                                  <div className="flex-1 pr-3">
+                                                    <h4 className="text-sm font-bold text-blue-600 mb-1">
+                                                      {item.title}
+                                                    </h4>
+                                                    <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                                                    <p className="text-xs text-gray-700">{item.description}</p>
+                                                  </div>
+                                                  <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center">
+                                                    <img
+                                                      src="/projects/ISSUE_ONE.png"
+                                                      alt="ISSUE ONE"
+                                                      className="w-full h-full object-contain"
+                                                    />
+                                                  </div>
+                                                </div>
+                                              ) : (
+                                                <>
+                                                  <h4 className="text-sm font-bold text-blue-600 mb-1">
+                                                    {item.title}
+                                                  </h4>
+                                                  <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                                                  <p className="text-xs text-gray-700">{item.description}</p>
+                                                </>
+                                              )}
+                      {/* ISSUE ONE 프로젝트 자세히 보기 버튼 */}
+                      {item.id === 2 && (
+                        <button
+                          onClick={() => setIsIssueOneModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -1285,6 +1317,236 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
+
+      {/* ISSUE ONE Modal */}
+      {isIssueOneModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsIssueOneModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsIssueOneModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4">
+              <img
+                src="/projects/Issue_one_detail.png"
+                alt="ISSUE ONE 프로젝트"
+                className="w-full h-auto rounded-t-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">ISSUE ONE</h2>
+              <p className="text-lg text-gray-600 mb-6">편향 없는 뉴스 이슈 요약 플랫폼 (Frontend · 팀장)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.03 ~ 2025.06</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">[ 🏆 I-MINI PROJECT 대상 수상작 ]<br></br>여러 언론사의 기사를 수집·분석하여 AI 요약으로 제공하고, 정치적 성향을 시각적으로 비교할 수 있는 뉴스 요약 플랫폼</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">서비스 링크</p>
+                  <a
+                    href="https://issue-one.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    issue-one.vercel.app
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
+                  <a
+                    href="https://github.com/KSEB-4-E"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    github.com/KSEB-4-E
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 디자인 레퍼런스 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🎨 디자인 레퍼런스</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-gray-700">무신사(MUSINSA)</p>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Frontend:</strong> React 19, Vite, React Router DOM, Styled-Components</p>
+                  <p className="text-sm text-gray-700"><strong>비동기 통신:</strong> Axios</p>
+                  <p className="text-sm text-gray-700"><strong>UI:</strong> Styled-Components, React Icons, React Spinners</p>
+                  <p className="text-sm text-gray-700"><strong>배포:</strong> Vercel</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 (FrontEnd · 팀장)</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">프로젝트 기획 및 전체 구조 설계 주도</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">프론트엔드 전반 개발 및 UI/UX 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">모바일 환경을 고려한 반응형 웹 구현</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">검색 플로우·라우팅·상태 전달 구조 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">팀 내 기술 방향성 결정 및 구현 가이드 제공</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">기능 정의, 화면 흐름 문서화 및 협업 커뮤니케이션 담당</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+
+                {/* 다중 언론사 기사 수집 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">다중 언론사 기사 수집 및 AI 요약 UI 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">키워드 검색 시 여러 언론사 기사 결과를 한 화면에서 비교</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">AI 요약 결과를 핵심 사실 / 공통 쟁점 / 전망 단계로 구조화하여 제공</p>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* 언론사 정치 성향 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">언론사 정치 성향 시각화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">보수 / 진보 / 중도 성향을 색상 기반 UI로 구분</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">언론사 로고와 카드형 레이아웃으로 직관적 비교 가능</p>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* 검색 플로우 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">검색 → 로딩 → 결과 페이지 UX 플로우 설계</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">AI 처리 대기 시간을 로딩 페이지로 분리해 사용자 이탈 최소화</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">React Router state와 URL query를 병행한 데이터 전달 구조 설계</p>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* 모바일 우선 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">모바일 우선 반응형 UI 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">모바일 화면에 최적화된 카드 레이아웃 및 인터랙션 구성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">화면 크기에 따른 레이아웃·여백·텍스트 크기 유연 대응</p>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* 시스템 테마 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">시스템 테마 연동 다크 모드 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">prefers-color-scheme 기반 OS 테마 자동 감지</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Styled-Components ThemeProvider를 통한 전역 테마 관리</p>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* SPA 사용자 경험 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">SPA 사용자 경험 개선</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">검색 플로우 중 뒤로가기 제어</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">페이지 이동 시 스크롤 위치 초기화</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 프로젝트 후기</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    강의를 따라 구현하던 방식에서 벗어나,
+                    기획부터 구조 설계, UI/UX, 구현까지 전부 직접 결정해 본 첫 프로젝트였습니다.<br></br>
+                    처음부터 원하는 서비스를 만들어가는 과정이 쉽지는 않았지만,
+                    그만큼 개발이 가장 재미있게 느껴졌고 스스로 설계하고 구현할 수 있다는 자신감을 얻었습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Contact Me Section */}
       <section id="contact" className="py-32 px-6 bg-gray-50" ref={observeElement}>
