@@ -421,6 +421,12 @@ const frontendTimelineData = [
     period: "2025년 9월 ~ 11월",
     description: "React Native를 활용한 첫 앱 개발 프로젝트로, 사용자 경험(UX)에 대해 많은 것을 배웠습니다.",
   },
+  {
+    id: 4,
+    title: "MakerFaire 부스 페이지",
+    period: "2025년 9월",
+    description: "실제 유저들이 사용하는 것을 처음으로 만들어본 프로젝트였습니다.",
+  },
 ]
 
 // 백엔드 타임라인 데이터
@@ -490,6 +496,7 @@ export default function Portfolio() {
   const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
   const [isIssueOneModalOpen, setIsIssueOneModalOpen] = useState(false);
   const [isShympyoModalOpen, setIsShympyoModalOpen] = useState(false);
+  const [isMakerFaireModalOpen, setIsMakerFaireModalOpen] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -986,6 +993,23 @@ export default function Portfolio() {
                                                     />
                                                   </div>
                                                 </div>
+                                              ) : item.id === 4 ? (
+                                                <div className="flex justify-between items-start mb-3">
+                                                  <div className="flex-1 pr-3">
+                                                    <h4 className="text-sm font-bold text-blue-600 mb-1">
+                                                      {item.title}
+                                                    </h4>
+                                                    <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                                                    <p className="text-xs text-gray-700">{item.description}</p>
+                                                  </div>
+                                                  <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                                                    <img
+                                                      src="/projects/makerFaire.png"
+                                                      alt="메이커페어 2025 - 부스 페이지"
+                                                      className="w-full h-full object-contain"
+                                                    />
+                                                  </div>
+                                                </div>
                                               ) : (
                                                 <>
                                                   <h4 className="text-sm font-bold text-blue-600 mb-1">
@@ -1008,6 +1032,15 @@ export default function Portfolio() {
                       {item.id === 3 && (
                         <button
                           onClick={() => setIsShympyoModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 메이커페어 2025: 부스 페이지 자세히 보기 버튼 */}
+                      {item.id === 4 && (
+                        <button
+                          onClick={() => setIsMakerFaireModalOpen(true)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1813,6 +1846,210 @@ export default function Portfolio() {
                     웹과 달리 모바일은 터치, 스크롤, 제스처 등 선택지가 많아
                     사용자의 행동 흐름을 어떻게 설계할지가 매우 중요하다는 점을 배울 수 있었습니다.<br></br>
                     기능 구현을 넘어, 사용자가 의도한 흐름대로 움직이게 만드는 UX 설계에 대해 고민해볼 수 있었던 경험이었습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MakerFaire Modal */}
+      {isMakerFaireModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsMakerFaireModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsMakerFaireModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4">
+              <img
+                src="/projects/makerFaire_detail.png"
+                alt="메이커페어 2025 - 부스 소개 및 제품 설명서 페이지"
+                className="w-full h-auto rounded-t-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">"네오엔" 부스 소개 및 제품 설명서 페이지</h2>
+              <p className="text-lg text-gray-600 mb-6">메이커페어 서울 2025 부스 안내·제품 설명 웹사이트 (Frontend)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.09</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">개발 인원</p>
+                  <p className="text-base font-semibold text-gray-900"><span className="text-blue-600 font-bold">프론트엔드 2명</span></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">메이커페어 서울 2025에서 직접 창업 부스를 운영하며, 부스 내 판매 제품의 QR 기반 온라인 설명서 겸 소개 웹사이트를 제작</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">서비스 링크</p>
+                  <a
+                    href="https://neon-makerfaire.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    neon-makerfaire.vercel.app/
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
+                  <a
+                    href="https://github.com/Jinacker/neon_maker"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    github.com/Jinacker/neon_maker
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 디자인 레퍼런스 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🎨 디자인 레퍼런스</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-gray-700">메이커페어 서울 2025 공식 홈페이지</p>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Frontend:</strong> React 19, Vite</p>
+                  <p className="text-sm text-gray-700"><strong>스타일링:</strong> CSS (모바일 우선 반응형 설계)</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">메이커페어 서울 2025 창업 부스 운영 및 제품 판매 참여</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">부스 웹사이트 기획 · 디자인 · 프론트엔드 개발</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">제품 설명 구조 설계 및 사용자 동선 정의</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">이미지 로딩 구조 설계 및 성능 최적화</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">창업 부스 제품 설명서 웹사이트 제작</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">아이들을 위한 전자 개발 키트를 중심으로 제품 설명 페이지 구성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">각 제품에 QR 코드를 동봉하여, QR 스캔 시 즉시 제품 사용 설명서로 연결</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">오프라인 부스–온라인 설명서를 자연스럽게 연결하는 구조 설계</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">모바일 우선 반응형 웹 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">전시장 환경 특성을 고려해 모바일 화면 기준으로 UI 설계</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">QR 스캔 후 빠르게 정보를 확인할 수 있도록 단순하고 직관적인 화면 구성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">데스크톱 환경에서도 모바일 비율을 유지해 일관된 사용자 경험 제공</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">사진 중심 콘텐츠 구조 설계</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">제품 특성상 사진 비중이 높아, 텍스트보다 시각 자료 위주의 설명 흐름 구성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">사진이 많아도 사용자가 부담 없이 정보를 따라갈 수 있도록 이미지 배치 순서와 그룹화에 집중</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">프론트엔드 성능 최적화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">대량의 제품 사진으로 인한 초기 로딩 문제를 주요 이슈로 인식</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">React.lazy와 Suspense를 활용한 Lazy Loading 적용</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">페이지 단위 컴포넌트 분리 및 이미지 로딩 시점 제어</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">현장 환경에서도 QR 스캔 후 빠르게 설명서를 확인할 수 있도록 UX 개선</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 프로젝트 후기</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    실제 사람들이 사용하는 서비스를 처음으로 만들어본 프로젝트였습니다.<br></br>
+                    프론트엔드에서도 성능과 최적화가 UX에 직접적인 영향을 준다는 점을 실감하며, 개발이 더욱 재미있고 보람 있게 느껴졌습니다.
                   </p>
                 </div>
               </div>
