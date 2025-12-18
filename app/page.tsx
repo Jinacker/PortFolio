@@ -471,7 +471,7 @@ const backendTimelineData = [
     id: 6,
     title: "돈가스 지도",
     period: "2025년 11월 ~ 운영중",
-    description: "실사용자에게 안정적인 서비스를 제공하기 위해 문제를 사전에 예방하는 운영을 처음으로 고민한 프로젝트였습니다.",
+    description: "실사용자에게 안정적인 서비스를 제공하기 위해 문제를 사전예방하는 운영을 처음으로 고민한 프로젝트였습니다.",
   },
   {
     id: 7,
@@ -968,20 +968,36 @@ export default function Portfolio() {
                         ...(index % 2 === 0
                           ? {
                               left: '0px',
-                              top: index === 0 ? '0px' : '-6.0px',
-                              bottom: index === frontendTimelineData.length - 1 ? '-15px' : '-4.5px',
-                              borderWidth: `${index === 0 ? '0' : '3px'} 0 3px 3px`,
-                              borderRadius: `${index === 0 ? '0' : '30px'} 0 0 30px`,
+                              top: index === 0 ? '-0px' : '-6.0px',
+                              bottom: index === frontendTimelineData.length - 1 ? '-15px' : '-20px',
+                              borderWidth: `3px 0 3px 3px`,
+                              borderRadius: `30px 0 0 30px`,
                             }
                           : {
                               right: '0',
                               top: '-3px',
-                              bottom: index === frontendTimelineData.length - 1 ? '0px' : (index === 3 ? '-5px' : '-2px'),
+                              bottom: index === frontendTimelineData.length - 1 ? '0px' : '-20px',
                               borderWidth: `3px 3px ${index === frontendTimelineData.length - 1 ? '0' : '3px'} 0`,
                               borderRadius: `0 30px 30px 0`,
                             }),
                       }}
                     ></div>
+
+                    {/* 첫 번째 카드 위로 수직선 추가 */}
+                    {index === 0 && (
+                      <div
+                        className="absolute"
+                        style={{
+                          right: '147px',
+                          top: '-27px',
+                          width: '50px',
+                          height: '30px',
+                          borderRight: '3px solid #3b82f6',
+                          borderBottom: '3px solid #3b82f6',
+                          borderBottomRightRadius: '40px',
+                        }}
+                      ></div>
+                    )}
 
                     {/* 카드 */}
                     <div className="bg-white rounded-lg p-4 relative shadow-sm border border-gray-200">
@@ -1138,20 +1154,36 @@ export default function Portfolio() {
                         ...(index % 2 === 0
                           ? {
                               left: '0px',
-                              top: index === 0 ? '0px' : '-6.0px',
-                              bottom: index === backendTimelineData.length - 1 ? '0px' : '-4.5px',
-                              borderWidth: `${index === 0 ? '0' : '3px'} 0 ${index === backendTimelineData.length - 1 ? '0' : '3px'} 3px`,
-                              borderRadius: `${index === 0 ? '0' : '30px'} 0 0 ${index === backendTimelineData.length - 1 ? '0' : '30px'}`,
+                              top: index === 0 ? '-0px' : '-6.0px',
+                              bottom: index === backendTimelineData.length - 1 ? '0px' : '-20px',
+                              borderWidth: `3px 0 3px 3px`,
+                              borderRadius: `30px 0 0 30px`,
                             }
                           : {
                               right: '0',
                               top: '-3px',
-                              bottom: index === backendTimelineData.length - 1 ? '0px' : '-2px',
+                              bottom: index === backendTimelineData.length - 1 ? '0px' : '-20px',
                               borderWidth: `3px 3px ${index === backendTimelineData.length - 1 ? '0' : '3px'} 0`,
                               borderRadius: `0 30px 30px 0`,
                             }),
                       }}
                     ></div>
+
+                    {/* 첫 번째 카드 위로 곡선 추가 */}
+                    {index === 0 && (
+                      <div
+                        className="absolute"
+                        style={{
+                          right: '147px',
+                          top: '-27px',
+                          width: '50px',
+                          height: '30px',
+                          borderRight: '3px solid #10b981',
+                          borderBottom: '3px solid #10b981',
+                          borderBottomRightRadius: '40px',
+                        }}
+                      ></div>
+                    )}
 
                     {/* 카드 */}
                     <div className="bg-white rounded-lg p-4 relative shadow-sm border border-gray-200">
