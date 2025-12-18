@@ -431,7 +431,7 @@ const frontendTimelineData = [
     id: 5,
     title: "돈가스 지도",
     period: "2025년 11월 ~ 운영중",
-    description: "첫 1인 개발로 앱을 출시하고 운영 중입니다. 사용자들의 편의를 위해 다.",
+    description: "1인 개발로 앱을 출시하고 운영하며, 사용자들의 편의를 위해 항상 고민중입니다.",
   },
 ]
 
@@ -465,7 +465,13 @@ const backendTimelineData = [
     id: 5,
     title: "UMC - 인하대 9기 YB",
     period: "2025년 9월 ~",
-    description: "Node.js Server 파트로 활동하며, TypeScript 기반으로 서버 개발을 학습하고 있습니다.",
+    description: "인하대 UMC 9기 Node.js Server 파트로 활동하며, TypeScript 기반으로 서버 개발을 학습하고 있습니다.",
+  },
+  {
+    id: 6,
+    title: "돈가스 지도",
+    period: "2025년 11월 ~ 운영중",
+    description: "실사용자에게 안정적인 서비스를 제공하기 위해 문제를 사전에 예방하는 운영을 처음으로 고민한 프로젝트였습니다.",
   },
 ]
 
@@ -516,6 +522,7 @@ export default function Portfolio() {
   const [isShympyoModalOpen, setIsShympyoModalOpen] = useState(false);
   const [isMakerFaireModalOpen, setIsMakerFaireModalOpen] = useState(false);
   const [isKatsuMapModalOpen, setIsKatsuMapModalOpen] = useState(false);
+  const [isKatsuMapBackendModalOpen, setIsKatsuMapBackendModalOpen] = useState(false);
   const [isFamiLogModalOpen, setIsFamiLogModalOpen] = useState(false);
   const [isSmartWMSModalOpen, setIsSmartWMSModalOpen] = useState(false);
   const [isGeonneoGeonneoModalOpen, setIsGeonneoGeonneoModalOpen] = useState(false);
@@ -768,7 +775,7 @@ export default function Portfolio() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* 열정 */}
               <div className="text-center">
-                <div className="w-40 h-40 mx-auto mb-4 bg-white border-4 border-blue-100 rounded-full flex flex-col items-center justify-center">
+                <div className="w-40 h-40 mx-auto mb-4 bg-white border-2 border-blue-100 rounded-full flex flex-col items-center justify-center">
                   <Flame className="w-14 h-14 text-blue-600 mb-2" />
                   <span className="text-base font-bold text-gray-900">열정</span>
                 </div>
@@ -780,7 +787,7 @@ export default function Portfolio() {
 
               {/* 소통 */}
               <div className="text-center">
-                <div className="w-40 h-40 mx-auto mb-4 bg-white border-4 border-blue-100 rounded-full flex flex-col items-center justify-center">
+                <div className="w-40 h-40 mx-auto mb-4 bg-white border-2 border-blue-100 rounded-full flex flex-col items-center justify-center">
                   <MessageCircle className="w-14 h-14 text-blue-600 mb-2" />
                   <span className="text-base font-bold text-gray-900">소통</span>
                 </div>
@@ -792,7 +799,7 @@ export default function Portfolio() {
 
               {/* 기록 */}
               <div className="text-center">
-                <div className="w-40 h-40 mx-auto mb-4 bg-white border-4 border-blue-100 rounded-full flex flex-col items-center justify-center">
+                <div className="w-40 h-40 mx-auto mb-4 bg-white border-2 border-blue-100 rounded-full flex flex-col items-center justify-center">
                   <FileText className="w-14 h-14 text-blue-600 mb-2" />
                   <span className="text-base font-bold text-gray-900">기록</span>
                 </div>
@@ -1210,6 +1217,23 @@ export default function Portfolio() {
                           <p className="text-xs text-gray-500 mb-2">{item.period}</p>
                           <p className="text-xs text-gray-700">{item.description}</p>
                         </>
+                      ) : item.id === 6 ? (
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="flex-1 pr-3">
+                            <h4 className="text-sm font-bold text-green-600 mb-1">
+                              {item.title}
+                            </h4>
+                            <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                            <p className="text-xs text-gray-700">{item.description}</p>
+                          </div>
+                          <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                            <img
+                              src="/projects/KatsuMap.png"
+                              alt="돈가스 지도"
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        </div>
                       ) : (
                         <>
                           <h4 className="text-sm font-bold text-green-600 mb-1">
@@ -1241,6 +1265,15 @@ export default function Portfolio() {
                       {item.id === 4 && (
                         <button
                           onClick={() => setIsGeonneoGeonneoModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 돈가스 지도 자세히 보기 버튼 */}
+                      {item.id === 6 && (
+                        <button
+                          onClick={() => setIsKatsuMapBackendModalOpen(true)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -2430,6 +2463,24 @@ export default function Portfolio() {
                     <li className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-sm text-gray-700">Sentry 연동으로 실제 사용자 환경에서 발생하는 오류 추적 및 개선</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">SVG 좌표계 기반 지도 UI 안정화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">메인 화면 서울 권역 지도를 SVG 좌표계 기반으로 설계하여 화면 비율 변화에도 레이아웃 고정</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">디바이스 해상도·종횡비와 무관하게 동일한 지도 배치와 터치 영역 유지</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">반응형 스타일링 대신 좌표 기준 레이아웃을 적용해 UI 깨짐 이슈 사전 방지</p>
                     </li>
                   </ul>
                 </div>
