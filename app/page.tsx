@@ -440,7 +440,7 @@ const backendTimelineData = [
   {
     id: 1,
     title: "백엔드 입문",
-    period: "2025년 3월 ~ 11월",
+    period: "2025년 3월",
     description: "멋쟁이사자처럼 인하대 BE 파트로 참여해, Django 기반으로 백엔드 개발에 처음 입문했습니다.",
   },
   {
@@ -451,9 +451,9 @@ const backendTimelineData = [
   },
   {
     id: 3,
-    title: "Spring Boot 프로젝트",
-    period: "2025년 여름",
-    description: "Smart WMS 프로젝트에서 Spring Boot로 백엔드를 개발하며 실무 경험을 쌓았습니다.",
+    title: "SmartWMS (🥈 우수상)",
+    period: "2025년 7월~8월",
+    description: "실제 창고 운영 흐름을 비즈니스 로직으로 옮기며, 처음으로 성능 최적화를 고민해본 프로젝트였습니다.",
   },
   {
     id: 4,
@@ -511,6 +511,7 @@ export default function Portfolio() {
   const [isMakerFaireModalOpen, setIsMakerFaireModalOpen] = useState(false);
   const [isKatsuMapModalOpen, setIsKatsuMapModalOpen] = useState(false);
   const [isFamiLogModalOpen, setIsFamiLogModalOpen] = useState(false);
+  const [isSmartWMSModalOpen, setIsSmartWMSModalOpen] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -1160,6 +1161,23 @@ export default function Portfolio() {
                             />
                           </div>
                         </div>
+                      ) : item.id === 3 ? (
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="flex-1 pr-3">
+                            <h4 className="text-sm font-bold text-green-600 mb-1">
+                              {item.title}
+                            </h4>
+                            <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                            <p className="text-xs text-gray-700">{item.description}</p>
+                          </div>
+                          <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                            <img
+                              src="/projects/SmartWMS.png"
+                              alt="SmartWMS"
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        </div>
                       ) : (
                         <>
                           <h4 className="text-sm font-bold text-green-600 mb-1">
@@ -1173,6 +1191,15 @@ export default function Portfolio() {
                       {item.id === 2 && (
                         <button
                           onClick={() => setIsFamiLogModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* SmartWMS 자세히 보기 버튼 */}
+                      {item.id === 3 && (
+                        <button
+                          onClick={() => setIsSmartWMSModalOpen(true)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -2449,7 +2476,7 @@ export default function Portfolio() {
             {/* Project Details */}
             <div className="p-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">FamiLog</h2>
-              <p className="text-lg text-gray-600 mb-6">가족 소통을 위한 질문·기록 기반 커뮤니케이션 웹 서비스 (Backend)</p>
+              <p className="text-lg text-gray-600 mb-6">가족 소통을 위한 1일1 질문·기록 기반 커뮤니케이션 웹 서비스 (Backend)</p>
 
               {/* 기본 정보 */}
               <div className="mb-12">
@@ -2673,6 +2700,275 @@ export default function Portfolio() {
                     처음으로 백엔드 개발자 역할을 맡아 진행한 프로젝트로, Django와 DRF의 기본 구조를 직접 경험하며 백엔드에 대한 이해를 넓힐 수 있었습니다. <br></br>
                     특히, 프론트엔드 팀과 협업하며 API 설계 및 데이터 구조를 맞춰가는 과정에서 실전적인 개발 경험을 쌓았고, JWT 기반 인증 시스템 구축을 통해 서버 보안의 중요성을 체감했습니다. <br></br>
                     비록 해커톤이라는 짧은 기간 동안 진행된 프로젝트였지만, 협업의 중요성과 백엔드 개발자로서의 역할을 명확히 이해할 수 있는 소중한 경험이었습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* SmartWMS Modal */}
+      {isSmartWMSModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsSmartWMSModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsSmartWMSModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4">
+              <img
+                src="/projects/SmartWMS_detail.png"
+                alt="Smart WMS"
+                className="w-full h-auto rounded-t-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Smart WMS</h2>
+              <p className="text-lg text-gray-600 mb-6">AMR 기반 스마트 창고 관리 시스템 (Backend)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.07 ~ 2025.08</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900"><span className="text-blue-600 font-bold">Backend 1명</span> / Frontend 1명 / AI 2명</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">[ 🏢 신세계 I&C 산학협력 프로젝트 - 정보통신기획평가원 원장상 수상]<br></br>재고·입출고·AMR 로봇 상태를 통합 관리하고, 실시간 대시보드와 3D 창고 시뮬레이션을 제공하는 스마트 창고 관리 시스템</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
+                  <a
+                    href="https://github.com/KSEB-4th-Project-3rd-Team"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    github.com/KSEB-4th-Project-3rd-Team
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Backend:</strong> Spring Boot, Java</p>
+                  <p className="text-sm text-gray-700"><strong>Security:</strong> Spring Security (세션 기반 인증)</p>
+                  <p className="text-sm text-gray-700"><strong>Database:</strong> MySQL (AWS RDS), JPA/Hibernate</p>
+                  <p className="text-sm text-gray-700"><strong>Infra:</strong> AWS EC2, Docker, Nginx</p>
+                  <p className="text-sm text-gray-700"><strong>API Docs:</strong> Swagger(OpenAPI)</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 (Backend 단독 담당)</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">백엔드 전체 API 설계 및 구현</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">재고·입출고·랙·AMR 도메인 모델링</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">대시보드 및 창고맵 API 성능 최적화</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">인증/권한, 배포 환경 구성까지 백엔드 전반 담당</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">창고 관리 핵심 도메인 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">재고(Item / Inventory), 랙(Rack), 입·출고 주문(InOutOrder) CRUD API 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">재고 변동 이력 관리 및 입출고 상태 흐름(State Flow) 설계</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">AMR 로봇 상태(위치, 배터리, 작업 상태) 관리 API 구현</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">인증 및 권한 관리</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Spring Security 기반 세션 인증 시스템 구축</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">관리자 / 일반 사용자 권한 분리 및 접근 제어</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">BCrypt 기반 비밀번호 해싱 적용</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">대시보드 성능 최적화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">N+1 쿼리 원인 분석 및 JOIN FETCH 기반 쿼리 재설계</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Hibernate MultipleBagFetchException 발생 이슈 해결<br></br>→ 컬렉션 타입 List → Set 변경 및 LAZY 전략 적용</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700"><strong>대시보드 초기 로딩 시간 14.67초 → 0.42초 (약 97% 개선)</strong></p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">랙(Rack) API 성능 개선</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">랙–재고 관계 조회 시 발생하던 N+1 쿼리 제거</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">단일 JOIN FETCH 쿼리로 통합</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700"><strong>API 응답 시간 1.13초 → 0.33초 (약 70% 개선)</strong></p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">창고맵 전용 경량 API 설계</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Unity WebGL 기반 3D 창고 시뮬레이션 연동</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">전체 랙 상세 데이터 대신<br></br>→ 위치, 점유 여부, 상태 정보만 반환하는 전용 DTO 설계</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700"><strong>응답 데이터 크기 약 70% 감소, 로딩 시간 대폭 개선</strong></p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">출고 등록 프로세스 성능 개선</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">출고 등록 화면 진입 시 필요한 데이터 사전 로딩 구조로 변경</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">중복 API 호출 제거 및 불필요한 연산 최소화</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">출고 등록 체감 속도 및 안정성 개선</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">배포 및 운영 환경 구성</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Docker 기반 백엔드 컨테이너화</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">AWS EC2 + RDS 운영 환경 구축</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Nginx 리버스 프록시 및 HTTPS(SSL) 설정</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">헬스체크 기반 서비스 상태 관리</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 기술적 고민 및 학습 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기술적 고민 및 학습</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">JPA/Hibernate의 N+1 쿼리, 컬렉션 Fetch 전략을 실제 성능 병목 사례를 통해 깊이 이해</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">단순 CRUD 구현이 아닌, 쿼리 수·응답 시간·응답 데이터 크기를 기준으로 한 성능 개선 경험</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">DB 설계 및 쿼리 구조 개선만으로 대규모 성능 향상이 가능하다는 점을 체감</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">WebGL, 대시보드, 출고 화면 등 사용자 체감 성능 중심의 API 분리 설계 경험</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 프로젝트 후기</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    백엔드를 단독으로 맡아 서비스 전체 구조와 성능까지 책임졌던 프로젝트였습니다.<br></br>
+                    실제 병목 지점을 직접 분석하고 수치로 개선 결과를 확인하면서,<br></br>
+                    백엔드 개발에서 설계와 성능 최적화의 중요성을 깊이 체감할 수 있었습니다.
                   </p>
                 </div>
               </div>
