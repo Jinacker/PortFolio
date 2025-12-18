@@ -417,9 +417,9 @@ const frontendTimelineData = [
   },
   {
     id: 3,
-    title: "React Native 앱 개발",
-    period: "2025년 여름",
-    description: "쉼표, 돈가스 지도 등 React Native로 모바일 앱을 개발하고 스토어에 출시했습니다.",
+    title: "쉼표 — 무더위 쉼터 지도",
+    period: "2025년 9월 ~ 11월",
+    description: "React Native를 활용한 첫 앱 개발 프로젝트로, 사용자 경험(UX)에 대해 많은 것을 배웠습니다.",
   },
 ]
 
@@ -489,6 +489,7 @@ export default function Portfolio() {
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
   const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
   const [isIssueOneModalOpen, setIsIssueOneModalOpen] = useState(false);
+  const [isShympyoModalOpen, setIsShympyoModalOpen] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -960,10 +961,27 @@ export default function Portfolio() {
                                                     <p className="text-xs text-gray-500 mb-2">{item.period}</p>
                                                     <p className="text-xs text-gray-700">{item.description}</p>
                                                   </div>
-                                                  <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center">
+                                                  <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
                                                     <img
                                                       src="/projects/ISSUE_ONE.png"
                                                       alt="ISSUE ONE"
+                                                      className="w-full h-full object-contain"
+                                                    />
+                                                  </div>
+                                                </div>
+                                              ) : item.id === 3 ? (
+                                                <div className="flex justify-between items-start mb-3">
+                                                  <div className="flex-1 pr-3">
+                                                    <h4 className="text-sm font-bold text-blue-600 mb-1">
+                                                      {item.title}
+                                                    </h4>
+                                                    <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                                                    <p className="text-xs text-gray-700">{item.description}</p>
+                                                  </div>
+                                                  <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                                                    <img
+                                                      src="/projects/shympyo.png"
+                                                      alt="무더위 쉼터: 쉼표"
                                                       className="w-full h-full object-contain"
                                                     />
                                                   </div>
@@ -981,6 +999,15 @@ export default function Portfolio() {
                       {item.id === 2 && (
                         <button
                           onClick={() => setIsIssueOneModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 무더위 쉼터: 쉼표 프로젝트 자세히 보기 버튼 */}
+                      {item.id === 3 && (
+                        <button
+                          onClick={() => setIsShympyoModalOpen(true)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1357,6 +1384,10 @@ export default function Portfolio() {
                   <p className="text-base font-semibold text-gray-900">2025.03 ~ 2025.06</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">개발 인원</p>
+                  <p className="text-base font-semibold text-gray-900">백엔드 2명 / 크롤링 1명 / 데이터분석 2명 / <span className="text-blue-600 font-bold">프론트엔드 1명</span></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
                   <p className="text-sm text-gray-700">[ 🏆 I-MINI PROJECT 대상 수상작 ]<br></br>여러 언론사의 기사를 수집·분석하여 AI 요약으로 제공하고, 정치적 성향을 시각적으로 비교할 수 있는 뉴스 요약 플랫폼</p>
                 </div>
@@ -1540,6 +1571,248 @@ export default function Portfolio() {
                     기획부터 구조 설계, UI/UX, 구현까지 전부 직접 결정해 본 첫 프로젝트였습니다.<br></br>
                     처음부터 원하는 서비스를 만들어가는 과정이 쉽지는 않았지만,
                     그만큼 개발이 가장 재미있게 느껴졌고 스스로 설계하고 구현할 수 있다는 자신감을 얻었습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ShymPyo Modal */}
+      {isShympyoModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsShympyoModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsShympyoModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4">
+              <img
+                src="/projects/shympyo_detail.png"
+                alt="쉼표 프로젝트"
+                className="w-full h-auto rounded-t-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">쉼표</h2>
+              <p className="text-lg text-gray-600 mb-6">무더위 쉼터 위치 안내 및 이용 관리 모바일 앱 (Frontend)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.08 ~ 2025.11</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">개발 인원</p>
+                  <p className="text-base font-semibold text-gray-900">백엔드 2 명 / <span className="text-blue-600 font-bold">프론트엔드 1 명</span></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">[ ☁️ K-Paas 공모전 출품작 ]<br></br>폭염 상황에서 사용자가 주변 무더위 쉼터를 빠르게 찾고, 실시간 위치·길안내·이용 현황을 통해 안전하게 이동할 수 있도록 돕는 앱</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
+                  <a
+                    href="https://github.com/ShymPyo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    github.com/ShymPyo
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 디자인 레퍼런스 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🎨 디자인 레퍼런스</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-gray-700">토스, 네이버 지도, 카카오맵 UI</p>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Frontend:</strong> React Native (Expo), TypeScript</p>
+                  <p className="text-sm text-gray-700"><strong>지도/위치:</strong> Kakao Maps WebView, Expo Location</p>
+                  <p className="text-sm text-gray-700"><strong>경로 안내:</strong> TMAP 보행자 경로 API</p>
+                  <p className="text-sm text-gray-700"><strong>인증:</strong> Google / Kakao / Naver OAuth 2.0</p>
+                  <p className="text-sm text-gray-700"><strong>상태 관리:</strong> React Context API</p>
+                  <p className="text-sm text-gray-700"><strong>실시간 통신:</strong> Server-Sent Events(SSE)</p>
+                  <p className="text-sm text-gray-700"><strong>배포/환경:</strong> Expo, 환경변수 기반 설정</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 (FrontEnd)</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">프로젝트 기획 및 서비스 구조 설계 주도</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">프론트엔드 전반 개발 (사용자/관리자 화면 포함)</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">지도·위치 기반 핵심 기능 설계 및 구현</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">팀 내 기술 방향성 결정 및 기능 우선순위 조율</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">백엔드 API 구조 협의 및 요구사항 정리</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">지도 기반 무더위 쉼터 탐색</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Kakao Maps WebView를 활용한 지도 렌더링</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">주변 쉼터 목록 및 상세 정보 모달 제공</p>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">실시간 위치 트래킹</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">expo-location을 활용한 실제 사용자 위치 수집</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">1초 주기 / 2m 이상 이동 시 위치 갱신</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">WebView 메시지 통신으로 지도 마커 및 중심 위치 부드럽게 갱신</p>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">도보 길안내 기능 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">TMAP 보행자 경로 API 연동</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">GeoJSON 응답 파싱 후 Polyline으로 실제 보행 경로 시각화</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">예상 거리 및 소요 시간 안내</p>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">소셜 로그인(OAuth 2.0) 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Google / Kakao / Naver 로그인 연동</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">인가 코드 기반 인증 흐름 설계 및 토큰 관리</p>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">실시간 이용 현황 업데이트</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">SSE 기반으로 쉼터 이용자 수 및 상태 실시간 반영</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">관리자 화면에서 이용자 입·퇴장 즉시 확인 가능</p>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">모바일 UX 최적화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">하단 슬라이드 패널 제스처 UI 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">키보드 대응(KeyboardAvoidingView, dismiss 처리)으로 입력 UX 개선</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">iOS/Android 환경 모두 고려한 레이아웃 안정화</p>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">접근성을 고려한 사용자 환경 옵션 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">노약자 및 저시력자를 고려하여 고대비 테마 모드 제공</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">글자 크기 조절 옵션을 통해 사용자 상황에 맞는 화면 가독성 확보</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">설정 변경 시 전역 UI에 즉시 반영되도록 Context 기반 테마 관리</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">접근성 옵션 적용 후에도 지도·모달·버튼 UI가 깨지지 않도록 레이아웃 대응</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 프로젝트 후기</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    처음으로 앱 형태의 서비스를 만들어본 프로젝트였습니다.<br></br>
+                    웹과 달리 모바일은 터치, 스크롤, 제스처 등 선택지가 많아
+                    사용자의 행동 흐름을 어떻게 설계할지가 매우 중요하다는 점을 배울 수 있었습니다.<br></br>
+                    기능 구현을 넘어, 사용자가 의도한 흐름대로 움직이게 만드는 UX 설계에 대해 고민해볼 수 있었던 경험이었습니다.
                   </p>
                 </div>
               </div>
