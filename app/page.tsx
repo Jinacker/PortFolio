@@ -24,6 +24,7 @@ import {
   ChevronDown,
   ChevronUp,
   X,
+  HelpCircle,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -1127,6 +1128,42 @@ export default function Portfolio() {
                     </div>
                   </div>
                 ))}
+
+                {/* 마지막 카드 이후 타임라인 연장 (카드 없이) */}
+                <div
+                  className="relative"
+                  style={{
+                    padding: '20px 20px 20px 0',
+                    maxWidth: '350px',
+                    height: '10px',
+                  }}
+                >
+                  {/* 반원형 테두리 - 오른쪽 위만 곡선 */}
+                  <div
+                    className="absolute pointer-events-none"
+                    style={{
+                      width: '50%',
+                      height: '100%',
+                      border: 'solid #3b82f6',
+                      right: '0',
+                      top: '-9px',
+                      bottom: '-20px',
+                      borderWidth: '3px 3px 0 0',
+                      borderRadius: '0 30px 0 0',
+                    }}
+                  ></div>
+
+                  {/* 곡선 이후 아래로 수직선 추가 */}
+                  <div
+                    className="absolute bg-blue-500"
+                    style={{
+                      right: '0px',
+                      bottom: '-386px',
+                      width: '3px',
+                      height: '398px',
+                    }}
+                  ></div>
+                </div>
               </div>
             </div>
 
@@ -1156,8 +1193,8 @@ export default function Portfolio() {
                               left: '0px',
                               top: index === 0 ? '-0px' : '-6.0px',
                               bottom: index === backendTimelineData.length - 1 ? '0px' : '-20px',
-                              borderWidth: `3px 0 3px 3px`,
-                              borderRadius: `30px 0 0 30px`,
+                              borderWidth: `3px 0 ${index === backendTimelineData.length - 1 ? '0' : '3px'} 3px`,
+                              borderRadius: index === backendTimelineData.length - 1 ? `30px 0 0 0` : `30px 0 0 30px`,
                             }
                           : {
                               right: '0',
@@ -1355,10 +1392,12 @@ export default function Portfolio() {
           <div className="text-center mt-16 mb-8">
             <button
               onClick={() => setIsExperienceExpanded(!isExperienceExpanded)}
-              className="inline-flex items-center gap-2 px-5 py-3 text-gray-600 hover:text-blue-600 border-2 border-gray-200 hover:border-blue-400 rounded-full transition-all"
+              className={`inline-flex items-center gap-2 py-3 text-gray-600 hover:text-blue-600 border-2 border-gray-200 hover:border-blue-400 rounded-full transition-all ${
+                isExperienceExpanded ? 'px-5' : 'pl-12 pr-5'
+              }`}
             >
               <span className="text-sm md:text-base font-medium">
-                {isExperienceExpanded ? '접기' : '성장 이야기 더보기'}
+                {isExperienceExpanded ? '접기' : '다른 활동도 궁금하신가요?'}
               </span>
               {isExperienceExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
             </button>
