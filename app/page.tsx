@@ -413,19 +413,25 @@ const frontendTimelineData = [
     id: 2,
     title: "ISSUE ONE (🥇대상 수상)",
     period: "2025년 3월 ~ 6월",
-    description: "강의 기반 구현에서 벗어나, 기획부터 설계·구현까지 전 과정을 직접 결정한 첫 프로젝트였습니다.",
+    description: "강의에서 벗어나, 백지 위에 제가 만들고 싶은걸 만든 첫 프로젝트였습니다.",
   },
   {
     id: 3,
     title: "쉼표 — 무더위 쉼터 지도",
-    period: "2025년 9월 ~ 11월",
+    period: "2025년 8월 ~ 11월",
     description: "React Native를 활용한 첫 앱 개발 프로젝트로, 사용자 경험(UX)에 대해 많은 것을 배웠습니다.",
   },
   {
     id: 4,
     title: "MakerFaire 부스 페이지",
     period: "2025년 9월",
-    description: "실제 유저들이 사용하는 것을 처음으로 만들어본 프로젝트였습니다.",
+    description: "실제로 사용되는 서비스를 처음으로 만들어본 프로젝트였습니다.",
+  },
+  {
+    id: 5,
+    title: "돈가스 지도",
+    period: "2025년 11월 ~ 운영중",
+    description: "첫 1인 개발로 앱을 출시하고 운영 중입니다. 사용자들의 편의를 위해 다.",
   },
 ]
 
@@ -497,6 +503,7 @@ export default function Portfolio() {
   const [isIssueOneModalOpen, setIsIssueOneModalOpen] = useState(false);
   const [isShympyoModalOpen, setIsShympyoModalOpen] = useState(false);
   const [isMakerFaireModalOpen, setIsMakerFaireModalOpen] = useState(false);
+  const [isKatsuMapModalOpen, setIsKatsuMapModalOpen] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -933,14 +940,14 @@ export default function Portfolio() {
                           ? {
                               left: '0px',
                               top: index === 0 ? '0px' : '-6.0px',
-                              bottom: index === frontendTimelineData.length - 1 ? '0px' : '-4.5px',
-                              borderWidth: `${index === 0 ? '0' : '3px'} 0 ${index === frontendTimelineData.length - 1 ? '0' : '3px'} 3px`,
-                              borderRadius: `${index === 0 ? '0' : '30px'} 0 0 ${index === frontendTimelineData.length - 1 ? '0' : '30px'}`,
+                              bottom: index === frontendTimelineData.length - 1 ? '-15px' : '-4.5px',
+                              borderWidth: `${index === 0 ? '0' : '3px'} 0 3px 3px`,
+                              borderRadius: `${index === 0 ? '0' : '30px'} 0 0 30px`,
                             }
                           : {
                               right: '0',
                               top: '-3px',
-                              bottom: index === frontendTimelineData.length - 1 ? '0px' : '-2px',
+                              bottom: index === frontendTimelineData.length - 1 ? '0px' : (index === 3 ? '-5px' : '-2px'),
                               borderWidth: `3px 3px ${index === frontendTimelineData.length - 1 ? '0' : '3px'} 0`,
                               borderRadius: `0 30px 30px 0`,
                             }),
@@ -1010,6 +1017,23 @@ export default function Portfolio() {
                                                     />
                                                   </div>
                                                 </div>
+                                              ) : item.id === 5 ? (
+                                                <div className="flex justify-between items-start mb-3">
+                                                  <div className="flex-1 pr-3">
+                                                    <h4 className="text-sm font-bold text-blue-600 mb-1">
+                                                      {item.title}
+                                                    </h4>
+                                                    <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                                                    <p className="text-xs text-gray-700">{item.description}</p>
+                                                  </div>
+                                                  <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                                                    <img
+                                                      src="/projects/KatsuMap.png"
+                                                      alt="돈가스 지도"
+                                                      className="w-full h-full object-contain"
+                                                    />
+                                                  </div>
+                                                </div>
                                               ) : (
                                                 <>
                                                   <h4 className="text-sm font-bold text-blue-600 mb-1">
@@ -1041,6 +1065,15 @@ export default function Portfolio() {
                       {item.id === 4 && (
                         <button
                           onClick={() => setIsMakerFaireModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 돈가스 지도 프로젝트 자세히 보기 버튼 */}
+                      {item.id === 5 && (
+                        <button
+                          onClick={() => setIsKatsuMapModalOpen(true)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1898,7 +1931,7 @@ export default function Portfolio() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
-                  <p className="text-sm text-gray-700">메이커페어 서울 2025에서 직접 창업 부스를 운영하며, 부스 내 판매 제품의 QR 기반 온라인 설명서 겸 소개 웹사이트를 제작</p>
+                  <p className="text-sm text-gray-700">메이커페어 서울 2025에서 직접 창업해 부스를 운영하며, 부스 내 판매 제품의 QR 기반 온라인 설명서 겸 소개 웹사이트를 제작</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">서비스 링크</p>
@@ -2050,6 +2083,297 @@ export default function Portfolio() {
                   <p className="text-sm text-gray-700 leading-relaxed">
                     실제 사람들이 사용하는 서비스를 처음으로 만들어본 프로젝트였습니다.<br></br>
                     프론트엔드에서도 성능과 최적화가 UX에 직접적인 영향을 준다는 점을 실감하며, 개발이 더욱 재미있고 보람 있게 느껴졌습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* KatsuMap Modal */}
+      {isKatsuMapModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsKatsuMapModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsKatsuMapModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4">
+              <img
+                src="/projects/KatsuMap_detail.png"
+                alt="돈가스 지도"
+                className="w-full h-auto rounded-t-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">돈가스 지도</h2>
+              <p className="text-lg text-gray-600 mb-6">지도 기반 돈가스 맛집 탐색 모바일 애플리케이션 (1인 개발 · Frontend)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.11 ~ 현재 운영 중</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">개발 인원</p>
+                  <p className="text-base font-semibold text-gray-900"><span className="text-blue-600 font-bold">프론트엔드 1명 (1인 개발)</span></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">[ 👤 250명 규모 실사용자 유지중 ]<br></br>서울 전역 돈가스 맛집을 지도 기반으로 탐색하고, 즐겨찾기·태그·리뷰 참여를 통해 사용자 경험이 축적되는 실사용 모바일 앱</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">App Store 링크</p>
+                  <a
+                    href="https://apps.apple.com/kr/app/돈가스-지도/id6755211452"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    🍎 App Store
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">Play Store 링크</p>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.katsumap.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    📱 Play Store
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
+                  <a
+                    href="https://github.com/Katsu-Map"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    github.com/Katsu-Map
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 디자인 레퍼런스 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🎨 디자인 레퍼런스</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-gray-700">순수 창작</p>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택 (Frontend)</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Framework:</strong> React Native, Expo</p>
+                  <p className="text-sm text-gray-700"><strong>Navigation:</strong> React Navigation (Tab / Stack)</p>
+                  <p className="text-sm text-gray-700"><strong>UI & Interaction:</strong> react-native-reanimated, react-native-gesture-handler, react-native-svg</p>
+                  <p className="text-sm text-gray-700"><strong>Map:</strong> React Native WebView + Kakao Map API</p>
+                  <p className="text-sm text-gray-700"><strong>State Management:</strong> React Context API</p>
+                  <p className="text-sm text-gray-700"><strong>Networking:</strong> Axios</p>
+                  <p className="text-sm text-gray-700"><strong>Local Storage:</strong> AsyncStorage</p>
+                  <p className="text-sm text-gray-700"><strong>Error Monitoring:</strong> Sentry</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">앱 기획 · UI/UX 설계 · 프론트엔드 전반을 1인 개발</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">iOS / Android 앱 직접 출시 및 운영</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">사용자 피드백을 기반으로 UI·UX 지속 개선</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실제 사용 환경에서 발생하는 문제를 중심으로 반복 개선</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">하이브리드 지도 구조 설계 및 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">React Native UI 위에 WebView로 Kakao Map API 연동</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">지도 렌더링은 WebView에서 처리하고, 화면 흐름·상태·모달 UI는 네이티브에서 제어</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">RN ↔ WebView 간 메시지 통신으로 마커 업데이트, 위치 이동, 상세 모달 제어</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">모바일 UX에 최적화된 화면 흐름 설계</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">하단 탭 기반 구조로 주요 기능(Home / 즐겨찾기 / 메시지 / 설정) 분리</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">지도 화면에서 바텀시트 UI를 도입해 리스트 ↔ 지도 전환을 자연스럽게 연결</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">드래그 제스처에 따라 여러 단계로 확장되는 바텀시트 UX 구현</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">앱 초기 진입 경험(App Initialization Flow) 설계</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">네이티브 스플래시 → 커스텀 스플래시 → 메인 화면으로 이어지는 흐름 구성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">커스텀 폰트 로딩, 세션 확인이 완료된 후 화면을 노출해 깜빡임 없는 안정적인 초기 UX 제공</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">사용자 참여 중심 UI 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">즐겨찾기, 태그 제안, 한 줄 평 등 사용자가 직접 참여하는 인터랙션 제공</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">즐겨찾기 등록/해제 시 즉각적인 UI 피드백(토스트, 상태 반영) 적용</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">사용자 행동이 지도와 상세 화면에 바로 반영되도록 상태 관리 설계</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">검색 및 탐색 UX 고도화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">식당명 검색 기능 UI 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">지도 상 검색 반경 시각화 및 레이어 겹침 문제 해결</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">검색 결과와 지도 상태가 일관되게 유지되도록 화면 동기화</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">안정성 및 품질 개선</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">안드로이드 시스템 폰트 크기 변경 시 레이아웃 깨짐 이슈 해결 (allowFontScaling=false 적용)</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">iPad 화면 비율 대응 및 다양한 디바이스 해상도 대응</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Sentry 연동으로 실제 사용자 환경에서 발생하는 오류 추적 및 개선</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">백오피스(관리자 대시보드) 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">서비스 운영을 위한 관리자 웹 대시보드 구축</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Recharts를 활용한 사용자 통계 및 데이터 시각화</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">식당 정보 관리, 태그 제안 검토, 리뷰 모니터링 기능 구현</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">지속적인 UI/UX 개선 및 업데이트</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">다수의 버전 업데이트를 통해 UI 개선, 인터랙션 보완</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">앱 스토어 심사 과정에서 발생한 이슈 대응 경험</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">운영 중 사용자 피드백을 반영한 반복 개선 사이클 경험</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 프로젝트 후기</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    실제 사용자들이 제가 만든 앱을 사용한다는 것만으로 가슴이 벅차오릅니다. <br></br>
+                    운영하며 쏟아지는 피드백을 UI/UX 개선과 기능 추가로 빠르게 반영하고 있으며,
+                    개발이 단순한 구현을 넘어 책임과 애착이 필요한 일이라는 점을 깊이 느끼고 있습니다.
                   </p>
                 </div>
               </div>
