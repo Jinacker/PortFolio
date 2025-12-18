@@ -1618,7 +1618,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.03 ~ 2025.06</p>
+                  <p className="text-base font-semibold text-gray-900">2025.03 ~ 2025.06 / 실질적 개발기간은 3주 </p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">개발 인원</p>
@@ -1852,7 +1852,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.08 ~ 2025.11</p>
+                  <p className="text-base font-semibold text-gray-900">2025.08 ~ 2025.11 / 개발기간 3개월</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">개발 인원</p>
@@ -2094,7 +2094,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.09</p>
+                  <p className="text-base font-semibold text-gray-900">2025.09 / 개발기간 약 일주일</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">개발 인원</p>
@@ -2298,7 +2298,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.11 ~ 현재 운영 중</p>
+                  <p className="text-base font-semibold text-gray-900">2025.11 ~ 현재 운영 중 / 일주일만에 MVP 완성 후 런칭. 그 후 지속적인 업데이트 중!</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">개발 인원</p>
@@ -2607,7 +2607,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.07</p>
+                  <p className="text-base font-semibold text-gray-900">2025.07 / 개발기간 약 일주일</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">개발 인원</p>
@@ -2869,7 +2869,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.07 ~ 2025.08</p>
+                  <p className="text-base font-semibold text-gray-900">2025.07 ~ 2025.08 / 개발기간 2개월</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">팀 구성</p>
@@ -3138,7 +3138,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2024.08</p>
+                  <p className="text-base font-semibold text-gray-900">2024.08 / 개발기간 약 일주일</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">팀 구성</p>
@@ -3345,7 +3345,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.04 ~ 현재 (운영 중)</p>
+                  <p className="text-base font-semibold text-gray-900">2025.04 ~ 현재 (운영 중) / 일주일 만에 MVP 완성 후 지속적 업데이트 중!</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">팀 구성</p>
@@ -3756,7 +3756,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.12 ~ 진행중</p>
+                  <p className="text-base font-semibold text-gray-900">2025.12 ~ 진행중 / 개발기간 약 3개월 예상</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">역할</p>
