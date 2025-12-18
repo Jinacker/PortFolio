@@ -18,6 +18,9 @@ import {
   Github,
   BookOpen,
   Folder,
+  Flame,
+  MessageCircle,
+  FileText,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -680,7 +683,52 @@ export default function Portfolio() {
             </p>
           </div>
 
+          {/* 핵심 역량 */}
+          <div className="max-w-4xl mx-auto py-20">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">핵심 역량</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* 열정 */}
+              <div className="text-center">
+                <div className="w-40 h-40 mx-auto mb-4 bg-white border-4 border-blue-100 rounded-full flex flex-col items-center justify-center">
+                  <Flame className="w-14 h-14 text-blue-600 mb-2" />
+                  <span className="text-base font-bold text-gray-900">열정</span>
+                </div>
+                <p className="text-[13px] text-gray-600 leading-relaxed text-left">
+                  만들고 배우는 과정 자체에서 즐거움을 느낍니다.<br></br>
+                  필요한 기술이라면 스택을 가리지 않고 학습하고 적용해왔습니다.
+                </p>
+              </div>
 
+              {/* 소통 */}
+              <div className="text-center">
+                <div className="w-40 h-40 mx-auto mb-4 bg-white border-4 border-blue-100 rounded-full flex flex-col items-center justify-center">
+                  <MessageCircle className="w-14 h-14 text-blue-600 mb-2" />
+                  <span className="text-base font-bold text-gray-900">소통</span>
+                </div>
+                <p className="text-[13px] text-gray-600 leading-relaxed text-left">
+                  다양한 활동과 프로젝트에서 팀장을 맡아 협업을 이끌어왔습니다.<br></br>
+                  의견을 조율하고 팀의 방향을 맞추는 소통에 익숙합니다.
+                </p>
+              </div>
+
+              {/* 기록 */}
+              <div className="text-center">
+                <div className="w-40 h-40 mx-auto mb-4 bg-white border-4 border-blue-100 rounded-full flex flex-col items-center justify-center">
+                  <FileText className="w-14 h-14 text-blue-600 mb-2" />
+                  <span className="text-base font-bold text-gray-900">기록</span>
+                </div>
+                <p className="text-[13px] text-gray-600 leading-relaxed text-left">
+                  개발 과정과 배운 내용을 꾸준히 기록하며 스스로를 점검합니다.<br></br>
+                  약 5년간 블로그를 운영하며, 기록을 습관으로 유지해왔습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 기술 스택 소제목 */}
+          <div className="max-w-4xl mx-auto mt-16 mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 text-center">기술 스택</h3>
+          </div>
 
                     {/* Box 1: 프론트엔드 & 백엔드 */}
                     <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm mb-6">
@@ -689,7 +737,8 @@ export default function Portfolio() {
                           <h3 className="text-lg font-semibold text-gray-900 mb-4">프론트엔드</h3>
                           <div className="flex flex-wrap gap-2">
                             <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
-                            <img src="https://img.shields.io/badge/React%20Native-000000?style=for-the-badge&logo=react&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white"/>
+                            <img src="https://img.shields.io/badge/React%20Native-20B2AA?style=for-the-badge&logo=react&logoColor=white"/>
                           </div>
                         </div>
                         <div>
@@ -728,9 +777,10 @@ export default function Portfolio() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">협업 & 개발 도구</h3>
                 <div className="flex flex-wrap gap-2">
                   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"/>
                   <img src="https://img.shields.io/badge/Postman-EF5B25?style=for-the-badge&logo=postman&logoColor=white"/>
-                  <img src="https://img.shields.io/badge/Slack-36C5F0?style=for-the-badge&logo=slack&logoColor=white"/>
-                  <img src="https://img.shields.io/badge/Figma-A259FF?style=for-the-badge&logo=figma&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Sentry-362D59?style=for-the-badge&logo=sentry&logoColor=white"/>
                 </div>
               </div>
             </div>
@@ -739,11 +789,9 @@ export default function Portfolio() {
           {/* 설명 문단 2 */}
           <div className="max-w-3xl mx-auto">
             <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-left mb-12">
-              <strong>로그와 모니터링 도구</strong>를 활용해 서비스 상태를 파악하고,
-               문제 상황을 <strong>빠르게 인지하고 대응</strong>하려 노력합니다.<br></br>
-              또한 <strong>백오피스를 직접 운영</strong>하며,
-               사용자가 <strong>안정적이고 편리하게 서비스를 이용할 수 있는 환경</strong>을 고민합니다. <br></br>
-               배포 환경과 서버 상태를 지속적으로 점검하며, 운영 관점에서 문제를 예방하는 개발을 지향합니다.
+              사용자가 <strong>안정적이고 편리하게 서비스를 이용할 수 있는 환경</strong>을 고민합니다. <br></br>
+              <strong>로그와 모니터링 도구</strong>를 활용해 서비스 상태를 파악하고, 문제 상황을 <strong>빠르게 인지하고 대응</strong>하려 노력합니다. <br></br>
+              <strong>테스트 자동화</strong>를 기반으로 변경 사항을 검증하며, 안정적인 운영을 위해 문제를 예방하는 개발을 지향합니다.
             </p>
           </div>
 
