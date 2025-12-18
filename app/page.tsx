@@ -452,14 +452,20 @@ const backendTimelineData = [
   {
     id: 3,
     title: "SmartWMS (🥈 우수상)",
-    period: "2025년 7월~8월",
+    period: "2025년 7월 ~ 8월",
     description: "실제 창고 운영 흐름을 비즈니스 로직으로 옮기며, 처음으로 성능 최적화를 고민해본 프로젝트였습니다.",
   },
   {
     id: 4,
-    title: "NestJS 학습 및 적용",
-    period: "2025년 11월",
-    description: "돈가스 지도 프로젝트에서 NestJS를 활용하여 TypeScript 기반 백엔드를 구축했습니다.",
+    title: "건너건너",
+    period: "2025년 8월",
+    description: "채팅 기능 구현을 통해 실시간 통신 구조를 이해하고, 아키텍처 분리가 개발 경험에 미치는 영향을 체감한 프로젝트였습니다.",
+  },
+  {
+    id: 5,
+    title: "UMC - 인하대 9기 YB",
+    period: "2025년 9월 ~",
+    description: "Node.js Server 파트로 활동하며, TypeScript 기반으로 서버 개발을 학습하고 있습니다.",
   },
 ]
 
@@ -512,6 +518,7 @@ export default function Portfolio() {
   const [isKatsuMapModalOpen, setIsKatsuMapModalOpen] = useState(false);
   const [isFamiLogModalOpen, setIsFamiLogModalOpen] = useState(false);
   const [isSmartWMSModalOpen, setIsSmartWMSModalOpen] = useState(false);
+  const [isGeonneoGeonneoModalOpen, setIsGeonneoGeonneoModalOpen] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -1178,6 +1185,31 @@ export default function Portfolio() {
                             />
                           </div>
                         </div>
+                      ) : item.id === 4 ? (
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="flex-1 pr-3">
+                            <h4 className="text-sm font-bold text-green-600 mb-1">
+                              {item.title}
+                            </h4>
+                            <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                            <p className="text-xs text-gray-700">{item.description}</p>
+                          </div>
+                          <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                            <img
+                              src="/GnGn.png"
+                              alt="건너건너"
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        </div>
+                      ) : item.id === 5 ? (
+                        <>
+                          <h4 className="text-sm font-bold text-green-600 mb-1">
+                            {item.title}
+                          </h4>
+                          <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                          <p className="text-xs text-gray-700">{item.description}</p>
+                        </>
                       ) : (
                         <>
                           <h4 className="text-sm font-bold text-green-600 mb-1">
@@ -1200,6 +1232,15 @@ export default function Portfolio() {
                       {item.id === 3 && (
                         <button
                           onClick={() => setIsSmartWMSModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 건너건너 자세히 보기 버튼 */}
+                      {item.id === 4 && (
+                        <button
+                          onClick={() => setIsGeonneoGeonneoModalOpen(true)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -2752,7 +2793,7 @@ export default function Portfolio() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
-                  <p className="text-sm text-gray-700">[ 🏢 신세계 I&C 산학협력 프로젝트 - 정보통신기획평가원 원장상 수상]<br></br>재고·입출고·AMR 로봇 상태를 통합 관리하고, 실시간 대시보드와 3D 창고 시뮬레이션을 제공하는 스마트 창고 관리 시스템</p>
+                  <p className="text-sm text-gray-700">[ 🏢 신세계 I&C 산학협력 프로젝트 - 🏆 정보통신기획평가원 원장상 수상]<br></br>재고·입출고·AMR 로봇 상태를 통합 관리하고, 실시간 대시보드와 3D 창고 시뮬레이션을 제공하는 스마트 창고 관리 시스템</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
@@ -2969,6 +3010,213 @@ export default function Portfolio() {
                     백엔드를 단독으로 맡아 서비스 전체 구조와 성능까지 책임졌던 프로젝트였습니다.<br></br>
                     실제 병목 지점을 직접 분석하고 수치로 개선 결과를 확인하면서,<br></br>
                     백엔드 개발에서 설계와 성능 최적화의 중요성을 깊이 체감할 수 있었습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* GeonneoGeonneo Modal */}
+      {isGeonneoGeonneoModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsGeonneoGeonneoModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsGeonneoGeonneoModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4">
+              <img
+                src="/projects/GNGN_detail.png"
+                alt="건너건너"
+                className="w-full h-auto rounded-t-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">건너건너</h2>
+              <p className="text-lg text-gray-600 mb-6">신뢰 기반 네트워크 연결 플랫폼 – 실시간 채팅 파트 담당 (Backend)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2024.08</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">Backend 3명 (<span className="text-blue-600 font-bold">채팅 파트 담당</span>) / Frontend 3명</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">[ 🦁 멋쟁이사자처럼 중앙 해커톤 ]<br></br>지인 기반 네트워크에서 사용자 간 신뢰 연결을 돕는 플랫폼으로,<br />실시간 1:1 채팅을 통해 ‘건너건너’ 연결되는 커뮤니케이션을 지원하는 서비스</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
+                  <a
+                    href="https://github.com/Team-Hawaiian-Pizza"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    github.com/Team-Hawaiian-Pizza
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Backend:</strong> Django, Django REST Framework</p>
+                  <p className="text-sm text-gray-700"><strong>Real-time:</strong> Django Channels, WebSocket</p>
+                  <p className="text-sm text-gray-700"><strong>Database:</strong> MySQL</p>
+                  <p className="text-sm text-gray-700"><strong>Cache / Message Broker:</strong> Redis</p>
+                  <p className="text-sm text-gray-700"><strong>Infra:</strong> Docker, Nginx</p>
+                  <p className="text-sm text-gray-700"><strong>Architecture:</strong> Monolith → Multi-Module 구조</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 (채팅 서비스 전담)</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실시간 채팅 서비스 설계 및 구현</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">기존 모놀리스 구조를 멀티모듈 아키텍처로 분리</p>
+                  </li>
+                   <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">WebSocket 기반 실시간 통신 로직 전반 담당</p>
+                  </li>
+                   <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">채팅 API 명세 작성 및 프론트엔드 연동 지원</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">실시간 1:1 채팅 기능 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">WebSocket 기반 실시간 메시지 송·수신</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Django Channels + Redis Channel Layer 구성</p>
+                    </li>
+                     <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">메시지 전송, 수신, 읽음 처리, 타이핑 상태 구현</p>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">채팅 성능 최적화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">초기 접속 시 전체 메시지 로드 → 페이지네이션 기반 무한 스크롤 방식으로 개선</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">최근 메시지 우선 로딩 후 이전 메시지 점진적 조회</p>
+                    </li>
+                     <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">메시지 인덱스 설계로 조회 성능 개선</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">모놀리스 → 멀티모듈 아키텍처 전환</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">기존 Core 서비스와 채팅 도메인 분리</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">채팅 서비스는 사용자 ID만 참조하도록 설계하여 서비스 간 결합도 최소화</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">추후 MSA 확장을 고려한 구조로 설계</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">WebSocket 구조 이해 및 안정화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">ASGI 서버(daphne) 기반 WebSocket 서버 구성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Redis 기반 채널 레이어를 통한 연결 관리</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">WebSocket 연결/해제, 재연결 흐름 직접 디버깅하며 실시간 통신 구조 이해</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 기술적 고민 및 학습 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기술적 고민 및 학습</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">REST API와 WebSocket의 역할 차이를 실제 구현을 통해 체득</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실시간 통신에서 상태 관리, 연결 안정성, 메시지 순서 보장의 중요성을 이해</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">단순 기능 구현이 아니라, 확장 가능한 채팅 아키텍처를 고민한 경험</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 프로젝트 후기</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                  채팅 기능을 구현하며 WebSocket과 실시간 통신 구조를 처음으로 깊이 이해하게 된 프로젝트였습니다.
+                  <br />특히 모놀리스 구조를 멀티모듈로 전환하며, 서비스 분리와 아키텍처 설계가 개발 경험에 얼마나 큰 영향을 주는지 체감할 수 있었습니다.
                   </p>
                 </div>
               </div>
