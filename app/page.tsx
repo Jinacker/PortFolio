@@ -473,6 +473,12 @@ const backendTimelineData = [
     period: "2025년 11월 ~ 운영중",
     description: "실사용자에게 안정적인 서비스를 제공하기 위해 문제를 사전에 예방하는 운영을 처음으로 고민한 프로젝트였습니다.",
   },
+  {
+    id: 7,
+    title: "외주 작업",
+    period: "2025년 12월 ~",
+    description: "처음으로 받은 외주 작업입니다. 대규모 동시 접속이 발생하는 티켓팅 서비스를 가정한 아키텍처를 구상하고 있습니다.",
+  },
 ]
 
 // 섹션별 애니메이션을 위한 커스텀 훅
@@ -526,6 +532,7 @@ export default function Portfolio() {
   const [isFamiLogModalOpen, setIsFamiLogModalOpen] = useState(false);
   const [isSmartWMSModalOpen, setIsSmartWMSModalOpen] = useState(false);
   const [isGeonneoGeonneoModalOpen, setIsGeonneoGeonneoModalOpen] = useState(false);
+  const [isTradModalOpen, setIsTradModalOpen] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -1234,6 +1241,23 @@ export default function Portfolio() {
                             />
                           </div>
                         </div>
+                      ) : item.id === 7 ? (
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="flex-1 pr-3">
+                            <h4 className="text-sm font-bold text-green-600 mb-1">
+                              {item.title}
+                            </h4>
+                            <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                            <p className="text-xs text-gray-700">{item.description}</p>
+                          </div>
+                          <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                            <img
+                              src="/projects/Trad.png"
+                              alt="외주 작업"
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        </div>
                       ) : (
                         <>
                           <h4 className="text-sm font-bold text-green-600 mb-1">
@@ -1274,6 +1298,15 @@ export default function Portfolio() {
                       {item.id === 6 && (
                         <button
                           onClick={() => setIsKatsuMapBackendModalOpen(true)}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 외주 작업 자세히 보기 버튼 */}
+                      {item.id === 7 && (
+                        <button
+                          onClick={() => setIsTradModalOpen(true)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -2269,7 +2302,7 @@ export default function Portfolio() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">개발 인원</p>
-                  <p className="text-base font-semibold text-gray-900"><span className="text-blue-600 font-bold">프론트엔드 1명 (1인 개발)</span></p>
+                  <p className="text-base font-semibold text-gray-900"><span className="text-blue-600 font-bold">백엔드 + 프론트엔드 1명 (1인 개발)</span></p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
@@ -3268,6 +3301,500 @@ export default function Portfolio() {
                   <p className="text-sm text-gray-700 leading-relaxed">
                   채팅 기능을 구현하며 WebSocket과 실시간 통신 구조를 처음으로 깊이 이해하게 된 프로젝트였습니다.
                   <br />특히 모놀리스 구조를 멀티모듈로 전환하며, 서비스 분리와 아키텍처 설계가 개발 경험에 얼마나 큰 영향을 주는지 체감할 수 있었습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* KatsuMap Backend Modal */}
+      {isKatsuMapBackendModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsKatsuMapBackendModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsKatsuMapBackendModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4">
+              <img
+                src="/projects/KatsuMap_detail.png"
+                alt="돈가스 지도 백엔드"
+                className="w-full h-auto rounded-t-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">돈가스 지도</h2>
+              <p className="text-lg text-gray-600 mb-6">지도 기반 돈가스 맛집 탐색 모바일 애플리케이션 (1인 개발 · Backend)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.04 ~ 현재 (운영 중)</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900"><span className="text-blue-600 font-bold">백엔드 + 프론트엔드 1명 (1인 개발)</span></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">[ 👤 250명 규모 실사용자 유지중 ]<br></br>서울 전역 돈가스 맛집을 지도 기반으로 탐색하고, 즐겨찾기·태그·리뷰 참여를 통해 사용자 경험이 축적되는 실사용 모바일 앱</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
+                  <a
+                    href="https://github.com/Katsu-Map"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    github.com/Katsu-Map
+                    <Github className="w-4 h-4" />
+                  </a>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">🍎 App Store</p>
+                  <a
+                    href="https://apps.apple.com/kr/app/%EB%8F%88%EA%B0%80%EC%8A%A4-%EC%A7%80%EB%8F%84/id6755211452"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    돈가스 지도 다운로드
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">📱 Play Store</p>
+                  <a
+                    href="https://play.google.com/store/apps/details?id=com.katsumap.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    돈가스 지도 다운로드
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Backend:</strong> NestJS, TypeScript</p>
+                  <p className="text-sm text-gray-700"><strong>Database:</strong> Supabase (PostgreSQL, PostGIS), Prisma ORM</p>
+                  <p className="text-sm text-gray-700"><strong>Infra:</strong> Google Cloud Run (Serverless), Docker</p>
+                  <p className="text-sm text-gray-700"><strong>CI/CD:</strong> Google Cloud Build</p>
+                  <p className="text-sm text-gray-700"><strong>Cache:</strong> In-memory Cache</p>
+                  <p className="text-sm text-gray-700"><strong>External API:</strong> Kakao Map REST API</p>
+                  <p className="text-sm text-gray-700"><strong>Crawling / AI:</strong> BeautifulSoup4, HuggingFace</p>
+                  <p className="text-sm text-gray-700"><strong>Security:</strong> Helmet, Rate Limiting, Validation Pipe</p>
+                  <p className="text-sm text-gray-700"><strong>Auth:</strong> UUID 기반 사용자 식별 + Session 기반 인증</p>
+                  <p className="text-sm text-gray-700"><strong>Testing:</strong> Jest, Supertest</p>
+                  <p className="text-sm text-gray-700"><strong>Logging:</strong> 사용자 접속·행동 로그 수집</p>
+                  <p className="text-sm text-gray-700"><strong>API Docs:</strong> Swagger (OpenAPI)</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 (Backend 단독 담당)</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">백엔드 전체 아키텍처 설계 및 구현</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">Cloud Run 기반 서버리스 환경 구성 및 운영</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">위치 기반 검색, 랭킹, 크롤링, AI 파이프라인 개발</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">세션 인증, 무중단 배포, 테스트 자동화, 로깅 포함 운영 전반 담당</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">관리자 백오피스용 API 설계 및 구현</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실서비스 트래픽 대응 및 지속적인 개선</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">위치 기반 맛집 추천 (Kakao REST API + PostGIS)</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">사용자가 장소명을 입력하면 Kakao Map REST API를 통해 좌표(위도/경도) 조회</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">조회된 좌표를 기준으로 PostgreSQL PostGIS 공간 쿼리 실행</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">ST_DWithin, ST_Distance를 활용한 반경 기반 검색 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">장소 → 좌표 변환 → 공간 검색 → 근처 맛집 추천의 전체 흐름을 백엔드에서 직접 설계</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">지도 및 장소 정보 연동</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Kakao Map REST API 기반 장소 상세 정보 조회</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">좌표 기반 데이터 검증으로 지도 UI와 백엔드 데이터 정합성 유지</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">외부 지도 API 의존성을 최소화한 구조 설계</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">랭킹 데이터 수집 및 가공</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">BeautifulSoup4 기반 크롤링 파이프라인 구현</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Google Place ID 기준으로 가게 리뷰 및 사진 데이터 수집</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">크롤링 데이터 정제 후 랭킹 및 가게 상세 정보에 활용</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">AI 기반 대표 이미지 자동 선정</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">HuggingFace 이미지 분류 모델 활용</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">수집된 가게 사진 중 '돈가스일 확률이 가장 높은 이미지'를 대표 이미지로 자동 선정</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">수동 큐레이션 없이도 일관된 가게 대표 이미지 제공</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">사용자 식별 및 인증 구조 (UUID + Session)</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">회원가입 없이 바로 사용할 수 있는 서비스 구조 설계</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">앱 최초 실행 시 UUID 발급 → 사용자 고유 식별자로 활용</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">UUID 기반 초기 식별 후 Session Token 발급</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">이후 모든 요청은 Session 기반 인증으로 처리</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">유저별 즐겨찾기, 태그, 활동 이력 제공</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">서버에는 Session Token Hash만 저장하여 보안성 확보</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">관리자 백오피스 API 구현</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">관리자 전용 인증 구조 설계</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">가게 정보 관리, 문의/신고 처리, 데이터 수정 API 제공</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">운영을 고려한 관리자 전용 엔드포인트 분리</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">사용자 접속 및 행동 로깅</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">사용자 접속, 주요 API 호출 로그 수집</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">서비스 사용 흐름 분석 및 운영 판단에 활용</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">장애 대응 및 이상 트래픽 분석 기반 마련</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">성능 및 안정성 최적화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700"><strong>인메모리 캐싱 적용</strong></p>
+                    </li>
+                    <li className="flex items-start gap-3 ml-4">
+                      <div className="w-1 h-1 bg-gray-300 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-600">인기 가게, 권역별 조회 결과 캐싱</p>
+                    </li>
+                    <li className="flex items-start gap-3 ml-4">
+                      <div className="w-1 h-1 bg-gray-300 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-600">반복 요청 시 DB 접근 최소화</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Rate Limiting 적용으로 비정상 트래픽 방어</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Helmet 적용을 통한 HTTP 보안 헤더 설정</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">공통 Exception Filter로 에러 응답 표준화</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">테스트 자동화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Jest + Supertest 기반 API 통합 테스트 구축</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">주요 API에 대해 정상 / 예외 / 인증 케이스 테스트 작성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">배포 전 테스트 자동 실행으로 안정성 확보</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">CI/CD 및 무중단 배포</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Google Cloud Build 기반 CI/CD 파이프라인 구성</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">코드 변경 시 테스트 → Docker 이미지 빌드 → Cloud Run 배포 자동화</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Cloud Run Revision 전환을 통한 무중단 배포</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">서비스 중단 없이 기능 개선 및 업데이트 수행</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-2">Cloud Run 서버리스 운영 및 비용 최적화</h4>
+                  <ul className="space-y-2 ml-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">Docker 이미지 기반 Cloud Run 배포</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">트래픽에 따른 자동 스케일링</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">무상태(stateless) 서버 구조 설계</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700"><strong>월 평균 서버 비용 약 2,000원 수준으로 운영</strong></p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">서버리스 구조를 통한 인프라 비용 및 운영 부담 최소화</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 기술적 고민 및 학습 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기술적 고민 및 학습</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">Kakao REST API와 PostGIS를 결합한 위치 기반 검색 구조를 실서비스에 적용</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">Supabase(PostgreSQL + PostGIS)를 활용한 서버리스 친화적 DB 운영 경험</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">Redis 없이 서버리스 환경에 적합한 인메모리 캐싱 전략의 장단점 검증</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">UUID + 세션 기반 인증으로 회원가입 없는 개인화 기능 제공</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">로깅, 테스트, CI/CD, 무중단 배포까지 포함한 운영 중심 백엔드 설계 역량 강화</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 프로젝트 후기</h3>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    실사용자가 있는 서비스를 단독으로 운영하며, 백엔드 개발이 기능 구현을 넘어 설계와 운영 전반을 책임지는 영역임을 체감했습니다.<br></br>
+                    서버리스 환경에서 성능과 비용을 함께 고려하며, 실서비스에 필요한 기술 선택과 운영 관점을 직접 경험한 프로젝트였습니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Trad (외주 작업) Modal */}
+      {isTradModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsTradModalOpen(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsTradModalOpen(false)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">외주 작업</h2>
+              <p className="text-lg text-gray-600 mb-6">대규모 동시 접속 티켓팅 서비스 아키텍처 설계</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.12 ~ 진행중</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">역할</p>
+                  <p className="text-base font-semibold text-gray-900"><span className="text-blue-600 font-bold">Backend 아키텍처 설계 및 구현</span></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">프로젝트 소개</p>
+                  <p className="text-sm text-gray-700">처음으로 받은 외주 작업입니다.<br />대규모 동시 접속이 발생하는 티켓팅 서비스를 가정한 아키텍처를 구상하고 있습니다.<br></br>프론트엔드 1명을 초청해 팀을 구성했습니다.</p>
+                </div>
+              </div>
+
+              {/* 주요 고민 사항 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🎯 주요 고민 사항</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">대규모 동시 접속 환경에서의 안정적인 시스템 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">티켓팅 서비스의 공정성과 성능을 동시에 고려한 아키텍처 구상</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실제 서비스 운영을 고려한 확장 가능한 구조 설계</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 프로젝트 상태 */}
+              <div className="mb-6">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="text-sm text-gray-700">
+                    <strong>🚀 현재 상태:</strong> 아키텍처 설계 및 초기 구현 진행중
+                  </p>
+                  <p className="text-sm text-gray-600 mt-2">
+                    상세한 내용은 프로젝트 완료 후 업데이트될 예정입니다.
                   </p>
                 </div>
               </div>
