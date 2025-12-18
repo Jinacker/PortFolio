@@ -21,6 +21,8 @@ import {
   Flame,
   MessageCircle,
   FileText,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -398,6 +400,50 @@ const projectData: ProjectItem[] = [
   },
 ]
 
+// 프론트엔드 타임라인 데이터
+const frontendTimelineData = [
+  {
+    id: 1,
+    title: "React 기초 학습",
+    period: "2025년 2월",
+    description: "인프런 한입 리액트 강의를 완강하며 React의 기초부터 실전까지 학습했습니다.",
+  },
+  {
+    id: 2,
+    title: "Next.js 프로젝트",
+    period: "2025년",
+    description: "Next.js로 포트폴리오 웹사이트를 제작하며 SSR과 라우팅을 경험했습니다.",
+  },
+  {
+    id: 3,
+    title: "React Native 앱 개발",
+    period: "2025년 여름",
+    description: "쉼표, 돈가스 지도 등 React Native로 모바일 앱을 개발하고 스토어에 출시했습니다.",
+  },
+]
+
+// 백엔드 타임라인 데이터
+const backendTimelineData = [
+  {
+    id: 1,
+    title: "Django 학습",
+    period: "2024년 겨울",
+    description: "KSEB 부트캠프에서 Django를 배우며 웹 애플리케이션 개발의 기초를 다졌습니다.",
+  },
+  {
+    id: 2,
+    title: "Spring Boot 프로젝트",
+    period: "2025년 여름",
+    description: "Smart WMS 프로젝트에서 Spring Boot로 백엔드를 개발하며 실무 경험을 쌓았습니다.",
+  },
+  {
+    id: 3,
+    title: "NestJS 학습 및 적용",
+    period: "2025년 11월",
+    description: "돈가스 지도 프로젝트에서 NestJS를 활용하여 TypeScript 기반 백엔드를 구축했습니다.",
+  },
+]
+
 // 섹션별 애니메이션을 위한 커스텀 훅
 const useScrollAnimation = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
@@ -440,6 +486,7 @@ export default function Portfolio() {
   const [activeTab, setActiveTab] = useState<'timeline' | 'projects'>('timeline');
 
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
+  const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -836,8 +883,166 @@ export default function Portfolio() {
             <BookOpen className="w-8 h-8 md:w-10 md:h-10 text-blue-600" /> 경험
           </h2>
 
-          {/* Tab Buttons */}
-          <div className="flex gap-4 mb-12 border-b border-gray-200">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed text-left mb-12">
+              <strong>매일 새로운 것을 배우는 재미</strong>에 푹 빠져 열심히 성장 중입니다!<br></br>
+              궁극적으로는.. 특정 기술에 얽매이지 않고,<br></br> 혼자서도 뭐든 뚝딱 만들어낼 수 있는 <strong className="text-blue-600">풀스택 역량</strong>을 손에 넣고 싶습니다. <br></br>
+              이 막연하지만 소중한 목표가 저를 나아가게 하는 가장 큰 원동력입니다.
+            </p>
+          </div>
+
+          {/* 개발 타임라인 소제목 */}
+          <div className="max-w-4xl mx-auto mt-36 mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 text-center">개발 타임라인</h3>
+          </div>
+
+          {/* 프론트엔드/백엔드 타임라인 */}
+          <div className="grid md:grid-cols-2 gap-12 mb-16">
+            {/* 프론트엔드 타임라인 */}
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">프론트엔드</h3>
+              <div className="p-4">
+                {frontendTimelineData.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className="relative"
+                    style={{
+                      padding: index % 2 === 0 ? '20px 0 20px 20px' : '20px 20px 20px 0',
+                      maxWidth: '350px',
+                    }}
+                  >
+                    {/* 반원형 테두리 */}
+                    <div
+                      className="absolute pointer-events-none"
+                      style={{
+                        content: '""',
+                        width: '50%',
+                        height: '100%',
+                        border: 'solid #3b82f6',
+                        ...(index % 2 === 0
+                          ? {
+                              left: '0px',
+                              top: index === 0 ? '0px' : '-6.0px',
+                              bottom: index === frontendTimelineData.length - 1 ? '0px' : '-4.5px',
+                              borderWidth: `${index === 0 ? '0' : '3px'} 0 ${index === frontendTimelineData.length - 1 ? '0' : '3px'} 3px`,
+                              borderRadius: `${index === 0 ? '0' : '30px'} 0 0 ${index === frontendTimelineData.length - 1 ? '0' : '30px'}`,
+                            }
+                          : {
+                              right: '0',
+                              top: '-3px',
+                              bottom: index === frontendTimelineData.length - 1 ? '0px' : '-2px',
+                              borderWidth: `3px 3px ${index === frontendTimelineData.length - 1 ? '0' : '3px'} 0`,
+                              borderRadius: `0 30px 30px 0`,
+                            }),
+                      }}
+                    ></div>
+
+                    {/* 카드 */}
+                    <div className="bg-white rounded-lg p-4 relative shadow-sm border border-gray-200">
+                      {/* 점 - 카드 왼쪽/오른쪽 중간에 배치 */}
+                      <span
+                        className="absolute w-2.5 h-2.5 bg-white rounded-full border-2 border-blue-500"
+                        style={{
+                          [index % 2 === 0 ? 'left' : 'right']: '-24.5px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                        }}
+                      ></span>
+
+                      <h4 className="text-sm font-bold text-blue-600 mb-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                      <p className="text-xs text-gray-700">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 백엔드 타임라인 */}
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">백엔드</h3>
+              <div className="p-4">
+                {backendTimelineData.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className="relative"
+                    style={{
+                      padding: index % 2 === 0 ? '20px 0 20px 20px' : '20px 20px 20px 0',
+                      maxWidth: '350px',
+                    }}
+                  >
+                    {/* 반원형 테두리 */}
+                    <div
+                      className="absolute pointer-events-none"
+                      style={{
+                        content: '""',
+                        width: '50%',
+                        height: '100%',
+                        border: 'solid #10b981',
+                        ...(index % 2 === 0
+                          ? {
+                              left: '0px',
+                              top: index === 0 ? '0px' : '-6.0px',
+                              bottom: index === backendTimelineData.length - 1 ? '0px' : '-4.5px',
+                              borderWidth: `${index === 0 ? '0' : '3px'} 0 ${index === backendTimelineData.length - 1 ? '0' : '3px'} 3px`,
+                              borderRadius: `${index === 0 ? '0' : '30px'} 0 0 ${index === backendTimelineData.length - 1 ? '0' : '30px'}`,
+                            }
+                          : {
+                              right: '0',
+                              top: '-3px',
+                              bottom: index === backendTimelineData.length - 1 ? '0px' : '-2px',
+                              borderWidth: `3px 3px ${index === backendTimelineData.length - 1 ? '0' : '3px'} 0`,
+                              borderRadius: `0 30px 30px 0`,
+                            }),
+                      }}
+                    ></div>
+
+                    {/* 카드 */}
+                    <div className="bg-white rounded-lg p-4 relative shadow-sm border border-gray-200">
+                      {/* 점 - 카드 왼쪽/오른쪽 중간에 배치 */}
+                      <span
+                        className="absolute w-2.5 h-2.5 bg-white rounded-full border-2 border-green-500"
+                        style={{
+                          [index % 2 === 0 ? 'left' : 'right']: '-24.5px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                        }}
+                      ></span>
+
+                      <h4 className="text-sm font-bold text-green-600 mb-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                      <p className="text-xs text-gray-700">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 성장 이야기 펼치기 버튼 */}
+          <div className="text-center mt-16 mb-8">
+            <button
+              onClick={() => setIsExperienceExpanded(!isExperienceExpanded)}
+              className="inline-flex items-center gap-2 px-5 py-3 text-gray-600 hover:text-blue-600 border-2 border-gray-200 hover:border-blue-400 rounded-full transition-all"
+            >
+              <span className="text-sm md:text-base font-medium">
+                {isExperienceExpanded ? '접기' : '성장 이야기 더보기'}
+              </span>
+              {isExperienceExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+            </button>
+          </div>
+
+          <div className={`transition-all duration-500 ease-in-out ${
+            isExperienceExpanded ? 'opacity-100 max-h-full' : 'opacity-0 max-h-0 overflow-hidden'
+          }`}>
+            {isExperienceExpanded && (
+            <>
+              {/* Tab Buttons */}
+              <div className="flex gap-4 mb-12 border-b border-gray-200">
             <button
               onClick={() => setActiveTab('timeline')}
               className={`pb-4 px-2 text-base font-medium transition-colors ${
@@ -864,8 +1069,8 @@ export default function Portfolio() {
           {activeTab === 'timeline' && (
             <div>
               <div className="max-w-2xl mx-auto mb-12 px-4">
-                                  <p className="text-gray-600 text-left text-xs md:text-sm leading-relaxed">                  아직 개발을 시작한 지 오래되진 않아 보여드릴 수 있는 성과는 많지 않습니다.<br></br>
-                  {' '}하지만 지금까지 제가 몰입해온 활동들을 정리하며,<br></br>
+                                  <p className="text-gray-600 text-left text-xs md:text-sm leading-relaxed">                  
+                  {' '}지금까지 제가 몰입해온 활동들을 정리하며,
                   {' '}어떤 태도로 배우고 성장해왔는지 전달하고 싶었습니다.<br></br>
                   {' '}이 타임라인에는 개발뿐 아니라 제가 경험한 다양한 도전과 노력의 흔적을 담았습니다.
                 </p>
@@ -1075,6 +1280,9 @@ export default function Portfolio() {
               </div>
             </div>
           )}
+            </>
+          )}
+          </div>
         </div>
       </section>
 
