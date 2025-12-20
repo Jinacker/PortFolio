@@ -970,6 +970,11 @@ export default function Portfolio() {
                       `}
                     ></div>
 
+                    {/* 첫 번째 카드 위로 곡선 */}
+                    {index === 0 && (
+                      <div className="absolute right-[41%] -top-[35.3px] w-12 h-9 border-r-[3.1px] border-b-[3px] border-blue-500 rounded-br-[30px]"></div>
+                    )}
+
                     {/* 방향 아이콘 */}
                     {index !== frontendTimelineData.length - 1 && (
                       <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-6 h-6 bg-white border-2 border-blue-500 rounded-full flex items-center justify-center z-10">
@@ -1133,6 +1138,11 @@ export default function Portfolio() {
                         border-green-500
                       `}
                     ></div>
+
+                    {/* 첫 번째 카드 위로 곡선 */}
+                    {index === 0 && (
+                      <div className="absolute right-[42%] -top-[35.3px] w-12 h-9 border-r-[3.1px] border-b-[3px] border-green-500 rounded-br-[30px]"></div>
+                    )}
 
                     {/* 방향 아이콘 */}
                     {index !== backendTimelineData.length - 1 && (
