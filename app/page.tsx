@@ -958,46 +958,23 @@ export default function Portfolio() {
                       maxWidth: '350px',
                     }}
                   >
-                    {/* 반원형 테두리 */}
+                    {/* 간단한 반원형 border */}
                     <div
-                      className="absolute pointer-events-none"
-                      style={{
-                        content: '""',
-                        width: '50%',
-                        height: '100%',
-                        border: 'solid #3b82f6',
-                        ...(index % 2 === 0
-                          ? {
-                              left: '0px',
-                              top: index === 0 ? '-0px' : '-6.0px',
-                              bottom: index === frontendTimelineData.length - 1 ? '-15px' : '-20px',
-                              borderWidth: `3px 0 3px 3px`,
-                              borderRadius: `30px 0 0 30px`,
-                            }
-                          : {
-                              right: '0',
-                              top: '-3px',
-                              bottom: index === frontendTimelineData.length - 1 ? '0px' : '-20px',
-                              borderWidth: `3px 3px ${index === frontendTimelineData.length - 1 ? '0' : '3px'} 0`,
-                              borderRadius: `0 30px 30px 0`,
-                            }),
-                      }}
+                      className={`
+                        absolute pointer-events-none -top-0.5 -bottom-0
+                        ${index % 2 === 0
+                          ? 'border-l-[3px] border-t-[3px] border-b-[3px] rounded-tl-[30px] rounded-bl-[30px] left-0 w-1/2'
+                          : 'border-r-[3px] border-t-[3px] border-b-[3px] rounded-tr-[30px] rounded-br-[30px] right-0 w-1/2'
+                        }
+                        border-blue-500
+                      `}
                     ></div>
 
-                    {/* 첫 번째 카드 위로 수직선 추가 */}
-                    {index === 0 && (
-                      <div
-                        className="absolute"
-                        style={{
-                          right: '147px',
-                          top: '-27px',
-                          width: '50px',
-                          height: '30px',
-                          borderRight: '3px solid #3b82f6',
-                          borderBottom: '3px solid #3b82f6',
-                          borderBottomRightRadius: '40px',
-                        }}
-                      ></div>
+                    {/* 방향 아이콘 */}
+                    {index !== frontendTimelineData.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-6 h-6 bg-white border-2 border-blue-500 rounded-full flex items-center justify-center z-10">
+                        <ChevronDown className="w-3 h-3 text-blue-500" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+                      </div>
                     )}
 
                     {/* 카드 */}
@@ -1129,41 +1106,6 @@ export default function Portfolio() {
                   </div>
                 ))}
 
-                {/* 마지막 카드 이후 타임라인 연장 (카드 없이) */}
-                <div
-                  className="relative"
-                  style={{
-                    padding: '20px 20px 20px 0',
-                    maxWidth: '350px',
-                    height: '10px',
-                  }}
-                >
-                  {/* 반원형 테두리 - 오른쪽 위만 곡선 */}
-                  <div
-                    className="absolute pointer-events-none"
-                    style={{
-                      width: '50%',
-                      height: '100%',
-                      border: 'solid #3b82f6',
-                      right: '0',
-                      top: '-9px',
-                      bottom: '-20px',
-                      borderWidth: '3px 3px 0 0',
-                      borderRadius: '0 30px 0 0',
-                    }}
-                  ></div>
-
-                  {/* 곡선 이후 아래로 수직선 추가 */}
-                  <div
-                    className="absolute bg-blue-500"
-                    style={{
-                      right: '0px',
-                      bottom: '-386px',
-                      width: '3px',
-                      height: '398px',
-                    }}
-                  ></div>
-                </div>
               </div>
             </div>
 
@@ -1180,46 +1122,23 @@ export default function Portfolio() {
                       maxWidth: '350px',
                     }}
                   >
-                    {/* 반원형 테두리 */}
+                    {/* 간단한 반원형 border */}
                     <div
-                      className="absolute pointer-events-none"
-                      style={{
-                        content: '""',
-                        width: '50%',
-                        height: '100%',
-                        border: 'solid #10b981',
-                        ...(index % 2 === 0
-                          ? {
-                              left: '0px',
-                              top: index === 0 ? '-0px' : '-6.0px',
-                              bottom: index === backendTimelineData.length - 1 ? '0px' : '-20px',
-                              borderWidth: `3px 0 ${index === backendTimelineData.length - 1 ? '0' : '3px'} 3px`,
-                              borderRadius: index === backendTimelineData.length - 1 ? `30px 0 0 0` : `30px 0 0 30px`,
-                            }
-                          : {
-                              right: '0',
-                              top: '-3px',
-                              bottom: index === backendTimelineData.length - 1 ? '0px' : '-20px',
-                              borderWidth: `3px 3px ${index === backendTimelineData.length - 1 ? '0' : '3px'} 0`,
-                              borderRadius: `0 30px 30px 0`,
-                            }),
-                      }}
+                      className={`
+                        absolute pointer-events-none -top-0.5 -bottom-0
+                        ${index % 2 === 0
+                          ? 'border-l-[3px] border-t-[3px] border-b-[3px] rounded-tl-[30px] rounded-bl-[30px] left-0 w-1/2'
+                          : 'border-r-[3px] border-t-[3px] border-b-[3px] rounded-tr-[30px] rounded-br-[30px] right-0 w-1/2'
+                        }
+                        border-green-500
+                      `}
                     ></div>
 
-                    {/* 첫 번째 카드 위로 곡선 추가 */}
-                    {index === 0 && (
-                      <div
-                        className="absolute"
-                        style={{
-                          right: '147px',
-                          top: '-27px',
-                          width: '50px',
-                          height: '30px',
-                          borderRight: '3px solid #10b981',
-                          borderBottom: '3px solid #10b981',
-                          borderBottomRightRadius: '40px',
-                        }}
-                      ></div>
+                    {/* 방향 아이콘 */}
+                    {index !== backendTimelineData.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-6 h-6 bg-white border-2 border-green-500 rounded-full flex items-center justify-center z-10">
+                        <ChevronDown className="w-3 h-3 text-green-500" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+                      </div>
                     )}
 
                     {/* 카드 */}
