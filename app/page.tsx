@@ -988,7 +988,7 @@ export default function Portfolio() {
 
                     {/* 첫 번째 카드 위로 곡선 */}
                     {index === 0 && (
-                      <div className="absolute right-[41%] -top-[35.3px] w-12 h-9 border-r-[3.1px] border-b-[3px] border-blue-500 rounded-br-[30px]"></div>
+                      <div className="absolute right-[41%] -top-[35.1px] w-12 h-9 border-r-[3.1px] border-b-[3px] border-blue-500 rounded-br-[30px]"></div>
                     )}
 
                     {/* 방향 아이콘 */}
@@ -1166,7 +1166,7 @@ export default function Portfolio() {
 
                     {/* 첫 번째 카드 위로 곡선 */}
                     {index === 0 && (
-                      <div className="absolute right-[42%] -top-[35.3px] w-12 h-9 border-r-[3.1px] border-b-[3px] border-green-500 rounded-br-[30px]"></div>
+                      <div className="absolute right-[42%] -top-[35.1px] w-12 h-9 border-r-[3.1px] border-b-[3px] border-green-500 rounded-br-[30px]"></div>
                     )}
 
                     {/* 방향 아이콘 */}
