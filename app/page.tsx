@@ -25,6 +25,7 @@ import {
   ChevronUp,
   X,
   HelpCircle,
+  Loader2,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -535,6 +536,19 @@ export default function Portfolio() {
   const [isGeonneoGeonneoModalOpen, setIsGeonneoGeonneoModalOpen] = useState(false);
   const [isTradModalOpen, setIsTradModalOpen] = useState(false);
 
+  // 이미지 프리로드 후 모달 열기 함수
+  const openModalWithImagePreload = (imageSrc: string, setModalOpen: (value: boolean) => void) => {
+    const img = new Image();
+    img.src = imageSrc;
+    img.onload = () => {
+      setModalOpen(true);
+    };
+    // 이미지가 이미 캐시되어 있는 경우 즉시 실행
+    if (img.complete) {
+      setModalOpen(true);
+    }
+  };
+
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
     if ('scrollRestoration' in history) {
@@ -947,7 +961,9 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             {/* 프론트엔드 타임라인 */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">프론트엔드</h3>
+              <h3 className="text-xl font-bold mb-4 mt-2 text-center">
+                <span className="border-[3.5px] border-blue-500 text-blue-500 rounded-full px-6 py-2 inline-block">프론트엔드</span>
+              </h3>
               <div className="p-4">
                 {frontendTimelineData.map((item, index) => (
                   <div
@@ -979,6 +995,13 @@ export default function Portfolio() {
                     {index !== frontendTimelineData.length - 1 && (
                       <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-6 h-6 bg-white border-2 border-blue-500 rounded-full flex items-center justify-center z-10">
                         <ChevronDown className="w-3 h-3 text-blue-500" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+                      </div>
+                    )}
+
+                    {/* 진행중 아이콘 */}
+                    {index === frontendTimelineData.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-7 h-7 bg-white border-2 border-blue-500 rounded-full flex items-center justify-center z-10">
+                        <Loader2 className="w-4 h-4 text-blue-500 animate-[spin_3s_linear_infinite]" strokeWidth={3} />
                       </div>
                     )}
 
@@ -1074,7 +1097,7 @@ export default function Portfolio() {
                       {/* ISSUE ONE 프로젝트 자세히 보기 버튼 */}
                       {item.id === 2 && (
                         <button
-                          onClick={() => setIsIssueOneModalOpen(true)}
+                          onClick={() => openModalWithImagePreload('/projects/Issue_one_detail.png', setIsIssueOneModalOpen)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1083,7 +1106,7 @@ export default function Portfolio() {
                       {/* 무더위 쉼터: 쉼표 프로젝트 자세히 보기 버튼 */}
                       {item.id === 3 && (
                         <button
-                          onClick={() => setIsShympyoModalOpen(true)}
+                          onClick={() => openModalWithImagePreload('/projects/shympyo_detail.png', setIsShympyoModalOpen)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1092,7 +1115,7 @@ export default function Portfolio() {
                       {/* 메이커페어 2025: 부스 페이지 자세히 보기 버튼 */}
                       {item.id === 4 && (
                         <button
-                          onClick={() => setIsMakerFaireModalOpen(true)}
+                          onClick={() => openModalWithImagePreload('/projects/makerFaire_detail.png', setIsMakerFaireModalOpen)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1101,7 +1124,7 @@ export default function Portfolio() {
                       {/* 돈가스 지도 프로젝트 자세히 보기 버튼 */}
                       {item.id === 5 && (
                         <button
-                          onClick={() => setIsKatsuMapModalOpen(true)}
+                          onClick={() => openModalWithImagePreload('/projects/KatsuMap_detail.png', setIsKatsuMapModalOpen)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1116,7 +1139,9 @@ export default function Portfolio() {
 
             {/* 백엔드 타임라인 */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">백엔드</h3>
+              <h3 className="text-xl font-bold mb-4 mt-2 text-center">
+                <span className="border-[3.5px] border-green-500 text-green-500 rounded-full px-6 py-2 inline-block">백엔드</span>
+              </h3>
               <div className="p-4">
                 {backendTimelineData.map((item, index) => (
                   <div
@@ -1148,6 +1173,13 @@ export default function Portfolio() {
                     {index !== backendTimelineData.length - 1 && (
                       <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-6 h-6 bg-white border-2 border-green-500 rounded-full flex items-center justify-center z-10">
                         <ChevronDown className="w-3 h-3 text-green-500" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+                      </div>
+                    )}
+
+                    {/* 진행중 아이콘 */}
+                    {index === backendTimelineData.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-7 h-7 bg-white border-2 border-green-500 rounded-full flex items-center justify-center z-10">
+                        <Loader2 className="w-4 h-4 text-green-500 animate-[spin_3s_linear_infinite]" strokeWidth={3} />
                       </div>
                     )}
 
@@ -1268,7 +1300,7 @@ export default function Portfolio() {
                       {/* FamiLog 자세히 보기 버튼 */}
                       {item.id === 2 && (
                         <button
-                          onClick={() => setIsFamiLogModalOpen(true)}
+                          onClick={() => openModalWithImagePreload('/projects/FamiLog_detail.png', setIsFamiLogModalOpen)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1277,7 +1309,7 @@ export default function Portfolio() {
                       {/* SmartWMS 자세히 보기 버튼 */}
                       {item.id === 3 && (
                         <button
-                          onClick={() => setIsSmartWMSModalOpen(true)}
+                          onClick={() => openModalWithImagePreload('/projects/SmartWMS_detail.png', setIsSmartWMSModalOpen)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1286,7 +1318,7 @@ export default function Portfolio() {
                       {/* 건너건너 자세히 보기 버튼 */}
                       {item.id === 4 && (
                         <button
-                          onClick={() => setIsGeonneoGeonneoModalOpen(true)}
+                          onClick={() => openModalWithImagePreload('/projects/GNGN_detail.png', setIsGeonneoGeonneoModalOpen)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1295,7 +1327,7 @@ export default function Portfolio() {
                       {/* 돈가스 지도 자세히 보기 버튼 */}
                       {item.id === 6 && (
                         <button
-                          onClick={() => setIsKatsuMapBackendModalOpen(true)}
+                          onClick={() => openModalWithImagePreload('/projects/KatsuMap_detail.png', setIsKatsuMapBackendModalOpen)}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1319,6 +1351,7 @@ export default function Portfolio() {
 
           {/* 성장 이야기 펼치기 버튼 */}
           <div className="text-center mt-16 mb-8">
+            <p className="text-gray-500 text-lg md:text-xl mb-24">김진의 여정은 계속됩니다...</p>
             <button
               onClick={() => setIsExperienceExpanded(!isExperienceExpanded)}
               className={`inline-flex items-center gap-2 py-3 text-gray-600 hover:text-blue-600 border-2 border-gray-200 hover:border-blue-400 rounded-full transition-all ${
