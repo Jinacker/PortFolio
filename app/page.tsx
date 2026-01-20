@@ -745,7 +745,6 @@ export default function Portfolio() {
                 <p className="text-sm text-gray-500 font-medium">학력</p>
                 <p className="text-sm md:text-base font-semibold text-gray-900">인하대학교 재학</p>
                 <p className="text-xs md:text-sm text-gray-500">(주) 공간정보공학과 / (복) 인공지능공학과</p>
-                <p className="text-xs md:text-sm text-gray-500">(부) 디자인융합과</p>
               </div>
             </div>
           </div>
@@ -769,6 +768,125 @@ export default function Portfolio() {
             </div>
           </div>
 
+          {/* 회고록 모음 섹션 */}
+          <div className="pt-20">
+            <div className="flex items-center gap-x-3 mb-4">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                <BookOpen className="w-5 h-5 text-blue-600" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900">회고록 모음</h3>
+            </div>
+
+            <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-6">
+              5년간 블로그를 꾸준히 운영하며 생각과 경험을 기록해왔습니다.<br />
+              군 생활 동안에도 하루도 빠짐없이 일기를 쓸 정도로 기록에 진심입니다.<br />
+              이 글들은 저라는 사람을 그대로 담아낸 기록입니다.
+            </p>
+
+            <a
+              href="https://blog.naver.com/rlawls1448"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium mb-8 transition-colors"
+            >
+              <span>블로그 방문하기</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+
+            <div className="infinite-scroll-container">
+              <div className="infinite-scroll-track">
+                {/* 첫 번째 세트 */}
+                <a href="https://blog.naver.com/rlawls1448/224132285494" target="_blank" rel="noopener noreferrer" className="memoir-card">
+                  <img src="/projects/2025-2.png" alt="2025-2학기 회고록" className="memoir-card-image" />
+                  <div className="memoir-card-content">
+                    <p className="memoir-card-title">2025-2학기 회고록</p>
+                    <p className="memoir-card-subtitle">성장과 도전의 기록</p>
+                  </div>
+                  <div className="memoir-card-arrow">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+
+                <a href="https://blog.naver.com/rlawls1448/224005262527" target="_blank" rel="noopener noreferrer" className="memoir-card">
+                  <img src="/projects/2025-summer.png" alt="2025 여름방학 회고록" className="memoir-card-image" />
+                  <div className="memoir-card-content">
+                    <p className="memoir-card-title">2025 여름방학 회고록</p>
+                    <p className="memoir-card-subtitle">뜨거운 여름의 성장기</p>
+                  </div>
+                  <div className="memoir-card-arrow">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+
+                <a href="https://blog.naver.com/rlawls1448/223927328023" target="_blank" rel="noopener noreferrer" className="memoir-card">
+                  <img src="/projects/2025-1.png" alt="2025-1학기 회고록" className="memoir-card-image" />
+                  <div className="memoir-card-content">
+                    <p className="memoir-card-title">2025-1학기 회고록</p>
+                    <p className="memoir-card-subtitle">새로운 시작의 기록</p>
+                  </div>
+                  <div className="memoir-card-arrow">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+
+                <a href="https://blog.naver.com/rlawls1448/223785118853" target="_blank" rel="noopener noreferrer" className="memoir-card">
+                  <img src="/projects/2024.png" alt="2024년 회고록" className="memoir-card-image" />
+                  <div className="memoir-card-content">
+                    <p className="memoir-card-title">2024년 회고록</p>
+                    <p className="memoir-card-subtitle">한 해를 돌아보며</p>
+                  </div>
+                  <div className="memoir-card-arrow">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+
+                {/* 두 번째 세트 (무한 루프를 위한 복제) */}
+                <a href="https://blog.naver.com/rlawls1448/224132285494" target="_blank" rel="noopener noreferrer" className="memoir-card">
+                  <img src="/projects/2025-2.png" alt="2025-2학기 회고록" className="memoir-card-image" />
+                  <div className="memoir-card-content">
+                    <p className="memoir-card-title">2025-2학기 회고록</p>
+                    <p className="memoir-card-subtitle">성장과 도전의 기록</p>
+                  </div>
+                  <div className="memoir-card-arrow">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+
+                <a href="https://blog.naver.com/rlawls1448/224005262527" target="_blank" rel="noopener noreferrer" className="memoir-card">
+                  <img src="/projects/2025-summer.png" alt="2025 여름방학 회고록" className="memoir-card-image" />
+                  <div className="memoir-card-content">
+                    <p className="memoir-card-title">2025 여름방학 회고록</p>
+                    <p className="memoir-card-subtitle">뜨거운 여름의 성장기</p>
+                  </div>
+                  <div className="memoir-card-arrow">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+
+                <a href="https://blog.naver.com/rlawls1448/223927328023" target="_blank" rel="noopener noreferrer" className="memoir-card">
+                  <img src="/projects/2025-1.png" alt="2025-1학기 회고록" className="memoir-card-image" />
+                  <div className="memoir-card-content">
+                    <p className="memoir-card-title">2025-1학기 회고록</p>
+                    <p className="memoir-card-subtitle">새로운 시작의 기록</p>
+                  </div>
+                  <div className="memoir-card-arrow">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+
+                <a href="https://blog.naver.com/rlawls1448/223785118853" target="_blank" rel="noopener noreferrer" className="memoir-card">
+                  <img src="/projects/2024.png" alt="2024년 회고록" className="memoir-card-image" />
+                  <div className="memoir-card-content">
+                    <p className="memoir-card-title">2024년 회고록</p>
+                    <p className="memoir-card-subtitle">한 해를 돌아보며</p>
+                  </div>
+                  <div className="memoir-card-arrow">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
 
         </div>
       </section>
