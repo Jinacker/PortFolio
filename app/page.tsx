@@ -483,6 +483,50 @@ const backendTimelineData = [
   },
 ]
 
+// 공간정보 타임라인 데이터
+// const gisTimelineData = [
+//   {
+//     id: 1,
+//     title: "공간정보공학과 입학",
+//     period: "2024년 3월",
+//     description: "인하대학교 공간정보공학과에 입학하며, GIS와 측량학의 기초를 학습하기 시작했습니다.",
+//   },
+//   {
+//     id: 2,
+//     title: "QGIS 실습",
+//     period: "2024년 1학기",
+//     description: "오픈소스 GIS 툴인 QGIS를 활용해 공간 데이터를 시각화하고 분석하는 방법을 학습했습니다.",
+//   },
+//   {
+//     id: 3,
+//     title: "측량학 실습",
+//     period: "2024년 2학기",
+//     description: "토탈스테이션과 GPS를 활용한 현장 측량 실습을 통해 공간 데이터 수집 과정을 경험했습니다.",
+//   },
+// ]
+
+// 인공지능 타임라인 데이터
+// const aiTimelineData = [
+//   {
+//     id: 1,
+//     title: "인공지능공학과 복수전공",
+//     period: "2025년 3월",
+//     description: "인공지능공학과 복수전공을 시작하며, 머신러닝과 딥러닝의 기초를 학습하기 시작했습니다.",
+//   },
+//   {
+//     id: 2,
+//     title: "Python & 데이터 분석",
+//     period: "2025년 1학기",
+//     description: "Python을 활용한 데이터 전처리와 시각화, 기초 통계 분석을 학습했습니다.",
+//   },
+//   {
+//     id: 3,
+//     title: "딥러닝 기초",
+//     period: "2025년 2학기",
+//     description: "PyTorch를 활용해 CNN, RNN 등 딥러닝 모델의 구조와 학습 원리를 학습하고 있습니다.",
+//   },
+// ]
+
 // 섹션별 애니메이션을 위한 커스텀 훅
 const useScrollAnimation = () => {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
@@ -904,8 +948,9 @@ export default function Portfolio() {
 
           <div className="max-w-3xl mx-auto">
             <p className="text-gray-700 text-base md:text-lg leading-relaxed text-left mb-12 mt-12">
-              <strong>기술</strong>은 결국 <strong>사람</strong>을 향해야 한다고 생각합니다.<br></br>
-              <strong>사람들</strong>의 일상에 실제로 도움이 되는 <strong className="text-blue-600">가치</strong>를 만들어내고 싶습니다.
+              <strong>매일 새로운 것을 배우는 재미</strong>에 푹 빠져 열심히 성장 중입니다!<br></br>
+              궁극적으로는.. 특정 기술에 얽매이지 않고,<br></br> 혼자서도 뭐든 뚝딱 만들어낼 수 있는 <strong className="text-blue-600">풀스택 역량</strong>을 손에 넣고 싶습니다. <br></br>
+              이 막연하지만 소중한 목표가 저를 나아가게 하는 가장 큰 원동력입니다.
             </p>
           </div>
 
@@ -1000,7 +1045,7 @@ export default function Portfolio() {
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">협업 & 개발 도구</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">개발 & 테스트 도구</h3>
                 <div className="flex flex-wrap gap-2">
                   <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
                   <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white"/>
@@ -1064,9 +1109,11 @@ export default function Portfolio() {
 
           <div className="max-w-3xl mx-auto">
             <p className="text-gray-700 text-base md:text-lg leading-relaxed text-left mb-12">
-              <strong>매일 새로운 것을 배우는 재미</strong>에 푹 빠져 열심히 성장 중입니다!<br></br>
-              궁극적으로는.. 특정 기술에 얽매이지 않고,<br></br> 혼자서도 뭐든 뚝딱 만들어낼 수 있는 <strong className="text-blue-600">풀스택 역량</strong>을 손에 넣고 싶습니다. <br></br>
-              이 막연하지만 소중한 목표가 저를 나아가게 하는 가장 큰 원동력입니다.
+              <strong>기술</strong>은 결국 <strong>사람</strong>을 향해야 한다고 생각합니다.<br></br>
+              <strong>사람들</strong>의 일상에 실제로 도움이 되는 <strong className="text-blue-600">가치</strong>를 만들어내고 싶습니다.
+              <br></br><br></br>
+              그래서 그 가치를 사람들에게 닿는 형태로 직접 구현해보고 싶었고,<br></br>
+              그 과정에서 자연스럽게 <strong>개발</strong>을 시작하게 되었습니다.
             </p>
           </div>
 
@@ -1466,6 +1513,120 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
+
+          {/* 공간정보/인공지능 타임라인 - 주석 처리 */}
+          {/*
+          <div className="grid md:grid-cols-2 gap-12 mb-16 mt-16">
+            <div>
+              <h3 className="text-xl font-bold mb-4 mt-2 text-center">
+                <span className="border-[3.5px] border-purple-500 text-purple-500 rounded-full px-6 py-2 inline-block">공간정보</span>
+              </h3>
+              <div className="p-4">
+                {gisTimelineData.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className="relative"
+                    style={{
+                      padding: index % 2 === 0 ? '20px 0 20px 20px' : '20px 20px 20px 0',
+                      maxWidth: '350px',
+                    }}
+                  >
+                    <div
+                      className={`
+                        absolute pointer-events-none -top-0.5 -bottom-0
+                        ${index % 2 === 0
+                          ? 'border-l-[3px] border-t-[3px] border-b-[3px] rounded-tl-[30px] rounded-bl-[30px] left-0 w-1/2'
+                          : 'border-r-[3px] border-t-[3px] border-b-[3px] rounded-tr-[30px] rounded-br-[30px] right-0 w-1/2'
+                        }
+                        border-purple-500
+                      `}
+                    ></div>
+                    {index === 0 && (
+                      <div className="absolute right-[41%] -top-[35.1px] w-12 h-9 border-r-[3.1px] border-b-[3px] border-purple-500 rounded-br-[30px]"></div>
+                    )}
+                    {index !== gisTimelineData.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-6 h-6 bg-white border-2 border-purple-500 rounded-full flex items-center justify-center z-10">
+                        <ChevronDown className="w-3 h-3 text-purple-500" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+                      </div>
+                    )}
+                    {index === gisTimelineData.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-7 h-7 bg-white border-2 border-purple-500 rounded-full flex items-center justify-center z-10">
+                        <Loader2 className="w-4 h-4 text-purple-500 animate-[spin_3s_linear_infinite]" strokeWidth={3} />
+                      </div>
+                    )}
+                    <div className="bg-white rounded-lg p-4 relative shadow-sm border border-gray-200">
+                      <span
+                        className="absolute w-2.5 h-2.5 bg-white rounded-full border-2 border-purple-500"
+                        style={{
+                          [index % 2 === 0 ? 'left' : 'right']: '-24.5px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                        }}
+                      ></span>
+                      <h4 className="text-sm font-bold text-purple-600 mb-1">{item.title}</h4>
+                      <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                      <p className="text-xs text-gray-700">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-4 mt-2 text-center">
+                <span className="border-[3.5px] border-orange-500 text-orange-500 rounded-full px-6 py-2 inline-block">인공지능</span>
+              </h3>
+              <div className="p-4">
+                {aiTimelineData.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className="relative"
+                    style={{
+                      padding: index % 2 === 0 ? '20px 0 20px 20px' : '20px 20px 20px 0',
+                      maxWidth: '350px',
+                    }}
+                  >
+                    <div
+                      className={`
+                        absolute pointer-events-none -top-0.5 -bottom-0
+                        ${index % 2 === 0
+                          ? 'border-l-[3px] border-t-[3px] border-b-[3px] rounded-tl-[30px] rounded-bl-[30px] left-0 w-1/2'
+                          : 'border-r-[3px] border-t-[3px] border-b-[3px] rounded-tr-[30px] rounded-br-[30px] right-0 w-1/2'
+                        }
+                        border-orange-500
+                      `}
+                    ></div>
+                    {index === 0 && (
+                      <div className="absolute right-[41%] -top-[35.1px] w-12 h-9 border-r-[3.1px] border-b-[3px] border-orange-500 rounded-br-[30px]"></div>
+                    )}
+                    {index !== aiTimelineData.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-6 h-6 bg-white border-2 border-orange-500 rounded-full flex items-center justify-center z-10">
+                        <ChevronDown className="w-3 h-3 text-orange-500" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+                      </div>
+                    )}
+                    {index === aiTimelineData.length - 1 && (
+                      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-7 h-7 bg-white border-2 border-orange-500 rounded-full flex items-center justify-center z-10">
+                        <Loader2 className="w-4 h-4 text-orange-500 animate-[spin_3s_linear_infinite]" strokeWidth={3} />
+                      </div>
+                    )}
+                    <div className="bg-white rounded-lg p-4 relative shadow-sm border border-gray-200">
+                      <span
+                        className="absolute w-2.5 h-2.5 bg-white rounded-full border-2 border-orange-500"
+                        style={{
+                          [index % 2 === 0 ? 'left' : 'right']: '-24.5px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                        }}
+                      ></span>
+                      <h4 className="text-sm font-bold text-orange-600 mb-1">{item.title}</h4>
+                      <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                      <p className="text-xs text-gray-700">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          */}
 
           {/* 성장 이야기 펼치기 버튼 */}
           <div className="text-center mt-16 mb-8">
@@ -2457,7 +2618,7 @@ export default function Portfolio() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
-                  <p className="text-sm text-gray-700">[ 👤 250명 규모 실사용자 유지중 ]<br></br>서울 전역 돈가스 맛집을 지도 기반으로 탐색하고, 즐겨찾기·태그·리뷰 참여를 통해 사용자 경험이 축적되는 실사용 모바일 앱</p>
+                  <p className="text-sm text-gray-700">[ 👤 누적 350명 사용자 · DAU 10명 유지 중 ]<br></br>서울 전역 돈가스 맛집을 지도 기반으로 탐색하고, 즐겨찾기·태그·리뷰 참여를 통해 사용자 경험이 축적되는 실사용 모바일 앱</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">App Store 링크</p>
@@ -3504,7 +3665,7 @@ export default function Portfolio() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
-                  <p className="text-sm text-gray-700">[ 👤 250명 규모 실사용자 유지중 ]<br></br>서울 전역 돈가스 맛집을 지도 기반으로 탐색하고, 즐겨찾기·태그·리뷰 참여를 통해 사용자 경험이 축적되는 실사용 모바일 앱</p>
+                  <p className="text-sm text-gray-700">[ 👤 누적 350명 사용자 · DAU 10명 유지 중 ]<br></br>서울 전역 돈가스 맛집을 지도 기반으로 탐색하고, 즐겨찾기·태그·리뷰 참여를 통해 사용자 경험이 축적되는 실사용 모바일 앱</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-sm text-gray-500 mb-1">GitHub 링크</p>
