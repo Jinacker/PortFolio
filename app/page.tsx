@@ -821,21 +821,23 @@ export default function Portfolio() {
               <h3 className="text-xl md:text-2xl font-bold text-gray-900">회고록 모음</h3>
             </div>
 
-            <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-6">
-              5년간 블로그를 꾸준히 운영하며 생각과 경험을 기록해왔습니다.<br />
-              군 생활 동안에도 하루도 빠짐없이 일기를 쓸 정도로 기록에 진심입니다.<br />
-              이 글들은 저라는 사람을 그대로 담아낸 기록입니다.
-            </p>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                5년간 블로그를 꾸준히 운영하며 생각과 경험을 기록해왔습니다.<br />
+                군 생활 동안에도 하루도 빠짐없이 일기를 쓸 정도로 기록에 진심입니다.<br />
+                이 글들은 저라는 사람을 그대로 담아낸 기록입니다.
+              </p>
 
-            <a
-              href="https://blog.naver.com/rlawls1448"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 font-medium mb-8 transition-colors"
-            >
-              <span>블로그 방문하기</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
+              <a
+                href="https://blog.naver.com/rlawls1448"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-blue-600 hover:text-blue-700 font-medium border border-blue-200 hover:border-blue-300 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors shrink-0"
+              >
+                <span>블로그 방문하기</span>
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
 
             <div className="infinite-scroll-container">
               <div className="infinite-scroll-track">
@@ -1633,7 +1635,7 @@ export default function Portfolio() {
             <p className="text-gray-500 text-lg md:text-xl mb-24">김진의 여정은 계속됩니다...</p>
             <button
               onClick={() => setIsExperienceExpanded(!isExperienceExpanded)}
-              className={`inline-flex items-center gap-2 py-3 text-gray-600 hover:text-blue-600 border-2 border-gray-200 hover:border-blue-400 rounded-full transition-all ${
+              className={`inline-flex items-center gap-2 py-3 text-gray-600 hover:text-blue-600 border-2 border-gray-200 hover:border-blue-400 rounded-full transition-colors ${
                 isExperienceExpanded ? 'px-5' : 'pl-12 pr-5'
               }`}
             >
@@ -1644,7 +1646,7 @@ export default function Portfolio() {
             </button>
           </div>
 
-          <div className={`transition-all duration-500 ease-in-out ${
+          <div className={`transition-[opacity,max-height] duration-300 ease-in-out ${
             isExperienceExpanded ? 'opacity-100 max-h-full' : 'opacity-0 max-h-0 overflow-hidden'
           }`}>
             {isExperienceExpanded && (
@@ -1744,7 +1746,7 @@ export default function Portfolio() {
               ).map((item, index) => (
                 <div key={item.id} className="relative">
                   <Card
-                    className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-80 relative transform ${
+                    className={`bg-white hover:shadow-xl transition-shadow duration-300 border-l-4 border-l-blue-500 h-80 relative transform ${
                       hasMounted && visibleSections.has("experience") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}
                     style={{
@@ -1827,7 +1829,7 @@ export default function Portfolio() {
             {projectData.map((project, index) => (
               <div key={project.id}>
                 <Card
-                  className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 border-l-4 border-l-blue-500 h-72 relative transform ${
+                  className={`bg-white hover:shadow-xl transition-shadow duration-300 border-l-4 border-l-blue-500 h-72 relative transform ${
                     hasMounted && visibleSections.has("experience") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                   }`}
                   style={{
@@ -4130,7 +4132,7 @@ export default function Portfolio() {
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-2xl mx-auto px-4">
             <Card
-              className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 cursor-pointer transform ${
+              className={`bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer transform ${
                 hasMounted && visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{
@@ -4156,7 +4158,7 @@ export default function Portfolio() {
             </Card>
 
             <Card
-              className={`bg-white hover:shadow-xl transition-all duration-500 hover:scale-105 cursor-pointer transform ${
+              className={`bg-white hover:shadow-xl transition-shadow duration-300 cursor-pointer transform ${
                 hasMounted && visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
               }`}
               style={{

@@ -220,10 +220,10 @@ body {
 /* 회고록 무한 슬라이드 애니메이션 */
 @keyframes infinite-scroll {
     0% {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
     }
 }
 
@@ -232,15 +232,17 @@ body {
     overflow-x: clip;
     width: 100%;
     padding: 8px 0 16px 0;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    contain: layout style;
 }
 
 .infinite-scroll-track {
     display: flex;
     gap: 1.5rem;
-    animation: infinite-scroll 20s linear infinite;
+    animation: infinite-scroll 30s linear infinite;
     width: fit-content;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
 }
 
 .infinite-scroll-track:hover {
