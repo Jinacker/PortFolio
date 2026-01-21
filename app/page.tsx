@@ -3653,7 +3653,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2025.04 ~ 현재 (운영 중) / 일주일 만에 MVP 완성 후 지속적 업데이트 중!</p>
+                  <p className="text-base font-semibold text-gray-900">2025.11 ~ 현재 (운영 중) / 일주일 만에 MVP 완성 후 지속적 업데이트 중!</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">팀 구성</p>
