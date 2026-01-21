@@ -570,28 +570,22 @@ export default function Portfolio() {
 
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null);
   const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
-  const [isIssueOneModalOpen, setIsIssueOneModalOpen] = useState(false);
-  const [isShympyoModalOpen, setIsShympyoModalOpen] = useState(false);
-  const [isMakerFaireModalOpen, setIsMakerFaireModalOpen] = useState(false);
-  const [isKatsuMapModalOpen, setIsKatsuMapModalOpen] = useState(false);
-  const [isKatsuMapBackendModalOpen, setIsKatsuMapBackendModalOpen] = useState(false);
-  const [isFamiLogModalOpen, setIsFamiLogModalOpen] = useState(false);
-  const [isSmartWMSModalOpen, setIsSmartWMSModalOpen] = useState(false);
-  const [isGeonneoGeonneoModalOpen, setIsGeonneoGeonneoModalOpen] = useState(false);
-  const [isTradModalOpen, setIsTradModalOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<string | null>(null);
 
   // 이미지 프리로드 후 모달 열기 함수
-  const openModalWithImagePreload = (imageSrc: string, setModalOpen: (value: boolean) => void) => {
+  const openModalWithImagePreload = (imageSrc: string, modalName: string) => {
     const img = new Image();
     img.src = imageSrc;
     img.onload = () => {
-      setModalOpen(true);
+      setActiveModal(modalName);
     };
     // 이미지가 이미 캐시되어 있는 경우 즉시 실행
     if (img.complete) {
-      setModalOpen(true);
+      setActiveModal(modalName);
     }
   };
+
+  const closeModal = () => setActiveModal(null);
 
   useEffect(() => {
     // 브라우저의 자동 스크롤 복원 비활성화
@@ -1264,7 +1258,7 @@ export default function Portfolio() {
                       {/* ISSUE ONE 프로젝트 자세히 보기 버튼 */}
                       {item.id === 2 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/Issue_one_detail.png', setIsIssueOneModalOpen)}
+                          onClick={() => openModalWithImagePreload('/projects/Issue_one_detail.png', 'issueOne')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1273,7 +1267,7 @@ export default function Portfolio() {
                       {/* 무더위 쉼터: 쉼표 프로젝트 자세히 보기 버튼 */}
                       {item.id === 3 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/shympyo_detail.png', setIsShympyoModalOpen)}
+                          onClick={() => openModalWithImagePreload('/projects/shympyo_detail.png', 'shympyo')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1282,7 +1276,7 @@ export default function Portfolio() {
                       {/* 메이커페어 2025: 부스 페이지 자세히 보기 버튼 */}
                       {item.id === 4 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/makerFaire_detail.png', setIsMakerFaireModalOpen)}
+                          onClick={() => openModalWithImagePreload('/projects/makerFaire_detail.png', 'makerFaire')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1291,7 +1285,7 @@ export default function Portfolio() {
                       {/* 돈가스 지도 프로젝트 자세히 보기 버튼 */}
                       {item.id === 5 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/KatsuMap_detail.png', setIsKatsuMapModalOpen)}
+                          onClick={() => openModalWithImagePreload('/projects/KatsuMap_detail.png', 'katsuMap')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1467,7 +1461,7 @@ export default function Portfolio() {
                       {/* FamiLog 자세히 보기 버튼 */}
                       {item.id === 2 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/FamiLog_detail.png', setIsFamiLogModalOpen)}
+                          onClick={() => openModalWithImagePreload('/projects/FamiLog_detail.png', 'famiLog')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1476,7 +1470,7 @@ export default function Portfolio() {
                       {/* SmartWMS 자세히 보기 버튼 */}
                       {item.id === 3 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/SmartWMS_detail.png', setIsSmartWMSModalOpen)}
+                          onClick={() => openModalWithImagePreload('/projects/SmartWMS_detail.png', 'smartWMS')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1485,7 +1479,7 @@ export default function Portfolio() {
                       {/* 건너건너 자세히 보기 버튼 */}
                       {item.id === 4 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/GNGN_detail.png', setIsGeonneoGeonneoModalOpen)}
+                          onClick={() => openModalWithImagePreload('/projects/GNGN_detail.png', 'geonneoGeonnoe')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1494,7 +1488,7 @@ export default function Portfolio() {
                       {/* 돈가스 지도 자세히 보기 버튼 */}
                       {item.id === 6 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/KatsuMap_detail.png', setIsKatsuMapBackendModalOpen)}
+                          onClick={() => openModalWithImagePreload('/projects/KatsuMap_detail.png', 'katsuMapBackend')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1503,7 +1497,7 @@ export default function Portfolio() {
                       {/* 외주 작업 자세히 보기 버튼 */}
                       {item.id === 7 && (
                         <button
-                          onClick={() => setIsTradModalOpen(true)}
+                          onClick={() => setActiveModal('trad')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1897,10 +1891,10 @@ export default function Portfolio() {
       </section>
 
       {/* ISSUE ONE Modal */}
-      {isIssueOneModalOpen && (
+      {activeModal === 'issueOne' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsIssueOneModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -1908,7 +1902,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsIssueOneModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
@@ -2131,10 +2125,10 @@ export default function Portfolio() {
       )}
 
       {/* ShymPyo Modal */}
-      {isShympyoModalOpen && (
+      {activeModal === 'shympyo' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsShympyoModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -2142,7 +2136,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsShympyoModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
@@ -2373,10 +2367,10 @@ export default function Portfolio() {
       )}
 
       {/* MakerFaire Modal */}
-      {isMakerFaireModalOpen && (
+      {activeModal === 'makerFaire' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsMakerFaireModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -2384,7 +2378,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsMakerFaireModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
@@ -2577,10 +2571,10 @@ export default function Portfolio() {
       )}
 
       {/* KatsuMap Modal */}
-      {isKatsuMapModalOpen && (
+      {activeModal === 'katsuMap' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsKatsuMapModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -2588,7 +2582,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsKatsuMapModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
@@ -2886,10 +2880,10 @@ export default function Portfolio() {
       )}
 
       {/* FamiLog Modal */}
-      {isFamiLogModalOpen && (
+      {activeModal === 'famiLog' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsFamiLogModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -2897,7 +2891,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsFamiLogModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
@@ -3148,10 +3142,10 @@ export default function Portfolio() {
       )}
 
       {/* SmartWMS Modal */}
-      {isSmartWMSModalOpen && (
+      {activeModal === 'smartWMS' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsSmartWMSModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -3159,7 +3153,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsSmartWMSModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
@@ -3417,10 +3411,10 @@ export default function Portfolio() {
       )}
 
       {/* GeonneoGeonneo Modal */}
-      {isGeonneoGeonneoModalOpen && (
+      {activeModal === 'geonneoGeonnoe' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsGeonneoGeonneoModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -3428,7 +3422,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsGeonneoGeonneoModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
@@ -3624,10 +3618,10 @@ export default function Portfolio() {
       )}
 
       {/* KatsuMap Backend Modal */}
-      {isKatsuMapBackendModalOpen && (
+      {activeModal === 'katsuMapBackend' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsKatsuMapBackendModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -3635,7 +3629,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsKatsuMapBackendModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
@@ -4043,10 +4037,10 @@ export default function Portfolio() {
       )}
 
       {/* Trad (외주 작업) Modal */}
-      {isTradModalOpen && (
+      {activeModal === 'trad' && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setIsTradModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
@@ -4054,7 +4048,7 @@ export default function Portfolio() {
           >
             {/* Close button */}
             <button
-              onClick={() => setIsTradModalOpen(false)}
+              onClick={() => closeModal()}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6 text-gray-600" />
