@@ -4086,6 +4086,14 @@ export default function Portfolio() {
               <X className="w-6 h-6 text-gray-600" />
             </button>
 
+            {/* Project Image */}
+            <div className="w-full p-4 flex justify-center">
+              <img
+                src="/projects/tradlab_detail.png"
+                alt="외주 작업"
+                className="w-3/4 h-auto rounded-2xl"
+              />
+            </div>
 
             {/* Project Details */}
             <div className="p-8">
