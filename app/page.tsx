@@ -517,7 +517,7 @@ const aiTimelineData = [
     id: 1,
     title: "2024 데이터 크리에이터 캠프",
     period: "2024.09 ~ 2024.10",
-    description: "인공지능을 처음 접한 프로젝트로, 학습이 성립되기까지의 과정에서 전처리와 학습 전략의 중요성을 체감하며 흥미를 느끼게 된 경험이었습니다.",
+    description: "인공지능을 처음 접한 프로젝트로, 학습이 성립되기까지의 과정에서 전처리와 학습 전략의 중요성을 체감하며 인공지능에 흥미를 느끼게 된 경험이었습니다.",
   },
   {
     id: 2,
@@ -539,9 +539,9 @@ const aiTimelineData = [
   },
   {
     id: 5,
-    title: "현재 관심사",
-    period: "2026 ~",
-    description: "인공지능 모델 개발에 대한 호기심으로 복수전공을 시작했으나, 학습 과정에서 AI 기술의 실질적 활용에 더 큰 매력을 느꼈습니다. 현재는 AI를 적재적소에 도입해 서비스 가치를 높이고 개발 생산성을 극대화하는 방법에 깊은 관심을 두고 있습니다.",
+    title: "현재 최대 관심사 = AI 활용 !!",
+    period: "2025 ~",
+    description: "AI를 적재적소에 도입해 서비스 가치를 높이고 개발 생산성을 극대화하는 방법에 관심이 많습니다.",
   },
 ]
 
@@ -1686,6 +1686,15 @@ export default function Portfolio() {
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-orange-600 border border-orange-500 rounded-lg hover:bg-orange-50 transition-colors"
                         >
                           프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 현재 관심사 자세히 보기 버튼 */}
+                      {item.id === 5 && (
+                        <button
+                          onClick={() => setActiveModal('aiInterest')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-orange-600 border border-orange-500 rounded-lg hover:bg-orange-50 transition-colors shadow-[0_0_10px_rgba(249,115,22,0.5)]"
+                        >
+                          AI 이렇게 활용해요!
                         </button>
                       )}
                     </div>
@@ -4277,7 +4286,8 @@ export default function Portfolio() {
             {/* Project Details */}
             <div className="p-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">🧩 어셈블 (ASSEMBLE)</h2>
-              <p className="text-lg text-gray-600 mb-6">패션 스타일 이미지 분류 및 선호 예측 AI 프로젝트<br /><span className="text-sm">팀 프로젝트 · Computer Vision / Recommendation</span></p>
+              <p className="text-lg text-gray-600 mb-1">패션 스타일 이미지 분류 및 선호 예측 AI 프로젝트</p>
+              <p className="text-sm text-gray-500 mb-6">팀 프로젝트 · Computer Vision / Recommendation</p>
 
               {/* 기본 정보 */}
               <div className="mb-12">
@@ -4287,11 +4297,12 @@ export default function Portfolio() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">팀 구성</p>
-                  <p className="text-base font-semibold text-gray-900">4인 팀 프로젝트<br /><span className="text-sm text-gray-600">※ 본인 담당: 이미지 전처리, CNN 모델 학습, 추천 파트 디버깅</span></p>
+                  <p className="text-base font-semibold text-gray-900">4인 팀 프로젝트</p>
+                  <p className="text-sm text-gray-600 mt-1">※ 본인 담당: 이미지 전처리 파이프라인 설계, CNN 모델 학습 및 성능 개선, 추천 파트 디버깅 및 분석</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
-                  <p className="text-sm text-gray-700">패션 이미지 데이터를 기반으로<br />① 성별·스타일 이미지 분류(CNN),<br />② 설문 기반 스타일 선호 데이터 분석,<br />③ ResNet feature를 활용한 item-based 추천 시스템까지 단계적으로 구현한 종합 AI 프로젝트</p>
+                  <p className="text-sm text-gray-700">패션 이미지 데이터를 기반으로<br />① 성별·스타일 이미지 분류(CNN),<br />② 설문 기반 스타일 선호 데이터 분석,<br />③ ResNet feature를 활용한 item-based 추천 시스템까지<br />데이터 → 모델 → 추천 전 과정을 단계적으로 구현한 종합 AI 프로젝트</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-sm text-gray-500 mb-1">블로그 링크</p>
@@ -4304,6 +4315,18 @@ export default function Portfolio() {
                     프로젝트 회고록 보기
                     <ExternalLink className="w-4 h-4" />
                   </a>
+                </div>
+              </div>
+
+              {/* 문제 정의와 접근 흐름 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🎯 문제 정의와 접근 흐름</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    이 프로젝트는 단순 분류 모델 구현이 아니라, <strong>"라벨/데이터가 애초에 깔끔하지 않은 상황에서 성능을 끌어올리는 실전형 문제"</strong>였습니다.
+
+                    특히 ResNet-18을 pretrained 없이 무작위 초기화로 학습해야 했고, 데이터도 학습 4,070장 / 검증 951장, 클래스는 <strong>31개(성별×스타일 조합)</strong>로 클래스당 150장도 안 되는 수준이라 "모델을 바꾸는 것"보다 <strong>"데이터를 제대로 만들기"</strong>가 더 중요했습니다.
+                  </p>
                 </div>
               </div>
 
@@ -4328,11 +4351,11 @@ export default function Portfolio() {
                 <ul className="space-y-2">
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">패션 이미지 전처리 파이프라인 설계 및 개선</p>
+                    <p className="text-sm text-gray-700">패션 이미지 전처리 파이프라인 설계 및 품질 개선</p>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">ResNet-18 이미지 분류 모델 학습 및 성능 개선</p>
+                    <p className="text-sm text-gray-700">ResNet-18 기반 이미지 분류 모델 학습 및 성능 분석</p>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -4340,7 +4363,7 @@ export default function Portfolio() {
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">추천 시스템 파트 코드 디버깅 및 성능 분석</p>
+                    <p className="text-sm text-gray-700">추천 시스템 파트 코드 디버깅 및 정확도 개선</p>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -4353,40 +4376,73 @@ export default function Portfolio() {
               <div className="mb-12">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
 
+                {/* Mission 1 */}
                 <div className="mb-6">
-                  <h4 className="text-base font-bold text-gray-800 mb-3">Mission 1. 패션 스타일 이미지 분류</h4>
-                  <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <h4 className="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
+                    <span className="bg-orange-100 text-orange-600 px-2 py-0.5 rounded text-xs">Mission 1</span>
+                    패션 스타일 이미지 분류
+                  </h4>
+                  <div className="bg-gray-50 rounded-lg p-4 space-y-4">
                     <div>
-                      <p className="text-sm font-semibold text-gray-700">▸ 파일명 기반 데이터 구조 설계</p>
-                      <p className="text-xs text-gray-600 ml-3">파일명 파싱을 통해 성별 & 스타일 통계 자동 집계</p>
+                      <p className="text-sm font-semibold text-gray-700 mb-1">▸ 파일명 기반 데이터 구조 설계</p>
+                      <p className="text-xs text-gray-600 ml-3">{'{W/T}_{이미지ID}_{시대}_{스타일}_{성별}.jpg'} 규칙을 파싱해 성별·스타일 라벨 자동 생성</p>
+                      <p className="text-xs text-gray-600 ml-3">이미지 ID 기준으로 통계 집계하여 데이터 분포 파악</p>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-gray-700">▸ ResNet-18 기반 이미지 분류</p>
-                      <p className="text-xs text-gray-600 ml-3">Pretrained 없이 Random Initialization으로 학습, 총 31개 클래스 분류</p>
+                      <p className="text-sm font-semibold text-gray-700 mb-1">▸ ResNet-18 기반 이미지 분류</p>
+                      <p className="text-xs text-gray-600 ml-3">Pretrained 모델을 사용하지 않고 Random Initialization 상태에서 학습</p>
+                      <p className="text-xs text-gray-600 ml-3">총 31개 클래스(성별 × 스타일 조합) 분류</p>
+                      <p className="text-xs text-gray-600 ml-3">데이터 규모 대비 높은 난이도의 분류 문제 설정</p>
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-gray-700">▸ 전처리 전략 개선 (핵심 기여)</p>
-                      <p className="text-xs text-gray-600 ml-3">DeepLabV3 + ResNet50 기반 인물 세그멘테이션</p>
-                      <p className="text-xs text-orange-600 ml-3 font-semibold">➡ Validation Accuracy: 약 50% → 64% 향상</p>
+                      <p className="text-sm font-semibold text-gray-700 mb-1">▸ 전처리 전략 개선 <span className="text-orange-600">(핵심 기여)</span></p>
+                      <p className="text-xs text-gray-600 ml-3">단순 리사이즈 기반 학습에서 성능 한계를 확인</p>
+                      <p className="text-xs text-gray-600 ml-3">DeepLabV3 + ResNet50 백본을 활용한 인물 세그멘테이션 적용</p>
+                      <p className="text-xs text-gray-600 ml-3">배경 제거 후 인물 중심 이미지로 재구성</p>
+                      <p className="text-xs text-gray-600 ml-3">OpenCV(BGR) ↔ PIL(RGB) 색상 채널 불일치 문제를 직접 디버깅</p>
+                      <p className="text-xs text-gray-600 ml-3">바운딩박스/리사이즈 순서 문제 해결로 데이터 손실 최소화</p>
+                      <p className="text-sm text-orange-600 font-semibold mt-2">➡ Validation Accuracy 약 50% → 64%까지 향상</p>
                     </div>
                   </div>
                 </div>
 
+                {/* Mission 2 */}
                 <div className="mb-6">
-                  <h4 className="text-base font-bold text-gray-800 mb-3">Mission 2. 패션 스타일 선호 데이터 분석</h4>
-                  <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-                    <p className="text-xs text-gray-600">유효 라벨 데이터 필터링 및 사용자별 스타일 선호 테이블 구성</p>
+                  <h4 className="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
+                    <span className="bg-orange-100 text-orange-600 px-2 py-0.5 rounded text-xs">Mission 2</span>
+                    패션 스타일 선호 데이터 분석
+                  </h4>
+                  <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                    <p className="text-xs text-gray-600">설문 JSON 데이터 중 실제 이미지와 매칭 가능한 데이터만 필터링</p>
+                    <p className="text-xs text-gray-600">사용자별 스타일 선호 여부(Q5 응답 기반)를 정규화</p>
+                    <p className="text-xs text-gray-600">100명 사용자 × 스타일 선호 테이블(DataFrame) 구성</p>
+                    <p className="text-xs text-gray-600">이미지 기반 모델 결과와 결합 가능한 형태로 데이터 구조 정리</p>
                   </div>
                 </div>
 
+                {/* Mission 3 */}
                 <div className="mb-6">
-                  <h4 className="text-base font-bold text-gray-800 mb-3">Mission 3. 패션 스타일 선호 예측 (추천 시스템)</h4>
-                  <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <h4 className="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
+                    <span className="bg-orange-100 text-orange-600 px-2 py-0.5 rounded text-xs">Mission 3</span>
+                    패션 스타일 선호 예측
+                  </h4>
+                  <div className="bg-gray-50 rounded-lg p-4 space-y-4">
                     <div>
-                      <p className="text-sm font-semibold text-gray-700">▸ Item-based Collaborative Filtering 구현</p>
-                      <p className="text-xs text-gray-600 ml-3">ResNet-18 중간 layer feature(512D) 추출, Cosine Similarity + Euclidean Distance 결합</p>
+                      <p className="text-sm font-semibold text-gray-700 mb-1">▸ Item-based Collaborative Filtering 구현</p>
+                      <p className="text-xs text-gray-600 ml-3">User-based 방식 대신 아이템 간 유사도 중심 추천 구조 채택</p>
+                      <p className="text-xs text-gray-600 ml-3">ResNet-18 중간 레이어에서 512차원 feature vector 추출</p>
+                      <p className="text-xs text-gray-600 ml-3">이미지 간 유사도를 기준으로 선호 여부 예측</p>
                     </div>
-                    <p className="text-xs text-orange-600 font-semibold">➡ 최종 Prediction Accuracy: 약 67.9% (최대 ~78% 실험)</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-700 mb-1">▸ Similarity 설계 및 디버깅</p>
+                      <p className="text-xs text-gray-600 ml-3">Cosine Similarity + Euclidean Distance 결합</p>
+                      <p className="text-xs text-gray-600 ml-3">정확도 100%로 잘못 계산되던 오류를 추적</p>
+                      <p className="text-xs text-gray-600 ml-3">엑셀(xlsx) 데이터 로딩 오류로 모든 예측값이 0이 되던 문제 발견</p>
+                      <p className="text-xs text-gray-600 ml-3">데이터 로딩 및 검증 로직 수정</p>
+                      <p className="text-xs text-gray-600 ml-3">OOM 방지를 위한 배치 단위 similarity 계산 적용</p>
+                      <p className="text-xs text-gray-600 ml-3">threshold, 가중치(alpha) 튜닝을 통한 성능 최적화</p>
+                    </div>
+                    <p className="text-sm text-orange-600 font-semibold">➡ 최종 Prediction Accuracy 약 67.9% (최대 ~78% 실험 결과 확인)</p>
                   </div>
                 </div>
               </div>
@@ -4397,15 +4453,19 @@ export default function Portfolio() {
                 <ul className="space-y-2">
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">데이터가 적을수록 전처리 품질이 모델 성능을 좌우함을 체감</p>
+                    <p className="text-sm text-gray-700">데이터가 적을수록 전처리 품질이 모델 성능을 결정한다는 점을 실험으로 체감</p>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">CNN 학습에서 배경 제거의 중요성</p>
+                    <p className="text-sm text-gray-700">CNN 학습에서 배경 제거가 단순 보조 작업이 아니라 핵심 성능 요인임을 이해</p>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">"더 오래 학습 ≠ 더 좋은 모델"이라는 경험적 학습</p>
+                    <p className="text-sm text-gray-700">"더 오래 학습한다고 더 좋은 모델이 되는 것은 아니다"라는 점을 과적합 실험을 통해 직접 확인</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">추천 시스템에서 모델보다 데이터 구조와 유사도 정의가 더 중요할 수 있음을 학습</p>
                   </li>
                 </ul>
               </div>
@@ -4414,9 +4474,9 @@ export default function Portfolio() {
               <div className="bg-orange-50 border border-orange-200 rounded-lg p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-3">📝 프로젝트 후기</h3>
                 <p className="text-sm text-gray-700 leading-relaxed">
-                  적은 데이터와 불균형한 분포 속에서 전처리·학습 전략·디버깅이 모델 성능을 얼마나 크게 바꿀 수 있는지를 직접 경험한 프로젝트였습니다.
+                  적은 데이터와 불균형한 분포, 그리고 pretrained 없이 시작하는 모델 조건 속에서 <strong>전처리·학습 전략·디버깅이 모델 성능을 얼마나 크게 바꿀 수 있는지</strong>를 직접 경험한 프로젝트였습니다.
                   <br /><br />
-                  특히 아무것도 학습되지 않은 상태의 ResNet-18 모델을 데이터 품질 개선만으로 점진적으로 "학습되게 만드는 과정"은 AI 모델이 결코 블랙박스가 아니라, <strong>사람의 선택과 설계에 크게 의존한다</strong>는 점을 체감하게 해주었습니다.
+                  특히 아무것도 학습되지 않은 상태의 ResNet-18 모델이 데이터 품질 개선만으로 점진적으로 "학습되기 시작하는 과정"을 지켜보며, AI 모델이 결코 블랙박스가 아니라 <strong>사람의 선택과 설계에 크게 의존하는 시스템</strong>이라는 점을 체감할 수 있었습니다.
                 </p>
               </div>
 
@@ -4686,6 +4746,183 @@ export default function Portfolio() {
                   <br /><br />
                   특히 이 과제는 인공지능을 단순히 "학습시키는 대상"이 아니라, <strong>서비스 맥락에 맞게 조정하고 활용하는 기술</strong>로 바라보게 만든 계기가 되었으며, 이후 인공지능을 서비스에 접목하는 방향에 지속적인 관심을 갖게 되었습니다.
                 </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* AI Interest Modal */}
+      {activeModal === 'aiInterest' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🤖 저는 AI를 이렇게 활용하고 있어요!</h2>
+              <p className="text-sm text-gray-500 mb-8">현재 관심을 두고 실천하고 있는 AI 활용 전략</p>
+
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-5 mb-10">
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  인공지능 모델 개발에 대한 호기심으로 복수전공을 시작했으나, 학습 과정에서 <strong>AI 기술의 실질적 활용</strong>에 더 큰 매력을 느꼈습니다.
+                  <br /><br />
+                  현재는 AI를 적재적소에 도입해 <strong>서비스 가치를 높이고 개발 생산성을 극대화</strong>하는 방법에 깊은 관심을 두고 있습니다!
+                  <br /><br />
+                  특히 1인 개발로 앱을 런칭했을때 AI를 활용해 생산성을 극대화해 <strong>기획부터 출시까지 일주일만에 완성</strong>한 경험이 있습니다.
+                </p>
+              </div>
+
+              {/* 1. 개발 문서화 */}
+              <div className="mb-10">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-sm font-bold">1</span>
+                  개발 문서화를 통한 AI 협업 최적화
+                </h3>
+                <div className="bg-gray-50 rounded-lg p-5 space-y-3">
+                  <p className="text-sm text-gray-700">기능 단위로 개발 내역을 <strong>Markdown 문서로 지속 기록</strong></p>
+                  <p className="text-sm text-gray-700">단순 결과물이 아니라 <strong>기획 의도 / 선택한 구조 / 트레이드오프 / TODO</strong> 까지 함께 정리</p>
+                  <p className="text-sm text-gray-700">Claude, Gemini 등 LLM이 장기 맥락을 잘 기억하지 못하는 한계를 인지하고,<br />내가 작성한 문서를 컨텍스트로 제공해 작업을 끊김 없이 이어가도록 활용</p>
+                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mt-3">
+                    <p className="text-sm text-gray-700">→ "AI에게 다시 설명하는 시간"을 줄이고</p>
+                    <p className="text-sm text-gray-700">→ "이어서 바로 구현/리팩토링/검토"가 가능한 상태를 유지</p>
+                    <p className="text-sm text-orange-700 font-medium mt-2">👉 AI를 내가 만든 기록을 읽고 함께 일하는 파트너로 사용</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. PR 단위 코드 리뷰 */}
+              <div className="mb-10">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-sm font-bold">2</span>
+                  PR 단위 코드 리뷰 자동화 (CodeRabbit AI)
+                </h3>
+                <div className="bg-gray-50 rounded-lg p-5 space-y-3">
+                  <p className="text-sm text-gray-700">GitHub PR 생성 시 <strong>CodeRabbit AI</strong>를 활용한 자동 코드 리뷰 도입</p>
+                  <div className="bg-white border border-gray-200 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-2">단순 스타일 체크가 아니라:</p>
+                    <ul className="space-y-1">
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">로직 흐름 이상 여부</p>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">중복 코드 / 개선 가능한 구조</p>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">네이밍, 책임 분리, 가독성</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-2">사람 리뷰 전에 1차 필터로 사용하여:</p>
+                    <p className="text-sm text-gray-700">✓ 리뷰 품질 상향 · 리뷰 대기 시간 단축 · 셀프 리뷰 비용 감소</p>
+                    <p className="text-sm text-green-700 font-medium mt-2">특히 1인 개발 / 소규모 팀 환경에서 효과가 큼</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. 테스트 자동화 */}
+              <div className="mb-10">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-sm font-bold">3</span>
+                  테스트 자동화 + AI 보조 학습
+                </h3>
+                <div className="bg-gray-50 rounded-lg p-5 space-y-3">
+                  <p className="text-sm text-gray-700"><strong>Jest + Supertest</strong> 기반으로 API 테스트 환경 구성</p>
+                  <div className="bg-white border border-gray-200 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-2">단위 테스트 / 통합 테스트 예제를 학습할 때:</p>
+                    <ul className="space-y-1">
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">공식 문서 + 블로그 글 + 실습 코드</p>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">AI에게 "이 테스트가 왜 필요한지", "이 패턴의 의도"를 질문하며 이해</p>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">TDD 관련 영상/자료를 참고하고, AI를 통해 현재 코드에 맞는 테스트 시나리오로 변환</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-2">결과적으로:</p>
+                    <p className="text-sm text-gray-700">✓ 테스트 작성 진입장벽 감소 · 기능 추가 시 회귀 버그에 대한 불안 감소 · 리팩토링 속도 향상</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. 1인 개발 환경 */}
+              <div className="mb-10">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-sm font-bold">4</span>
+                  1인 개발 환경에서의 AI 활용 (돈가스 지도 앱 사례)
+                </h3>
+                <div className="bg-gray-50 rounded-lg p-5 space-y-3">
+                  <p className="text-sm text-gray-700"><strong>기획 → 디자인 → FE → BE → 배포 → 운영</strong>까지 혼자 진행</p>
+                  <div className="bg-white border border-gray-200 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-2">AI를 다음 역할로 활용:</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <p className="text-sm text-gray-700">• <strong>기획 정리자</strong> (아이디어 구조화, 기능 분해)</p>
+                      <p className="text-sm text-gray-700">• <strong>설계 검토자</strong> (DB 스키마, API 설계 검증)</p>
+                      <p className="text-sm text-gray-700">• <strong>구현 보조자</strong> (NestJS / Prisma / RN 코드 스캐폴딩)</p>
+                      <p className="text-sm text-gray-700">• <strong>운영 컨설턴트</strong> (보안, Rate Limit, 캐싱, 로깅 전략)</p>
+                    </div>
+                  </div>
+                  <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                    <p className="text-sm text-gray-700">특히 서버 안정성 리포트, 배포 전 체크리스트를 AI와 함께 작성하여</p>
+                    <p className="text-sm text-purple-700 font-medium mt-1">"돌아가는 코드"가 아니라 "실제로 운영 가능한 서비스" 수준으로 끌어올림</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 5. 에러 추적 */}
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center text-orange-600 text-sm font-bold">5</span>
+                  에러 추적·운영 단계에서의 AI 활용
+                </h3>
+                <div className="bg-gray-50 rounded-lg p-5 space-y-3">
+                  <p className="text-sm text-gray-700"><strong>Sentry</strong>를 통한 실제 사용자 환경 에러 수집</p>
+                  <div className="bg-white border border-gray-200 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-2">수집된 에러 로그와 상황을 AI에 전달하여:</p>
+                    <ul className="space-y-1">
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">원인 추정</p>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">재현 시나리오 도출</p>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                        <p className="text-sm text-gray-700">수정 방향 정리</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <p className="text-sm text-gray-700">덕분에 단순 크래시 대응이 아니라</p>
+                    <p className="text-sm text-orange-700 font-medium">왜 이런 문제가 생겼는지 구조적으로 이해하며 개선</p>
+                  </div>
+                </div>
               </div>
 
             </div>
