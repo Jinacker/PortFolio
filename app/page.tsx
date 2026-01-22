@@ -481,6 +481,12 @@ const backendTimelineData = [
     period: "2025년 12월 ~",
     description: "처음으로 받은 외주 작업입니다. 대규모 동시 접속이 발생하는 티켓팅 서비스를 가정한 아키텍처를 구상하고 있습니다.",
   },
+  {
+    id: 8,
+    title: "알바로그",
+    period: "2026년 1월 ~",
+    description: "UMC 프로젝트로 현재 개발 중이며, CodeRabbit을 통해 PR 단위의 코드 리뷰 자동화를 실험·적용하고 있습니다.",
+  },
 ]
 
 // 공간정보 타임라인 데이터
@@ -1449,6 +1455,23 @@ export default function Portfolio() {
                             />
                           </div>
                         </div>
+                      ) : item.id === 8 ? (
+                        <div className="flex justify-between items-start mb-3">
+                          <div className="flex-1 pr-3">
+                            <h4 className="text-sm font-bold text-green-600 mb-1">
+                              {item.title}
+                            </h4>
+                            <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                            <p className="text-xs text-gray-700">{item.description}</p>
+                          </div>
+                          <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-gray-100 flex items-center justify-center border border-gray-300">
+                            <img
+                              src="/projects/albaLog.png"
+                              alt="알바로그"
+                              className="w-full h-full object-cover scale-145"
+                            />
+                          </div>
+                        </div>
                       ) : (
                         <>
                           <h4 className="text-sm font-bold text-green-600 mb-1">
@@ -1498,6 +1521,15 @@ export default function Portfolio() {
                       {item.id === 7 && (
                         <button
                           onClick={() => setActiveModal('trad')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 알바로그 자세히 보기 버튼 */}
+                      {item.id === 8 && (
+                        <button
+                          onClick={() => setActiveModal('albaLog')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -4106,6 +4138,72 @@ export default function Portfolio() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 알바로그 Modal */}
+      {activeModal === 'albaLog' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Image */}
+            <div className="w-full p-4 flex justify-center">
+              <img
+                src="/projects/albaLog.png"
+                alt="알바로그"
+                className="w-48 h-48 object-cover rounded-2xl"
+              />
+            </div>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">알바로그</h2>
+              <p className="text-lg text-gray-600 mb-6">알바 통합 관리 플랫폼 (Backend)</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2026.01 ~ / 약 한달 예정</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">PM 1명 / Design 2명 / Frontend 4명 / <span className="text-blue-600 font-bold">Backend 5명</span></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">[ 🚀 UMC 9th DemoDay 프로젝트 ]<br></br>알바생과 매니저를 위한 통합 관리 플랫폼으로,<br />CodeRabbit을 통해 PR 단위의 코드 리뷰 자동화를 실험·적용하고 있습니다.</p>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Runtime:</strong> Node.js & Express</p>
+                  <p className="text-sm text-gray-700"><strong>Language:</strong> TypeScript</p>
+                  <p className="text-sm text-gray-700"><strong>API Docs:</strong> Tsoa & OpenAPI 3.0</p>
+                  <p className="text-sm text-gray-700"><strong>Database:</strong> MySQL</p>
+                  <p className="text-sm text-gray-700"><strong>Infra:</strong> Docker, NginX</p>
+                  <p className="text-sm text-gray-700"><strong>CI/CD:</strong> Github Actions</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
