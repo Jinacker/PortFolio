@@ -490,48 +490,60 @@ const backendTimelineData = [
 ]
 
 // 공간정보 타임라인 데이터
-// const gisTimelineData = [
-//   {
-//     id: 1,
-//     title: "공간정보공학과 입학",
-//     period: "2024년 3월",
-//     description: "인하대학교 공간정보공학과에 입학하며, GIS와 측량학의 기초를 학습하기 시작했습니다.",
-//   },
-//   {
-//     id: 2,
-//     title: "QGIS 실습",
-//     period: "2024년 1학기",
-//     description: "오픈소스 GIS 툴인 QGIS를 활용해 공간 데이터를 시각화하고 분석하는 방법을 학습했습니다.",
-//   },
-//   {
-//     id: 3,
-//     title: "측량학 실습",
-//     period: "2024년 2학기",
-//     description: "토탈스테이션과 GPS를 활용한 현장 측량 실습을 통해 공간 데이터 수집 과정을 경험했습니다.",
-//   },
-// ]
+const gisTimelineData = [
+  {
+    id: 1,
+    title: "공간정보공학과 입학",
+    period: "2024년 3월",
+    description: "인하대학교 공간정보공학과에 입학하며, GIS와 측량학의 기초를 학습하기 시작했습니다.",
+  },
+  {
+    id: 2,
+    title: "QGIS 실습",
+    period: "2024년 1학기",
+    description: "오픈소스 GIS 툴인 QGIS를 활용해 공간 데이터를 시각화하고 분석하는 방법을 학습했습니다.",
+  },
+  {
+    id: 3,
+    title: "측량학 실습",
+    period: "2024년 2학기",
+    description: "토탈스테이션과 GPS를 활용한 현장 측량 실습을 통해 공간 데이터 수집 과정을 경험했습니다.",
+  },
+]
 
 // 인공지능 타임라인 데이터
-// const aiTimelineData = [
-//   {
-//     id: 1,
-//     title: "인공지능공학과 복수전공",
-//     period: "2025년 3월",
-//     description: "인공지능공학과 복수전공을 시작하며, 머신러닝과 딥러닝의 기초를 학습하기 시작했습니다.",
-//   },
-//   {
-//     id: 2,
-//     title: "Python & 데이터 분석",
-//     period: "2025년 1학기",
-//     description: "Python을 활용한 데이터 전처리와 시각화, 기초 통계 분석을 학습했습니다.",
-//   },
-//   {
-//     id: 3,
-//     title: "딥러닝 기초",
-//     period: "2025년 2학기",
-//     description: "PyTorch를 활용해 CNN, RNN 등 딥러닝 모델의 구조와 학습 원리를 학습하고 있습니다.",
-//   },
-// ]
+const aiTimelineData = [
+  {
+    id: 1,
+    title: "2024 데이터 크리에이터 캠프",
+    period: "2024.09 ~ 2024.10",
+    description: "인공지능을 처음 접한 프로젝트로, 학습이 성립되기까지의 과정에서 전처리와 학습 전략의 중요성을 체감하며 흥미를 느끼게 된 경험이었습니다.",
+  },
+  {
+    id: 2,
+    title: "인공지능공학과 복수전공 시작",
+    period: "2025-1학기 ~",
+    description: "데이터 크리에이터 프로젝트를 계기로 인공지능에 대한 흥미가 생겨, 인공지능공학과 복수전공을 선택하게 되었습니다.",
+  },
+  {
+    id: 3,
+    title: "KT 대학생 IT 서포터즈 2기 부팀장",
+    period: "~ 2025.03",
+    description: "도서산간 중학생을 대상으로 AI 코딩 교육 봉사를 진행하며, 로봇을 활용한 게임형 커리큘럼과 블록 코딩 기반 모델 학습 과정을 직접 설계·운영했습니다.",
+  },
+  {
+    id: 4,
+    title: "LLaMA 3.2 Fine-tuning 프로젝트",
+    period: "2025.12",
+    description: "자연어처리 과목을 통해 배운 내용을 바탕으로, 서비스에 활용 가능한 인공지능에 관심을 갖고 진행한 프로젝트입니다.",
+  },
+  {
+    id: 5,
+    title: "현재 관심사",
+    period: "2026 ~",
+    description: "인공지능 모델 개발에 대한 호기심으로 복수전공을 시작했으나, 학습 과정에서 AI 기술의 실질적 활용에 더 큰 매력을 느꼈습니다. 현재는 AI를 적재적소에 도입해 서비스 가치를 높이고 개발 생산성을 극대화하는 방법에 깊은 관심을 두고 있습니다.",
+  },
+]
 
 // 섹션별 애니메이션을 위한 커스텀 훅
 const useScrollAnimation = () => {
@@ -1542,8 +1554,7 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* 공간정보/인공지능 타임라인 - 주석 처리 */}
-          {/*
+          {/* 공간정보/인공지능 타임라인 */}
           <div className="grid md:grid-cols-2 gap-12 mb-16 mt-16">
             <div>
               <h3 className="text-xl font-bold mb-4 mt-2 text-center">
@@ -1648,13 +1659,41 @@ export default function Portfolio() {
                       <h4 className="text-sm font-bold text-orange-600 mb-1">{item.title}</h4>
                       <p className="text-xs text-gray-500 mb-2">{item.period}</p>
                       <p className="text-xs text-gray-700">{item.description}</p>
+                      {/* 데이터 크리에이터 캠프 자세히 보기 버튼 */}
+                      {item.id === 1 && (
+                        <button
+                          onClick={() => setActiveModal('assemble')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-orange-600 border border-orange-500 rounded-lg hover:bg-orange-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* KT IT 서포터즈 자세히 보기 버튼 */}
+                      {item.id === 3 && (
+                        <a
+                          href="https://www.withdigital.co.kr/kit04_list.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-orange-600 border border-orange-500 rounded-lg hover:bg-orange-50 transition-colors block text-center"
+                        >
+                          자세히 보기
+                        </a>
+                      )}
+                      {/* NSMC LLaMA Fine-tuning 자세히 보기 버튼 */}
+                      {item.id === 4 && (
+                        <button
+                          onClick={() => setActiveModal('nsmc')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-orange-600 border border-orange-500 rounded-lg hover:bg-orange-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          */}
 
           {/* 성장 이야기 펼치기 버튼 */}
           <div className="text-center mt-16 mb-8">
@@ -4210,6 +4249,443 @@ export default function Portfolio() {
                   <p className="text-sm text-gray-700"><strong>Infra:</strong> Docker, NginX</p>
                   <p className="text-sm text-gray-700"><strong>CI/CD:</strong> Github Actions</p>
                 </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 어셈블 (ASSEMBLE) Modal */}
+      {activeModal === 'assemble' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🧩 어셈블 (ASSEMBLE)</h2>
+              <p className="text-lg text-gray-600 mb-6">패션 스타일 이미지 분류 및 선호 예측 AI 프로젝트<br /><span className="text-sm">팀 프로젝트 · Computer Vision / Recommendation</span></p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2024.09 ~ 2024.10 (데이터 크리에이터 캠프)</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">4인 팀 프로젝트<br /><span className="text-sm text-gray-600">※ 본인 담당: 이미지 전처리, CNN 모델 학습, 추천 파트 디버깅</span></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">패션 이미지 데이터를 기반으로<br />① 성별·스타일 이미지 분류(CNN),<br />② 설문 기반 스타일 선호 데이터 분석,<br />③ ResNet feature를 활용한 item-based 추천 시스템까지 단계적으로 구현한 종합 AI 프로젝트</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">블로그 링크</p>
+                  <a
+                    href="https://blog.naver.com/rlawls1448/223648547754"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    프로젝트 회고록 보기
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Language:</strong> Python</p>
+                  <p className="text-sm text-gray-700"><strong>Framework:</strong> PyTorch, torchvision</p>
+                  <p className="text-sm text-gray-700"><strong>Model:</strong> ResNet-18, DeepLabV3 (ResNet-50 backbone)</p>
+                  <p className="text-sm text-gray-700"><strong>CV:</strong> OpenCV, PIL</p>
+                  <p className="text-sm text-gray-700"><strong>Recommendation:</strong> Item-based Collaborative Filtering</p>
+                  <p className="text-sm text-gray-700"><strong>Similarity:</strong> Cosine Similarity, Euclidean Distance</p>
+                  <p className="text-sm text-gray-700"><strong>Data:</strong> Image Dataset (약 5,000장), Survey JSON / XLSX</p>
+                  <p className="text-sm text-gray-700"><strong>Environment:</strong> Jupyter Notebook</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">패션 이미지 전처리 파이프라인 설계 및 개선</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">ResNet-18 이미지 분류 모델 학습 및 성능 개선</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">세그멘테이션·객체 인식 기반 데이터 품질 개선</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">추천 시스템 파트 코드 디버깅 및 성능 분석</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실험 결과 분석 및 성능 변화 원인 정리</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 구현 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 구현 내용</h3>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-3">Mission 1. 패션 스타일 이미지 분류</h4>
+                  <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                    <div>
+                      <p className="text-sm font-semibold text-gray-700">▸ 파일명 기반 데이터 구조 설계</p>
+                      <p className="text-xs text-gray-600 ml-3">파일명 파싱을 통해 성별 & 스타일 통계 자동 집계</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-700">▸ ResNet-18 기반 이미지 분류</p>
+                      <p className="text-xs text-gray-600 ml-3">Pretrained 없이 Random Initialization으로 학습, 총 31개 클래스 분류</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-700">▸ 전처리 전략 개선 (핵심 기여)</p>
+                      <p className="text-xs text-gray-600 ml-3">DeepLabV3 + ResNet50 기반 인물 세그멘테이션</p>
+                      <p className="text-xs text-orange-600 ml-3 font-semibold">➡ Validation Accuracy: 약 50% → 64% 향상</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-3">Mission 2. 패션 스타일 선호 데이터 분석</h4>
+                  <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                    <p className="text-xs text-gray-600">유효 라벨 데이터 필터링 및 사용자별 스타일 선호 테이블 구성</p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-3">Mission 3. 패션 스타일 선호 예측 (추천 시스템)</h4>
+                  <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                    <div>
+                      <p className="text-sm font-semibold text-gray-700">▸ Item-based Collaborative Filtering 구현</p>
+                      <p className="text-xs text-gray-600 ml-3">ResNet-18 중간 layer feature(512D) 추출, Cosine Similarity + Euclidean Distance 결합</p>
+                    </div>
+                    <p className="text-xs text-orange-600 font-semibold">➡ 최종 Prediction Accuracy: 약 67.9% (최대 ~78% 실험)</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 기술적 고민 및 학습 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기술적 고민 및 학습</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">데이터가 적을수록 전처리 품질이 모델 성능을 좌우함을 체감</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">CNN 학습에서 배경 제거의 중요성</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">"더 오래 학습 ≠ 더 좋은 모델"이라는 경험적 학습</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">📝 프로젝트 후기</h3>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  적은 데이터와 불균형한 분포 속에서 전처리·학습 전략·디버깅이 모델 성능을 얼마나 크게 바꿀 수 있는지를 직접 경험한 프로젝트였습니다.
+                  <br /><br />
+                  특히 아무것도 학습되지 않은 상태의 ResNet-18 모델을 데이터 품질 개선만으로 점진적으로 "학습되게 만드는 과정"은 AI 모델이 결코 블랙박스가 아니라, <strong>사람의 선택과 설계에 크게 의존한다</strong>는 점을 체감하게 해주었습니다.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* NSMC LLaMA Fine-tuning Modal */}
+      {activeModal === 'nsmc' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Project Details */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🧠 NSMC 기반 한국어 감성 분석 모델 고도화</h2>
+              <p className="text-lg text-gray-600 mb-1">LLaMA 3.2 Fine-tuning · LoRA Rank 실험 · Few-shot Prompt · Reasoning SFT</p>
+              <p className="text-sm text-gray-500 mb-6">개인 프로젝트 · Natural Language Processing</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2025.12 / 약 한달</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">개인 프로젝트</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">NSMC(네이버 영화 리뷰) 데이터셋을 활용해 한국어 LLaMA 3.2 모델을 대상으로<br />Fine-tuning, LoRA Rank 조정, Few-shot Prompt, Reasoning 데이터셋 생성까지 단계적으로 실험하며<br />감성 분류 성능과 추론 품질의 변화를 정량적으로 분석한 프로젝트</p>
+                </div>
+              </div>
+
+              {/* 기술 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 기술 스택</h3>
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700"><strong>Model:</strong> Bllossom/llama-3.2-Korean-Bllossom-3B</p>
+                  <p className="text-sm text-gray-700"><strong>Framework:</strong> PyTorch, HuggingFace Transformers</p>
+                  <p className="text-sm text-gray-700"><strong>Fine-tuning:</strong> LoRA (PEFT), Unsloth</p>
+                  <p className="text-sm text-gray-700"><strong>Dataset:</strong> NSMC (Naver Sentiment Movie Corpus)</p>
+                  <p className="text-sm text-gray-700"><strong>Prompting:</strong> Zero-shot / Few-shot</p>
+                  <p className="text-sm text-gray-700"><strong>Reasoning Data:</strong> Gemini API 기반 자동 생성</p>
+                  <p className="text-sm text-gray-700"><strong>Evaluation:</strong> Accuracy, Skip rate</p>
+                  <p className="text-sm text-gray-700"><strong>Environment:</strong> Google Colab (T4)</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">NSMC 데이터 전처리 및 학습/평가 프롬프트 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">LLaMA 3.2 한국어 모델 Fine-tuning 파이프라인 구축</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">LoRA rank(r)·epoch 변화에 따른 성능 비교 실험</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">Few-shot Prompt 구성 전략 및 메모리 이슈 대응</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">Reasoning 데이터셋 생성 로직 설계 및 안정화</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-orange-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">생성 기반 모델의 평가 로직 개선 및 성능 분석</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 실험 구성 및 결과 */}
+              <div className="mb-10">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">✨ 실험 구성 및 결과</h3>
+
+                {/* 1️⃣ Baseline */}
+                <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm font-semibold text-gray-800">1️⃣ Baseline (Fine-tuning 없음)</p>
+                    <span className="text-xs font-bold text-red-600 bg-red-100 px-2 py-1 rounded">0.581</span>
+                  </div>
+                  <p className="text-xs text-gray-600 mb-2">조건: Zero-shot Prompt, 학습 없음 · 평가 데이터: NSMC test 1,000개</p>
+                  <p className="text-xs text-gray-500 italic">➡ 한국어 zero-shot 분류는 가능하나, 프롬프트 구조만으로는 실사용에 부족한 성능임을 확인</p>
+                </div>
+
+                {/* 2️⃣ LoRA r=4 */}
+                <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm font-semibold text-gray-800">2️⃣ LoRA Fine-tuning (r = 4)</p>
+                    <span className="text-xs font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">best 0.782</span>
+                  </div>
+                  <div className="bg-white rounded border border-gray-200 overflow-hidden mb-2">
+                    <table className="w-full text-xs">
+                      <thead className="bg-gray-100">
+                        <tr>
+                          <th className="px-3 py-2 text-left text-gray-600">설정</th>
+                          <th className="px-3 py-2 text-center text-gray-600">Accuracy</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-t"><td className="px-3 py-1.5 text-gray-600">r=4 / 1 epoch</td><td className="px-3 py-1.5 text-center">0.756</td></tr>
+                        <tr className="border-t bg-orange-50"><td className="px-3 py-1.5 text-gray-600">r=4 / 3 epoch</td><td className="px-3 py-1.5 text-center font-semibold">0.782</td></tr>
+                        <tr className="border-t"><td className="px-3 py-1.5 text-gray-600">r=4 / 5 epoch</td><td className="px-3 py-1.5 text-center">0.778</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-xs text-gray-500 italic">➡ 3 epoch 이후 성능 수렴 및 소폭 하락 · 프롬프트를 학습/평가 단계에서 동일하게 유지하는 것이 성능에 결정적</p>
+                </div>
+
+                {/* 3️⃣ LoRA r=2 */}
+                <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm font-semibold text-gray-800">3️⃣ LoRA Rank 변경 실험 (r = 2)</p>
+                    <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">best 0.800</span>
+                  </div>
+                  <div className="bg-white rounded border border-gray-200 overflow-hidden mb-2">
+                    <table className="w-full text-xs">
+                      <thead className="bg-gray-100">
+                        <tr>
+                          <th className="px-3 py-2 text-left text-gray-600">설정</th>
+                          <th className="px-3 py-2 text-center text-gray-600">Accuracy</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-t"><td className="px-3 py-1.5 text-gray-600">r=2 / 1 epoch</td><td className="px-3 py-1.5 text-center">0.727</td></tr>
+                        <tr className="border-t bg-green-50"><td className="px-3 py-1.5 text-gray-600">r=2 / 3 epoch</td><td className="px-3 py-1.5 text-center font-bold text-green-700">0.800 (최고)</td></tr>
+                        <tr className="border-t"><td className="px-3 py-1.5 text-gray-600">r=2 / 5 epoch</td><td className="px-3 py-1.5 text-center">0.792</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="text-xs text-gray-500 italic">➡ 낮은 rank에서도 충분한 학습 반복 시 더 높은 일반화 성능 달성 · 본 데이터 규모에서는 r=2, 3 epoch이 가장 효율적</p>
+                </div>
+
+                {/* 4️⃣ Few-shot */}
+                <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm font-semibold text-gray-800">4️⃣ Few-shot Prompt 실험</p>
+                    <span className="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded">0.735</span>
+                  </div>
+                  <div className="space-y-2 mb-2">
+                    <div className="bg-red-50 border border-red-100 rounded p-2">
+                      <p className="text-xs font-medium text-red-700">▸ 초기 결과</p>
+                      <p className="text-xs text-gray-600">문체가 NSMC와 맞지 않는 demonstration 사용 시 → Accuracy 0.56 ~ 0.57로 오히려 감소</p>
+                    </div>
+                    <div className="bg-green-50 border border-green-100 rounded p-2">
+                      <p className="text-xs font-medium text-green-700">▸ 개선 전략</p>
+                      <p className="text-xs text-gray-600">NSMC 특유의 구어체·짧은 리뷰 문체 반영 · 중립적 표현 제거, 감성 극단 예시 위주 구성</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 italic">➡ 2-shot (극단적 예시) → Accuracy 0.735 · demonstration 개수보다 예시의 명확성과 분포 적합성이 더 중요함을 확인</p>
+                </div>
+
+                {/* 5️⃣ Reasoning 데이터셋 */}
+                <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                  <p className="text-sm font-semibold text-gray-800 mb-2">5️⃣ Reasoning 데이터셋 생성</p>
+                  <div className="bg-white rounded border border-gray-200 p-3 mb-2">
+                    <p className="text-xs text-gray-700 mb-1"><strong>데이터 수:</strong> 1,000개 (리뷰–정답–근거)</p>
+                    <p className="text-xs text-gray-700 mb-1"><strong>생성 방식:</strong> NSMC 원본 라벨 고정 · Gemini API로 정답의 타당한 이유만 생성</p>
+                    <p className="text-xs text-gray-700"><strong>안정성:</strong> JSON 포맷 강제 + Retry 로직으로 배치 실패 없이 1,000개 전량 생성 성공</p>
+                  </div>
+                  <p className="text-xs text-gray-500 italic">➡ "문제–정답–근거" 구조의 고품질 reasoning 학습 데이터셋 구축</p>
+                </div>
+
+                {/* 6️⃣ Reasoning SFT */}
+                <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-sm font-semibold text-gray-800">6️⃣ Reasoning SFT 학습 및 평가</p>
+                    <span className="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded">0.761</span>
+                  </div>
+                  <p className="text-xs text-gray-600 mb-2">학습 설정: LoRA r=8, epoch=1 · 출력 형식: 첫 단어 = 긍정/부정 + 한 문장 근거</p>
+                  <div className="grid grid-cols-2 gap-2 mb-2">
+                    <div className="bg-red-50 border border-red-100 rounded p-2">
+                      <p className="text-xs font-medium text-red-700 mb-1">1차 평가</p>
+                      <p className="text-xs text-gray-600">Accuracy: 0.748</p>
+                      <p className="text-xs text-gray-600">Skip: 369 / 500 (출력 형식 불일치)</p>
+                    </div>
+                    <div className="bg-green-50 border border-green-100 rounded p-2">
+                      <p className="text-xs font-medium text-green-700 mb-1">개선 후 재평가</p>
+                      <p className="text-xs text-gray-600">Accuracy: <strong>0.7606</strong></p>
+                      <p className="text-xs text-gray-600">Evaluated: 497 / Skipped: 3</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 italic">➡ 분류 성능은 단순 LoRA 최고 성능(0.800)보다는 낮으나, 근거 생성이 가능한 감성 분석 모델로 확장 성공</p>
+                </div>
+              </div>
+
+              {/* 전체 성능 비교 요약 */}
+              <div className="mb-10">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">📊 전체 성능 비교 요약</h3>
+                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th className="px-4 py-3 text-left font-semibold text-gray-700">모델</th>
+                        <th className="px-4 py-3 text-center font-semibold text-gray-700">Accuracy</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-t border-gray-200">
+                        <td className="px-4 py-2.5 text-gray-600">Baseline</td>
+                        <td className="px-4 py-2.5 text-center">0.581</td>
+                      </tr>
+                      <tr className="border-t border-gray-200 bg-gray-50">
+                        <td className="px-4 py-2.5 text-gray-600">LoRA r=4 (best)</td>
+                        <td className="px-4 py-2.5 text-center">0.782</td>
+                      </tr>
+                      <tr className="border-t border-gray-200 bg-green-50">
+                        <td className="px-4 py-2.5 text-gray-700 font-medium">LoRA r=2 (best)</td>
+                        <td className="px-4 py-2.5 text-center font-bold text-green-700">0.800</td>
+                      </tr>
+                      <tr className="border-t border-gray-200">
+                        <td className="px-4 py-2.5 text-gray-600">Reasoning SFT</td>
+                        <td className="px-4 py-2.5 text-center">0.761</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* 핵심 인사이트 */}
+              <div className="mb-10">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">🧠 핵심 인사이트</h3>
+                <div className="space-y-2">
+                  {[
+                    "LoRA rank는 데이터 규모·태스크 특성에 따라 최적값이 달라짐",
+                    "Fine-tuning과 Prompt Engineering은 보완 관계",
+                    "Few-shot은 개수보다 예시 품질이 중요",
+                    "Reasoning 학습은 정확도보다 설명 가능성 향상에 기여",
+                    "생성 기반 모델은 평가 로직 설계가 성능만큼 중요"
+                  ].map((insight, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                      <p className="text-xs text-gray-700">{insight}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 프로젝트 결론 */}
+              <div className="bg-orange-50 border border-orange-200 rounded-lg p-5">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">📝 프로젝트 결론</h3>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  본 프로젝트를 통해 자연어처리 이론이 실제 모델 성능 개선으로 이어지기 위해서는 <strong>데이터 구성, 학습 전략, Prompt 설계가 유기적으로 결합</strong>되어야 한다는 점을 확인했습니다.
+                  <br /><br />
+                  특히 이 과제는 인공지능을 단순히 "학습시키는 대상"이 아니라, <strong>서비스 맥락에 맞게 조정하고 활용하는 기술</strong>로 바라보게 만든 계기가 되었으며, 이후 인공지능을 서비스에 접목하는 방향에 지속적인 관심을 갖게 되었습니다.
+                </p>
               </div>
 
             </div>
