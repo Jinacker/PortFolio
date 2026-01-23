@@ -1582,7 +1582,7 @@ export default function Portfolio() {
                       {/* 외주 작업 자세히 보기 버튼 */}
                       {item.id === 7 && (
                         <button
-                          onClick={() => setActiveModal('trad')}
+                          onClick={() => openModalWithImagePreload('/projects/tradlab_detail.png', 'trad')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1591,7 +1591,7 @@ export default function Portfolio() {
                       {/* 알바로그 자세히 보기 버튼 */}
                       {item.id === 8 && (
                         <button
-                          onClick={() => setActiveModal('albaLog')}
+                          onClick={() => openModalWithImagePreload('/projects/albaLog.png', 'albaLog')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-green-600 border border-green-500 rounded-lg hover:bg-green-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1661,7 +1661,7 @@ export default function Portfolio() {
                       {/* QGIS 프로젝트 자세히 보기 버튼 */}
                       {item.id === 2 && (
                         <button
-                          onClick={() => setActiveModal('qgisProject')}
+                          onClick={() => openModalWithImagePreload('/projects/qgis.png', 'qgisProject')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1688,7 +1688,7 @@ export default function Portfolio() {
                       {/* 공간정보 경진대회 자세히 보기 버튼 */}
                       {item.id === 3 && (
                         <button
-                          onClick={() => setActiveModal('rescueRoute')}
+                          onClick={() => openModalWithImagePreload('/projects/rescue_route_detail.png', 'rescueRoute')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1697,7 +1697,7 @@ export default function Portfolio() {
                       {/* 농어촌 디지털 트윈 자세히 보기 버튼 */}
                       {item.id === 4 && (
                         <button
-                          onClick={() => setActiveModal('digitalTwin')}
+                          onClick={() => openModalWithImagePreload('/projects/digital_twin.png', 'digitalTwin')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1706,7 +1706,7 @@ export default function Portfolio() {
                       {/* GNSS 측위 성능 비교 자세히 보기 버튼 */}
                       {item.id === 5 && (
                         <button
-                          onClick={() => setActiveModal('gnssProject')}
+                          onClick={() => openModalWithImagePreload('/projects/gps_1.png', 'gnssProject')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1715,7 +1715,7 @@ export default function Portfolio() {
                       {/* ArcGIS 폐기물 매립지 자세히 보기 버튼 */}
                       {item.id === 6 && (
                         <button
-                          onClick={() => setActiveModal('arcgisProject')}
+                          onClick={() => openModalWithImagePreload('/projects/arcgis.png', 'arcgisProject')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1724,7 +1724,7 @@ export default function Portfolio() {
                       {/* 플리마켓 입지 분석 자세히 보기 버튼 */}
                       {item.id === 7 && (
                         <button
-                          onClick={() => setActiveModal('fleamarketProject')}
+                          onClick={() => openModalWithImagePreload('/projects/fli_1.png', 'fleamarketProject')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1849,7 +1849,8 @@ export default function Portfolio() {
 
           {/* 성장 이야기 펼치기 버튼 */}
           <div className="text-center mt-16 mb-8">
-            <p className="text-gray-500 text-lg md:text-xl mb-24">김진의 여정은 계속됩니다...</p>
+            <p className="text-gray-500 text-base md:text-lg mb-2">지도 위의 좌표가 AI를 만나 살아있는 서비스가 되는 그날까지,</p>
+            <p className="text-gray-500 text-lg md:text-xl mb-8">김진의 여정은 계속됩니다...</p>
             <button
               onClick={() => setIsExperienceExpanded(!isExperienceExpanded)}
               className={`inline-flex items-center gap-2 py-3 text-gray-600 hover:text-blue-600 border-2 border-gray-200 hover:border-blue-400 rounded-full transition-colors ${
