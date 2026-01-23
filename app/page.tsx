@@ -494,21 +494,69 @@ const gisTimelineData = [
   {
     id: 1,
     title: "공간정보공학과 입학",
-    period: "2024년 3월",
-    description: "인하대학교 공간정보공학과에 입학하며, GIS와 측량학의 기초를 학습하기 시작했습니다.",
+    period: "2021년 3월",
+    description: "위치기반 IT 분야에 관심을 가지고 인하대학교 공간정보공학과에 입학하게 되었습니다.",
   },
   {
     id: 2,
-    title: "QGIS 실습",
-    period: "2024년 1학기",
-    description: "오픈소스 GIS 툴인 QGIS를 활용해 공간 데이터를 시각화하고 분석하는 방법을 학습했습니다.",
+    title: "QGIS 프로젝트\n도로–건축물 이격거리 공간분석",
+    period: "2024년 6월",
+    description: "건축법 이격거리 규정을 실제 공간데이터에 적용해 도로–건축물 관계를 GIS 분석으로 검증한 공간정보 프로젝트",
   },
+  // {
+  //   id: 3,
+  //   title: "2024 한이음 ICT 멘토링 프로젝트",
+  //   period: "2024년 04월",
+  //   description: "공간정보 기술(SLAM)로 실내 환경을 인식하고 해석하는 과정이 임베디드 시스템과 결합될 때 어떤 가능성이 있는지를 탐색해본 경험이었습니다.",
+  // },
+  // {
+  //   id: 4,
+  //   title: "대국민 디지털 트윈 아이디어 공모전",
+  //   period: "2024년 9월",
+  //   description: "해양 쓰레기 문제를 결과가 아닌 원인 관점에서 공간적으로 재해석하며, 디지털 트윈의 가능성과 한계를 함께 고민해본 프로젝트였습니다.",
+  // },
   {
     id: 3,
-    title: "측량학 실습",
-    period: "2024년 2학기",
-    description: "토탈스테이션과 GPS를 활용한 현장 측량 실습을 통해 공간 데이터 수집 과정을 경험했습니다.",
+    title: "제6회 공간정보 활용 경진대회 최우수상 수상 🥇",
+    period: "2024년 10월",
+    description: "공간정보를 활용해 응급 상황에서 실제로 도움이 될 수 있는 서비스를 구상하면서 공간정보 기술이 사람의 삶과 직접 맞닿아 있다는 점을 처음으로 실감하게 되었습니다.",
   },
+  {
+    id: 4,
+    title: "농어촌 디지털 트윈 서비스 아이디어 경진대회\n장려상 수상🥉",
+    period: "2024년 10월",
+    description: "농촌 고령층의 일상과 디지털 환경을 고민하며, 디지털 트윈 기술이 지역과 세대의 간극을 줄이는 데 어떻게 쓰일 수 있는지를 구체적으로 고민해본 경험이었습니다.",
+  },
+  {
+    id: 5,
+    title: "RTAP2U 활용\nRTCM 버전별 측위 성능 비교 검증",
+    period: "2024년 10~12월",
+    description: "RTCM 3.1과 3.2 버전의 측위 데이터를 수집하고, 정밀도와 정확도 분석을 통해 멀티 GNSS의 신뢰성을 검증한 GPS/GNSS 정밀 측위 분석 프로젝트",
+  },
+  {
+    id: 6,
+    title: "ArcGIS 프로젝트\n폐기물 매립지 적지 선정",
+    period: "2025년 5월",
+    description: "AHP 기반 Map Algebra를 활용해 환경·사회·지형 요인을 통합한 폐기물 매립지 적지 선정 프로젝트",
+  },
+  {
+    id: 7,
+    title: "공간분석 프로젝트\n주소정보 기반 플리마켓 최적 입지 도출",
+    period: "2025년 6월",
+    description: "생활인구·교통 데이터를 활용해 플리마켓 최적 입지를 분석하고, 사물주소 체계를 결합해 실제 운영과 안내까지 연결한 공간분석 프로젝트",
+  },
+  // {
+  //   id: 7,
+  //   title: "시민체감 수원형 도시안전 서비스 아이디어톤",
+  //   period: "2024년 10월",
+  //   description: "공간정보를 활용해 도시 범죄 문제를 '사건'이 아닌 '공간 패턴'으로 바라보며, 도시 안전 서비스의 가능성을 고민해본 프로젝트였습니다.",
+  // },
+  // {
+  //   id: 8,
+  //   title: "제7회 서울특별시 드론 활용 경진대회",
+  //   period: "2024년 11월",
+  //   description: "병해충 문제를 공간 데이터로 재해석하며, 드론과 GIS를 결합한 정밀 방제의 가능성과 한계를 함께 고민해본 프로젝트였습니다.",
+  // },
 ]
 
 // 인공지능 타임라인 데이터
@@ -1056,6 +1104,7 @@ export default function Portfolio() {
                   <img src="https://img.shields.io/badge/Google%20Cloud-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white"/>
                   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
                   <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
+                  <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"/>
                 </div>
               </div>
               <div>
@@ -1076,6 +1125,7 @@ export default function Portfolio() {
             <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-left mb-12">
               사용자가 <strong>안정적이고 편리하게 서비스를 이용할 수 있는 환경</strong>을 고민합니다. <br></br>
               <strong>로그와 모니터링 도구</strong>를 활용해 서비스 상태를 파악하고, 문제 상황을 <strong>빠르게 인지하고 대응</strong>하려 노력합니다. <br></br>
+              서비스 성능과 확장성을 고려해 <strong>캐시·세션</strong> 등 인프라 구성 요소를 설계하고 개선하는 데에도 관심을 두고 있습니다.<br></br>
               <strong>테스트 자동화</strong>를 기반으로 변경 사항을 검증하며, 안정적인 운영을 위해 문제를 예방하는 개발을 지향합니다.
             </p>
           </div>
@@ -1555,7 +1605,10 @@ export default function Portfolio() {
           </div>
 
           {/* 공간정보/인공지능 타임라인 */}
-          <div className="grid md:grid-cols-2 gap-12 mb-16 mt-16">
+          <div className="max-w-4xl mx-auto mt-16 mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 text-center">도메인 타임라인</h3>
+          </div>
+          <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
               <h3 className="text-xl font-bold mb-4 mt-2 text-center">
                 <span className="border-[3.5px] border-purple-500 text-purple-500 rounded-full px-6 py-2 inline-block">공간정보</span>
@@ -1602,9 +1655,99 @@ export default function Portfolio() {
                           transform: 'translateY(-50%)',
                         }}
                       ></span>
-                      <h4 className="text-sm font-bold text-purple-600 mb-1">{item.title}</h4>
+                      <h4 className="text-sm font-bold text-purple-600 mb-1 whitespace-pre-line">{item.title}</h4>
                       <p className="text-xs text-gray-500 mb-2">{item.period}</p>
                       <p className="text-xs text-gray-700">{item.description}</p>
+                      {/* QGIS 프로젝트 자세히 보기 버튼 */}
+                      {item.id === 2 && (
+                        <button
+                          onClick={() => setActiveModal('qgisProject')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* Self Grow 자세히 보기 버튼 - 주석처리 */}
+                      {/* {item.id === 3 && (
+                        <button
+                          onClick={() => setActiveModal('selfGrow')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )} */}
+                      {/* 대국민 디지털 트윈 아이디어 공모전 자세히 보기 버튼 - 주석처리 */}
+                      {/* {item.id === 4 && (
+                        <button
+                          onClick={() => setActiveModal('oceanTrash')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )} */}
+                      {/* 공간정보 경진대회 자세히 보기 버튼 */}
+                      {item.id === 3 && (
+                        <button
+                          onClick={() => setActiveModal('rescueRoute')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 농어촌 디지털 트윈 자세히 보기 버튼 */}
+                      {item.id === 4 && (
+                        <button
+                          onClick={() => setActiveModal('digitalTwin')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* GNSS 측위 성능 비교 자세히 보기 버튼 */}
+                      {item.id === 5 && (
+                        <button
+                          onClick={() => setActiveModal('gnssProject')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* ArcGIS 폐기물 매립지 자세히 보기 버튼 */}
+                      {item.id === 6 && (
+                        <button
+                          onClick={() => setActiveModal('arcgisProject')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 플리마켓 입지 분석 자세히 보기 버튼 */}
+                      {item.id === 7 && (
+                        <button
+                          onClick={() => setActiveModal('fleamarketProject')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )}
+                      {/* 수원 도시안전 아이디어톤 자세히 보기 버튼 - 주석처리 */}
+                      {/* {item.id === 7 && (
+                        <button
+                          onClick={() => setActiveModal('suwonSafety')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )} */}
+                      {/* 드론 활용 경진대회 자세히 보기 버튼 - 주석처리 */}
+                      {/* {item.id === 8 && (
+                        <button
+                          onClick={() => setActiveModal('droneContest')}
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
+                        >
+                          프로젝트 자세히 보기
+                        </button>
+                      )} */}
                     </div>
                   </div>
                 ))}
@@ -4925,6 +5068,1884 @@ export default function Portfolio() {
                 </div>
               </div>
 
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* QGIS Project Modal */}
+      {activeModal === 'qgisProject' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header Image */}
+            <div className="w-full h-72 bg-gradient-to-r from-purple-50 to-indigo-100 flex items-center justify-center">
+              <img
+                src="/projects/qgis.png"
+                alt="QGIS 공간분석 프로젝트"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🗺️ QGIS 공간정보 프로젝트</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">건축법 기반 도로–건축물 이격거리 준수 여부 공간분석</p>
+              <p className="text-sm text-gray-500 mb-6">2024년 · 개인 프로젝트 · 도구: QGIS</p>
+
+              {/* 프로젝트 개요 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">프로젝트 개요</p>
+                  <p className="text-sm text-gray-700">본 프로젝트는 「건축법 제58조」 및 「건축법 시행령 제80조의2」에 명시된 도로 경계선으로부터 건축물의 최소 이격거리(6m) 규정을 실제 공간데이터에 적용하여, 도로와 건축물 간 이격거리 준수 여부를 GIS 공간분석으로 검증한 공간정보 프로젝트입니다.</p>
+                  <p className="text-sm text-gray-700 mt-2">법령에서 제시하는 정성적 기준을 단순 설명에 그치지 않고, <strong>버퍼·중첩·교차 분석</strong>을 통해 정량적·시각적으로 확인하는 것을 목표로 했습니다.</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">사용 데이터</p>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• 인천시 GIS 건물 통합 정보 (AL_D010_28_20241104.shp)</li>
+                    <li>• 도로 현황 데이터 (Z_UPIS_C_UQ151.shp)</li>
+                  </ul>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">분석 범위</p>
+                  <p className="text-sm text-gray-700">데이터 규모를 고려해 인하대학교 인근 지역으로 클리핑하여 분석 수행</p>
+                </div>
+              </div>
+
+              {/* 법적 근거 및 버퍼 거리 설정 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">⚖️ 법적 근거 및 버퍼 거리 설정</h3>
+                <div className="bg-purple-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-700 mb-2"><strong>관련 법령:</strong> 「건축법」 제58조, 「건축법 시행령」 제80조의2 및 별표 2</p>
+                  <p className="text-sm text-gray-700 mb-2"><strong>버퍼 거리:</strong> 도로 경계선 기준 6m</p>
+                  <p className="text-sm text-gray-700 mb-1"><strong>설정 근거:</strong></p>
+                  <ul className="text-sm text-gray-700 ml-4 space-y-1">
+                    <li>• 교통 안전 확보</li>
+                    <li>• 일조권 및 채광 보호</li>
+                    <li>• 도시 경관 및 공공 공간 확보</li>
+                    <li>• 비상 차량 및 보행 동선 확보</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 공간분석 과정 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔍 공간분석 과정</h3>
+                <div className="space-y-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">1. 데이터 전처리</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 도로 데이터에서 중앙선·점선 등 불필요 요소 제거</li>
+                      <li>• QGIS 표현식을 활용해 도로 외곽선만 추출</li>
+                      <li>• 지역·도로폭·조례 차이를 고려해 골목길 제외</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">2. 버퍼 분석</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 도로 외곽선을 기준으로 6m 버퍼 생성</li>
+                      <li>• 건축법상 이격 기준을 공간적으로 모델링</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">3. 데이터 정제</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 도로 데이터 파편화 문제 해결을 위해 Dissolve(융해) 기능 적용</li>
+                      <li>• 연속적인 도로 버퍼 폴리곤 생성</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">4. 중첩 및 교차 분석</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 입력 레이어: 도로 6m 버퍼</li>
+                      <li>• 중첩 레이어: 건물 데이터</li>
+                      <li>• Intersection 분석으로 버퍼와 겹치는 건물 추출</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">5. 결과 검증</h4>
+                    <p className="text-sm text-gray-700">속성 테이블 및 지도 시각화를 통해 교차 결과 확인</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 분석 결과 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📊 분석 결과</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">대부분의 건축물이 도로 이격거리 6m 규정을 준수하고 있음을 확인</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">일부 건물에서 버퍼와의 겹침 현상 관찰</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">→ 실제 규정 위반 가능성 또는 건물 높이에 따른 2D 투영 효과로 인한 시각적 겹침 가능성</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 해석 및 한계 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 해석 및 한계</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">「건축법 시행령」에 따라 2m 이상 옹벽·담장이 존재할 경우 이격 규정이 적용되지 않을 수 있음</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">본 프로젝트는 2D 공간데이터 기반 분석으로, 건물 높이·지형 단차·구조물 존재 여부를 완전히 반영하지 못하는 한계가 존재</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 활용 가능성 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">💡 활용 가능성</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">불법 증축·무허가 건축물 1차 탐지</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">건축 허가 사전 검토 보조 자료</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">도로 확장 및 도시 재정비 대상지 검토</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">화재·응급차량 접근성 등 공공 안전 관리</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 프로젝트를 통해 얻은 점 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">📝 프로젝트를 통해 얻은 점</h3>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  본 프로젝트를 통해 GIS는 단순 시각화 도구가 아니라, <strong>법·제도·공공 데이터를 공간적으로 해석하고 의사결정을 지원하는 분석 도구</strong>임을 체감했습니다.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  동시에, 공간분석 결과 해석 시 <strong>데이터 한계를 인식하고 보완하는 사고의 중요성</strong>도 함께 배울 수 있었습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* GNSS Project Modal */}
+      {activeModal === 'gnssProject' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+
+            {/* Header Images */}
+            <div className="w-full bg-gradient-to-r from-orange-50 to-amber-100 p-4">
+              <div className="grid grid-cols-2 gap-4">
+                <img
+                  src="/projects/gps_2.png"
+                  alt="GNSS 정밀 측위 분석 이미지 1"
+                  className="w-full h-64 object-contain rounded-lg"
+                />
+                <img
+                  src="/projects/gps_1.png"
+                  alt="GNSS 정밀 측위 분석 이미지 2"
+                  className="w-full h-64 object-contain rounded-lg"
+                />
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🛰️ RTAP2U 활용 RTCM 버전별 측위 성능 비교 및 신뢰성 검증</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">RTCM 3.1 vs 3.2 데이터 비교·분석을 통한 최적 측위 프로토콜 도출</p>
+              <p className="text-sm text-gray-500 mb-6">2024년 10~12월 · 5인 팀 프로젝트 · GPS/GNSS 정밀 측위 분석</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">RTAP2U 수신기를 활용하여 RTCM 3.1과 3.2 버전의 측위 데이터를 수집하고, <strong>정밀도(Precision)</strong>와 <strong>정확도(Accuracy)</strong> 분석을 통해 멀티 GNSS의 신뢰성을 검증한 프로젝트</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">5인 팀 프로젝트</p>
+                </div>
+              </div>
+
+              {/* 사용 데이터 & 기술 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 사용 데이터 & 기술</h3>
+                <div className="bg-purple-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-700 mb-2"><strong>H/W:</strong> RTAP2U (보급형 고정밀 GNSS 수신기), 안테나, 폴대</p>
+                  <p className="text-sm text-gray-700 mb-2"><strong>Protocol:</strong> NTRIP (VRS-RTCM 3.1 / VRS-RTCM 3.2 / RTK-RTCM 3.2)</p>
+                  <p className="text-sm text-gray-700 mb-2"><strong>Analysis:</strong> RMSE(평균 제곱근 오차) 산출, 표준편차 분석, DOP 상관관계 분석</p>
+                  <p className="text-sm text-gray-700"><strong>Software:</strong> RTAP2U Viewer, Excel (데이터 통계 처리)</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-2">사용 데이터</p>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• <strong>관측 데이터:</strong> 인천 및 수도권 내 통합기준점(U인천08, U0213, U인천06, U인천02 등)에서의 정지 측량 데이터</li>
+                    <li>• <strong>기준 데이터:</strong> 국토지리정보원 국가 통합 기준점 고시 성과 (참값으로 활용)</li>
+                    <li>• <strong>보정 데이터:</strong> 국토지리정보원 NTRIP 서버에서 제공하는 RTCM 3.1 및 3.2 보정정보</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 추진체계 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👥 프로젝트 추진체계</h3>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-700">
+                    <strong>데이터 수집 설계</strong> → <strong>현장 관측</strong> → <strong>데이터 전처리</strong> → <strong>통계 분석</strong> → <strong>결과 도출</strong>
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="mb-2">
+                      <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">실험 설계</span>
+                    </div>
+                    <p className="text-sm text-gray-700">데이터 비교의 공정성을 위해 동일한 통합기준점에서 유사한 DOP 조건 하에 3가지 모드(VRS 3.1, VRS 3.2, RTK 3.2)를 연속 측정</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="mb-2">
+                      <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">데이터 수집</span>
+                    </div>
+                    <p className="text-sm text-gray-700">각 측점에서 모드별 5분 이상, 위성 가시성 변화를 최소화하여 연속 측정 수행</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="mb-2">
+                      <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded">성과 분석</span>
+                    </div>
+                    <p className="text-sm text-gray-700">참값(통합기준점 좌표)과 관측값 간의 절대 오차(RMSE) 및 정밀도(표준편차) 산출</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 프로젝트 배경 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📋 프로젝트 배경 및 필요성</h3>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <ul className="text-sm text-gray-700 space-y-2">
+                    <li>• 기존 <strong>RTCM 3.1</strong>은 GPS와 GLONASS 위성군만 사용하는 반면, <strong>RTCM 3.2(MSM)</strong>는 Galileo, BeiDou, QZSS 등 다중 위성항법시스템(Multi-GNSS)을 지원</li>
+                    <li>• 도심지나 위성 수신이 불안정한 환경에서 위성 가용 개수가 늘어나는 RTCM 3.2가 실제로 얼마나 더 높은 정확도와 신뢰성을 보장하는지 <strong>정량적인 검증</strong>이 필요</li>
+                    <li>• 보급형 수신기인 RTAP2U에서도 고가의 측량 장비 수준의 데이터를 확보할 수 있는지 <strong>프로토콜별 성능 차이</strong>를 분석</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 목표 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🎯 프로젝트 목표</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700"><strong>정확도(Accuracy) 평가:</strong> 수직·수평 RMSE를 기준으로 각 RTCM 버전별 절대 정확도 비교</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700"><strong>정밀도(Precision) 평가:</strong> 동일 환경에서 분산 및 표준편차를 분석하여 데이터의 일관성 확인</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700"><strong>데이터 신뢰성 검증:</strong> 측정된 DOP(HDOP, VDOP) 값과 측위 오차 간의 상관관계 분석</p>
+                  </li>
+                </ul>
+                <div className="bg-gray-50 rounded-lg p-4 mt-4">
+                  <p className="text-sm text-gray-500 mb-2">분석 범위</p>
+                  <p className="text-sm text-gray-700"><strong>공간적 범위:</strong> 인천광역시 내 통합기준점 4개소 (남동구 논현동, 미추홀구 용현동, 남구 학익동, 동구 송림동)</p>
+                  <p className="text-sm text-gray-700 mt-2"><strong>비교 대상:</strong></p>
+                  <ul className="text-sm text-gray-700 ml-4 mt-1 space-y-1">
+                    <li>• VRS-RTCM 3.1: GPS + GLONASS</li>
+                    <li>• VRS-RTCM 3.2: GPS + GLONASS + Galileo + BeiDou + QZSS (Multi-GNSS)</li>
+                    <li>• RTK-RTCM 3.2: Single-RTK 방식 (비교군)</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 분석 방법 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">⚙️ 분석 방법</h3>
+                <div className="space-y-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">절대 정확도 분석 (RMSE)</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 국가 통합기준점 고시 좌표(True Value)와 수신기 관측 좌표 간의 차이를 계산</li>
+                      <li>• <strong>수평(Horizontal) 및 수직(Vertical), 3차원 RMSE</strong>를 산출하여 모드별 성능 평가</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">정밀도 분석 (Standard Deviation)</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 관측된 데이터군(Epochs)의 평균 좌표를 기준으로 각 데이터가 흩어진 정도(표준편차)를 계산</li>
+                      <li>• 수신 안정성 평가</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">신뢰성 지표 분석 (DOP & TTFF)</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• <strong>PDOP/HDOP/VDOP:</strong> 위성 배치에 따른 정밀도 저하율 모니터링</li>
+                      <li>• <strong>TTFF (Time To First Fix):</strong> 초기 고정해(Fix)를 얻는 데 걸리는 시간 비교</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 분석 결과 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📍 분석 결과</h3>
+                <div className="space-y-4">
+                  <div className="bg-green-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-green-800 mb-2">1. RTCM 3.2의 우수한 정확도 입증</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 대부분의 측점에서 <strong>RTCM 3.2(VRS)</strong>가 RTCM 3.1 대비 수평·수직 RMSE가 낮게 측정됨</li>
+                      <li>• 특히 U인천02 측점의 경우, RTCM 3.1은 수평 RMSE <strong>15.8cm</strong>, 수직 RMSE <strong>18.1cm</strong>로 튀는 현상이 발생했으나, RTCM 3.2는 수평 <strong>2.3cm</strong>, 수직 <strong>11.5cm</strong>로 안정적인 결과</li>
+                    </ul>
+                  </div>
+                  <div className="bg-blue-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-blue-800 mb-2">2. Multi-GNSS(다중 위성)의 효과 확인</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• RTCM 3.2 적용 시 가용 위성 수가 증가함에 따라 <strong>HDOP 및 VDOP 수치가 전반적으로 개선</strong></li>
+                      <li>• 장애물이 있거나 수신 환경이 불량한 곳에서도 RTCM 3.2가 더 높은 <strong>Fix Rate(고정 성공률)</strong>와 <strong>Data Quality Rate</strong>를 유지</li>
+                    </ul>
+                  </div>
+                  <div className="bg-amber-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-amber-800 mb-2">3. TTFF (초기 고정 시간) 단축</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• RTCM 3.2 모드가 3.1 모드 대비 더 빠른 시간 내에 Fix 해를 획득</li>
+                      <li>• 예: U인천02 측점 TTFF <strong>46.6초(3.1)</strong> vs <strong>18.2초(3.2)</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 프로젝트 의의 및 한계 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">💡 프로젝트 의의 및 한계</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm font-semibold text-green-700 mb-1">✅ 의의</p>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 이론적으로 알려진 Multi-GNSS(RTCM 3.2)의 우수성을 <strong>실제 필드 테스트를 통해 정량적으로 검증</strong></li>
+                      <li>• 보급형 기기(RTAP2U)로도 RTCM 3.2 프로토콜을 활용하면 <strong>cm급의 정밀 측위가 가능</strong>함을 확인, 저비용 고효율 측위 시스템 구축의 근거 마련</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-amber-700 mb-1">⚠️ 한계</p>
+                    <p className="text-sm text-gray-700">일부 측점(U인천08 등)에서는 수직 오차가 수평 오차에 비해 상대적으로 크게 발생하는 경향이 있어 <strong>안테나 높이 측정 오차나 전리층 지연 등 외부 변수</strong>에 대한 추가 분석이 요구됨</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ArcGIS Project Modal */}
+      {activeModal === 'arcgisProject' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header Image */}
+            <div className="w-full h-72 bg-gradient-to-r from-emerald-50 to-teal-100 flex items-center justify-center">
+              <img
+                src="/projects/arcgis.png"
+                alt="ArcGIS 폐기물 매립지 적지 선정 공간분석"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🗑️ 폐기물 매립지 적지 선정 공간분석 프로젝트</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">AHP 기반 Map Algebra를 활용한 환경·사회 요인 통합 분석</p>
+              <p className="text-sm text-gray-500 mb-6">2025년 5월 · 개인 프로젝트 · GIS / Spatial Analysis</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">환경·지형·사회적 요인을 GIS 래스터 분석으로 통합해 폐기물 매립지 후보지를 데이터 기반으로 도출한 공간분석 프로젝트</p>
+                </div>
+              </div>
+
+              {/* 사용 데이터 & 기술 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 사용 데이터 & 기술</h3>
+                <div className="bg-purple-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-700 mb-2"><strong>Tool:</strong> ArcGIS</p>
+                  <p className="text-sm text-gray-700 mb-2"><strong>Analysis:</strong> Raster Analysis, Map Algebra, AHP 기반 가중치 중첩</p>
+                  <p className="text-sm text-gray-700"><strong>Spatial Methods:</strong> Buffer, Reclassify, SetNull, IDW, Slope Analysis</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-2">사용 데이터</p>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• DEM 기반 경사도(Slope)</li>
+                    <li>• 토양 배수등급</li>
+                    <li>• 토지이용/토지피복</li>
+                    <li>• 접근성(IDW, 거리 기반 가중 분석)</li>
+                    <li>• 인구밀도: 통계청 1km 격자 총인구 데이터</li>
+                    <li>• 자연보호구역: 국립공원·생태보전지역 등 (500m 버퍼 적용)</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 가중치 설정 근거 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">⚖️ 가중치 설정 근거</h3>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">AHP 기반 가중치 적용 참고 문헌</p>
+                  <p className="text-sm text-gray-700 font-medium">『GIS를 활용한 쓰레기 매립지 입지 선정과정의 체계화 연구』(이성준 외, 2014)</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-3">핵심 판단 기준</p>
+                  <ul className="text-sm text-gray-700 space-y-2">
+                    <li className="flex items-start gap-2">
+                      <span className="font-semibold text-amber-700 min-w-[70px]">경사도</span>
+                      <span>→ 물리적 안정성·침출수 위험</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="font-semibold text-amber-700 min-w-[70px]">인구밀도</span>
+                      <span>→ 사회적 수용성(NIMBY)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="font-semibold text-amber-700 min-w-[70px]">토지이용</span>
+                      <span>→ 환경·사회적 민감도</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="font-semibold text-amber-700 min-w-[70px]">토양</span>
+                      <span>→ 지하수 오염 가능성</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="font-semibold text-amber-700 min-w-[70px]">접근성</span>
+                      <span>→ 운영 효율성</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">폐기물 매립지 입지 선정 문제를 공간분석 모델로 구조화</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">래스터 해상도 통일(5m) 및 전처리 수행</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">인구밀도·환경민감지역 등 비실습 데이터 추가 선정 및 적용</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">AHP 기반 가중치 적용 및 Map Algebra 수식 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">분석 결과 시각화 및 적합·부적합 지역 해석</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 분석 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 분석 내용</h3>
+                <div className="space-y-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">인구밀도 분석</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 1km 격자 총인구 데이터를 래스터로 변환</li>
+                      <li>• Natural Breaks 기준 3등급 재분류 후 역점수 적용</li>
+                      <li>• 사회적 수용성(NIMBY)을 고려한 적합도 반영</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">자연보호구역 배제 처리</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 국립공원·보전지역 경계 기준 500m 버퍼 생성</li>
+                      <li>• SetNull 처리로 분석 단계에서 완전 배제 마스크 적용</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">가중치 기반 적합도 분석</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• AHP 기반 가중치 적용 (Slope 0.2597 / Population 0.1948 / LandUse 0.1558 / Toyang 0.1429 / IDW 0.1299)</li>
+                      <li>• Map Algebra로 픽셀 단위 종합 적합도 산출</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">결과 분류</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• Jenks Natural Breaks 기준 3등급 분류</li>
+                      <li>• 적합 / 보통 / 부적합 지역 도출</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 분석 결과 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📊 분석 결과</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-green-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-green-800 mb-2">✅ 적합 지역</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 인구 밀도 낮고, 경사 완만하며</li>
+                      <li>• 자연보호구역과 충분히 이격된 도심 외곽 지역</li>
+                    </ul>
+                  </div>
+                  <div className="bg-red-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-red-800 mb-2">❌ 부적합 지역</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 도심 밀집 지역</li>
+                      <li>• 급경사지 및 보호구역 인접 지역</li>
+                    </ul>
+                  </div>
+                </div>
+                <p className="text-sm text-gray-600 mt-4 italic">분석 결과는 선행 연구에서 제시한 "완경사지 · 저인구 · 저환경민감 지역" 조건과 높은 일치성을 보임.</p>
+              </div>
+
+              {/* 프로젝트를 통해 배운 점 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">🧠 프로젝트를 통해 배운 점</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">공간문제는 단일 지표가 아닌 <strong>다변량 의사결정 문제</strong>임을 체감</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">Map Algebra와 SetNull 처리를 통해 GIS가 정책·환경 계획에서 <strong>현실 제약을 반영하는 도구</strong>가 될 수 있음을 경험</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">공간분석은 '정답을 찾는 것'이 아니라 <strong>합리적인 선택지를 좁히는 과정</strong>이라는 인식 확립</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fleamarket Project Modal */}
+      {activeModal === 'fleamarketProject' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header Images */}
+            <div className="w-full bg-gradient-to-r from-orange-50 to-amber-100 p-4">
+              <div className="grid grid-cols-2 gap-4">
+                <img
+                  src="/projects/fli_2.png"
+                  alt="플리마켓 최적 입지 공간분석 1"
+                  className="w-full h-64 object-contain rounded-lg"
+                />
+                <img
+                  src="/projects/fli_1.png"
+                  alt="플리마켓 최적 입지 공간분석 2"
+                  className="w-full h-64 object-contain rounded-lg"
+                />
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🛍️ 플리마켓 최적 입지 도출 및 사물주소 활용 방안</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">생활인구·대중교통 데이터 기반 플리마켓 입지 적합성 분석</p>
+              <p className="text-sm text-gray-500 mb-6">2025년 4~6월 · 3인 팀 프로젝트 · 주소정보 활용 산업 아이디어 공모전 출품</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">생활인구·교통 데이터를 활용해 플리마켓 최적 입지를 분석하고, 사물주소 체계를 결합해 실제 운영과 안내까지 연결한 공간분석 프로젝트</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">3인 팀 프로젝트</p>
+                </div>
+              </div>
+
+              {/* 사용 기술 */}
+              {/* 사용 데이터 & 기술 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🔧 사용 데이터 & 기술</h3>
+                <div className="bg-purple-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-700 mb-2"><strong>Tool:</strong> ArcGIS</p>
+                  <p className="text-sm text-gray-700 mb-2"><strong>Analysis:</strong> 공간중첩분석, AHP 가중치 분석, 버퍼 분석</p>
+                  <p className="text-sm text-gray-700"><strong>Application:</strong> 주소정보 체계 설계, 사물주소 활용 방안</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-2">사용 데이터</p>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• 100m 격자 단위 상주 인구 밀도 데이터</li>
+                    <li>• 버스·지하철 정류장별 승하차 인원 데이터</li>
+                    <li>• 문화·체육시설 위치 데이터</li>
+                    <li>• 공영 주차장 위치 데이터</li>
+                    <li>• 환경부 토지피복도 (설치 가능 공간 필터링)</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 추진체계 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👥 프로젝트 추진체계</h3>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-700">
+                    <strong>데이터 수집</strong> → <strong>분석</strong> → <strong>시각화</strong> → <strong>정책 제안</strong>의 흐름으로 프로젝트를 진행하며, 정례 회의를 통해 진행 상황을 점검하고 문제를 해결
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="mb-2">
+                      <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">데이터 수집·전처리</span>
+                    </div>
+                    <p className="text-sm text-gray-700">데이터 및 버스 이용 데이터 수집 (POI, 토지이용 등), 데이터 전처리 및 분석용 포맷 변환</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="mb-2">
+                      <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded">GIS 공간분석</span>
+                    </div>
+                    <p className="text-sm text-gray-700">수집된 데이터를 GIS에 매핑, AHP 기반 중첩 분석을 통해 적합도 평가 수행, 격자별 점수 산정과 토지피복도 반영을 통해 최종 적지 도출</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4 border-2 border-purple-300">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded">시각화 및 결과 도출</span>
+                      <span className="text-sm text-purple-600 font-semibold">본인 담당</span>
+                    </div>
+                    <p className="text-sm text-gray-700">분석 결과를 지도와 그래프로 시각화, 후보지 분포도 작성, 최종 선정 후보지에 대한 인포그래픽 제작 및 보고서 작성</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="mb-2">
+                      <span className="px-2 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded">정책 제안 및 검증</span>
+                    </div>
+                    <p className="text-sm text-gray-700">사물주소 부여 방안 마련 및 행정적 효과 분석, 유관 정책 및 사례 조사</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 프로젝트 배경 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📋 프로젝트 배경 및 필요성</h3>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <ul className="text-sm text-gray-700 space-y-2">
+                    <li>• 플리마켓은 지역 상권 활성화와 시민 참여를 동시에 유도할 수 있는 도시형 이벤트</li>
+                    <li>• 실제 운영에서는 <strong>입지 선정 실패</strong>로 낮은 방문율과 셀러 수익 저하가 반복 발생</li>
+                    <li>• 대부분 경험이나 직관에 의존해 장소를 선정하며, <strong>요일·시간대별 유동 패턴이나 교통 접근성</strong>을 체계적으로 고려하지 못함</li>
+                    <li>• 공간정보를 활용해 플리마켓 입지를 과학적으로 분석하고, <strong>사물주소 기반 위치 안내 체계</strong>를 함께 제안</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 목표 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🎯 프로젝트 목표</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">생활인구와 교통 접근성을 기반으로 플리마켓 개최에 <strong>적합한 공간 도출</strong></p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">입지 특성에 따라 <strong>평일형 / 주말형 / 혼합형</strong> 플리마켓 운영 유형 분류</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">선정된 공간에 <strong>사물주소</strong>를 부여해 홍보·안내·운영 효율을 높이는 활용 방안 제시</p>
+                  </li>
+                </ul>
+                <div className="bg-gray-50 rounded-lg p-4 mt-4">
+                  <p className="text-sm text-gray-500 mb-1">분석 범위</p>
+                  <p className="text-sm text-gray-700"><strong>공간적 범위:</strong> 인천 연수구 전역</p>
+                  <p className="text-sm text-gray-700"><strong>분석 대상:</strong> 공원·광장 등 개방형 공공공간</p>
+                </div>
+              </div>
+
+              {/* 활용 데이터 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📊 사용 데이터 및 분석 범위</h3>
+                <div className="space-y-4">
+                  <div className="bg-blue-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-blue-800 mb-2">대중교통 데이터</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 버스 정류장별 일평균 승·하차 인원</li>
+                      <li>• 기준: <strong>일 2,000명 이상</strong> 정류장</li>
+                      <li>• 적용 버퍼: <strong>400m</strong> (보행 접근권 기준)</li>
+                    </ul>
+                  </div>
+                  <div className="bg-green-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-green-800 mb-2">상주 인구 데이터</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• <strong>100m × 100m</strong> 격자 단위 인구 데이터</li>
+                      <li>• 상위 20%~하위 20% <strong>5분위 구간화</strong></li>
+                      <li>• 보행권 고려를 위해 <strong>300m 버퍼</strong> 확장</li>
+                    </ul>
+                  </div>
+                  <div className="bg-amber-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-amber-800 mb-2">토지피복 데이터</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 환경부 토지피복도 (<strong>30m 해상도</strong>)</li>
+                      <li>• 플리마켓 설치 가능 유형만 필터링:</li>
+                      <li className="ml-4">- 문화·체육·휴양지역 (코드 140)</li>
+                      <li className="ml-4">- 기타 초지 (코드 423)</li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-700 mb-2">보조 데이터</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 문화시설 POI</li>
+                      <li>• 주차장 위치 데이터</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 분석 방법 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">⚙️ 공간분석 방법</h3>
+                <div className="space-y-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">1. 접근성 분석</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 버스 정류장 및 지하철역을 기준으로 <strong>400m 버퍼</strong> 생성</li>
+                      <li>• 버스·지하철 접근성이 중첩되는 지역은 <strong>최고 접근성 구간</strong>으로 분류</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">2. 인구 밀도 분석</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 100m 격자 인구 데이터를 <strong>분위별로 분류</strong></li>
+                      <li>• 각 구간에 점수 부여 후 <strong>300m 버퍼</strong> 생성</li>
+                      <li>• <strong>Erase 기법</strong>을 활용해 중복 영역 제거</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">3. 다기준 의사결정 (AHP)</h4>
+                    <p className="text-sm text-gray-500 mb-2">AHP 기법으로 산출한 가중치:</p>
+                    <div className="grid grid-cols-2 gap-2 text-sm text-gray-700">
+                      <div className="flex justify-between bg-white rounded px-3 py-1">
+                        <span>상주 인구 밀도</span>
+                        <span className="font-semibold text-purple-600">0.318</span>
+                      </div>
+                      <div className="flex justify-between bg-white rounded px-3 py-1">
+                        <span>대중교통 접근성</span>
+                        <span className="font-semibold text-purple-600">0.274</span>
+                      </div>
+                      <div className="flex justify-between bg-white rounded px-3 py-1">
+                        <span>문화시설 접근성</span>
+                        <span className="font-semibold text-purple-600">0.226</span>
+                      </div>
+                      <div className="flex justify-between bg-white rounded px-3 py-1">
+                        <span>주차장 접근성</span>
+                        <span className="font-semibold text-purple-600">0.182</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">4. 중첩 분석</h4>
+                    <ul className="text-sm text-gray-700 space-y-1">
+                      <li>• 각 요소별 점수를 가중치와 곱해 <strong>종합 적합도 점수(Score_All)</strong> 생성</li>
+                      <li>• 토지피복 필터 적용 후 <strong>실제 설치 가능한 후보지만</strong> 최종 도출</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 분석 결과 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📍 분석 결과</h3>
+                <div className="bg-green-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-2">플리마켓 적합 공간의 공통 특성</p>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• 상주 인구가 충분히 확보된 <strong>주거지 인접 공원</strong></li>
+                    <li>• 대중교통 접근성이 우수한 <strong>생활권 중심 공간</strong></li>
+                    <li>• 문화시설 또는 상업시설과 인접한 <strong>체류형 공간</strong></li>
+                    <li>• 토지피복상 임시 행사 설치가 가능한 <strong>개방형 공간</strong></li>
+                  </ul>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <p className="text-sm text-gray-500 mb-2">후보지 도출</p>
+                    <p className="text-sm text-gray-700">연수구 전역에서 플리마켓 개최 적합 후보지 다수 도출, 최종 후보지는 <strong>6개 구역</strong>으로 군집화하여 관리 및 운영 용이성 확보</p>
+                  </div>
+                  <div className="bg-amber-50 rounded-lg p-4">
+                    <p className="text-sm text-gray-500 mb-2">운영 유형 분류</p>
+                    <p className="text-sm text-gray-700">각 후보지는 교통 이용 패턴을 기반으로 <strong>평일형 / 주말형 / 혼합형</strong> 운영 유형으로 구분</p>
+                  </div>
+                </div>
+                <div className="bg-gray-100 rounded-lg p-3 text-center">
+                  <p className="text-sm text-gray-600 italic">→ 단순한 '좋은 장소'가 아닌 <strong>운영 전략까지 고려한 입지 평가</strong> 가능</p>
+                </div>
+              </div>
+
+              {/* 사물주소 활용 방안 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🏷️ 사물주소 적용 방안</h3>
+                <p className="text-sm text-gray-600 mb-4">선정된 플리마켓 공간에 도로명 기반 사물주소를 부여하고, 행사 내부의 각 부스에는 임시 가상주소 체계를 적용하는 방안을 제안</p>
+                <div className="space-y-4">
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h4 className="font-semibold text-blue-800 mb-3">주소 체계 설계</h4>
+                    <ul className="text-sm text-gray-700 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-600">•</span>
+                        <span>행사장 전체에 <strong>도로명 기반 공간주소</strong> 부여</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-600">•</span>
+                        <span>행사 내부 부스에는 <strong>기간 한정 임시 가상주소</strong>(@@-마켓명-부스명) 부여</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h4 className="font-semibold text-green-800 mb-3">기대 효과</h4>
+                    <ul className="text-sm text-gray-700 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600">✓</span>
+                        <span>지도 앱 검색을 통한 <strong>정확한 위치 안내</strong></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600">✓</span>
+                        <span>부스별 <strong>디지털 프로필 제공</strong></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600">✓</span>
+                        <span>응급 상황 발생 시 <strong>정확한 위치 전달</strong></span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-600">✓</span>
+                        <span>행사 종료 후 <strong>자동 소멸되는 주소 수명주기 관리</strong></span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 border border-purple-300 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">🖥️ 프로토타입 시연</h4>
+                    <p className="text-sm text-gray-700">실제 프로토타입을 제작해 <strong>지도 연동 기반 시스템 시연</strong>까지 수행</p>
+                  </div>
+                </div>
+                <div className="bg-gray-100 rounded-lg p-3 mt-4 text-center">
+                  <p className="text-sm text-gray-600 italic">→ 플리마켓은 <strong>"분석된 공간 + 주소로 설명 가능한 장소"</strong>로 확장</p>
+                </div>
+              </div>
+
+              {/* 담당 역할 상세 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 담당 역할 상세</h3>
+                <div className="bg-purple-50 border-2 border-purple-300 rounded-lg p-4">
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700"><strong>GIS 기반 공간분석 설계 및 수행</strong></p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">버퍼·중첩·<strong>Erase·Union</strong> 등 공간분석 프로세스 구축</p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">분석 결과 <strong>지도 및 인포그래픽 시각화</strong></p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700">후보지 해석 및 <strong>정책·행정 활용 방안 정리</strong></p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-sm text-gray-700"><strong>사물주소 적용 시나리오 설계</strong> 및 서비스 구조 제안</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* 프로젝트 의의 및 한계 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">💡 프로젝트 의의 및 한계</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm font-semibold text-green-700 mb-1">✅ 의의</p>
+                    <p className="text-sm text-gray-700">공간분석을 통해 플리마켓 입지 선정 문제를 <strong>데이터 기반으로 재정의</strong>하고, 주소정보 활용까지 연결한 <strong>공간정보 융합형 기획 프로젝트</strong></p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-amber-700 mb-1">⚠️ 한계</p>
+                    <p className="text-sm text-gray-700">통신사 유동인구 데이터 등 고정밀 자료를 활용하지 못해 일부 분석은 대중교통·인구 데이터를 통한 <strong>간접 추정에 의존</strong> → 향후 실시간 유동 데이터와 연계해 분석 정밀도 향상 가능</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Self Grow Modal */}
+      {activeModal === 'selfGrow' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header Image */}
+            <div className="w-full h-72 bg-gradient-to-r from-green-50 to-emerald-100 flex items-center justify-center">
+              <img
+                src="/projects/selfgrow.png"
+                alt="Self Grow 스마트 화분"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🌱 Self Grow: 빛을 따라 자유롭게 성장하는 스마트 화분</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">2024 한이음 ICT 멘토링 프로젝트 · 구현 과제 (미선정)</p>
+              <p className="text-sm text-gray-500 mb-6">구현 전제 프로젝트 · 임베디드 / 공간정보</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2024.02.02 ~ 2024.04.01</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">3인 팀 프로젝트</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">프로젝트 개요</p>
+                  <p className="text-sm text-gray-700">2024 한이음 ICT 멘토링 프로젝트에서 실제 제작을 목표로 과제가 제시된 프로젝트로, SLAM 기반 자율 이동 스마트 화분 시스템을 제안했습니다. 프로젝트는 구현 단계를 전제로 설계되었으나, 과제 선정 과정에서 최종 선정되지 않아 실제 제작 단계로는 진행되지 못했습니다. 다만, 구현을 염두에 둔 기술 구조 설계와 시스템 흐름까지는 구체적으로 준비했습니다.</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">SLAM과 센서 기반 공간 인식을 활용해 스마트 화분이 실내 환경에서 스스로 위치를 인식하고 햇빛이 가장 잘 드는 위치로 이동하도록 구현을 전제로 설계한 임베디드·공간정보 프로젝트</p>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">프로젝트 아이디어 기획 및 기술 방향 설정</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">SLAM 기반 공간 인식 및 자율 이동 구조 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">센서(LiDAR, Camera) 구성 및 데이터 활용 흐름 정의</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">구현 가능성을 고려한 시스템 아키텍처 설계</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 설계 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 설계 내용 (구현 전제)</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">SLAM 기반 실내 공간 인식 구조</h4>
+                    <ul className="space-y-1 text-sm text-gray-700">
+                      <li>• LiDAR와 카메라 센서를 활용해 실내 환경을 인식하는 구조 설계</li>
+                      <li>• SLAM을 통해 화분의 위치를 추정하고 이동 경로를 계획하는 흐름 정의</li>
+                      <li>• 로봇·자율주행 기술을 일상적인 IoT 기기에 적용하는 시도</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">최적 위치 탐색 및 이동 시나리오</h4>
+                    <ul className="space-y-1 text-sm text-gray-700">
+                      <li>• 조도 센서 데이터를 기반으로 햇빛이 가장 잘 드는 위치 탐색</li>
+                      <li>• 고정형 스마트 화분이 아닌, 스스로 이동하는 생장 환경 제공 개념 제안</li>
+                      <li>• 자율 이동이 실제 사용자 문제를 해결하는지에 대한 타당성 검토</li>
+                    </ul>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">식물 상태 관리 시스템 설계</h4>
+                    <ul className="space-y-1 text-sm text-gray-700">
+                      <li>• 카메라 기반 영상 분석으로 식물 생장 상태를 확인하는 구조 설계</li>
+                      <li>• 자동 급수 시스템을 연동한 관리 흐름 정의</li>
+                      <li>• 사용자 개입을 최소화하는 방향으로 시스템 시나리오 구성</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 기술적 고민 및 배운 점 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기술적 고민 및 배운 점</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">SLAM과 센서 기술을 구현 관점에서 어떻게 적용할 수 있는지 구체적으로 고민</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">기술적으로 가능한 것과 사용자에게 실제로 필요한 것의 차이를 인식</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">구현 이전 단계에서 아이디어의 실용성을 검증하는 과정의 중요성을 체감</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">임베디드·공간정보 기술을 서비스로 연결하는 시각을 얻음</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">📝 프로젝트 후기</h3>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  실제 제작을 목표로 준비했던 프로젝트였지만, 과제 선정 단계에서 탈락하며 구현까지 이어지지는 못했습니다.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  그럼에도 불구하고 SLAM, 센서, 공간정보 기술을 단순한 개념이 아니라 실제 구현을 전제로 설계해본 경험은 이후 프로젝트에서 기술 선택과 실용성을 함께 고려하는 데 큰 기준점이 되었습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Rescue Route Modal */}
+      {activeModal === 'rescueRoute' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header Image */}
+            <div className="w-full h-72 bg-gradient-to-r from-blue-50 to-indigo-50 flex items-center justify-center">
+              <img
+                src="/projects/rescue_route_detail.png"
+                alt="응급차량 경로 최적화 시스템"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🏆 실시간 교통 데이터 기반 응급차량 경로 최적화 시스템</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">제6회 공간정보 활용 경진대회 · 최우수상</p>
+              <p className="text-sm text-gray-500 mb-6">팀 프로젝트 · 공간정보 서비스 기획</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2024.09 ~ 2024.10</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">주최 / 주관</p>
+                  <p className="text-base font-semibold text-gray-900">공간정보산업진흥원</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">4인 팀 프로젝트 (팀장)</p>
+                  <p className="text-sm text-gray-600 mt-1">※ 본인 역할: 팀장, 서비스 기획 총괄, 공간정보 활용 시나리오 설계, 제안서 작성 주도</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">실시간 교통 데이터를 활용해 응급차량의 이동 경로를 효율적으로 안내하고, 민간 교통 흐름까지 함께 고려한 공간정보 기반 공공 안전 서비스를 기획한 프로젝트로 공간정보의 공공 활용 가능성을 인정받아 최우수상을 수상함</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">블로그 링크</p>
+                  <a
+                    href="https://blog.naver.com/rlawls1448/223631106628"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-blue-600 hover:underline flex items-center gap-1"
+                  >
+                    프로젝트 회고록 보기
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">팀장으로 참여하여 프로젝트 전반 주도</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">아이디어 발굴 및 문제 정의 총괄</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실시간 교통 데이터 기반 서비스 구조 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">공간정보 활용 시나리오 기획</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">제안서 전체 구조 설계 및 핵심 내용 작성</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">발표 흐름 구성 및 결과 정리</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 기획 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 기획 내용</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 실시간 교통 상황 기반 응급차량 경로 안내</p>
+                    <ul className="space-y-1 ml-3">
+                      <li className="text-xs text-gray-600">• 실시간 교통 데이터를 활용해 응급차량 전용 최적 경로를 산출</li>
+                      <li className="text-xs text-gray-600">• 정체 구간을 회피하고, 상황에 따라 유연하게 경로를 재계산하는 구조 제안</li>
+                      <li className="text-xs text-gray-600">• 단순 최단 거리 기준이 아닌 실제 주행 가능성 중심의 경로 설계</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 민간 교통 흐름을 고려한 공간정보 활용</p>
+                    <ul className="space-y-1 ml-3">
+                      <li className="text-xs text-gray-600">• 응급차량 이동 시 주변 일반 차량의 흐름까지 함께 고려</li>
+                      <li className="text-xs text-gray-600">• 특정 구간 집중 혼잡을 방지하는 공공·민간 교통 연계 개념 제시</li>
+                      <li className="text-xs text-gray-600">• 공간정보를 단순 시각화가 아닌 의사결정 도구로 활용하는 방향 제안</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 공공 안전 관점의 서비스 기획</p>
+                    <ul className="space-y-1 ml-3">
+                      <li className="text-xs text-gray-600">• 응급 상황에서의 골든타임 확보를 핵심 가치로 설정</li>
+                      <li className="text-xs text-gray-600">• 공간정보 기술이 시민 안전과 직결될 수 있음을 강조</li>
+                      <li className="text-xs text-gray-600">• 실제 공공 서비스로 확장 가능한 구조를 중심으로 기획</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 기획적 고민 및 배운 점 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기획적 고민 및 배운 점</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">공간정보는 "지도 표현"을 넘어 시간·상황·의사결정을 결합할 때 가치가 극대화됨</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실시간 데이터와 공간정보를 결합한 서비스 설계의 중요성 체감</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">기술 구현 이전에 문제 정의와 서비스 시나리오 설계가 성패를 좌우함을 경험</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">팀장 역할을 수행하며 기획·문서화·의사결정 조율 역량 강화</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 수상 후기 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">📝 수상 후기</h3>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  공간정보를 단순한 분석 도구가 아니라, <strong>공공 안전과 시민의 생명에 직접적으로 기여할 수 있는 기술</strong>로 바라보는 시각을 갖게 된 프로젝트였습니다.
+                  <br /><br />
+                  아이디어 발굴부터 제안서 작성까지 전 과정을 주도하며, 공간정보 기술의 사회적 가치와 실제 활용 가능성을 인정받아 <strong>최우수상</strong>이라는 성과로 이어질 수 있었습니다.
+                  <br /><br />
+                  또한 이 대회에서 다른 참가자들이 직접 개발해 온 서비스들을 보며, <strong>서비스 개발</strong>에 대한 관심을 갖게 된 계기가 되었습니다.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Digital Twin Modal */}
+      {activeModal === 'digitalTwin' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header Image */}
+            <div className="w-full h-72 bg-gradient-to-r from-green-50 to-emerald-50 flex items-center justify-center">
+              <img
+                src="/projects/digital_twin.png"
+                alt="농어촌 디지털 트윈 서비스"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🌾 디지털 트윈 기반 농촌 생활 커뮤니티 관리 플랫폼</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">농어촌 디지털 트윈 서비스 아이디어 경진대회 · 장려상 🥉</p>
+              <p className="text-sm text-gray-500 mb-6">1인 출품작 · 서비스 기획 / 공간정보</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2024.09 ~ 2024.10</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">주관</p>
+                  <p className="text-base font-semibold text-gray-900">포스텍 미래도시연구센터</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">1인 출품작</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">농촌 지역의 고령화와 디지털 격차 문제를 해결하기 위해 디지털 트윈과 음성 기반 AI 인터페이스를 결합한 농촌 생활 커뮤니티 관리 플랫폼을 제안한 아이디어 중심의 서비스 기획 프로젝트</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">블로그 링크</p>
+                  <a
+                    href="https://blog.naver.com/rlawls1448/223648587549"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-base font-semibold text-purple-600 hover:underline flex items-center gap-1"
+                  >
+                    프로젝트 회고록 보기
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* 역할 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">농촌 고령층의 디지털 접근성 문제 정의</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">디지털 트윈 기반 서비스 구조 기획</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">사용자(고령층) 관점의 기능 시나리오 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">제안서 스토리라인 구성 및 사회적 가치 정리</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 기획 내용 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 기획 내용</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 문제 정의: 농촌 고령화와 디지털 격차</p>
+                    <ul className="space-y-1 ml-3">
+                      <li className="text-xs text-gray-600">• 농촌 지역의 고령 인구 증가와 디지털 서비스 접근성 문제에 주목</li>
+                      <li className="text-xs text-gray-600">• 기존 디지털 서비스가 고령층에게는 오히려 진입 장벽이 된다는 점을 문제로 설정</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 디지털 트윈 기반 농촌 생활 관리 플랫폼</p>
+                    <ul className="space-y-1 ml-3">
+                      <li className="text-xs text-gray-600">• 농촌 지역의 인프라(전력, 급수 등)를 디지털 트윈으로 시각화</li>
+                      <li className="text-xs text-gray-600">• 지역 자원과 생활 정보를 한 플랫폼에서 통합 관리하는 구조 제안</li>
+                      <li className="text-xs text-gray-600">• 문제 발생 가능 지점을 사전에 파악하고 빠르게 대응할 수 있는 구조 설계</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 음성 기반 AI 비서를 활용한 접근성 개선</p>
+                    <ul className="space-y-1 ml-3">
+                      <li className="text-xs text-gray-600">• 고령층이 복잡한 조작 없이 서비스를 이용할 수 있도록 음성 기반 AI 비서 중심 UI/UX 제안</li>
+                      <li className="text-xs text-gray-600">• 앱을 직접 조작하지 않아도: 생활 정보 조회, 건강 상태 확인, 이상 발생 시 가족·지역 보건소 자동 알림 가능</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 커뮤니티 중심 서비스 설계</p>
+                    <ul className="space-y-1 ml-3">
+                      <li className="text-xs text-gray-600">• 주민 간 소통을 지원하는 커뮤니티 기능 제안</li>
+                      <li className="text-xs text-gray-600">• 고립되기 쉬운 농촌 고령층의 사회적 연결 강화</li>
+                      <li className="text-xs text-gray-600">• 디지털 기술을 통해 삶의 질을 실질적으로 개선하는 방향에 초점</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* 기획 배경 및 고민 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기획 배경 및 고민</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">디지털 기술은 복잡해서 어려운 것이 아니라, 누구를 위해 어떻게 설계하느냐에 따라 접근성이 달라진다는 관점에서 출발</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실제 가족(할머니)의 디지털 기기 사용 경험에서 아이디어를 얻어 "기술을 줄이는 설계"의 중요성을 고민</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">기술 구현보다 사회적 문제 정의와 서비스 시나리오의 설득력에 집중</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">📝 프로젝트 후기</h3>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  이번 공모전은 디지털 트윈과 AI 기술을 단순한 기술 요소가 아니라, <strong>사회적 문제를 해결하는 수단</strong>으로 바라보게 된 계기였습니다.
+                  <br /><br />
+                  아직 모든 기술을 구현할 수 있는 단계는 아니었지만, 디지털 기술이 고령층의 삶을 더 편리하게 만들 수 있다는 가능성을 <strong>서비스 기획 관점에서 구체화</strong>해볼 수 있었던 의미 있는 경험이었습니다.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Ocean Trash Modal */}
+      {activeModal === 'oceanTrash' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header */}
+            <div className="w-full h-32 bg-gradient-to-r from-cyan-50 to-blue-100 flex items-center justify-center">
+              <span className="text-6xl">🌊</span>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🌊 대국민 디지털 트윈 아이디어 공모전</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">디지털 트윈 기반 해류 및 지형 분석을 통한 해양 쓰레기 근원 추적 및 예방 시스템</p>
+              <p className="text-sm text-gray-500 mb-6">공모전 프로젝트 · 디지털 트윈 / 공간정보 / 환경</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2024.09</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">공모전 개요</p>
+                  <p className="text-sm text-gray-700">대국민 디지털 트윈 아이디어 공모전은 디지털 트윈과 공간 데이터를 활용해 사회적 문제를 해결할 수 있는 창의적인 아이디어를 제안하는 공모전입니다. 본 프로젝트는 해양 쓰레기 문제를 대상으로, 기존의 '쓰레기 밀집 지역 분석' 중심 접근에서 벗어나 문제의 발생 원인을 공간적으로 추적해보는 관점에서 아이디어를 제안했습니다.</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">팀 프로젝트 (3인)</p>
+                  <p className="text-xs text-gray-500 mt-1">※ 본인 역할: 해양 쓰레기 문제의 공간적 재정의 / 해류·해저 지형 데이터 활용 아이디어 구상 / 디지털 트윈 활용 시나리오 구조화 / 팀 아이디어 정리 및 제안서 구성 보조</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">해류와 해저 지형이라는 공간 변수를 디지털 트윈 환경에 결합해, 해양 쓰레기 문제를 '결과(집적)'가 아닌 '원인(발생 근원)' 관점에서 해석해보는 방법을 고민한 디지털 트윈 기반 아이디어 공모전 프로젝트</p>
+                </div>
+              </div>
+
+              {/* 역할 상세 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 상세</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">해양 쓰레기 문제를 공간정보 관점에서 재정의</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">해류·지형 데이터가 쓰레기 이동에 미치는 영향 분석 관점 제시</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">디지털 트윈 환경에서 데이터 결합 흐름 설계</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">'역추적'이라는 접근 방식이 갖는 의미와 한계 정리</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">팀 내 아이디어 논의 정리 및 문서화</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 아이디어 및 접근 방식 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 아이디어 및 접근 방식</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">1. 기존 해양 쓰레기 분석 방식의 한계 인식</h4>
+                    <p className="text-sm text-gray-700 mb-2">기존 해양 쓰레기 관련 연구와 서비스는 대부분 쓰레기가 <strong>어디에 많이 쌓이는지(집적 지역)</strong>를 분석하는 데 초점을 맞추고 있었습니다.</p>
+                    <p className="text-sm text-gray-700">그러나 이러한 접근은 이미 문제가 발생한 이후의 상황을 다룬다는 한계를 가진다고 판단했고, 본 프로젝트에서는 <strong>"쓰레기는 어디서부터 시작되었는가"</strong>라는 질문에서 출발했습니다.</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">2. 해류·해저 지형 기반 '근원 역추적' 관점</h4>
+                    <p className="text-sm text-gray-700 mb-2">해양 쓰레기는 해류, 조류, 해저 지형 등 다양한 공간적·환경적 요인에 의해 이동합니다. 이에 따라:</p>
+                    <ul className="space-y-1 text-sm text-gray-700 ml-4">
+                      <li>• 위성 기반 해류 데이터</li>
+                      <li>• 해저 지형 정보</li>
+                      <li>• 해양 환경 변수</li>
+                    </ul>
+                    <p className="text-sm text-gray-700 mt-2">등을 디지털 트윈 환경에 통합해, 쓰레기의 이동 경로를 <strong>거꾸로 해석(역추적)</strong>함으로써 발생 가능 지역을 추정하는 아이디어를 제안했습니다.</p>
+                    <p className="text-sm text-gray-700 mt-2">이 접근은 단순한 시뮬레이션을 넘어, <strong>공간정보를 활용한 원인 중심 분석</strong>이라는 점에서 기존 방식과 차별점을 가집니다.</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">3. 예방 중심의 디지털 트윈 활용 시나리오</h4>
+                    <p className="text-sm text-gray-700 mb-2">본 아이디어의 궁극적인 목표는 쓰레기가 쌓인 이후의 대응이 아니라, <strong>사전에 문제를 줄이는 것</strong>이었습니다. 이를 위해:</p>
+                    <ul className="space-y-1 text-sm text-gray-700 ml-4">
+                      <li>• 발생 가능성이 높은 지역을 공간적으로 도출하고</li>
+                      <li>• 해당 지역을 대상으로 정책적 개입, 관리 강화, 교육 캠페인 등을 제안하는</li>
+                    </ul>
+                    <p className="text-sm text-gray-700 mt-2"><strong>예방 중심 디지털 트윈 활용 시나리오</strong>를 구상했습니다.</p>
+                    <p className="text-sm text-gray-700 mt-2">디지털 트윈을 '현상을 보여주는 도구'가 아니라 <strong>의사결정을 돕는 도구</strong>로 활용하려는 관점이 핵심이었습니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 한계와 기술적 고민 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 한계와 기술적 고민</h3>
+                <p className="text-sm text-gray-700 mb-3">아이디어를 구체화하는 과정에서, 해류 분석의 높은 복잡성과 현실적인 제약도 명확히 드러났습니다.</p>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">해류는 기후·환경 요인에 따라 지속적으로 변화하며</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">이를 정밀하게 모델링하기 위해서는 방대한 데이터와 연산 자원이 필요</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">제한된 공모전 환경에서는 이를 충분히 검증·구현하기 어려웠음</p>
+                  </li>
+                </ul>
+                <p className="text-sm text-gray-700 mt-3">이로 인해, 아이디어의 이론적 가능성에 비해 현실적인 구현 난이도가 높다는 점이 본 프로젝트의 한계로 작용했습니다.</p>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">📝 프로젝트 후기</h3>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  본선 진출에는 이르지 못했지만, 이번 공모전을 통해 디지털 트윈과 공간정보 기술이 환경 문제를 다루는 데 어떤 방식으로 활용될 수 있는지를 깊이 고민해볼 수 있었습니다.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  특히 <strong>결과가 아닌 원인에 주목하는 공간적 사고 방식</strong>이 복잡한 사회·환경 문제를 바라보는 데 중요한 관점이 될 수 있음을 체감했습니다.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  이 경험은 이후 다른 디지털 트윈 및 공간정보 프로젝트에서도 문제를 정의하는 방식과 기술을 바라보는 시각에 큰 영향을 주었습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Suwon Safety Modal */}
+      {activeModal === 'suwonSafety' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header Image */}
+            <div className="w-full h-72 bg-gradient-to-r from-slate-50 to-gray-100 flex items-center justify-center">
+              <img
+                src="/projects/suwon.png"
+                alt="수원형 도시안전 서비스"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🛡️ 시민체감 수원형 도시안전 서비스 아이디어톤</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">지능형 CCTV 경보기 '망루'</p>
+              <p className="text-sm text-gray-500 mb-6">아이디어톤 프로젝트 · 도시안전 / 공간정보(GIS) / 서비스 기획</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2024.09.23 ~ 2024.10.25</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">대회 개요</p>
+                  <p className="text-sm text-gray-700">시민체감 수원형 도시안전 서비스 아이디어톤은 도시 내 안전 문제를 시민의 일상 관점에서 바라보고, 기술과 디자인, 사회적 가치를 결합한 해결책을 제안하는 아이디어톤 대회입니다. 본 프로젝트는 수원시의 도시 안전 문제를 대상으로, 공간정보와 AI 기술을 활용해 범죄를 사후 대응이 아닌 사전 예방 관점에서 다루는 방법을 고민하며 아이디어를 제안했습니다.</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">4인 팀 (다학제 협업)</p>
+                  <p className="text-xs text-gray-500 mt-1">전자공학 / 공간정보공학 / 산업디자인 / 토목공학 전공 참여</p>
+                  <p className="text-xs text-gray-500 mt-1">※ 본인 역할: 공간정보(GIS) 기반 위험 지역 분석, 데이터 시각화, 자원 배치 전략 구상</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">범죄 데이터를 공간적으로 분석해 취약 지역을 도출하고, 지속 가능한 에너지와 AI 기반 분석을 결합해 도시 안전을 능동적으로 관리하는 서비스 구조를 고민한 아이디어톤 프로젝트</p>
+                </div>
+              </div>
+
+              {/* 역할 상세 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 상세</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">범죄 데이터와 인구 밀도를 활용한 공간적 위험도 분석</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">GIS 기반 범죄 취약 지역 도출</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">분석 결과의 시각화 및 지도 표현</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">공간 분석 결과를 바탕으로 한 자원 배치 전략 구상</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">공간정보 분석을 서비스 기획 흐름에 연결</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 아이디어 및 접근 방식 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 아이디어 및 접근 방식</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">1. 도시 범죄 취약 지역에 대한 공간적 접근</h4>
+                    <p className="text-sm text-gray-700 mb-2">도시 범죄는 단순히 발생 건수의 문제가 아니라, <strong>어디에서, 어떤 환경에서 반복되는가</strong>의 문제라고 판단했습니다.</p>
+                    <p className="text-sm text-gray-700">이에 따라 범죄 발생 데이터와 인구 밀도 데이터를 결합해 공간 단위로 위험도를 산출하고, 범죄 취약 지역을 직관적으로 파악할 수 있도록 GIS 기반 시각화를 수행했습니다. 이를 통해 도시 안전 문제를 개별 사건이 아닌 <strong>공간 패턴의 문제</strong>로 바라보는 접근을 시도했습니다.</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">2. 지능형 CCTV 경보기 '망루' 개념</h4>
+                    <p className="text-sm text-gray-700 mb-2">본 프로젝트에서 제안한 '망루'는 단순한 CCTV 설치가 아닌, <strong>도시 안전 거점의 개념</strong>입니다.</p>
+                    <ul className="space-y-1 text-sm text-gray-700 ml-4">
+                      <li>• CCTV와 센서를 통해 실시간 데이터를 수집하고</li>
+                      <li>• AI 기반 분석으로 이상 행동을 감지하며</li>
+                      <li>• 필요 시 빠르게 대응할 수 있는 구조를 구상했습니다.</li>
+                    </ul>
+                    <p className="text-sm text-gray-700 mt-2">이는 사후 모니터링 중심의 기존 CCTV 활용 방식에서 벗어나, <strong>범죄를 사전에 억제하고 예방하는 방향</strong>으로 도시 안전 서비스를 재해석한 시도였습니다.</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">3. 지속 가능한 전력 공급을 고려한 설계</h4>
+                    <p className="text-sm text-gray-700">도시 내 모든 지역이 안정적인 전력 인프라를 갖추고 있지 않다는 점에 주목해, 태양광 패널과 수직축 풍력 터빈을 활용한 <strong>독립형 전력 공급 구조</strong>를 제안했습니다. 이는 기술적 실현 여부를 떠나, 도시 안전 인프라를 설계할 때 지속 가능성과 환경 요소를 함께 고려해야 한다는 문제의식에서 출발한 접근이었습니다.</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">4. 공간정보 기반 자원 배치 전략</h4>
+                    <p className="text-sm text-gray-700">GIS 분석을 통해 도출한 범죄 취약 지역을 바탕으로, 한정된 도시 안전 자원을 어디에 우선 배치해야 효과적인지를 고민했습니다. 단순히 장비를 많이 설치하는 것이 아니라, <strong>공간적 위험도가 높은 지역에 집중 배치</strong>함으로써 자원의 효율성을 높이는 전략을 서비스 구조 안에 녹이고자 했습니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 한계와 배운 점 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 한계와 배운 점</h3>
+                <p className="text-sm text-gray-700 mb-3">본 프로젝트는 제안서 단계에서 마무리되었고, 본선 진출에는 이르지 못해 실제 구현으로 이어지지는 못했습니다.</p>
+                <p className="text-sm text-gray-700 mb-3">이 과정에서 <strong>기술적 가능성과 함께 실현 가능성을 설득력 있게 전달하는 것의 중요성</strong>을 크게 느꼈습니다.</p>
+                <p className="text-sm text-gray-700">아이디어 자체의 완성도뿐 아니라, 왜 지금 필요한지, 실제로 어떻게 작동할 수 있는지를 명확히 보여주는 것이 중요하다는 점을 배웠습니다.</p>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">📝 프로젝트 후기</h3>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  이번 아이디어톤을 통해 공간정보 기술이 단순한 데이터 분석을 넘어, <strong>도시 문제를 이해하고 의사결정을 돕는 핵심 도구</strong>가 될 수 있음을 깊이 체감했습니다.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  특히 GIS 기반 분석과 시각화가 도시 안전과 같은 복합적인 문제에서 문제를 구조적으로 바라보게 만드는 힘이 있다는 점을 알게 되었고, 이후 공간정보를 서비스와 정책 설계로 연결하는 관점에 큰 영향을 준 경험이었습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Drone Contest Modal */}
+      {activeModal === 'droneContest' && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => closeModal()}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => closeModal()}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-6 h-6 text-gray-600" />
+            </button>
+
+            {/* Header Image */}
+            <div className="w-full h-72 bg-gradient-to-r from-sky-50 to-blue-100 flex items-center justify-center">
+              <img
+                src="/projects/drone.png"
+                alt="드론 활용 경진대회"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🚁 제7회 서울특별시 드론 활용 경진대회</h2>
+              <p className="text-lg text-purple-600 font-semibold mb-1">스마트 방제 GIS와 드론 기반 통합 관리 시스템</p>
+              <p className="text-sm text-gray-500 mb-6">공모전 프로젝트 · 드론 / 공간정보(GIS) / 스마트 농업</p>
+
+              {/* 기본 정보 */}
+              <div className="mb-12">
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">기간</p>
+                  <p className="text-base font-semibold text-gray-900">2024.10.21 ~ 2024.11.28</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">대회 개요</p>
+                  <p className="text-sm text-gray-700">제7회 서울특별시 드론 활용 경진대회는 드론 기술을 활용해 도시·환경·농업 등 다양한 사회 문제를 해결할 수 있는 창의적인 활용 방안을 제안하는 공모전입니다. 본 프로젝트는 병해충 문제를 대상으로, 드론과 GIS(공간정보 시스템)를 결합해 방제 작업을 보다 정밀하고 효율적으로 수행할 수 있는 관리 시스템을 고민하며 아이디어를 제안했습니다.</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-gray-500 mb-1">팀 구성</p>
+                  <p className="text-base font-semibold text-gray-900">팀 프로젝트</p>
+                  <p className="text-xs text-gray-500 mt-1">※ 본인 역할: 공간정보(GIS) 기반 병해충 분포 분석 접근 설계, 방제 우선순위 도출 논리 정리, 아이디어 구조화</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
+                  <p className="text-sm text-gray-700">드론으로 수집한 병해충·환경 데이터를 GIS로 분석해 방제 대상 지역과 우선순위를 공간적으로 도출하고, 정밀 방제를 통해 환경 부담을 줄이는 방법을 고민한 드론·공간정보 융합 아이디어 프로젝트</p>
+                </div>
+              </div>
+
+              {/* 역할 상세 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할 상세</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">병해충 문제를 공간적 관점에서 재정의</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">병해충 분포 데이터를 GIS로 해석하는 분석 흐름 구상</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">방제 우선순위 도출을 위한 공간 분석 논리 정리</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">드론 기반 정밀 방제 시나리오 구조화</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">팀 내 아이디어 정리 및 제안 내용 보완</p>
+                  </li>
+                </ul>
+              </div>
+
+              {/* 주요 아이디어 및 접근 방식 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 아이디어 및 접근 방식</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">1. 병해충 문제에 대한 공간정보 기반 접근</h4>
+                    <p className="text-sm text-gray-700 mb-2">기존의 방제 방식은 넓은 지역을 대상으로 한 일괄 방제가 주를 이루어, 자원 낭비와 환경 부담이 크다는 한계를 가진다고 판단했습니다.</p>
+                    <p className="text-sm text-gray-700">이에 따라 본 프로젝트에서는 병해충 문제를 <strong>"어디에 얼마나 분포해 있는가"</strong>라는 공간 문제로 정의하고, GIS를 활용해 병해충 밀집 지역을 분석하는 접근을 시도했습니다.</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">2. 드론 기반 데이터 수집과 GIS 분석 연계</h4>
+                    <p className="text-sm text-gray-700 mb-2">드론에 탑재된 센서를 통해 병해충 분포와 주변 환경 정보를 수집하고, 이를 GIS 환경에서 시각화·분석해 병해충 밀도가 높은 지역과 방제가 시급한 구역을 도출하는 흐름을 구상했습니다.</p>
+                    <p className="text-sm text-gray-700">이를 통해 방제 작업을 경험이나 감각이 아닌 <strong>데이터 기반 의사결정</strong>으로 전환하고자 했습니다.</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">3. 방제 우선순위 분석과 정밀 방제 개념</h4>
+                    <p className="text-sm text-gray-700 mb-2">GIS 분석을 통해 도출한 결과를 바탕으로 방제가 꼭 필요한 지역만 선별하고, 한정된 자원을 효율적으로 배치하는 <strong>정밀 방제 전략</strong>을 제안했습니다.</p>
+                    <p className="text-sm text-gray-700">이는 기존의 무차별적 방제 방식에서 벗어나, 필요한 곳에만 최소한으로 개입함으로써 방제 효과는 높이고 환경 부담은 줄이려는 접근이었습니다.</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-4">
+                    <h4 className="font-semibold text-purple-800 mb-2">4. 지속 가능한 방제 관리 관점</h4>
+                    <p className="text-sm text-gray-700">방제 결과 데이터를 축적해 향후 방제 계획 수립, 병해충 발생 패턴 분석 등에 활용할 수 있는 <strong>지속 가능한 관리 체계</strong>로 확장 가능한 구조를 함께 고민했습니다. 병해충 문제를 단기 대응이 아닌, 공간 데이터를 활용한 장기 관리 문제로 바라본 점이 핵심이었습니다.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 한계와 배운 점 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 한계와 배운 점</h3>
+                <p className="text-sm text-gray-700 mb-3">아이디어를 구체화하는 과정에서, 병해충 데이터의 복잡성과 실시간 처리의 어려움이라는 현실적인 한계를 마주했습니다.</p>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">정확한 병해충 분포 파악을 위한 데이터 확보의 어려움</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">실시간 분석을 위한 기술·자원적 제약</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-sm text-gray-700">공모전 환경에서 이를 충분히 검증하기 어려운 점</p>
+                  </li>
+                </ul>
+                <p className="text-sm text-gray-700 mt-3">이러한 이유로 본선 진출에는 이르지 못했지만, 공간정보 기반 접근의 가능성과 함께 현실적 제약을 동시에 고려해야 함을 깊이 깨닫는 계기가 되었습니다.</p>
+              </div>
+
+              {/* 프로젝트 후기 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-purple-800 mb-3">📝 프로젝트 후기</h3>
+                <p className="text-sm text-gray-700 leading-relaxed mb-3">
+                  이번 경진대회를 통해 드론과 GIS 기술이 병해충 방제와 같은 환경 문제에서 얼마나 중요한 역할을 할 수 있는지를 분명히 느낄 수 있었습니다.
+                </p>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  특히 <strong>문제를 공간 데이터로 정의하고 해석하는 사고 방식</strong>이 기술적 해결책을 설계하는 데 필수적이라는 점을 체감했고, 이후 공간정보를 활용한 공공·환경 프로젝트를 바라보는 시각에 큰 영향을 준 경험이었습니다.
+                </p>
+              </div>
             </div>
           </div>
         </div>
