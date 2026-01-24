@@ -563,7 +563,7 @@ const gisTimelineData = [
 const aiTimelineData = [
   {
     id: 1,
-    title: "2024 데이터 크리에이터 캠프",
+    title: "CNN 기반 패션 이미지 분류 및 스타일 선호 예측",
     period: "2024.09 ~ 2024.10",
     description: "인공지능을 처음 접한 프로젝트로, 학습이 성립되기까지의 과정에서 전처리와 학습 전략의 중요성을 체감하며 인공지능에 흥미를 느끼게 된 경험이었습니다.",
   },
@@ -4430,7 +4430,7 @@ export default function Portfolio() {
 
             {/* Project Details */}
             <div className="p-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">🧩 어셈블 (ASSEMBLE)</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">🧩 2024 데이터 크리에이터 캠프</h2>
               <p className="text-lg text-gray-600 mb-1">패션 스타일 이미지 분류 및 선호 예측 AI 프로젝트</p>
               <p className="text-sm text-gray-500 mb-6">팀 프로젝트 · Computer Vision / Recommendation</p>
 
@@ -4438,7 +4438,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">기간</p>
-                  <p className="text-base font-semibold text-gray-900">2024.09 ~ 2024.10 (데이터 크리에이터 캠프)</p>
+                  <p className="text-base font-semibold text-gray-900">2024.09 ~ 2024.10 (약 2달)</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">팀 구성</p>
