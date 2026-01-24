@@ -479,7 +479,7 @@ const backendTimelineData = [
     id: 7,
     title: "외주 작업",
     period: "2025년 12월 ~",
-    description: "처음으로 받은 외주 작업입니다. 대규모 동시 접속이 발생하는 티켓팅 서비스를 가정한 아키텍처를 구상하고 있습니다.",
+    description: "처음으로 받은 외주 작업입니다. 동시 주문이 발생하는 상황을 가정하고, 데이터 정합성과 안정성을 고려한 백엔드 아키텍처를 설계하고 있습니다.",
   },
   {
     id: 8,
@@ -541,9 +541,9 @@ const gisTimelineData = [
   },
   {
     id: 7,
-    title: "공간분석 프로젝트\n주소정보 기반 플리마켓 최적 입지 도출",
+    title: "공간분석 프로젝트\n플리마켓 입지 적합성 분석",
     period: "2025년 6월",
-    description: "생활인구·교통 데이터를 활용해 플리마켓 최적 입지를 분석하고, 사물주소 체계를 결합해 실제 운영과 안내까지 연결한 공간분석 프로젝트",
+    description: "생활인구·교통 데이터를 활용해 플리마켓 최적 입지를 분석하고, 사물주소 체계를 결합해 운영과 안내까지 연결한 공간분석 프로젝트",
   },
   // {
   //   id: 7,
@@ -4279,18 +4279,19 @@ export default function Portfolio() {
             </button>
 
             {/* Project Image */}
-            <div className="w-full p-4 flex justify-center">
+            <div className="w-full p-4 flex flex-col items-center">
               <img
                 src="/projects/tradlab_detail.png"
                 alt="외주 작업"
                 className="w-3/4 h-auto rounded-2xl"
               />
+              <p className="text-sm text-gray-500 mt-2 italic">이전 요구사항에 맞춰 설계했던 폐기된 아키텍처</p>
             </div>
 
             {/* Project Details */}
             <div className="p-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">외주 작업</h2>
-              <p className="text-lg text-gray-600 mb-6">대규모 동시 접속 티켓팅 서비스 아키텍처 설계</p>
+              <p className="text-lg text-gray-600 mb-6">동시 주문 환경에서의 백엔드 동시성 처리 설계</p>
 
               {/* 기본 정보 */}
               <div className="mb-12">
@@ -4304,7 +4305,7 @@ export default function Portfolio() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-sm text-gray-500 mb-1">프로젝트 소개</p>
-                  <p className="text-sm text-gray-700">처음으로 받은 외주 작업입니다.<br />대규모 동시 접속이 발생하는 티켓팅 서비스를 가정한 아키텍처를 구상하고 있습니다.<br></br>프론트엔드 1명을 초청해 팀을 구성했습니다.</p>
+                  <p className="text-sm text-gray-700">처음으로 진행하는 외주 프로젝트입니다.<br />초기에는 대규모 동시 접속이 발생하는 티켓팅 서비스를 가정한 전체 아키텍처 설계를 목표로 시작했으나, 요구사항 조정에 따라 현재는 동시 주문 상황에서 발생하는 동시성 문제를 안정적으로 처리하는 백엔드 구조 설계에 집중하고 있습니다.<br /><br />프론트엔드 개발자 1명과 함께 팀을 구성하여 협업 중입니다.</p>
                 </div>
               </div>
 
@@ -4314,15 +4315,15 @@ export default function Portfolio() {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">대규모 동시 접속 환경에서의 안정적인 시스템 설계</p>
+                    <p className="text-sm text-gray-700">다수의 사용자가 동시에 주문 요청을 보낼 때 발생하는 데이터 정합성 문제 해결</p>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">티켓팅 서비스의 공정성과 성능을 동시에 고려한 아키텍처 구상</p>
+                    <p className="text-sm text-gray-700">중복 주문, 초과 판매 등을 방지하기 위한 동시성 제어 전략 설계</p>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">실제 서비스 운영을 고려한 확장 가능한 구조 설계</p>
+                    <p className="text-sm text-gray-700">실제 서비스 환경을 고려한 안정적이고 확장 가능한 백엔드 구조 설계</p>
                   </li>
                 </ul>
               </div>
@@ -4331,10 +4332,10 @@ export default function Portfolio() {
               <div className="mb-6">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <p className="text-sm text-gray-700">
-                    <strong>🚀 현재 상태:</strong> 아키텍처 설계 및 초기 구현 진행중
+                    <strong>🚀 현재 상태:</strong> 동시 주문 상황을 가정한 시나리오 정의 및 동시성 처리 중심의 아키텍처 설계, 초기 구현 진행 중
                   </p>
                   <p className="text-sm text-gray-600 mt-2">
-                    상세한 내용은 프로젝트 완료 후 업데이트될 예정입니다.
+                    상세 구현 내용 및 결과는 프로젝트 완료 후 업데이트될 예정입니다.
                   </p>
                 </div>
               </div>
@@ -4940,6 +4941,8 @@ export default function Portfolio() {
                   <p className="text-sm text-gray-700">기능 단위로 개발 내역을 <strong>Markdown 문서로 지속 기록</strong></p>
                   <p className="text-sm text-gray-700">단순 결과물이 아니라 <strong>기획 의도 / 선택한 구조 / 트레이드오프 / TODO</strong> 까지 함께 정리</p>
                   <p className="text-sm text-gray-700">Claude, Gemini 등 LLM이 장기 맥락을 잘 기억하지 못하는 한계를 인지하고,<br />내가 작성한 문서를 컨텍스트로 제공해 작업을 끊김 없이 이어가도록 활용</p>
+                  <p className="text-sm text-gray-700">복잡한 작업은 <strong>Spec 명세서</strong>를 작성해 프롬프트로 전달<br />→ 목적 / 규칙 / 기대 결과 / 나오면 안 되는 것들로 구조화</p>
+                  <p className="text-sm text-gray-700">자주 쓰는 <strong>프롬프트 템플릿, 테스트 코드</strong>는 문서화해서 재사용<br />→ AI가 맥락을 더 잘 이해하고 일관된 결과 도출</p>
                   <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mt-3">
                     <p className="text-sm text-gray-700">→ "AI에게 다시 설명하는 시간"을 줄이고</p>
                     <p className="text-sm text-gray-700">→ "이어서 바로 구현/리팩토링/검토"가 가능한 상태를 유지</p>
@@ -5028,6 +5031,13 @@ export default function Portfolio() {
                       <p className="text-sm text-gray-700">• <strong>설계 검토자</strong> (DB 스키마, API 설계 검증)</p>
                       <p className="text-sm text-gray-700">• <strong>구현 보조자</strong> (NestJS / Prisma / RN 코드 스캐폴딩)</p>
                       <p className="text-sm text-gray-700">• <strong>운영 컨설턴트</strong> (보안, Rate Limit, 캐싱, 로깅 전략)</p>
+                    </div>
+                  </div>
+                  <div className="bg-white border border-gray-200 rounded-lg p-4">
+                    <p className="text-xs text-gray-500 mb-2">AI Agent 활용 전략:</p>
+                    <div className="space-y-2">
+                      <p className="text-sm text-gray-700">• <strong>작게 시작하기</strong> — 한번에 많이 X, 개발 Agent 하나로 시작해서 필요할 때마다 확장<br /><span className="text-xs text-gray-500 ml-4">(예: GitHub 이슈/PR 자동 생성 MCP 붙이기 등)</span></p>
+                      <p className="text-sm text-gray-700">• <strong>나눠서 여러 번 호출</strong> — 한번에 다 시키면 추적이 힘듦, 단계별로 나눠서 요청</p>
                     </div>
                   </div>
                   <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
@@ -5725,7 +5735,7 @@ export default function Portfolio() {
               <div className="mb-12">
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
-                  <p className="text-sm text-gray-700">생활인구·교통 데이터를 활용해 플리마켓 최적 입지를 분석하고, 사물주소 체계를 결합해 실제 운영과 안내까지 연결한 공간분석 프로젝트</p>
+                  <p className="text-sm text-gray-700">생활인구·교통 데이터를 활용해 플리마켓 최적 입지를 분석하고, 사물주소 체계를 결합해 운영과 안내까지 연결한 공간분석 프로젝트</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-sm text-gray-500 mb-1">팀 구성</p>
