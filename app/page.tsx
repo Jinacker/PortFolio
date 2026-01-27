@@ -644,17 +644,36 @@ export default function Portfolio() {
   const [isExperienceExpanded, setIsExperienceExpanded] = useState(false);
   const [activeModal, setActiveModal] = useState<string | null>(null);
 
-  // 이미지 프리로드 후 모달 열기 함수
-  const openModalWithImagePreload = (imageSrc: string, modalName: string) => {
-    const img = new Image();
-    img.src = imageSrc;
-    img.onload = () => {
-      setActiveModal(modalName);
+  // 이미지 프리로드 후 모달 열기 함수 (여러 이미지 지원)
+  const openModalWithImagePreload = (imageSrc: string | string[], modalName: string) => {
+    const images = Array.isArray(imageSrc) ? imageSrc : [imageSrc];
+    let loadedCount = 0;
+    let modalOpened = false;
+
+    const openModal = () => {
+      if (!modalOpened) {
+        modalOpened = true;
+        setActiveModal(modalName);
+      }
     };
-    // 이미지가 이미 캐시되어 있는 경우 즉시 실행
-    if (img.complete) {
-      setActiveModal(modalName);
-    }
+
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === images.length) {
+          openModal();
+        }
+      };
+      // 이미지가 이미 캐시되어 있는 경우
+      if (img.complete) {
+        loadedCount++;
+        if (loadedCount === images.length) {
+          openModal();
+        }
+      }
+    });
   };
 
   const closeModal = () => setActiveModal(null);
@@ -1740,7 +1759,7 @@ export default function Portfolio() {
                       {/* GNSS 측위 성능 비교 자세히 보기 버튼 */}
                       {item.id === 5 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/gps_1.png', 'gnssProject')}
+                          onClick={() => openModalWithImagePreload(['/projects/gps_1.png', '/projects/gps_2.png'], 'gnssProject')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -1758,7 +1777,7 @@ export default function Portfolio() {
                       {/* 플리마켓 입지 분석 자세히 보기 버튼 */}
                       {item.id === 7 && (
                         <button
-                          onClick={() => openModalWithImagePreload('/projects/fli_1.png', 'fleamarketProject')}
+                          onClick={() => openModalWithImagePreload(['/projects/fli_1.png', '/projects/fli_2.png'], 'fleamarketProject')}
                           className="mt-3 w-full px-3 py-2 text-xs font-medium text-purple-600 border border-purple-500 rounded-lg hover:bg-purple-50 transition-colors"
                         >
                           프로젝트 자세히 보기
@@ -6262,8 +6281,8 @@ export default function Portfolio() {
             {/* Modal Content */}
             <div className="p-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">🏆 실시간 교통 데이터 기반 응급차량 경로 최적화 시스템</h2>
-              <p className="text-lg text-purple-600 font-semibold mb-1">제6회 공간정보 활용 경진대회 · 최우수상</p>
-              <p className="text-sm text-gray-500 mb-6">팀 프로젝트 · 공간정보 서비스 기획</p>
+              <p className="text-lg text-purple-600 font-semibold mb-1">제6회 공간정보 활용 경진대회 · 최우수상 (민간 아이디어 부문)</p>
+              <p className="text-sm text-gray-500 mb-6">팀 프로젝트 · 공간정보 서비스 기획 및 설계 | 2024.09 ~ 2024.10</p>
 
               {/* 기본 정보 */}
               <div className="mb-12">
@@ -6278,11 +6297,10 @@ export default function Portfolio() {
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">팀 구성</p>
                   <p className="text-base font-semibold text-gray-900">4인 팀 프로젝트 (팀장)</p>
-                  <p className="text-sm text-gray-600 mt-1">※ 본인 역할: 팀장, 서비스 기획 총괄, 공간정보 활용 시나리오 설계, 제안서 작성 주도</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
                   <p className="text-sm text-gray-500 mb-1">한 줄 소개</p>
-                  <p className="text-sm text-gray-700">실시간 교통 데이터를 활용해 응급차량의 이동 경로를 효율적으로 안내하고, 민간 교통 흐름까지 함께 고려한 공간정보 기반 공공 안전 서비스를 기획한 프로젝트로 공간정보의 공공 활용 가능성을 인정받아 최우수상을 수상함</p>
+                  <p className="text-sm text-gray-700">실시간 교통 데이터와 AI 알고리즘을 결합해 응급차량의 '골든타임'을 확보하고, 민간 차량의 자발적 우회를 유도하여 공공 안전 시너지를 창출하는 공간정보 기반 지능형 교통 시스템(ITS) 기획 프로젝트입니다.</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-sm text-gray-500 mb-1">블로그 링크</p>
@@ -6300,65 +6318,115 @@ export default function Portfolio() {
 
               {/* 역할 */}
               <div className="mb-12">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할</h3>
-                <ul className="space-y-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">👨‍💻 역할: 팀장 및 서비스 기획 총괄</h3>
+                <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">팀장으로 참여하여 프로젝트 전반 주도</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">아이디어 발굴 및 문제 정의</p>
+                      <p className="text-xs text-gray-600 mt-1">도심 교통 체증 및 병원 수용 정보 부재로 인한 응급차량 지체 문제를 정의하고, 골든타임 확보를 위한 핵심 가치 설정</p>
+                    </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">아이디어 발굴 및 문제 정의 총괄</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">공간정보 활용 시나리오 설계</p>
+                      <p className="text-xs text-gray-600 mt-1">국가교통정보센터 및 국립중앙의료원 데이터를 결합한 서비스 흐름 설계</p>
+                    </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">실시간 교통 데이터 기반 서비스 구조 설계</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">기술 로직 및 알고리즘 제안</p>
+                      <p className="text-xs text-gray-600 mt-1">A* 알고리즘 가중치 설계 및 민간 차량 유도를 위한 클러스터링/시계열 분석 모델 도입 제안</p>
+                    </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">공간정보 활용 시나리오 기획</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">시스템 아키텍처 및 API 설계</p>
+                      <p className="text-xs text-gray-600 mt-1">Express.js 기반 API 구조 및 Leaflet.js를 활용한 GeoJSON 시각화 방안 수립</p>
+                    </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">제안서 전체 구조 설계 및 핵심 내용 작성</p>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">발표 흐름 구성 및 결과 정리</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">제안서 작성 및 발표 주도</p>
+                      <p className="text-xs text-gray-600 mt-1">논리적인 문서 구조 설계와 시각화 자료 구성을 통해 최우수상 수상 견인</p>
+                    </div>
                   </li>
                 </ul>
               </div>
 
-              {/* 주요 기획 내용 */}
+              {/* 주요 기획 및 기술 내용 */}
               <div className="mb-12">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 기획 내용</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">✨ 주요 기획 및 기술 내용</h3>
 
-                <div className="space-y-4">
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 실시간 교통 상황 기반 응급차량 경로 안내</p>
-                    <ul className="space-y-1 ml-3">
-                      <li className="text-xs text-gray-600">• 실시간 교통 데이터를 활용해 응급차량 전용 최적 경로를 산출</li>
-                      <li className="text-xs text-gray-600">• 정체 구간을 회피하고, 상황에 따라 유연하게 경로를 재계산하는 구조 제안</li>
-                      <li className="text-xs text-gray-600">• 단순 최단 거리 기준이 아닌 실제 주행 가능성 중심의 경로 설계</li>
-                    </ul>
+                {/* 1. 데이터 기반 응급실 및 최적 경로 선정 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-3">1. 데이터 기반 응급실 및 최적 경로 선정</h4>
+                  <div className="space-y-4">
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-800 mb-2">▸ 실시간 병원 가용 정보 통합</p>
+                      <p className="text-xs text-gray-600">국립중앙의료원의 실시간 병상 정보와 환자의 중증도를 AI가 분석하여 최적의 목적지 병원 자동 지정</p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-800 mb-2">▸ 가중치 반영 A* 알고리즘 (Weighted A*)</p>
+                      <p className="text-xs text-gray-600 mb-2">단순 최단거리가 아닌, 실시간 도로 상황을 반영한 5가지 핵심 가중치를 적용하여 경로 산출</p>
+                      <ul className="space-y-1 ml-3">
+                        <li className="text-xs text-gray-600">• <strong>양보 확률 가중치:</strong> 도로별 과거 양보 데이터를 기반으로 통과 용이성 계산</li>
+                        <li className="text-xs text-gray-600">• <strong>교통 혼잡도 가중치:</strong> 실시간 노드 밀도 및 도로 최대 용량 반영</li>
+                        <li className="text-xs text-gray-600">• <strong>도로 인프라 가중치:</strong> 차선 수, 교차로 및 신호등 개수 반영</li>
+                        <li className="text-xs text-gray-600">• <strong>돌발 상황 가중치:</strong> 사고, 공사, 기상 상황 등에 따른 위험도 적용</li>
+                        <li className="text-xs text-gray-600">• <strong>VMS(전광표지) 연동:</strong> 도로 메시지 기반 정체 구간 가중치 상향</li>
+                      </ul>
+                    </div>
                   </div>
+                </div>
 
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 민간 교통 흐름을 고려한 공간정보 활용</p>
-                    <ul className="space-y-1 ml-3">
-                      <li className="text-xs text-gray-600">• 응급차량 이동 시 주변 일반 차량의 흐름까지 함께 고려</li>
-                      <li className="text-xs text-gray-600">• 특정 구간 집중 혼잡을 방지하는 공공·민간 교통 연계 개념 제시</li>
-                      <li className="text-xs text-gray-600">• 공간정보를 단순 시각화가 아닌 의사결정 도구로 활용하는 방향 제안</li>
-                    </ul>
+                {/* 2. 민간 차량 우회 및 양보 유도 시스템 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-3">2. 민간 차량 우회 및 양보 유도 시스템</h4>
+                  <div className="space-y-4">
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-800 mb-2">▸ 군집 분석을 통한 알림 범위 설정</p>
+                      <p className="text-xs text-gray-600">DBSCAN 및 K-means 알고리즘으로 경로 주변의 차량 밀집도를 분석하여 효율적인 알람 전송 지역 식별</p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-800 mb-2">▸ 미래 위치 예측 모델</p>
+                      <p className="text-xs text-gray-600">상태 공간 모델(State Space Model)과 ARIMA 시계열 분석을 통해 민간 차량의 이동 패턴을 예측하고, 응급차량 접근 전 사전 알림 전송</p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-800 mb-2">▸ 상황별 맞춤형 유도 로직</p>
+                      <ul className="space-y-1 ml-3">
+                        <li className="text-xs text-gray-600">• <strong>차선 비워두기:</strong> 500m 이내 접근 시 차선 변경 또는 양보 권유 메시지 송출</li>
+                        <li className="text-xs text-gray-600">• <strong>우회 경로 제시:</strong> 응급차량 경로와 겹치는 정도를 페널티로 부여하여 민간 차량용 최적 우회로 탐색</li>
+                      </ul>
+                    </div>
                   </div>
+                </div>
 
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <p className="text-sm font-semibold text-gray-800 mb-2">▸ 공공 안전 관점의 서비스 기획</p>
-                    <ul className="space-y-1 ml-3">
-                      <li className="text-xs text-gray-600">• 응급 상황에서의 골든타임 확보를 핵심 가치로 설정</li>
-                      <li className="text-xs text-gray-600">• 공간정보 기술이 시민 안전과 직결될 수 있음을 강조</li>
-                      <li className="text-xs text-gray-600">• 실제 공공 서비스로 확장 가능한 구조를 중심으로 기획</li>
-                    </ul>
+                {/* 3. 서비스 구현 및 확장성 설계 */}
+                <div className="mb-6">
+                  <h4 className="text-base font-bold text-gray-800 mb-3">3. 서비스 구현 및 확장성 설계</h4>
+                  <div className="space-y-4">
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-800 mb-2">▸ 시각화 및 데이터 전송</p>
+                      <p className="text-xs text-gray-600">WebSocket을 활용한 실시간 위치 공유와 GeoJSON 형식을 이용한 지도 렌더링(Leaflet.js) 설계</p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-800 mb-2">▸ OTA(Over-the-Air) 업데이트</p>
+                      <p className="text-xs text-gray-600">커넥티드 카 서비스(블루링크 등)를 통해 기존 차량 내비게이션에 소프트웨어 업데이트 방식으로 즉시 도입 가능한 구조 제안</p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-800 mb-2">▸ 도메인 확장</p>
+                      <p className="text-xs text-gray-600">구급차 외에도 소방차, 경찰차 등 긴급 출동 차량 및 스마트 시티 물류 최적화 시스템으로의 확장 가능성 제시</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -6366,31 +6434,62 @@ export default function Portfolio() {
               {/* 기획적 고민 및 배운 점 */}
               <div className="mb-12">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">🧠 기획적 고민 및 배운 점</h3>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">공간정보는 "지도 표현"을 넘어 시간·상황·의사결정을 결합할 때 가치가 극대화됨</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">공간정보의 의사결정 도구화</p>
+                      <p className="text-xs text-gray-600 mt-1">지도를 단순 시각화 매체로 보는 것을 넘어, 실시간 가중치와 예측 모델을 결합했을 때 공공 안전 분야에서 강력한 의사결정 도구가 될 수 있음을 체감함</p>
+                    </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">실시간 데이터와 공간정보를 결합한 서비스 설계의 중요성 체감</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">데이터 전처리의 중요성</p>
+                      <p className="text-xs text-gray-600 mt-1">GPS 오차 보정, 결측치 보간, 좌표계 변환 등 수집된 날것의 데이터를 GIS 데이터와 매핑하는 과정에서 데이터 정제 능력의 중요성을 학습함</p>
+                    </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">기술 구현 이전에 문제 정의와 서비스 시나리오 설계가 성패를 좌우함을 경험</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">사용자 관점의 기술 설계</p>
+                      <p className="text-xs text-gray-600 mt-1">기술적 정교함도 중요하지만, 운전자가 방해받지 않으면서도 자발적으로 협조할 수 있게 하는 UI/UX 시나리오(우회로 추천 등)가 서비스 성패의 핵심임을 깨달음</p>
+                    </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-sm text-gray-700">팀장 역할을 수행하며 기획·문서화·의사결정 조율 역량 강화</p>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-800">팀 리딩 및 문서화 역량</p>
+                      <p className="text-xs text-gray-600 mt-1">복잡한 알고리즘과 데이터 흐름을 시각적인 제안서로 구조화하고, 팀원 간의 역할을 조율하며 프로젝트의 완성도를 높이는 경험을 쌓음</p>
+                    </div>
                   </li>
                 </ul>
+              </div>
+
+              {/* 활용 데이터 및 스택 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">📝 활용 데이터 및 스택</h3>
+                <div className="space-y-4">
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Data</p>
+                    <p className="text-xs text-gray-600">국가교통정보센터(교통 소통/예측/돌발/CCTV/노드링크), 국립중앙의료원(응급실 가용병상)</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Algorithm</p>
+                    <p className="text-xs text-gray-600">Weighted A*, DBSCAN, K-means, State Space Model, ARIMA</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Tech (Proposed)</p>
+                    <p className="text-xs text-gray-600">Node.js (Express), WebSocket, Leaflet.js, GeoJSON, OTA</p>
+                  </div>
+                </div>
               </div>
 
               {/* 수상 후기 */}
               <div className="bg-purple-50 border border-purple-200 rounded-lg p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-3">📝 수상 후기</h3>
                 <p className="text-sm text-gray-700 leading-relaxed">
-                  공간정보를 단순한 분석 도구가 아니라, <strong>공공 안전과 시민의 생명에 직접적으로 기여할 수 있는 기술</strong>로 바라보는 시각을 갖게 된 프로젝트였습니다.
+                  공간정보를 활용해 응급 상황에서 실제로 도움이 될 수 있는 서비스를 구상하면서 <strong>공간정보 기술이 사람의 삶과 직접 맞닿아 있다는 점</strong>을 처음으로 실감하게 되었습니다.
                   <br /><br />
                   아이디어 발굴부터 제안서 작성까지 전 과정을 주도하며, 공간정보 기술의 사회적 가치와 실제 활용 가능성을 인정받아 <strong>최우수상</strong>이라는 성과로 이어질 수 있었습니다.
                   <br /><br />
