@@ -435,6 +435,12 @@ const frontendTimelineData = [
     period: "2025년 11월 ~ 운영중",
     description: "1인 개발로 앱을 출시하고 운영하며, 사용자들의 편의를 위해 항상 고민중입니다.",
   },
+  {
+    id: 6,
+    title: "카츠헌터 X 돈가스지도",
+    period: "2026년 1월 ~",
+    description: "국내 최고 돈가스 리뷰 전문 인플루언서 '카츠헌터'님과 콜라보하여,\n돈가스 지도를 전국으로 확장해 나가고 있습니다.",
+  },
 ]
 
 // 백엔드 타임라인 데이터
@@ -1314,6 +1320,23 @@ export default function Portfolio() {
                                                     />
                                                   </div>
                                                 </div>
+                                              ) : item.id === 6 ? (
+                                                <div className="flex justify-between items-start mb-3">
+                                                  <div className="flex-1 pr-3">
+                                                    <h4 className="text-sm font-bold text-blue-600 mb-1">
+                                                      {item.title}
+                                                    </h4>
+                                                    <p className="text-xs text-gray-500 mb-2">{item.period}</p>
+                                                    <p className="text-xs text-gray-700">{item.description}</p>
+                                                  </div>
+                                                  <div className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden ml-3 bg-white flex items-center justify-center border border-gray-300">
+                                                    <img
+                                                      src="/projects/katz_hunter_logo.svg"
+                                                      alt="카츠헌터 X 돈가스지도"
+                                                      className="w-full h-full object-contain"
+                                                    />
+                                                  </div>
+                                                </div>
                                               ) : (
                                                 <>
                                                   <h4 className="text-sm font-bold text-blue-600 mb-1">
@@ -1358,6 +1381,17 @@ export default function Portfolio() {
                         >
                           프로젝트 자세히 보기
                         </button>
+                      )}
+                      {/* 카츠헌터 X 돈가스지도 자세히 보기 버튼 */}
+                      {item.id === 6 && (
+                        <a
+                          href="https://www.instagram.com/katz_hunter/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 w-full px-3 py-2 text-xs font-medium text-blue-600 border border-blue-300 rounded-lg hover:bg-blue-50 transition-colors block text-center"
+                        >
+                          자세히 보기
+                        </a>
                       )}
                     </div>
                   </div>
