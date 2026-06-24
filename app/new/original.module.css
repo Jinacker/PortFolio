@@ -109,8 +109,30 @@
   display: none;
 }
 
-.portfolioNav a {
+.portfolioNav a,
+.page a {
   text-decoration: none;
+}
+
+.page :global(.record-float-card) {
+  animation: record-float 4.8s ease-in-out infinite;
+}
+
+.page :global(.record-float-card:hover) {
+  animation-play-state: paused;
+  transform: translateY(-0.75rem) rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+@keyframes record-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-0.5rem);
+  }
 }
 
 @media (min-width: 640px) {

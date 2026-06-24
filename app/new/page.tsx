@@ -1,10 +1,9 @@
 "use client"
 
 import { NextIntlClientProvider } from "next-intl"
-import { BookOpen, Code, Code2, GraduationCap, Mail, Trophy, User, Users } from "lucide-react"
+import { ArrowUpRight, BookOpen, Code, Code2, GraduationCap, Mail, Trophy, User, Users } from "lucide-react"
 
 import { SectionWatchProvider } from "@/_components/SectionWatcher"
-import BlogSection from "@/_sections/BlogSection"
 import EducationSection from "@/_sections/EducationSection"
 import ExperienceSection from "@/_sections/ExperienceSection"
 import MainSection from "@/_sections/MainSection"
@@ -37,7 +36,7 @@ const passionGroups = [
       ["2025.09 ~ 2026.02", "UMC 9기 Node.JS Server 파트", ""],
       ["2025.03 ~ 2025.12", "멋쟁이 사자처럼 13기 BE 파트", ""],
       ["2025.01 ~ 2025.11", "KSEB 부트캠프 4기", ""],
-      ["2024.11 ~ 2025.03", "KT 대학생 IT 서포터즈 2기 기획팀 부팀장", ""],
+      ["2024.11 ~ 2025.03", "KT 대학생 IT 서포터즈 2기 - AI 코딩 커리큘럼 개발", ""],
       ["2024.09 ~ 2024.11", "2024 데이터 크리에이터 캠프 스타터 과정", ""],
     ],
   },
@@ -62,10 +61,46 @@ const passionGroups = [
     items: [
       ["2025.09", "2025 메이커페어 부스 창업 및 운영", "Maker Faire Seoul 2025"],
       ["2025.03 ~ 2026.02", "코딩 동아리 DEBUG 회장", "공간정보공학과 학술 동아리"],
+      ["2025.01", "커비eSim 서포터즈 1기", "핀트원(주)"],
       ["2024.12.05 ~ 2025.03.21", "KT 대학생 IT 서포터즈 KIT 2기 기획팀 부팀장", "KT희망나눔그룹"],
       ["2024.08.17 ~ 2024.09.21", "부천시 스마트리빙랩 시민참여단 팀장", "부천시"],
       ["2024.08.12 ~ 2024.10.31", "디지털 혁신 페스타 서포터즈", "지디넷코리아"],
     ],
+  },
+]
+
+const MEMOIR_POSITIONS = [
+  "left-0 top-6 rotate-[-12deg] z-[4]",
+  "left-[120px] top-1 rotate-[-4deg] z-[3]",
+  "left-[240px] top-5 rotate-[5deg] z-[2]",
+  "left-[360px] top-9 rotate-[12deg] z-[1]",
+]
+const MEMOIR_ANIMATION_DELAYS = ["0s", "0.8s", "1.6s", "2.4s"]
+
+const memoirPosts = [
+  {
+    title: "2025-2학기 회고록",
+    subtitle: "성장과 도전의 기록",
+    image: "/projects/2025-2.png",
+    href: "https://blog.naver.com/rlawls1448/224132285494",
+  },
+  {
+    title: "2025 여름방학 회고록",
+    subtitle: "뜨거운 여름의 성장기",
+    image: "/projects/2025-summer.png",
+    href: "https://blog.naver.com/rlawls1448/224005262527",
+  },
+  {
+    title: "2025-1학기 회고록",
+    subtitle: "새로운 시작의 기록",
+    image: "/projects/2025-1.png",
+    href: "https://blog.naver.com/rlawls1448/223927328023",
+  },
+  {
+    title: "2024년 회고록",
+    subtitle: "한 해를 돌아보며",
+    image: "/projects/2024.png",
+    href: "https://blog.naver.com/rlawls1448/223785118853",
   },
 ]
 
@@ -103,7 +138,7 @@ function PassionSection() {
           const Icon = group.icon
 
           return (
-          <article key={group.title} className="px-0">
+          <article key={group.title} className={group.title === "개발 연혁" || group.title === "대외활동" ? "ml-7 px-0" : "px-0"}>
             <div className="mb-2.5 flex items-center gap-2">
               <Icon className={`h-4 w-4 ${group.iconClass}`} strokeWidth={1.9} />
               <h3 className="text-sm font-bold text-foreground md:text-base">{group.title}</h3>
@@ -116,7 +151,7 @@ function PassionSection() {
                   className="py-1 indent-0 first:pt-0 last:pb-0"
                 >
                   <p className="text-[10px] font-semibold leading-3 text-foreground/40">{date}</p>
-                  <p className="mt-0.5 break-keep text-[11px] font-semibold leading-4 text-foreground/85">{title}</p>
+                  <p className={`mt-0.5 font-semibold leading-4 text-foreground/85 ${title.includes("VSPICE") ? "whitespace-nowrap text-[10px]" : "break-keep text-[11px]"}`}>{title}</p>
                   {organization ? (
                     <p className="break-keep text-[10px] leading-3 text-foreground/45">{organization}</p>
                   ) : null}
@@ -136,6 +171,66 @@ function PassionSection() {
   )
 }
 
+function RecordSection() {
+  return (
+    <section id="blog" className="w-full">
+      <p className="section-eyebrow">기록의 습관</p>
+      <p className="section-title">생각이 흘러가버리지 않도록 꾸준히 기록해왔습니다.</p>
+
+      <div className="relative mx-auto mb-10 h-56 w-[540px] max-w-full">
+        {memoirPosts.map((post, index) => {
+          return (
+            <a
+              key={post.title}
+              href={post.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ animationDelay: MEMOIR_ANIMATION_DELAYS[index] }}
+              className={`record-float-card absolute w-44 rounded-md border border-foreground/10 bg-background/90 p-2.5 no-underline shadow-sm backdrop-blur transition duration-300 hover:z-10 hover:border-primary/30 hover:shadow-md ${MEMOIR_POSITIONS[index]}`}
+            >
+              <img
+                src={post.image}
+                alt={post.title}
+                className="h-20 w-full rounded object-cover"
+              />
+              <p className="mt-2 truncate text-xs font-bold text-foreground">{post.title}</p>
+              <p className="mt-0.5 truncate text-[11px] font-medium text-foreground/45">{post.subtitle}</p>
+            </a>
+          )
+        })}
+      </div>
+
+      <div className="mx-auto max-w-[720px] text-center">
+        <p className="break-keep text-sm font-medium leading-7 text-foreground/65 md:text-base">
+          5년간 블로그에 경험과 고민을 남겼고,
+          <br />
+          군 생활 동안에도 하루도 빠짐없이 일기를 쓰며 스스로를 돌아봤습니다.
+        </p>
+        <p className="mt-4 break-keep text-sm font-medium leading-7 text-foreground/65 md:text-base">
+          결과보다 과정에 가까운 이야기들,
+          <br />
+          그리고 제가 어떤 방식으로 배우고 성장해왔는지를 담아두었습니다.
+        </p>
+        <p className="mt-4 break-keep text-sm font-semibold leading-7 text-foreground/80 md:text-base">
+          제가 어떤 생각을 하며 여기까지 왔는지 궁금하다면,
+          <br />
+          블로그에 남겨둔 기록들을 편하게 구경해보셔도 좋습니다.
+        </p>
+
+        <a
+          href="https://blog.naver.com/rlawls1448"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 text-sm font-bold text-primary no-underline transition hover:bg-primary/10"
+        >
+          블로그 방문하기
+          <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+        </a>
+      </div>
+    </section>
+  )
+}
+
 export default function NewPortfolioPage() {
   return (
     <NextIntlClientProvider locale="ko" messages={messages} timeZone="Asia/Seoul">
@@ -151,9 +246,9 @@ export default function NewPortfolioPage() {
             <MainSection />
             <ExistingPortfolioHeader />
             <PassionSection />
+            <RecordSection />
             <ExperienceSection />
             <ProjectSection />
-            <BlogSection />
             <EducationSection />
             <div id="contact" className="w-full">
               <OutroSection />
