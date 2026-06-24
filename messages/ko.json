@@ -1,0 +1,58 @@
+{
+  "Metadata": {
+    "title": "송진경 | 프론트엔드 개발자",
+    "description": "프론트엔드 개발자 송진경의 포트폴리오입니다. React, Typescript, Next.js 기반의 웹 프론트엔드를 개발합니다.",
+    "keywords": "프론트엔드, 프론트엔드 개발자, 프론트엔드 개발자 포트폴리오"
+  },
+  "Header": {
+    "name": "송진경",
+    "role": "프론트엔드 개발자",
+    "nav": {
+      "experience": "경력",
+      "project": "프로젝트",
+      "blog": "블로그",
+      "education": "교육"
+    },
+    "sectionNav": "섹션 내비게이션",
+    "toggleTheme": "테마 전환",
+    "changeLanguage": "언어 변경",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기"
+  },
+  "Main": {
+    "heading": "안녕하세요,<br></br>프론트엔드 개발자<br></br><em>송진경</em>입니다.",
+    "subtitle": "React를 중심으로 웹 프론트엔드를 개발합니다.<br></br>함께 제품을 만들고 성장시킬 곳을 찾고 있습니다."
+  },
+  "Intro": {
+    "eyebrow": "핵심 역량",
+    "title": "확장 가능하게 설계하며, 측정해 개선합니다."
+  },
+  "Experience": {
+    "eyebrow": "경력 사항",
+    "title": "다양한 업무와 프로젝트를 통해<br></br>경험과 노하우를 쌓고 있습니다.",
+    "groups": {
+      "work": "업무 경험",
+      "project": "프로젝트"
+    },
+    "showDetail": "주요 업무 내용 보기",
+    "hideDetail": "주요 업무 내용 가리기"
+  },
+  "Project": {
+    "eyebrow": "프로젝트 상세",
+    "title": "주요 프로젝트의 세부 사항을 확인해보세요"
+  },
+  "Blog": {
+    "eyebrow": "블로그",
+    "title": "자세한 문제해결 과정은<br></br>블로그에서 확인할 수 있습니다.",
+    "readMore": "자세히 보기",
+    "goToBlog": "블로그로 이동"
+  },
+  "Education": {
+    "eyebrow": "교육 및 어학"
+  },
+  "Outro": {
+    "message": "감사합니다<br></br>더 궁금한 점이 있다면<br></br>편하게 연락주세요",
+    "email": "이메일",
+    "github": "Github"
+  }
+}

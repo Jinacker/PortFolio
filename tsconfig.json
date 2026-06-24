@@ -19,6 +19,12 @@
       }
     ],
     "paths": {
+      "@/_components/*": ["./app/_components/*"],
+      "@/_sections/*": ["./app/_sections/*"],
+      "@/assets/*": ["./public/assets/*"],
+      "@/data/*": ["./app/data/*"],
+      "@/i18n/*": ["./app/i18n/*"],
+      "@/utils/*": ["./app/utils/*"],
       "@/*": ["./*"]
     }
   },
