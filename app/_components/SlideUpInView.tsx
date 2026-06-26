@@ -1,8 +1,11 @@
 "use client";
 
+import { ReactNode } from "react";
+
 import { motion } from "framer-motion";
 
-interface SlideUpInViewProps extends React.PropsWithChildren {
+interface SlideUpInViewProps {
+  children?: ReactNode;
   once?: boolean;
 }
 

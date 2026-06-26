@@ -16,7 +16,7 @@ export default function EducationSection() {
   return (
     <SectionWatcher id="education">
       <SlideUpInView>
-        <h2 className="section-eyebrow mb-6 md:mb-8">{t("eyebrow")}</h2>
+        <h2 className="section-eyebrow mb-10 md:mb-14">{t("eyebrow")}</h2>
 
         <div className="flex flex-col gap-8 md:gap-10">
           {educationItems.map(data => (

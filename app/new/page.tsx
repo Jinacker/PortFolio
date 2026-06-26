@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { ArrowUpRight, BookOpen, Code, Code2, GraduationCap, Mail, Trophy, User, Users } from "lucide-react"
 
 import { SectionWatchProvider } from "@/_components/SectionWatcher"
+import SlideUpInView from "@/_components/SlideUpInView"
 import EducationSection from "@/_sections/EducationSection"
 import ExperienceSection from "@/_sections/ExperienceSection"
 import MainSection from "@/_sections/MainSection"
@@ -174,59 +175,61 @@ function PassionSection() {
 function RecordSection() {
   return (
     <section id="blog" className="w-full">
-      <p className="section-eyebrow">기록의 습관</p>
-      <p className="section-title">생각이 흘러가버리지 않도록 꾸준히 기록해왔습니다.</p>
+      <SlideUpInView>
+        <p className="section-eyebrow">기록의 습관</p>
+        <p className="section-title">생각이 흘러가버리지 않도록 꾸준히 기록해왔습니다.</p>
 
-      <div className="relative mx-auto mb-10 h-56 w-[540px] max-w-full">
-        {memoirPosts.map((post, index) => {
-          return (
-            <a
-              key={post.title}
-              href={post.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ animationDelay: MEMOIR_ANIMATION_DELAYS[index] }}
-              className={`record-float-card absolute w-44 rounded-md border border-foreground/10 bg-background/90 p-2.5 no-underline shadow-sm backdrop-blur transition duration-300 hover:z-10 hover:border-primary/30 hover:shadow-md ${MEMOIR_POSITIONS[index]}`}
-            >
-              <img
-                src={post.image}
-                alt={post.title}
-                className="h-20 w-full rounded object-cover"
-              />
-              <p className="mt-2 truncate text-xs font-bold text-foreground">{post.title}</p>
-              <p className="mt-0.5 truncate text-[11px] font-medium text-foreground/45">{post.subtitle}</p>
-            </a>
-          )
-        })}
-      </div>
+        <div className="relative mx-auto mb-10 h-56 w-[540px] max-w-full">
+          {memoirPosts.map((post, index) => {
+            return (
+              <a
+                key={post.title}
+                href={post.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ animationDelay: MEMOIR_ANIMATION_DELAYS[index] }}
+                className={`record-float-card absolute w-44 rounded-md border border-foreground/10 bg-background/90 p-2.5 no-underline shadow-sm backdrop-blur transition duration-300 hover:z-10 hover:border-primary/30 hover:shadow-md ${MEMOIR_POSITIONS[index]}`}
+              >
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="h-20 w-full rounded object-cover"
+                />
+                <p className="mt-2 truncate text-xs font-bold text-foreground">{post.title}</p>
+                <p className="mt-0.5 truncate text-[11px] font-medium text-foreground/45">{post.subtitle}</p>
+              </a>
+            )
+          })}
+        </div>
 
-      <div className="mx-auto max-w-[720px] text-center">
-        <p className="break-keep text-sm font-medium leading-7 text-foreground/65 md:text-base">
-          5년간 블로그에 경험과 고민을 남겼고,
-          <br />
-          군 생활 동안에도 하루도 빠짐없이 일기를 쓰며 스스로를 돌아봤습니다.
-        </p>
-        <p className="mt-4 break-keep text-sm font-medium leading-7 text-foreground/65 md:text-base">
-          결과보다 과정에 가까운 이야기들,
-          <br />
-          그리고 제가 어떤 방식으로 배우고 성장해왔는지를 담아두었습니다.
-        </p>
-        <p className="mt-4 break-keep text-sm font-semibold leading-7 text-foreground/80 md:text-base">
-          제가 어떤 생각을 하며 여기까지 왔는지 궁금하다면,
-          <br />
-          블로그에 남겨둔 기록들을 편하게 구경해보셔도 좋습니다.
-        </p>
+        <div className="mx-auto max-w-[720px] text-center">
+          <p className="break-keep text-sm font-medium leading-7 text-foreground/65 md:text-base">
+            5년간 블로그에 경험과 고민을 남겼고,
+            <br />
+            군 생활 동안에도 하루도 빠짐없이 일기를 쓰며 스스로를 돌아봤습니다.
+          </p>
+          <p className="mt-4 break-keep text-sm font-medium leading-7 text-foreground/65 md:text-base">
+            결과보다 과정에 가까운 이야기들,
+            <br />
+            그리고 제가 어떤 방식으로 배우고 성장해왔는지를 담아두었습니다.
+          </p>
+          <p className="mt-4 break-keep text-sm font-semibold leading-7 text-foreground/80 md:text-base">
+            제가 어떤 생각을 하며 여기까지 왔는지 궁금하다면,
+            <br />
+            블로그에 남겨둔 기록들을 편하게 구경해보셔도 좋습니다.
+          </p>
 
-        <a
-          href="https://blog.naver.com/rlawls1448"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 text-sm font-bold text-primary no-underline transition hover:bg-primary/10"
-        >
-          블로그 방문하기
-          <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
-        </a>
-      </div>
+          <a
+            href="https://blog.naver.com/rlawls1448"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-transparent px-5 py-2.5 text-sm font-bold text-primary no-underline transition hover:bg-primary/5"
+          >
+            블로그 방문하기
+            <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+          </a>
+        </div>
+      </SlideUpInView>
     </section>
   )
 }
@@ -247,9 +250,9 @@ export default function NewPortfolioPage() {
             <ExistingPortfolioHeader />
             <PassionSection />
             <ExperienceSection />
-            <RecordSection />
             <ProjectSection />
             <EducationSection />
+            <RecordSection />
             <div id="contact" className="w-full">
               <OutroSection />
             </div>

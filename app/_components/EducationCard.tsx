@@ -4,19 +4,37 @@ import type { Education } from "@/data/types";
 
 type EducationCardProps = Education;
 
+const formatPeriod = (period: string) => {
+  const separator = period.includes(" - ") ? " - " : period.includes(" ~ ") ? " ~ " : null;
+
+  if (!separator) {
+    return <span>{period}</span>;
+  }
+
+  const [start, end] = period.split(separator);
+
+  return (
+    <span className="flex flex-col items-center leading-tight">
+      <span>{start}</span>
+      <span className="text-foreground/35">-</span>
+      <span>{end}</span>
+    </span>
+  );
+};
+
 const EducationCard = ({ id, period, title, sub_title, items }: EducationCardProps) => {
   return (
-    <div key={`edu-card-${id}`} className="grid sm:grid-cols-3 sm:gap-x-10 sm:items-start">
+    <div key={`edu-card-${id}`} className="grid sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-x-8 sm:items-start sm:pl-24">
       <p
         className="
-          text-sm md:text-base text-foreground/60 mb-3 sm:ml-auto
+          flex items-start gap-2.5 text-center text-sm md:text-base text-foreground/60 mb-3 sm:justify-end
           before:content-['*'] before:text-foreground/30 before:w-[21px] before:inline-block
         "
       >
-        {period}
+        {formatPeriod(period)}
       </p>
 
-      <div className="pl-5 sm:pl-0 sm:col-span-2 flex flex-col gap-2">
+      <div className="pl-5 sm:pl-0 flex flex-col gap-2">
         <div className="flex flex-col gap-1">
           <p className="text-base md:text-lg font-semibold">{title}</p>
           <p className="text-sm md:text-base font-normal text-foreground/60 whitespace-pre-wrap">{sub_title}</p>

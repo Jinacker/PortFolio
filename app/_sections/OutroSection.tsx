@@ -15,11 +15,11 @@ const OutroSection = () => {
 
         <div className="w-72 md:w-80 mx-auto grid grid-cols-3 text-sm md:text-base gap-2 md:gap-3 p-6 md:p-8 rounded-2xl bg-dark/5 dark:bg-light/10">
           <p className="font-semibold">{t("email")}</p>
-          <p className="col-span-2">sjk.mari@gmail.com</p>
+          <p className="col-span-2">rlawls1448@naver.com</p>
 
           <p className="font-semibold">{t("github")}</p>
-          <Link href="https://github.com/MeganMagic" target="_blank" className="col-span-2">
-            <p>@MeganMagic</p>
+          <Link href="https://github.com/Jinacker" target="_blank" className="col-span-2">
+            <p>@Jinacker</p>
           </Link>
         </div>
       </SlideUpInView>
