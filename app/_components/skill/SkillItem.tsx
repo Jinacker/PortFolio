@@ -48,6 +48,12 @@ const generateSizeSet = (size: Size) => {
 };
 
 const SkillItem = ({ size = "md", label, imageUrl, isActive = true }: SkillItemProps) => {
+  const imageFitClass = label === "Gitea" || label === "Dagre.js" ? "object-cover" : "object-contain";
+  const imagePaddingClass = cn(
+    label === "Slack" && "p-1",
+    label === "GitHub Actions" && "p-1",
+  );
+
   return (
     <div
       className={cn(
@@ -59,7 +65,7 @@ const SkillItem = ({ size = "md", label, imageUrl, isActive = true }: SkillItemP
       )}
     >
       <Image
-        className={cn(size === "xs" ? "rounded shadow" : "rounded-md shadow-md")}
+        className={cn(imageFitClass, imagePaddingClass, size === "xs" ? "rounded bg-white shadow" : "rounded-md bg-white shadow-md")}
         fill={true}
         src={imageUrl}
         alt={label}

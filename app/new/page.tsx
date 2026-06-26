@@ -32,7 +32,7 @@ const passionGroups = [
     iconClass: "text-[#00C676]",
     items: [
       ["2026.03 ~ 2026.06", "SureSoftTech. 시험자동화연구소 VSPICE팀 인턴", ""],
-      ["2025.12 ~ 2026.06", "트래드랩(초기 창업팀) 백엔드 개발", ""],
+      ["2025.12 ~ 2026.06", "트래드랩 창업팀 백엔드 개발", ""],
       ["2025.09 ~ 2026.02", "UMC 9기 Node.JS Server 파트", ""],
       ["2025.03 ~ 2025.12", "멋쟁이 사자처럼 13기 BE 파트", ""],
       ["2025.01 ~ 2025.11", "KSEB 부트캠프 4기", ""],
@@ -246,8 +246,8 @@ export default function NewPortfolioPage() {
             <MainSection />
             <ExistingPortfolioHeader />
             <PassionSection />
-            <RecordSection />
             <ExperienceSection />
+            <RecordSection />
             <ProjectSection />
             <EducationSection />
             <div id="contact" className="w-full">

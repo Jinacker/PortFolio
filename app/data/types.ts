@@ -6,7 +6,22 @@
  * Postgres database can be expressed as plain TypeScript modules.
  */
 
-export type Category = "FRONTEND" | "FRONTEND_LIBRARY" | "ENV" | "DESIGN" | "ETC";
+export type Category =
+  | "FRONTEND"
+  | "FRONTEND_LIBRARY"
+  | "BACKEND"
+  | "RUNTIME_LANGUAGE"
+  | "FRAMEWORK_API"
+  | "DATA_AUTH"
+  | "VALIDATION_SECURITY"
+  | "CLOUD_INFRA"
+  | "MERMAID_CORE"
+  | "MERMAID_TEST_QUALITY"
+  | "MERMAID_BUILD_WORKFLOW"
+  | "INFRA_TEST"
+  | "ENV"
+  | "DESIGN"
+  | "ETC";
 
 export interface Skill {
   id: number;
@@ -44,6 +59,7 @@ export interface Experience {
   links: ExperienceLink[];
   is_active: boolean | null;
   sub_title: string | null;
+  imageUrl?: string;
   index: number;
   skill_ids: number[];
   category: string | null;
