@@ -51,7 +51,7 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items }: Exp
           <ChevronRight className={cn("w-4 h-4 transition-transform", isExpanded && "rotate-90")} />
           <p className="text-left text-xs md:text-sm">{isExpanded ? t("hideDetail") : t("showDetail")}</p>
         </button>
-        {isExpanded && (
+        {isExpanded && items.length > 0 && (
           <ul className="list-disc list-inside bg-foreground/5 rounded-lg p-4 -indent-5 pl-10">
             {items.map((data, index) => (
               <li

@@ -23,22 +23,22 @@ const getTotalDuration = (obj: { [k in string]: number }) => {
   const durationOffset = 0.5;
   return Object.entries(obj).reduce((acc, cur) => acc + cur[1], 0) - durationOffset;
 };
-// first shape
-export const scene3shape1Durations = {
-  pathLength1: 1,
-};
-export const scene3shape1TotalDuration = getTotalDuration(scene3shape1Durations);
 
-// second shape
-export const scene3shape2Durations = {
+// first shape (ㅈ — horizontal bar drops in + V draws)
+export const scene3shape1Durations = {
   moveY1: 0.5,
   pathLength1: 1,
 };
-export const scene3shape2TotalDuration = getTotalDuration(scene3shape2Durations);
+export const scene3shape1TotalDuration = getTotalDuration(scene3shape1Durations); // 1.0
 
-// third shape
+// second shape (ㅣ — single vertical stroke)
+export const scene3shape2Durations = {
+  pathLength1: 0.8,
+};
+export const scene3shape2TotalDuration = getTotalDuration(scene3shape2Durations); // 0.3
+
+// third shape (ㄴ — L-shape stroke + dot detail)
 export const scene3shape3Durations = {
-  moveX1: 0.5,
   pathLength1: 1,
   scaleUp1: 0.5,
 };

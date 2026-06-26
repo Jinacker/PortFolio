@@ -12,6 +12,7 @@ import {
   scene3shape3Durations as scene3d,
 } from "./constants";
 
+// ㄴ
 const ThirdShape = () => {
   const [scope, animate] = useAnimate();
   const [isDone, setIsDone] = useState(false);
@@ -21,21 +22,20 @@ const ThirdShape = () => {
     animate([[".svg1", { y: -10 }, { ...scene1, delay: scene1Stagger * 2 }]]);
     // scene2
     animate([[".svg1", { x: 0 }, { ...scene2 }]]);
-    // scene3
+    // scene3: L-shape draws in after second shape finishes, then dot pops
     animate([
       [
         ".path1",
-        { x: 0 },
+        { pathLength: 1 },
         {
-          duration: scene3d.moveX1,
           at: scene3at,
           delay: scene3shape1TotalDuration + scene3shape2TotalDuration,
+          duration: scene3d.pathLength1,
           ease: "easeOut",
           type: "spring",
         },
       ],
-      [".path1", { pathLength: 1 }, { duration: scene3d.pathLength1, at: "-0.3", ease: "easeOut", type: "spring" }],
-      [".path2", { scale: 1 }, { duration: scene3d.scaleUp1, at: "-0.2", ease: "easeOut", type: "spring" }],
+      [".dot", { scale: 1 }, { duration: scene3d.scaleUp1, at: "-0.2", ease: "easeOut", type: "spring", bounce: 0.5 }],
     ]).then(() => setIsDone(true));
   }, []);
 
@@ -55,20 +55,24 @@ const ThirdShape = () => {
         fill="none"
         style={{ x: -150, y: 300 }}
       >
+        {/* ㄴ: 위에서 내려와 오른쪽으로 꺾임 */}
         <motion.path
           className="path1"
-          d="M100 144C75.6995 144 56 124.301 56 100C56 75.6995 75.6995 56 100 56C124.301 56 144 75.6995 144 100C144 124.301 124.301 144 100 144Z"
-          stroke="#E2FF00"
+          d="M55 50L55 143L150 143"
+          stroke="#fde047"
           strokeWidth="72"
           strokeLinecap="round"
           strokeLinejoin="round"
           pathLength={0}
-          x={-50}
         />
-        <motion.path
-          className="path2 dark:fill-background"
-          d="M86 143C86 162.882 69.8823 179 50 179C30.1177 179 14 162.882 14 143C14 123.118 30.1177 107 50 107C69.8823 107 86 123.118 86 143Z"
+        {/* 꺾이는 모서리 안쪽 흰 점 디테일 */}
+        <motion.circle
+          className="dot dark:fill-background"
+          cx={130}
+          cy={143}
+          r={14}
           fill="#ffffff"
+          style={{ originX: "130px", originY: "143px" }}
           scale={0}
         />
       </motion.svg>

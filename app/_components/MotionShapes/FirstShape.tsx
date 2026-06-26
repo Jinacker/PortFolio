@@ -4,6 +4,7 @@ import { motion, useAnimate } from "framer-motion";
 
 import { scene1, scene2, scene3at, scene3shape1Durations as scene3d } from "./constants";
 
+// ㅈ
 const FirstShape = () => {
   const [scope, animate] = useAnimate();
   const [isDone, setIsDone] = useState(false);
@@ -13,9 +14,17 @@ const FirstShape = () => {
     animate([[".svg1", { y: -10 }, { ...scene1 }]]);
     // scene2
     animate([[".svg1", { x: 0 }, { ...scene2 }]]);
-    // scene3
+    // scene3: horizontal bar slides down into position, then V draws in
     animate([
-      [".path1", { pathLength: 1 }, { at: scene3at, duration: scene3d.pathLength1, ease: "easeOut", type: "spring" }],
+      [".path1", { y: 0 }, { at: scene3at, duration: scene3d.moveY1, ease: "easeOut", type: "spring" }],
+      [".path1", { pathLength: 1 }, { duration: scene3d.pathLength1, ease: "easeInOut", type: "spring" }],
+    ]);
+    animate([
+      [
+        ".path2",
+        { pathLength: 1 },
+        { at: scene3at, delay: scene3d.moveY1, duration: scene3d.pathLength1, ease: "easeInOut", type: "spring" },
+      ],
     ]).then(() => setIsDone(true));
   }, []);
 
@@ -36,15 +45,26 @@ const FirstShape = () => {
         xmlns="http://www.w3.org/2000/svg"
         style={{ x: 250, y: 300 }}
       >
+        {/* 가로 획 — y: 86에서 0으로 내려옴 */}
         <motion.path
           className="path1"
-          d="M 50 140.5 L 100 64 L 150 140.5"
+          d="M50 57H150"
           stroke="#007AFF"
           strokeWidth="72"
           strokeLinecap="round"
           strokeLinejoin="round"
           pathLength={0}
-          visibility="visible"
+          style={{ y: 86 }}
+        />
+        {/* 아래 V 획 */}
+        <motion.path
+          className="path2"
+          d="M50 143L100 93L150 143"
+          stroke="#007AFF"
+          strokeWidth="72"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          pathLength={0.001}
         />
       </motion.svg>
     </motion.div>

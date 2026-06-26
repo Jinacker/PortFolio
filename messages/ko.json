@@ -28,14 +28,14 @@
     "title": "확장 가능하게 설계하며, 측정해 개선합니다."
   },
   "Experience": {
-    "eyebrow": "경력 사항",
-    "title": "다양한 업무와 프로젝트를 통해<br></br>경험과 노하우를 쌓고 있습니다.",
+    "eyebrow": "대표 경험",
+    "title": "가장 자신 있게 보여드릴 수 있는<br></br>경험들을 모았습니다.",
     "groups": {
       "work": "업무 경험",
       "project": "프로젝트"
     },
-    "showDetail": "주요 업무 내용 보기",
-    "hideDetail": "주요 업무 내용 가리기"
+    "showDetail": "자세히 보기",
+    "hideDetail": "접기"
   },
   "Project": {
     "eyebrow": "프로젝트 상세",

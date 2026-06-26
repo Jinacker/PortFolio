@@ -25,8 +25,11 @@ export default function ExperienceSection() {
     skills: getSkillsByIds(skill_ids),
   }));
 
-  const works = data.filter(({ category }) => category === "WORK");
-  const projects = data.filter(({ category }) => category === "PROJECT");
+  const groups = [
+    { key: "service", title: "실사용 서비스 운영", data: data.filter(({ category }) => category === "SERVICE") },
+    { key: "work", title: "업무 경험", data: data.filter(({ category }) => category === "WORK") },
+    { key: "open-source", title: "오픈소스 기여", data: data.filter(({ category }) => category === "OPEN_SOURCE") },
+  ];
 
   return (
     <SectionWatcher id="experience">
@@ -34,10 +37,7 @@ export default function ExperienceSection() {
         <h2 className="section-eyebrow">{t("eyebrow")}</h2>
         <p className="section-title">{t.rich("title", { br: () => <br /> })}</p>
 
-        {[
-          { key: "work", title: t("groups.work"), data: works },
-          { key: "project", title: t("groups.project"), data: projects },
-        ].map(({ key, title, data }) => (
+        {groups.map(({ key, title, data }) => (
           <React.Fragment key={`exp-${key}`}>
             <div className="flex gap-4 items-center md:max-w-[768px] mx-auto mt-12 mb-8">
               <div className="w-full h-[1px] bg-gradient-to-l from-foreground/15" />
