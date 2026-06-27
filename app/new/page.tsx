@@ -5,7 +5,8 @@ import { ArrowUpRight, BookOpen, Code, Code2, GraduationCap, Mail, Trophy, User,
 import dynamic from "next/dynamic"
 import { useEffect, useState } from "react"
 
-import { SectionWatchProvider } from "@/_components/SectionWatcher"
+import SectionNav from "@/_components/SectionNav"
+import SectionWatcher, { SectionWatchProvider } from "@/_components/SectionWatcher"
 import SlideUpInView from "@/_components/SlideUpInView"
 import EducationSection from "@/_sections/EducationSection"
 import ExperienceSection from "@/_sections/ExperienceSection"
@@ -19,6 +20,14 @@ import styles from "./original.module.css"
 const LegacyTimelineModals = dynamic(() => import("@/_components/LegacyTimelineModals"), {
   ssr: false,
 })
+
+const NEW_SECTION_NAV_ITEMS = [
+  { id: "intro", label: "소개" },
+  { id: "experience", label: "경험" },
+  { id: "project", label: "역량" },
+  { id: "education", label: "교육" },
+  { id: "blog", label: "기록" },
+] as const
 
 const passionGroups = [
   {
@@ -77,10 +86,10 @@ const passionGroups = [
 ]
 
 const MEMOIR_POSITIONS = [
-  "left-0 top-6 rotate-[-12deg] z-[4]",
-  "left-[120px] top-1 rotate-[-4deg] z-[3]",
-  "left-[240px] top-5 rotate-[5deg] z-[2]",
-  "left-[360px] top-9 rotate-[12deg] z-[1]",
+  "left-0 top-6 z-[4]",
+  "left-[120px] top-1 z-[3]",
+  "left-[240px] top-5 z-[2]",
+  "left-[360px] top-9 z-[1]",
 ]
 const MEMOIR_ANIMATION_DELAYS = ["0s", "0.8s", "1.6s", "2.4s"]
 
@@ -139,7 +148,8 @@ function PassionSection() {
 
   return (
     <>
-      <section id="intro" className="w-full">
+      <SectionWatcher id="intro">
+        <div className="w-full">
         <p className="section-eyebrow">애정과 몰입</p>
         <p className="section-title">저를 가장 잘 설명할 수 있는 단어입니다.</p>
 
@@ -202,7 +212,8 @@ function PassionSection() {
           <br />
           그 과정에서 쌓인 경험들이 지금의 저를 만들었습니다.
         </p>
-      </section>
+        </div>
+      </SectionWatcher>
       {activeModal ? (
         <LegacyTimelineModals activeModal={activeModal} closeModal={() => setActiveModal(null)} />
       ) : null}
@@ -212,7 +223,7 @@ function PassionSection() {
 
 function RecordSection() {
   return (
-    <section id="blog" className="w-full">
+    <SectionWatcher id="blog">
       <SlideUpInView>
         <p className="section-eyebrow">기록의 습관</p>
         <p className="section-title">생각이 흘러가버리지 않도록 꾸준히 기록해왔습니다.</p>
@@ -268,7 +279,7 @@ function RecordSection() {
           </a>
         </div>
       </SlideUpInView>
-    </section>
+    </SectionWatcher>
   )
 }
 
@@ -310,10 +321,13 @@ export default function NewPortfolioPage() {
             <ProjectSection />
             <EducationSection />
             <RecordSection />
-            <div id="contact" className="w-full">
-              <OutroSection />
-            </div>
+            <SectionWatcher id="contact">
+              <div className="w-full">
+                <OutroSection />
+              </div>
+            </SectionWatcher>
           </main>
+          <SectionNav items={NEW_SECTION_NAV_ITEMS} showFromLg />
         </SectionWatchProvider>
       </div>
     </NextIntlClientProvider>

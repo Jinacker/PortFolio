@@ -9,10 +9,16 @@ import { useTranslations } from "next-intl";
 import { useSectionWatch } from "./SectionWatcher";
 import { navItems } from "./navItems";
 
-const SectionNav = () => {
+interface SectionNavProps {
+  items?: ReadonlyArray<{ id: string; label: string }>;
+  showFromLg?: boolean;
+}
+
+const SectionNav = ({ items, showFromLg = false }: SectionNavProps) => {
   const t = useTranslations("Header");
   const { activeId } = useSectionWatch();
   const [isVisible, setIsVisible] = useState(false);
+  const resolvedItems = items ?? navItems.map(({ key, id }) => ({ id, label: t(`nav.${key}`) }));
 
   // Reveal only after the hero (#main) has scrolled out of view.
   useEffect(() => {
@@ -27,12 +33,13 @@ const SectionNav = () => {
     <nav
       aria-label={t("sectionNav")}
       className={cn(
-        "fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-3.5",
+        "fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden flex-col gap-3.5",
+        showFromLg ? "lg:flex" : "xl:flex",
         "transition-opacity duration-200",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none",
       )}
     >
-      {navItems.map(({ key, id }) => {
+      {resolvedItems.map(({ id, label }) => {
         const isActive = activeId === id;
         return (
           <Link
@@ -51,11 +58,12 @@ const SectionNav = () => {
             />
             <span
               className={cn(
-                "text-xs font-semibold whitespace-nowrap transition-colors duration-200",
+                "font-semibold whitespace-nowrap transition-colors duration-200",
+                showFromLg ? "text-[11px]" : "text-xs",
                 isActive ? "text-foreground" : "text-foreground/40 group-hover:text-foreground/70",
               )}
             >
-              {t(`nav.${key}`)}
+              {label}
             </span>
           </Link>
         );

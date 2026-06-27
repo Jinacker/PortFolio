@@ -118,12 +118,6 @@
   animation: record-float 4.8s ease-in-out infinite;
 }
 
-.page :global(.record-float-card:hover) {
-  animation-play-state: paused;
-  transform: translateY(-0.75rem) rotate(0deg);
-  transition: transform 0.3s ease;
-}
-
 @keyframes record-float {
   0%,
   100% {
