@@ -78,9 +78,9 @@ const passionGroups = [
       ["2025.09", "2025 메이커페어 부스 창업 및 운영", "Maker Faire Seoul 2025", "modal:makerFaire"],
       ["2025.03 ~ 2026.02", "코딩 동아리 DEBUG 회장", "공간정보공학과 학술 동아리", "https://blog.naver.com/rlawls1448/223815163411"],
       ["2025.01", "커비eSim 서포터즈 1기", "핀트원(주)", "https://blog.naver.com/rlawls1448/223674626853"],
-      ["2024.12.05 ~ 2025.03.21", "KT 대학생 IT 서포터즈 KIT 2기 기획팀 부팀장", "KT희망나눔그룹", "https://blog.naver.com/rlawls1448/223685580386"],
+      ["2024.12.05 ~ 2025.03.21", "KT 대학생 IT 서포터즈 KIT 2기 - 기획팀 부팀장", "KT희망나눔그룹", "https://blog.naver.com/rlawls1448/223685580386"],
       ["2024.08.17 ~ 2024.09.21", "부천시 스마트리빙랩 시민참여단 팀장", "부천시", "https://blog.naver.com/rlawls1448/223554607352"],
-      ["2024.08.12 ~ 2024.10.31", "디지털 혁신 페스타 서포터즈", "지디넷코리아", "https://blog.naver.com/rlawls1448/223554640037"],
+      ["2024.08.12 ~ 2024.10.31", "디지털 혁신 페스타 서포터즈 1기", "지디넷코리아", "https://blog.naver.com/rlawls1448/223554640037"],
     ],
   },
 ]
@@ -207,11 +207,20 @@ function PassionSection() {
           )})}
         </div>
 
-        <p className="mx-auto mt-7 max-w-2xl break-keep text-center text-sm font-semibold leading-6 text-foreground/75 md:text-base">
-          맡은 일에 애정을 가지고, 후회가 남지 않을 만큼 몰입해왔습니다.
-          <br />
-          그 과정에서 쌓인 경험들이 지금의 저를 만들었습니다.
-        </p>
+        <div className="mx-auto mt-8 max-w-2xl break-keep text-center text-sm font-medium leading-7 text-foreground/65 md:text-base">
+          <p>
+            <strong className="font-semibold text-foreground/85">매일 같은 곳, 같은 사람들 안에만 머무르면 생각도 쉽게 좁아진다고 믿습니다.</strong>
+            <br />
+            학교 밖으로 나가 다양한 사람들과 프로젝트를 만나며 시야를 넓혀왔습니다.
+          </p>
+          <p className="mt-4">
+            낯선 환경에서도 제가 할 수 있는 역할을 찾았고, 맡은 일에는 <strong className="font-semibold text-foreground/85">쉽게 식지 않는 애정</strong>을 쏟았습니다.
+            <br />
+            더 잘 만들고 싶다는 마음은 자연스럽게 <strong className="font-semibold text-foreground/85">더 오래 고민하는 태도</strong>로 이어졌고, 
+                        <br />그 과정에서 <strong className="font-semibold text-foreground/85">몰입</strong>하는 법을 배웠습니다.
+          </p>
+          <p className="mt-5 font-bold text-foreground/85">그렇게 쌓인 도전과 경험들이 지금의 저를 만들었습니다.</p>
+        </div>
         </div>
       </SectionWatcher>
       {activeModal ? (
