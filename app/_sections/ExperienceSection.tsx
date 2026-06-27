@@ -3,15 +3,19 @@
 import React, { useState } from "react";
 
 import { ChevronDown, Loader2 } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useLocale, useTranslations } from "next-intl";
 
 import ExpCard from "@/_components/ExpCard";
-import LegacyTimelineModals from "@/_components/LegacyTimelineModals";
 import SectionWatcher from "@/_components/SectionWatcher";
 import SlideUpInView from "@/_components/SlideUpInView";
 import experiences from "@/data/experiences";
 import skills from "@/data/skills";
 import type { Locale } from "@/i18n/routing";
+
+const LegacyTimelineModals = dynamic(() => import("@/_components/LegacyTimelineModals"), {
+  ssr: false,
+});
 
 const extraTimelineItems = [
   {
@@ -33,7 +37,7 @@ const extraTimelineItems = [
       { period: "2025년 3월", title: "백엔드 입문", description: "멋쟁이사자처럼 인하대 BE 파트로 참여해, Django 기반으로 백엔드 개발에 처음 입문했습니다." },
       { period: "2025년 7월", title: "FamiLog", description: "처음으로 백엔드 역할을 맡아 실제 프로젝트를 진행했습니다.", image: "/projects/FamiLog.png", action: "프로젝트 자세히 보기", modalName: "famiLog", modalImages: ["/projects/FamiLog_detail.png"] },
       { period: "2025년 7월 ~ 8월", title: "SmartWMS (🥈 우수상)", description: "실제 창고 운영 흐름을 비즈니스 로직으로 옮기며, 처음으로 성능 최적화를 고민해본 프로젝트였습니다.", image: "/projects/SmartWMS.png", action: "프로젝트 자세히 보기", modalName: "smartWMS", modalImages: ["/projects/SmartWMS_detail.png"] },
-      { period: "2025년 8월", title: "건너건너", description: "채팅 기능 구현을 통해 실시간 통신 구조를 이해하고, 아키텍처 분리가 개발 경험에 미치는 영향을 체감한 프로젝트였습니다.", image: "/projects/GNGN_detail.png", action: "프로젝트 자세히 보기", modalName: "geonneoGeonnoe", modalImages: ["/projects/GNGN_detail.png"] },
+      { period: "2025년 8월", title: "건너건너", description: "채팅 기능 구현을 통해 실시간 통신 구조를 이해하고, 아키텍처 분리가 개발 경험에 미치는 영향을 체감한 프로젝트였습니다.", image: "/GnGn.png", action: "프로젝트 자세히 보기", modalName: "geonneoGeonnoe", modalImages: ["/projects/GNGN_detail.png"] },
       { period: "2025년 9월 ~", title: "UMC - 인하대 9기 YB", description: "인하대 UMC 9기 Node.js Server 파트로 활동하며, TypeScript 기반으로 서버 개발을 학습하고 있습니다." },
       { period: "2025년 11월 ~ 운영중", title: "돈가스 지도", description: "실사용자에게 안정적인 서비스를 제공하기 위해 문제를 사전예방하는 운영을 처음으로 고민한 프로젝트였습니다.", image: "/projects/KatsuMap.png", action: "프로젝트 자세히 보기", modalName: "katsuMapBackend", modalImages: ["/projects/KatsuMap_detail.png"] },
       { period: "2025년 12월 ~", title: "외주 작업", description: "동시 주문 상황을 가정하고, 데이터 정합성과 안정성을 고려한 백엔드 아키텍처를 설계하고 있습니다.", image: "/projects/Trad.png", action: "프로젝트 자세히 보기", modalName: "trad", modalImages: ["/projects/tradlab_detail.png"] },
@@ -166,7 +170,7 @@ function TimelineColumn({
                   </div>
                   {item.image ? (
                     <div className="ml-3 flex h-24 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-300 bg-gray-100">
-                      <img src={item.image} alt={item.title} className="h-full w-full object-contain" />
+                      <img src={item.image} alt={item.title} loading="lazy" className="h-full w-full object-contain" />
                     </div>
                   ) : null}
                 </div>
@@ -262,48 +266,52 @@ export default function ExperienceSection() {
             onClick={() => setIsTimelineOpen(prev => !prev)}
             className="rounded-full border border-foreground/10 px-4 py-2 text-xs font-semibold text-foreground/55 transition hover:border-primary/30 hover:text-primary"
           >
-            {isTimelineOpen ? "접어넣기" : "다른 경험들도 궁금해요!"}
+            {isTimelineOpen ? "타임라인 다시 접어넣기" : "다른 경험들도 궁금해요!"}
           </button>
         </div>
 
         {isTimelineOpen ? (
-          <div className="mx-auto mt-10 max-w-4xl">
-            <div className="mx-auto mb-12 max-w-4xl">
-              <h3 className="text-center text-2xl font-bold text-gray-900 md:text-3xl">개발 타임라인</h3>
-            </div>
+          <SlideUpInView>
+            <div className="mx-auto mt-10 max-w-4xl">
+              <div className="mx-auto mb-12 max-w-4xl">
+                <h3 className="text-center text-2xl font-bold text-gray-900 md:text-3xl">개발 타임라인</h3>
+              </div>
 
-            <div className="mb-16 grid gap-12 md:grid-cols-2">
-              {extraTimelineItems.slice(0, 2).map(group => (
-                <TimelineColumn
-                  key={group.group}
-                  title={group.group}
-                  color={group.color as TimelineColor}
-                  items={group.items}
-                  onOpenModal={openTimelineModal}
-                />
-              ))}
-            </div>
+              <div className="mb-16 grid gap-12 md:grid-cols-2">
+                {extraTimelineItems.slice(0, 2).map(group => (
+                  <TimelineColumn
+                    key={group.group}
+                    title={group.group}
+                    color={group.color as TimelineColor}
+                    items={group.items}
+                    onOpenModal={openTimelineModal}
+                  />
+                ))}
+              </div>
 
-            <div className="mx-auto mb-12 mt-16 max-w-4xl">
-              <h3 className="text-center text-2xl font-bold text-gray-900 md:text-3xl">도메인 타임라인</h3>
-            </div>
+              <div className="mx-auto mb-12 mt-16 max-w-4xl">
+                <h3 className="text-center text-2xl font-bold text-gray-900 md:text-3xl">도메인 타임라인</h3>
+              </div>
 
-            <div className="mb-16 grid gap-12 md:grid-cols-2">
-              {extraTimelineItems.slice(2).map(group => (
-                <TimelineColumn
-                  key={group.group}
-                  title={group.group}
-                  color={group.color as TimelineColor}
-                  items={group.items}
-                  onOpenModal={openTimelineModal}
-                />
-              ))}
+              <div className="mb-16 grid gap-12 md:grid-cols-2">
+                {extraTimelineItems.slice(2).map(group => (
+                  <TimelineColumn
+                    key={group.group}
+                    title={group.group}
+                    color={group.color as TimelineColor}
+                    items={group.items}
+                    onOpenModal={openTimelineModal}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          </SlideUpInView>
         ) : null}
 
       </SlideUpInView>
-      <LegacyTimelineModals activeModal={activeModal} closeModal={() => setActiveModal(null)} />
+      {activeModal ? (
+        <LegacyTimelineModals activeModal={activeModal} closeModal={() => setActiveModal(null)} />
+      ) : null}
     </SectionWatcher>
   );
 }
