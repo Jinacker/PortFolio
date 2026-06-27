@@ -3,7 +3,7 @@
 import { NextIntlClientProvider } from "next-intl"
 import { ArrowUpRight, BookOpen, Code, Code2, GraduationCap, Mail, Trophy, User, Users } from "lucide-react"
 import dynamic from "next/dynamic"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { SectionWatchProvider } from "@/_components/SectionWatcher"
 import SlideUpInView from "@/_components/SlideUpInView"
@@ -119,11 +119,11 @@ function ExistingPortfolioHeader() {
           <a href="#intro" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2 no-underline">
             <User className="w-5 h-5" /> 소개
           </a>
-          <a href="#skills" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2 no-underline">
-            <Code className="w-5 h-5" /> 기술
-          </a>
           <a href="#experience" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2 no-underline">
             <BookOpen className="w-5 h-5" /> 경험
+          </a>
+          <a href="#project" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2 no-underline">
+            <Code className="w-5 h-5" /> 기술
           </a>
           <a href="#contact" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2 no-underline">
             <Mail className="w-5 h-5" /> 문의
@@ -273,6 +273,25 @@ function RecordSection() {
 }
 
 export default function NewPortfolioPage() {
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual"
+    }
+
+    if (window.location.hash) {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`)
+    }
+
+    window.scrollTo(0, 0)
+    const frame = window.requestAnimationFrame(() => window.scrollTo(0, 0))
+    const timeout = window.setTimeout(() => window.scrollTo(0, 0), 50)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.clearTimeout(timeout)
+    }
+  }, [])
+
   return (
     <NextIntlClientProvider locale="ko" messages={messages} timeZone="Asia/Seoul">
       <div className={styles.page}>
