@@ -2,6 +2,8 @@
 
 import { NextIntlClientProvider } from "next-intl"
 import { ArrowUpRight, BookOpen, Code, Code2, GraduationCap, Mail, Trophy, User, Users } from "lucide-react"
+import dynamic from "next/dynamic"
+import { useState } from "react"
 
 import { SectionWatchProvider } from "@/_components/SectionWatcher"
 import SlideUpInView from "@/_components/SlideUpInView"
@@ -14,17 +16,21 @@ import messages from "../../messages/ko.json"
 
 import styles from "./original.module.css"
 
+const LegacyTimelineModals = dynamic(() => import("@/_components/LegacyTimelineModals"), {
+  ssr: false,
+})
+
 const passionGroups = [
   {
     title: "프로젝트 수상",
     icon: Trophy,
     iconClass: "text-yellow-300",
     items: [
-      ["2025.08.28", "신세계 I&C 산학협력 프로젝트 우수상", "정보통신기획평가원장상"],
-      ["2025.06.20", "I-Mini 프로젝트 대상", "인하대학교 SW중심 대학사업단"],
-      ["2024.11.07", "제 6회 공간정보 활용 경진대회 최우수상", "공간정보 산업진흥원"],
-      ["2024.11.01", "농어촌 디지털트윈 경진대회 장려상", "포스텍 미래 도시 연구센터"],
-      ["2020.12.18", "제5회 INU 메이커 경진대회 우수상", "인천대학교"],
+      ["2025.08.28", "신세계 I&C 산학협력 프로젝트 우수상", "정보통신기획평가원장상", "https://github.com/KSEB-4th-Project-3rd-Team"],
+      ["2025.06.20", "I-Mini 프로젝트 대상", "인하대학교 SW중심 대학사업단", "https://blog.naver.com/rlawls1448/223913885215"],
+      ["2024.11.07", "제 6회 공간정보 활용 경진대회 최우수상", "공간정보 산업진흥원", "https://blog.naver.com/rlawls1448/223675136871"],
+      ["2024.11.01", "농어촌 디지털트윈 경진대회 장려상", "포스텍 미래 도시 연구센터", "https://blog.naver.com/rlawls1448/223674643082"],
+      ["2020.12.18", "제5회 INU 메이커 경진대회 우수상", "인천대학교", "https://blog.naver.com/rlawls1448/222223758063"],
     ],
   },
   {
@@ -34,11 +40,11 @@ const passionGroups = [
     items: [
       ["2026.03 ~ 2026.06", "SureSoftTech. 시험자동화연구소 VSPICE팀 인턴", ""],
       ["2025.12 ~ 2026.06", "트래드랩 창업팀 백엔드 개발", ""],
-      ["2025.09 ~ 2026.02", "UMC 9기 Node.JS Server 파트", ""],
-      ["2025.03 ~ 2025.12", "멋쟁이 사자처럼 13기 BE 파트", ""],
-      ["2025.01 ~ 2025.11", "KSEB 부트캠프 4기", ""],
-      ["2024.11 ~ 2025.03", "KT 대학생 IT 서포터즈 2기 - AI 코딩 커리큘럼 개발", ""],
-      ["2024.09 ~ 2024.11", "2024 데이터 크리에이터 캠프 스타터 과정", ""],
+      ["2025.09 ~ 2026.02", "UMC 9기 Node.JS Server 파트", "", "https://blog.naver.com/rlawls1448/224005292835"],
+      ["2025.03 ~ 2025.12", "멋쟁이 사자처럼 13기 BE 파트", "", "https://blog.naver.com/rlawls1448/223815192434"],
+      ["2025.01 ~ 2025.11", "KSEB 부트캠프 4기", "", "https://blog.naver.com/rlawls1448/223814972761"],
+      ["2024.11 ~ 2025.03", "KT 대학생 IT 서포터즈 2기 - AI 코딩 커리큘럼 개발", "", "https://blog.naver.com/rlawls1448/223815131854"],
+      ["2024.09 ~ 2024.11", "2024 데이터 크리에이터 캠프 스타터 과정", "", "https://blog.naver.com/rlawls1448/223681491796"],
     ],
   },
   {
@@ -47,12 +53,12 @@ const passionGroups = [
     iconClass: "text-yellow-300",
     items: [
       ["2026.05.26", "2026-1학기 Co-op 인턴 주간보고 평가 최우수상", "인하대학교 인재개발원 + 슈어소프트테크(주)"],
-      ["2026.02.20", "UMC 9기 서버파트 Best Challenger 수상", "대학생 개발 연합동아리 UMC"],
-      ["2025.06.20", "KSEB 4기 우수교육생 수상", "인하대학교 SW중심대학사업단장상"],
-      ["2025.04.24", "2025 농협 조합원 자녀 대학생 장학생", "농협 영농회"],
-      ["2025-1학기", "국토정보공사 발전 장려 장학생", "국토정보공사 장학회"],
-      ["2024.10.31", "디지털 혁신 페스타 2024 우수 서포터즈 수상", "지디넷코리아"],
-      ["2024-2학기", "국토정보공사 발전 장려 장학생", "국토정보공사 장학회"],
+      ["2026.02.20", "UMC 9기 서버파트 Best Challenger 수상", "대학생 개발 연합동아리 UMC", "https://blog.naver.com/rlawls1448/224216644931"],
+      ["2025.06.20", "KSEB 4기 우수교육생 수상", "인하대학교 SW중심대학사업단장상", "https://blog.naver.com/rlawls1448/223913885215"],
+      ["2025.04.24", "2025 농협 조합원 자녀 대학생 장학생", "농협 영농회", "https://blog.naver.com/rlawls1448/223842792230"],
+      ["2025-1학기", "국토정보공사 발전 장려 장학생", "국토정보공사 장학회", "https://blog.naver.com/rlawls1448/223842792230"],
+      ["2024.10.31", "디지털 혁신 페스타 2024 우수 서포터즈 수상", "지디넷코리아", "https://blog.naver.com/rlawls1448/223672365443"],
+      ["2024-2학기", "국토정보공사 발전 장려 장학생", "국토정보공사 장학회", "https://blog.naver.com/rlawls1448/223636051928"],
     ],
   },
   {
@@ -60,12 +66,12 @@ const passionGroups = [
     icon: Users,
     iconClass: "text-[#00C676]",
     items: [
-      ["2025.09", "2025 메이커페어 부스 창업 및 운영", "Maker Faire Seoul 2025"],
-      ["2025.03 ~ 2026.02", "코딩 동아리 DEBUG 회장", "공간정보공학과 학술 동아리"],
-      ["2025.01", "커비eSim 서포터즈 1기", "핀트원(주)"],
-      ["2024.12.05 ~ 2025.03.21", "KT 대학생 IT 서포터즈 KIT 2기 기획팀 부팀장", "KT희망나눔그룹"],
-      ["2024.08.17 ~ 2024.09.21", "부천시 스마트리빙랩 시민참여단 팀장", "부천시"],
-      ["2024.08.12 ~ 2024.10.31", "디지털 혁신 페스타 서포터즈", "지디넷코리아"],
+      ["2025.09", "2025 메이커페어 부스 창업 및 운영", "Maker Faire Seoul 2025", "modal:makerFaire"],
+      ["2025.03 ~ 2026.02", "코딩 동아리 DEBUG 회장", "공간정보공학과 학술 동아리", "https://blog.naver.com/rlawls1448/223815163411"],
+      ["2025.01", "커비eSim 서포터즈 1기", "핀트원(주)", "https://blog.naver.com/rlawls1448/223674626853"],
+      ["2024.12.05 ~ 2025.03.21", "KT 대학생 IT 서포터즈 KIT 2기 기획팀 부팀장", "KT희망나눔그룹", "https://blog.naver.com/rlawls1448/223685580386"],
+      ["2024.08.17 ~ 2024.09.21", "부천시 스마트리빙랩 시민참여단 팀장", "부천시", "https://blog.naver.com/rlawls1448/223554607352"],
+      ["2024.08.12 ~ 2024.10.31", "디지털 혁신 페스타 서포터즈", "지디넷코리아", "https://blog.naver.com/rlawls1448/223554640037"],
     ],
   },
 ]
@@ -129,16 +135,19 @@ function ExistingPortfolioHeader() {
 }
 
 function PassionSection() {
+  const [activeModal, setActiveModal] = useState<string | null>(null)
+
   return (
-    <section id="intro" className="w-full">
-      <p className="section-eyebrow">애정과 몰입</p>
-      <p className="section-title">저를 가장 잘 설명할 수 있는 단어입니다.</p>
+    <>
+      <section id="intro" className="w-full">
+        <p className="section-eyebrow">애정과 몰입</p>
+        <p className="section-title">저를 가장 잘 설명할 수 있는 단어입니다.</p>
 
-      <div className="mx-auto grid max-w-[530px] justify-center gap-x-1 gap-y-5 md:grid-cols-[260px_260px]">
-        {passionGroups.map((group) => {
-          const Icon = group.icon
+        <div className="mx-auto grid max-w-[530px] justify-center gap-x-1 gap-y-5 md:grid-cols-[260px_260px]">
+          {passionGroups.map((group) => {
+            const Icon = group.icon
 
-          return (
+            return (
           <article key={group.title} className={group.title === "개발 연혁" || group.title === "대외활동" ? "ml-7 px-0" : "px-0"}>
             <div className="mb-2.5 flex items-center gap-2">
               <Icon className={`h-4 w-4 ${group.iconClass}`} strokeWidth={1.9} />
@@ -146,29 +155,58 @@ function PassionSection() {
             </div>
 
             <ul className="list-none p-0 indent-0 [&>li]:list-none [&>li]:marker:content-none">
-              {group.items.map(([date, title, organization]) => (
+              {group.items.map(([date, title, organization, href]) => {
+                const modalName = href?.startsWith("modal:") ? href.slice("modal:".length) : null
+
+                return (
                 <li
                   key={`${group.title}-${date}-${title}`}
                   className="py-1 indent-0 first:pt-0 last:pb-0"
                 >
-                  <p className="text-[10px] font-semibold leading-3 text-foreground/40">{date}</p>
-                  <p className={`mt-0.5 font-semibold leading-4 text-foreground/85 ${title.includes("VSPICE") ? "whitespace-nowrap text-[10px]" : "break-keep text-[11px]"}`}>{title}</p>
-                  {organization ? (
-                    <p className="break-keep text-[10px] leading-3 text-foreground/45">{organization}</p>
-                  ) : null}
+                  {href ? (
+                    <a
+                      href={modalName ? undefined : href}
+                      target={modalName ? undefined : "_blank"}
+                      rel={modalName ? undefined : "noopener noreferrer"}
+                      onClick={modalName ? event => {
+                        event.preventDefault()
+                        setActiveModal(modalName)
+                      } : undefined}
+                      className="group block cursor-pointer [text-decoration:none!important]"
+                    >
+                      <p className="text-[10px] font-semibold leading-3 text-foreground/40">{date}</p>
+                      <p className={`mt-0.5 font-semibold leading-4 text-foreground/85 transition-colors group-hover:text-primary ${title.includes("VSPICE") ? "whitespace-nowrap text-[10px]" : "break-keep text-[11px]"}`}>{title}</p>
+                      {organization ? (
+                        <p className="break-keep text-[10px] leading-3 text-foreground/45">{organization}</p>
+                      ) : null}
+                    </a>
+                  ) : (
+                    <>
+                      <p className="text-[10px] font-semibold leading-3 text-foreground/40">{date}</p>
+                      <p className={`mt-0.5 font-semibold leading-4 text-foreground/85 ${title.includes("VSPICE") ? "whitespace-nowrap text-[10px]" : "break-keep text-[11px]"}`}>{title}</p>
+                      {organization ? (
+                        <p className="break-keep text-[10px] leading-3 text-foreground/45">{organization}</p>
+                      ) : null}
+                    </>
+                  )}
                 </li>
-              ))}
+                )
+              })}
             </ul>
           </article>
-        )})}
-      </div>
+          )})}
+        </div>
 
-      <p className="mx-auto mt-7 max-w-2xl break-keep text-center text-sm font-semibold leading-6 text-foreground/75 md:text-base">
-        맡은 일에 애정을 가지고, 후회가 남지 않을 만큼 몰입해왔습니다.
-        <br />
-        그 과정에서 쌓인 경험들이 지금의 저를 만들었습니다.
-      </p>
-    </section>
+        <p className="mx-auto mt-7 max-w-2xl break-keep text-center text-sm font-semibold leading-6 text-foreground/75 md:text-base">
+          맡은 일에 애정을 가지고, 후회가 남지 않을 만큼 몰입해왔습니다.
+          <br />
+          그 과정에서 쌓인 경험들이 지금의 저를 만들었습니다.
+        </p>
+      </section>
+      {activeModal ? (
+        <LegacyTimelineModals activeModal={activeModal} closeModal={() => setActiveModal(null)} />
+      ) : null}
+    </>
   )
 }
 
