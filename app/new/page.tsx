@@ -237,7 +237,7 @@ function RecordSection() {
         <p className="section-eyebrow">기록의 습관</p>
         <p className="section-title">생각이 흘러가버리지 않도록 꾸준히 기록해왔습니다.</p>
 
-        <div className="relative mx-auto mb-10 h-56 w-[540px] max-w-full">
+        <div className="relative mx-auto mb-8 h-56 w-[540px] max-w-full">
           {memoirPosts.map((post, index) => {
             return (
               <a
@@ -262,19 +262,22 @@ function RecordSection() {
 
         <div className="mx-auto max-w-[720px] text-center">
           <p className="break-keep text-sm font-medium leading-7 text-foreground/65 md:text-base">
+            지나간 경험을 기록으로 남기고, 다시 돌아보는 일을 좋아합니다.
+            <br />
+            <br />
             5년간 블로그에 경험과 고민을 남겼고,
             <br />
-            군 생활 동안에도 하루도 빠짐없이 일기를 쓰며 스스로를 돌아봤습니다.
+            군 생활 중에도 하루도 빠짐없이 일기를 쓰며 제 생각을 정리했습니다.
           </p>
           <p className="mt-4 break-keep text-sm font-medium leading-7 text-foreground/65 md:text-base">
-            결과보다 과정에 가까운 이야기들,
+            그 기록들은 제가 무엇을 좋아하고, 어떤 순간에 고민하며,
             <br />
-            그리고 제가 어떤 방식으로 배우고 성장해왔는지를 담아두었습니다.
+            어떤 방식으로 성장해왔는지를 가장 솔직하게 보여줍니다.
           </p>
           <p className="mt-4 break-keep text-sm font-semibold leading-7 text-foreground/80 md:text-base">
-            제가 어떤 생각을 하며 여기까지 왔는지 궁금하다면,
+            포트폴리오에 다 담지 못한 제 이야기가 궁금하다면,
             <br />
-            블로그에 남겨둔 기록들을 편하게 구경해보셔도 좋습니다.
+            블로그를 편하게 구경해보셔도 좋습니다.
           </p>
 
           <a
