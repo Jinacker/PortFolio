@@ -8,6 +8,12 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.simpleicons.org",
+      },
+    ],
   },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"))

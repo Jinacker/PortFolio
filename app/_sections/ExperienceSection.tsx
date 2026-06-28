@@ -260,7 +260,18 @@ export default function ExperienceSection() {
           </React.Fragment>
         ))}
 
-        <div className="mt-12 flex justify-center">
+        <p className="mx-auto mt-12 max-w-2xl text-center text-sm leading-relaxed text-foreground/60 md:text-base">
+          기능은 누구나 만들 수 있지만,
+          <br />
+          실제로 사람들에게{" "}
+          <strong className="font-semibold text-foreground">선택받고 쓰이는 가치</strong>
+          가 되는 건 또 다른 일이라고 생각합니다.
+          <br />
+          <strong className="font-semibold text-foreground">그 가치를 만들기 위해</strong>{" "}
+          노력해왔습니다.
+        </p>
+
+        <div className="mt-6 flex justify-center">
           <button
             type="button"
             onClick={() => setIsTimelineOpen(prev => !prev)}
