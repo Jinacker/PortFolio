@@ -1,0 +1,58 @@
+{
+  "Metadata": {
+    "title": "Jin-kyeong Song | Frontend Developer",
+    "description": "Portfolio of Jin-kyeong Song, a frontend developer building web frontends with React, TypeScript, and Next.js.",
+    "keywords": "frontend, frontend developer, frontend developer portfolio"
+  },
+  "Header": {
+    "name": "Jin-kyeong Song",
+    "role": "Frontend Developer",
+    "nav": {
+      "experience": "Experience",
+      "project": "Projects",
+      "blog": "Blog",
+      "education": "Education"
+    },
+    "sectionNav": "Section navigation",
+    "toggleTheme": "Toggle theme",
+    "changeLanguage": "Change language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Main": {
+    "heading": "Hello,<br></br>I'm <em>Jin-kyeong Song</em>,<br></br>a Frontend Developer.",
+    "subtitle": "I build web frontends with a focus on React.<br></br>I'm looking for a place to build and grow products together."
+  },
+  "Intro": {
+    "eyebrow": "Core Strengths",
+    "title": "I design for scalability and improve through measurement."
+  },
+  "Experience": {
+    "eyebrow": "Experience",
+    "title": "Through diverse work and projects,<br></br>I keep building experience and know-how.",
+    "groups": {
+      "work": "Work Experience",
+      "project": "Projects"
+    },
+    "showDetail": "View key responsibilities",
+    "hideDetail": "Hide key responsibilities"
+  },
+  "Project": {
+    "eyebrow": "Project Details",
+    "title": "Take a closer look at the details of my key projects."
+  },
+  "Blog": {
+    "eyebrow": "Blog",
+    "title": "You can find detailed problem-solving<br></br>write-ups on my blog.",
+    "readMore": "Read more",
+    "goToBlog": "Go to blog"
+  },
+  "Education": {
+    "eyebrow": "Education & Language"
+  },
+  "Outro": {
+    "message": "Thank you<br></br>If you'd like to know more,<br></br>feel free to reach out.",
+    "email": "Email",
+    "github": "Github"
+  }
+}

@@ -12,6 +12,13 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+      backgroundColor: {
+        dark: "rgb(15, 24, 42)",
+        light: "#ffffff",
+        blue: "#007AFF",
+        green: "#00C676",
+        lime: "#E2FF00",
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
