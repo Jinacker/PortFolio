@@ -132,7 +132,7 @@ function ExistingPortfolioHeader() {
             <BookOpen className="w-5 h-5" /> 경험
           </a>
           <a href="#project" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2 no-underline">
-            <Code className="w-5 h-5" /> 기술
+            <Code className="w-5 h-5" /> 역량
           </a>
           <a href="#contact" className="text-gray-800 hover:text-gray-900 transition flex items-center gap-2 no-underline">
             <Mail className="w-5 h-5" /> 문의
@@ -214,7 +214,7 @@ function PassionSection() {
             학교 밖으로 나가 다양한 사람들과 프로젝트를 만나며 시야를 넓혀왔습니다.
           </p>
           <p className="mt-4">
-            낯선 환경에서도 제가 할 수 있는 역할을 찾았고, 맡은 일에는 <strong className="font-semibold text-foreground/85">쉽게 식지 않는 애정</strong>을 쏟았습니다.
+            낯선 환경에서도 제가 할 수 있는 역할을 찾아왔고, 맡은 일에는 <strong className="font-semibold text-foreground/85">쉽게 식지 않는 애정</strong>을 쏟았습니다.
             <br />
             더 잘 만들고 싶다는 마음은 자연스럽게 <strong className="font-semibold text-foreground/85">더 오래 고민하는 태도</strong>로 이어졌고, 
                         <br />그 과정에서 <strong className="font-semibold text-foreground/85">몰입</strong>하는 법을 배웠습니다.
