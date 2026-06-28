@@ -263,9 +263,9 @@ export default function ExperienceSection() {
         <p className="mx-auto mt-12 max-w-2xl text-center text-sm leading-relaxed text-foreground/60 md:text-base">
           기능은 누구나 만들 수 있지만,
           <br />
-          그 기능이 실제로 사람들에게{" "}
+          실제로 사람들에게{" "}
           <strong className="font-semibold text-foreground">선택받고 쓰이는 가치</strong>
-          가 되는 건 또 다른 일입니다.
+          가 되는 건 또 다른 일이라고 생각합니다.
           <br />
           <strong className="font-semibold text-foreground">그 가치를 만들기 위해</strong>{" "}
           노력해왔습니다.

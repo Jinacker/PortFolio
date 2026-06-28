@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { createPortal } from "react-dom";
+
 import cn from "classnames";
 import Image from "next/image";
 
@@ -7,6 +12,7 @@ interface SkillItemProps {
   label: string;
   imageUrl: string;
   isActive?: boolean;
+  tooltipPlacement?: "top" | "bottom";
 }
 
 const mediaQueries: Record<Size, { min: number; max: number }> = {
@@ -47,39 +53,64 @@ const generateSizeSet = (size: Size) => {
     .join(", ");
 };
 
-const SkillItem = ({ size = "md", label, imageUrl, isActive = true }: SkillItemProps) => {
+const SkillItem = ({
+  size = "md",
+  label,
+  imageUrl,
+  isActive = true,
+  tooltipPlacement = "bottom",
+}: SkillItemProps) => {
+  const [tooltipPosition, setTooltipPosition] = useState<{ left: number; top: number } | null>(null);
   const imageFitClass = label === "Gitea" || label === "Dagre.js" ? "object-cover" : "object-contain";
   const imagePaddingClass = cn(
     label === "Slack" && "p-1",
     label === "GitHub Actions" && "p-1",
   );
 
+  const showTooltip = (element: HTMLDivElement) => {
+    const rect = element.getBoundingClientRect();
+    setTooltipPosition({
+      left: rect.left + rect.width / 2,
+      top: tooltipPlacement === "top" ? rect.top - 4 : rect.bottom + 4,
+    });
+  };
+
   return (
-    <div
-      className={cn(
-        "relative group/skill transition-all",
-        size === "md" && "w-12 h-12",
-        size === "sm" && "w-8 h-8",
-        size === "xs" && "w-6 h-6",
-        !isActive && "opacity-15 blur-md",
-      )}
-    >
-      <Image
-        className={cn(imageFitClass, imagePaddingClass, size === "xs" ? "rounded bg-white shadow" : "rounded-md bg-white shadow-md")}
-        fill={true}
-        src={imageUrl}
-        alt={label}
-        sizes={generateSizeSet(size)}
-      />
-      <p
+    <>
+      <div
         className={cn(
-          "absolute -bottom-1 translate-y-full left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-foreground/75 text-background rounded text-xs md:text-sm text-center whitespace-nowrap font-normal invisible z-10",
-          isActive && "group-hover/skill:visible",
+          "relative transition-all",
+          size === "md" && "w-12 h-12",
+          size === "sm" && "w-8 h-8",
+          size === "xs" && "w-6 h-6",
+          !isActive && "opacity-15 blur-md",
         )}
+        onMouseEnter={event => isActive && showTooltip(event.currentTarget)}
+        onMouseLeave={() => setTooltipPosition(null)}
       >
-        {label}
-      </p>
-    </div>
+        <Image
+          className={cn(imageFitClass, imagePaddingClass, size === "xs" ? "rounded bg-white shadow" : "rounded-md bg-white shadow-md")}
+          fill={true}
+          src={imageUrl}
+          alt={label}
+          sizes={generateSizeSet(size)}
+        />
+      </div>
+      {tooltipPosition && typeof document !== "undefined"
+        ? createPortal(
+            <p
+              className={cn(
+                "pointer-events-none fixed z-[9999] -translate-x-1/2 whitespace-nowrap rounded bg-foreground/75 px-1.5 py-0.5 text-center text-xs font-normal text-background md:text-sm",
+                tooltipPlacement === "top" && "-translate-y-full",
+              )}
+              style={{ left: tooltipPosition.left, top: tooltipPosition.top }}
+            >
+              {label}
+            </p>,
+            document.body,
+          )
+        : null}
+    </>
   );
 };
 
