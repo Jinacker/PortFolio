@@ -100,7 +100,13 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, categ
         <div className={cn("flex gap-1", imageUrl ? "items-start" : "flex-col")}>
           {imageUrl ? (
             <div className="relative mt-3 hidden h-36 w-[17rem] shrink-0 overflow-hidden rounded-md border border-foreground/10 bg-white shadow-sm sm:block">
-              <Image src={imageUrl} alt={title} fill className={title.includes("TradLab") ? "object-cover" : "object-contain"} sizes="272px" />
+              <Image
+                src={imageUrl}
+                alt={title}
+                fill
+                className={title.includes("TradLab") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
+                sizes="272px"
+              />
             </div>
           ) : null}
           {imageUrl ? <div className="ml-3 mt-3 hidden h-36 w-px shrink-0 bg-foreground/10 sm:block" /> : null}

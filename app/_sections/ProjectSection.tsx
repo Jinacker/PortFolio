@@ -69,7 +69,8 @@ const competencies = [
 ] as const;
 
 const verticalLabels = ["운영", "협업", "설계", "활용"] as const;
-const accentColors = ["#007AFF", "#00C676", "#FFD84D"] as const;
+const accentColors = ["#007AFF", "#00C676", "#FF9F0A"] as const;
+const lineColors = ["#007AFF", "#00C676", "#FFD84D"] as const;
 const titleKeywords = ["운영", "협업", "설계", "활용"] as const;
 
 function renderHighlightedText(text: string, highlights: readonly string[]) {
@@ -105,6 +106,7 @@ export default function ProjectSection() {
             const isOpen = openId === id;
             const label = verticalLabels[index % verticalLabels.length];
             const accentColor = accentColors[index % accentColors.length];
+            const lineColor = lineColors[index % lineColors.length];
             const titleKeyword = titleKeywords[index % titleKeywords.length];
 
             return (
@@ -125,7 +127,7 @@ export default function ProjectSection() {
                     isOpen ? "opacity-0" : "opacity-100 [transition-delay:550ms]"
                   }`}
                 >
-                  <span className="mt-0.5 h-[61px] w-[5px] shrink-0 rounded-full" style={{ backgroundColor: accentColor }} />
+                  <span className="mt-0.5 h-[61px] w-[5px] shrink-0 rounded-full" style={{ backgroundColor: lineColor }} />
                   <span className="whitespace-nowrap text-[28px] font-black text-[#4e4e53] [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] [writing-mode:vertical-rl]">
                     {label}
                   </span>

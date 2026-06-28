@@ -33,7 +33,7 @@ const passionGroups = [
   {
     title: "프로젝트 수상",
     icon: Trophy,
-    iconClass: "text-yellow-300",
+    iconClass: "text-[#FF9F0A]",
     items: [
       ["2025.08.28", "신세계 I&C 산학협력 프로젝트 우수상", "정보통신기획평가원장상", "https://github.com/KSEB-4th-Project-3rd-Team"],
       ["2025.06.20", "I-Mini 프로젝트 대상", "인하대학교 SW중심 대학사업단", "https://blog.naver.com/rlawls1448/223913885215"],
@@ -59,7 +59,7 @@ const passionGroups = [
   {
     title: "개인 수상 및 장학금",
     icon: GraduationCap,
-    iconClass: "text-yellow-300",
+    iconClass: "text-[#FF9F0A]",
     items: [
       ["2026.05.26", "2026-1학기 Co-op 인턴 주간보고 평가 최우수상", "인하대학교 인재개발원 + 슈어소프트테크(주)"],
       ["2026.02.20", "UMC 9기 서버파트 Best Challenger 수상", "대학생 개발 연합동아리 UMC", "https://blog.naver.com/rlawls1448/224216644931"],
