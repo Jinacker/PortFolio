@@ -70,6 +70,7 @@ const competencies = [
 
 const verticalLabels = ["운영", "협업", "설계", "활용"] as const;
 const accentColors = ["#007AFF", "#00C676", "#FF9F0A"] as const;
+const numberColors = ["#007AFF", "#00C676", "#FFD84D"] as const;
 const lineColors = ["#007AFF", "#00C676", "#FFD84D"] as const;
 const titleKeywords = ["운영", "협업", "설계", "활용"] as const;
 
@@ -106,6 +107,7 @@ export default function ProjectSection() {
             const isOpen = openId === id;
             const label = verticalLabels[index % verticalLabels.length];
             const accentColor = accentColors[index % accentColors.length];
+            const numberColor = numberColors[index % numberColors.length];
             const lineColor = lineColors[index % lineColors.length];
             const titleKeyword = titleKeywords[index % titleKeywords.length];
 
@@ -128,17 +130,17 @@ export default function ProjectSection() {
                   }`}
                 >
                   <span className="mt-0.5 h-[61px] w-[5px] shrink-0 rounded-full" style={{ backgroundColor: lineColor }} />
-                  <span className="whitespace-nowrap text-[28px] font-black text-[#4e4e53] [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] [writing-mode:vertical-rl]">
+                  <span className="whitespace-nowrap text-[28px] font-semibold text-[#4e4e53] [font-family:Arial,sans-serif] [font-weight:600] [letter-spacing:0] [writing-mode:vertical-rl]">
                     {label}
                   </span>
                 </span>
 
                 {/* 카드 확장이 끝난 다음 본문을 한 번에 노출 */}
                 <div
-                  className={`min-h-0 flex-1 overflow-hidden px-[15px] pb-6 pt-6 transition-[opacity,transform] ease-out md:pb-0 ${
+                  className={`min-h-0 flex-1 overflow-hidden px-[15px] pb-6 pt-6 transition-none md:pb-0 md:transition-[opacity,transform] md:ease-out ${
                     isOpen
-                      ? "translate-y-0 opacity-100 duration-200 [transition-delay:650ms]"
-                      : "pointer-events-none translate-y-3 opacity-0 duration-100 [transition-delay:0ms]"
+                      ? "translate-y-0 opacity-100 md:duration-200 md:[transition-delay:650ms]"
+                      : "pointer-events-none translate-y-3 opacity-0 md:duration-100 md:[transition-delay:0ms]"
                   }`}
                 >
                   <div className="w-full space-y-2 md:w-[500px]">
@@ -172,15 +174,15 @@ export default function ProjectSection() {
                     className={`flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors duration-300 ${
                       isOpen ? "text-white" : "bg-[#f5f5f7] text-[#77777d]"
                     }`}
-                    style={isOpen ? { backgroundColor: accentColor } : undefined}
+                    style={isOpen ? { backgroundColor: numberColor } : undefined}
                   >
                     {index + 1}
                   </div>
                   <h4
-                    className={`min-w-0 font-bold transition-opacity ${
+                    className={`min-w-0 font-bold transition-none md:transition-opacity ${
                       isOpen
-                        ? "flex-1 whitespace-normal break-keep text-left text-base font-black leading-tight text-[#4e4e53] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] duration-200 [transition-delay:650ms] md:flex-none md:whitespace-nowrap md:text-lg"
-                        : "text-xl font-black text-[#262627] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] duration-150 md:hidden"
+                        ? "flex-1 whitespace-normal break-keep text-left text-base font-black leading-tight text-[#4e4e53] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] md:flex-none md:whitespace-nowrap md:text-lg md:duration-200 md:[transition-delay:650ms]"
+                        : "text-xl font-black text-[#262627] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] md:hidden md:duration-150"
                     }`}
                   >
                     {isOpen
