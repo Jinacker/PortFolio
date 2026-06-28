@@ -8,22 +8,6 @@ import SlideUpInView from "@/_components/SlideUpInView";
 
 const competencies = [
   {
-    id: "operation-driven",
-    title: "운영 환경을 기준으로 영향 범위를 좁히는 개발",
-    images: ["/projects/operation_1.png"],
-    tools: ["Grafana", "Sentry", "Cloud Logging", "Cloud Monitoring", "Lighthouse"],
-    highlights: [
-      "현재 사용 중인 사용자, 업데이트하지 않은 사용자, 앞으로 확장될 기능",
-      "로그와 재현 조건",
-      "필요한 부분만 안정적으로 바꾸는 것",
-    ],
-    paragraphs: [
-      "개발 환경에서 정상 동작하는 기능도 실제 사용자 환경에서는 예상치 못한 문제로 이어질 수 있다고 생각합니다.",
-      "그래서 기능을 수정할 때는 현재 사용 중인 사용자, 업데이트하지 않은 사용자, 앞으로 확장될 기능까지 함께 고려하며 영향 범위를 먼저 판단합니다. 문제가 발생하면 로그와 재현 조건을 바탕으로 원인을 좁히고, 기존 흐름을 깨뜨리지 않는 최소 변경으로 개선합니다.",
-      "실서비스 운영과 인턴에서의 레거시 경험을 통해, 좋은 수정은 많은 코드를 바꾸는 것이 아니라 문제의 원인을 정확히 찾아 필요한 부분만 안정적으로 바꾸는 것이라는 기준을 갖게 되었습니다.",
-    ],
-  },
-  {
     id: "full-cycle",
     title: "여러 역할의 관점을 잇는 협업 중심의 풀사이클 경험",
     images: ["/projects/makerfaire_booth.png"],
@@ -37,6 +21,22 @@ const competencies = [
       "기획, 디자인, 프론트엔드, 백엔드, 운영까지 여러 역할을 직접 맡으며 서비스가 만들어지고 사용자에게 전달되는 전체 흐름을 경험했습니다.",
       "각 역할을 직접 수행해보며 화면을 만드는 입장, API를 설계하는 입장, 운영 중 문제를 대응하는 입장의 제약과 고민을 이해하게 되었습니다. 덕분에 요구사항을 단순 기능 목록이 아니라 실제 구현과 협업이 가능한 단위로 정리하는 데 강점이 있습니다.",
       "사용자 피드백을 꾸준히 받아왔고, 이를 화면, 기능, 운영 방식에 반영해 제품을 개선해왔습니다. 사용자의 반응을 듣고 방향을 조정하는 과정을 자연스럽게 개발 흐름 안에 녹여왔습니다.",
+    ],
+  },
+  {
+    id: "operation-driven",
+    title: "운영 환경을 기준으로 영향 범위를 좁히는 개발",
+    images: ["/projects/operation_1.png"],
+    tools: ["Grafana", "Sentry", "Cloud Logging", "Cloud Monitoring", "Lighthouse"],
+    highlights: [
+      "현재 사용 중인 사용자, 업데이트하지 않은 사용자, 앞으로 확장될 기능",
+      "로그와 재현 조건",
+      "필요한 부분만 안정적으로 바꾸는 것",
+    ],
+    paragraphs: [
+      "개발 환경에서 정상 동작하는 기능도 실제 사용자 환경에서는 예상치 못한 문제로 이어질 수 있다고 생각합니다.",
+      "그래서 기능을 수정할 때는 현재 사용 중인 사용자, 업데이트하지 않은 사용자, 앞으로 확장될 기능까지 함께 고려하며 영향 범위를 먼저 판단합니다. 문제가 발생하면 로그와 재현 조건을 바탕으로 원인을 좁히고, 기존 흐름을 깨뜨리지 않는 최소 변경으로 개선합니다.",
+      "실서비스 운영과 인턴에서의 레거시 경험을 통해, 좋은 수정은 많은 코드를 바꾸는 것이 아니라 문제의 원인을 정확히 찾아 필요한 부분만 안정적으로 바꾸는 것이라는 기준을 갖게 되었습니다.",
     ],
   },
   {
@@ -77,11 +77,11 @@ const competencies = [
   },
 ] as const;
 
-const verticalLabels = ["운영", "협업", "설계", "활용"] as const;
+const verticalLabels = ["협업", "운영", "설계", "활용"] as const;
 const accentColors = ["#007AFF", "#00C676", "#FF9F0A"] as const;
 const numberColors = ["#007AFF", "#00C676", "#FFD84D"] as const;
 const lineColors = ["#007AFF", "#00C676", "#FFD84D"] as const;
-const titleKeywords = ["운영", "협업", "설계", "활용"] as const;
+const titleKeywords = ["협업", "운영", "설계", "활용"] as const;
 
 const toolIconUrls: Record<string, string> = {
   Grafana: "/assets/skills/grafana.webp",
@@ -135,7 +135,7 @@ export default function ProjectSection() {
         </p>
 
         {/* css_sliding_cards 레포 구조 그대로 포팅: 하단 정렬 row(아이콘 + 고정폭 description) */}
-        <div className="mx-auto flex w-full max-w-[780px] flex-col gap-2.5 md:items-stretch md:flex-row">
+        <div className="mx-auto flex w-full max-w-[790px] flex-col gap-2.5 md:items-stretch md:flex-row">
           {competencies.map(({ id, title, images, tools, highlights, paragraphs }, index) => {
             const isOpen = openId === id;
             const label = verticalLabels[index % verticalLabels.length];
