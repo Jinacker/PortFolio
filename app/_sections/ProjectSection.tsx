@@ -117,8 +117,8 @@ export default function ProjectSection() {
                 aria-expanded={isOpen}
                 className={`relative flex flex-col overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white text-left shadow-[0_10px_30px_-8px_rgba(15,23,42,0.18)] transition-[width,height,flex] duration-700 ease-[cubic-bezier(.28,-.03,0,.99)] ${
                   isOpen
-                    ? "h-[380px] md:h-full md:flex-1"
-                    : "h-[76px] md:h-full md:w-[76px] md:flex-none"
+                    ? "h-auto md:h-full md:flex-1"
+                    : "h-[60px] md:h-full md:w-[76px] md:flex-none"
                 }`}
               >
                 {/* 접힌 상태에서는 짧은 라벨만 노출 */}
@@ -135,7 +135,7 @@ export default function ProjectSection() {
 
                 {/* 카드 확장이 끝난 다음 본문을 한 번에 노출 */}
                 <div
-                  className={`min-h-0 flex-1 overflow-hidden px-[15px] pt-6 transition-[opacity,transform] ease-out ${
+                  className={`min-h-0 flex-1 overflow-hidden px-[15px] pb-6 pt-6 transition-[opacity,transform] ease-out md:pb-0 ${
                     isOpen
                       ? "translate-y-0 opacity-100 duration-200 [transition-delay:650ms]"
                       : "pointer-events-none translate-y-3 opacity-0 duration-100 [transition-delay:0ms]"
@@ -163,7 +163,11 @@ export default function ProjectSection() {
                 </div>
 
                 {/* 번호 + 소제목 — 아래에 (같은 위계) */}
-                <div className={`flex shrink-0 items-center gap-2.5 p-3 ${isOpen ? "" : "md:justify-center md:px-0"}`}>
+                <div
+                  className={`relative order-first flex min-h-[58px] w-full shrink-0 items-center gap-2.5 p-2.5 md:order-last md:p-3 ${
+                    isOpen ? "" : "md:justify-center md:px-0"
+                  }`}
+                >
                   <div
                     className={`flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors duration-300 ${
                       isOpen ? "text-white" : "bg-[#f5f5f7] text-[#77777d]"
@@ -173,9 +177,9 @@ export default function ProjectSection() {
                     {index + 1}
                   </div>
                   <h4
-                    className={`whitespace-nowrap font-bold transition-opacity ${
+                    className={`min-w-0 font-bold transition-opacity ${
                       isOpen
-                        ? "text-lg font-black text-[#4e4e53] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] duration-200 [transition-delay:650ms]"
+                        ? "flex-1 whitespace-normal break-keep text-left text-base font-black leading-tight text-[#4e4e53] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] duration-200 [transition-delay:650ms] md:flex-none md:whitespace-nowrap md:text-lg"
                         : "text-xl font-black text-[#262627] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] duration-150 md:hidden"
                     }`}
                   >
