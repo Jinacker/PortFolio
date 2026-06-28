@@ -87,9 +87,9 @@ const passionGroups = [
 
 const MEMOIR_POSITIONS = [
   "left-0 top-6 z-[4]",
-  "left-[120px] top-1 z-[3]",
-  "left-[240px] top-5 z-[2]",
-  "left-[360px] top-9 z-[1]",
+  "left-[22%] top-1 z-[3] sm:left-[120px]",
+  "left-[44%] top-5 z-[2] sm:left-[240px]",
+  "left-[66%] top-9 z-[1] sm:left-[360px]",
 ]
 const MEMOIR_ANIMATION_DELAYS = ["0s", "0.8s", "1.6s", "2.4s"]
 
@@ -237,7 +237,7 @@ function RecordSection() {
         <p className="section-eyebrow">기록의 습관</p>
         <p className="section-title">생각이 흘러가버리지 않도록 꾸준히 기록해왔습니다.</p>
 
-        <div className="relative mx-auto mb-8 h-56 w-[540px] max-w-full">
+        <div className="relative mx-auto mb-8 h-44 w-full max-w-[540px] sm:h-56">
           {memoirPosts.map((post, index) => {
             return (
               <a
@@ -246,15 +246,15 @@ function RecordSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ animationDelay: MEMOIR_ANIMATION_DELAYS[index] }}
-                className={`record-float-card absolute w-44 rounded-md border border-foreground/10 bg-background/90 p-2.5 no-underline shadow-sm backdrop-blur transition duration-300 hover:z-10 hover:border-primary/30 hover:shadow-md ${MEMOIR_POSITIONS[index]}`}
+                className={`record-float-card absolute w-[34%] rounded-md border border-foreground/10 bg-background/90 p-2 no-underline shadow-sm backdrop-blur transition duration-300 hover:z-10 hover:border-primary/30 hover:shadow-md sm:w-44 sm:p-2.5 ${MEMOIR_POSITIONS[index]}`}
               >
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="h-20 w-full rounded object-cover"
+                  className="h-14 w-full rounded object-cover sm:h-20"
                 />
-                <p className="mt-2 truncate text-xs font-bold text-foreground">{post.title}</p>
-                <p className="mt-0.5 truncate text-[11px] font-medium text-foreground/45">{post.subtitle}</p>
+                <p className="mt-1.5 truncate text-[10px] font-bold text-foreground sm:mt-2 sm:text-xs">{post.title}</p>
+                <p className="mt-0.5 truncate text-[9px] font-medium text-foreground/45 sm:text-[11px]">{post.subtitle}</p>
               </a>
             )
           })}
