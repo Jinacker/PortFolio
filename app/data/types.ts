@@ -51,12 +51,19 @@ export interface ExperienceLink {
   href: string;
 }
 
+export interface PdfDocumentSection {
+  label: string;
+  startPage: number;
+  endPage: number;
+}
+
 export interface Experience {
   id: number;
   title: string;
   period: string;
   items: string[];
   links: ExperienceLink[];
+  pdfSections?: PdfDocumentSection[];
   is_active: boolean | null;
   sub_title: string | null;
   imageUrl?: string;

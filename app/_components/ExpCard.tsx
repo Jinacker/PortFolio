@@ -14,7 +14,7 @@ import type { Experience, Skill } from "@/data/types";
 
 import SkillItem from "./skill/SkillItem";
 
-const PdfScrollamaModal = dynamic(() => import("./PdfScrollamaModal"), { ssr: false });
+const PdfViewerModal = dynamic(() => import("./PdfViewerModal"), { ssr: false });
 
 interface ExpCardProps extends Omit<Experience, "skill_ids"> {
   skills: Skill[];
@@ -73,7 +73,7 @@ const formatPeriod = (period: string) => {
   );
 };
 
-const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links, category, imageUrl }: ExpCardProps) => {
+const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links, pdfSections, category, imageUrl }: ExpCardProps) => {
   const t = useTranslations("Experience");
   const [isExpanded, setIsExpanded] = useState(false);
   const [activePdfUrl, setActivePdfUrl] = useState<string | null>(null);
@@ -215,9 +215,11 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
         )}
       </div>
       {activePdfUrl ? (
-        <PdfScrollamaModal
+        <PdfViewerModal
           pdfUrl={activePdfUrl}
-          title={title}
+          heading={pdfLink?.label ?? "PDF 보기"}
+          subheading={title}
+          sections={pdfSections}
           onClose={() => setActivePdfUrl(null)}
         />
       ) : null}
