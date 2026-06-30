@@ -150,7 +150,7 @@ export default function ProjectSection() {
                 type="button"
                 onClick={() => setOpenId(id)}
                 aria-expanded={isOpen}
-                className={`relative flex flex-col overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white text-left shadow-[0_10px_30px_-8px_rgba(15,23,42,0.18)] transition-[width,height,flex] duration-700 ease-[cubic-bezier(.28,-.03,0,.99)] ${
+                className={`relative flex flex-col overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white text-left shadow-[0_10px_30px_-8px_rgba(15,23,42,0.18)] transition-[width,height,flex] duration-700 [transition-timing-function:cubic-bezier(.28,-.03,0,.99)] ${
                   isOpen
                     ? "h-auto md:flex-1"
                     : "h-[60px] md:h-auto md:w-[76px] md:flex-none"
@@ -163,7 +163,7 @@ export default function ProjectSection() {
                   }`}
                 >
                   <span className="mt-0.5 h-[61px] w-[5px] shrink-0 rounded-full" style={{ backgroundColor: lineColor }} />
-                  <span className="whitespace-nowrap text-[28px] font-semibold text-[#4e4e53] [font-family:Arial,sans-serif] [font-weight:600] [letter-spacing:0] [writing-mode:vertical-rl]">
+                  <span className="whitespace-nowrap text-[28px] font-semibold text-[#4e4e53] [font-family:Arial,sans-serif] [letter-spacing:0] [writing-mode:vertical-rl]">
                     {label}
                   </span>
                 </span>
@@ -231,10 +231,10 @@ export default function ProjectSection() {
                     {index + 1}
                   </div>
                   <h4
-                    className={`min-w-0 font-bold transition-none md:transition-opacity ${
+                    className={`min-w-0 transition-none md:transition-opacity ${
                       isOpen
-                        ? "flex-1 whitespace-normal break-keep text-left text-base font-black leading-tight text-[#4e4e53] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] md:flex-none md:whitespace-nowrap md:text-lg md:duration-200 md:[transition-delay:650ms]"
-                        : "text-xl font-black text-[#262627] opacity-100 [font-family:Arial,sans-serif] [font-weight:900] [letter-spacing:0] md:hidden md:duration-150"
+                        ? "flex-1 whitespace-normal break-keep text-left text-base font-black leading-tight text-[#4e4e53] opacity-100 [font-family:Arial,sans-serif] [letter-spacing:0] md:flex-none md:whitespace-nowrap md:text-lg md:duration-200 md:[transition-delay:650ms]"
+                        : "text-xl font-black text-[#262627] opacity-100 [font-family:Arial,sans-serif] [letter-spacing:0] md:hidden md:duration-150"
                     }`}
                   >
                     {isOpen

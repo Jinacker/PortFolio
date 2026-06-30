@@ -12,6 +12,52 @@ body {
   }
 }
 
+.pdf-page-slider::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+.pdf-page-slider::-webkit-slider-thumb {
+  width: 1.75rem;
+  height: 0.75rem;
+  margin-top: -0.125rem;
+  appearance: none;
+  border: 2px solid white;
+  border-radius: 9999px;
+  background: #007aff;
+  box-shadow: 0 1px 5px rgb(0 122 255 / 35%);
+}
+
+.pdf-page-slider::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+.pdf-page-slider::-moz-range-thumb {
+  width: 1.75rem;
+  height: 0.75rem;
+  border: 2px solid white;
+  border-radius: 9999px;
+  background: #007aff;
+  box-shadow: 0 1px 5px rgb(0 122 255 / 35%);
+}
+
+.pdf-cursor-prev {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10.5' fill='white' stroke='%23cbd5e1'/%3E%3Cpath d='M14 8 10 12l4 4' fill='none' stroke='%23334155' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      12 12,
+    w-resize;
+}
+
+.pdf-cursor-next {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10.5' fill='white' stroke='%23cbd5e1'/%3E%3Cpath d='m10 8 4 4-4 4' fill='none' stroke='%23334155' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      12 12,
+    e-resize;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
