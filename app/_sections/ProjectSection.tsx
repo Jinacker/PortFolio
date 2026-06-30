@@ -178,15 +178,32 @@ export default function ProjectSection() {
                 >
                   <div className="flex h-full w-full flex-col md:w-[500px]">
                     {images.length > 0 ? (
-                      <div className="mb-3 flex gap-2">
-                        {images.map(src => (
-                          <img
-                            key={src}
-                            src={src}
-                            alt=""
-                            className="h-32 flex-1 rounded-lg border border-black/5 object-cover object-[50%_18%]"
-                          />
-                        ))}
+                      <div className="mb-3">
+                        <div className="flex gap-2">
+                          {images.map(src => (
+                            <img
+                              key={src}
+                              src={src}
+                              alt=""
+                              className="h-32 flex-1 rounded-lg border border-black/5 object-cover object-[50%_18%]"
+                            />
+                          ))}
+                        </div>
+                        <div className="mt-1.5 flex items-center justify-end">
+                          <p className="mr-2 shrink-0 whitespace-nowrap text-[10px] font-semibold text-foreground/35">활용툴</p>
+                          <ul className="flex list-none flex-nowrap gap-2 p-0 indent-0">
+                            {tools.map(tool => (
+                              <li key={`${id}-${tool}`} className="indent-0">
+                                <SkillItem
+                                  size="xs"
+                                  label={tool}
+                                  imageUrl={toolIconUrls[tool]}
+                                  tooltipPlacement="top"
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     ) : null}
                     <div className="space-y-2">
@@ -195,23 +212,6 @@ export default function ProjectSection() {
                           {renderHighlightedText(paragraph, highlights)}
                         </p>
                       ))}
-                    </div>
-                    <div className={`ml-auto mr-4 py-1 ${index < 2 ? "mt-2" : ""}`}>
-                      <div className="flex items-center">
-                        <p className="mr-2 shrink-0 whitespace-nowrap text-[10px] font-semibold text-foreground/35">활용툴</p>
-                        <ul className="flex list-none flex-nowrap gap-2 p-0 indent-0">
-                          {tools.map(tool => (
-                            <li key={`${id}-${tool}`} className="indent-0">
-                              <SkillItem
-                                size="xs"
-                                label={tool}
-                                imageUrl={toolIconUrls[tool]}
-                                tooltipPlacement="top"
-                              />
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
                     </div>
                   </div>
                 </div>
