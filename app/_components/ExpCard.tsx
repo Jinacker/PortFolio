@@ -79,8 +79,10 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, categ
   );
 
   const toggleDetail = () => {
-    setIsExpanded(!isExpanded);
+    setIsExpanded(prev => !prev);
   };
+
+  const detailId = `experience-${id}-detail`;
 
   return (
     <div className="grid sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-x-8 sm:items-start sm:pl-16">
@@ -91,7 +93,14 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, categ
 
       <div className="pl-6 sm:pl-0 flex flex-col gap-3">
         {imageUrl ? (
-          <div className="relative h-36 w-full overflow-hidden rounded-md border border-foreground/10 bg-white shadow-sm sm:hidden">
+          <button
+            type="button"
+            onClick={toggleDetail}
+            aria-expanded={isExpanded}
+            aria-controls={detailId}
+            aria-label={`${title} 자세히 보기`}
+            className="relative h-36 w-full cursor-pointer overflow-hidden rounded-md border border-foreground/10 bg-white shadow-sm sm:hidden"
+          >
             <Image
               src={imageUrl}
               alt={title}
@@ -99,19 +108,32 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, categ
               className={title.includes("TradLab") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
               sizes="calc(100vw - 3rem)"
             />
-          </div>
+          </button>
         ) : null}
 
-        <div className="flex flex-col gap-1">
+        <button
+          type="button"
+          onClick={toggleDetail}
+          aria-expanded={isExpanded}
+          aria-controls={detailId}
+          className="flex cursor-pointer flex-col gap-1 text-left"
+        >
           <p className="text-base md:text-lg font-semibold ">{title}</p>
           {sub_title && (
             <p className="text-xs md:text-sm font-normal text-foreground/60 whitespace-pre-wrap">{parse(sub_title)}</p>
           )}
-        </div>
+        </button>
 
         <div className={cn("flex gap-1", imageUrl ? "items-start" : "flex-col")}>
           {imageUrl ? (
-            <div className="relative mt-3 hidden h-36 w-[17rem] shrink-0 overflow-hidden rounded-md border border-foreground/10 bg-white shadow-sm sm:block">
+            <button
+              type="button"
+              onClick={toggleDetail}
+              aria-expanded={isExpanded}
+              aria-controls={detailId}
+              aria-label={`${title} 자세히 보기`}
+              className="relative mt-3 hidden h-36 w-[17rem] shrink-0 cursor-pointer overflow-hidden rounded-md border border-foreground/10 bg-white shadow-sm sm:block"
+            >
               <Image
                 src={imageUrl}
                 alt={title}
@@ -119,7 +141,7 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, categ
                 className={title.includes("TradLab") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
                 sizes="272px"
               />
-            </div>
+            </button>
           ) : null}
           {imageUrl ? <div className="ml-3 mt-3 hidden h-36 w-px shrink-0 bg-foreground/10 sm:block" /> : null}
 
@@ -147,12 +169,18 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, categ
           </div>
         </div>
 
-        <button className="text-primary/75 flex items-center gap-1 mt-2" onClick={toggleDetail}>
+        <button
+          type="button"
+          className="text-primary/75 flex items-center gap-1 mt-2"
+          onClick={toggleDetail}
+          aria-expanded={isExpanded}
+          aria-controls={detailId}
+        >
           <ChevronRight className={cn("w-4 h-4 transition-transform", isExpanded && "rotate-90")} />
           <p className="text-left text-xs md:text-sm">{isExpanded ? t("hideDetail") : t("showDetail")}</p>
         </button>
         {isExpanded && items.length > 0 && (
-          <ul className="list-disc list-inside bg-foreground/5 rounded-lg p-4 -indent-5 pl-10">
+          <ul id={detailId} className="list-disc list-inside bg-foreground/5 rounded-lg p-4 -indent-5 pl-10">
             {items.map((data, index) => (
               <li
                 key={`exp-${id}-detail-${index}`}
