@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, FileText } from "react-feather";
+import { ChevronRight } from "react-feather";
 
 import cn from "classnames";
 import dynamic from "next/dynamic";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import parse from "html-react-parser";
 import { useTranslations } from "next-intl";
@@ -12,6 +13,7 @@ import { useTranslations } from "next-intl";
 import Shape from "@/assets/shape-sparkle.svg";
 import type { Experience, Skill } from "@/data/types";
 
+import ExperienceDetailPanel from "./ExperienceDetailPanel";
 import SkillItem from "./skill/SkillItem";
 
 const PdfViewerModal = dynamic(() => import("./PdfViewerModal"), { ssr: false });
@@ -73,7 +75,7 @@ const formatPeriod = (period: string) => {
   );
 };
 
-const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links, pdfSections, category, imageUrl }: ExpCardProps) => {
+const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links, pdfSections, detailSections, category, imageUrl }: ExpCardProps) => {
   const t = useTranslations("Experience");
   const [isExpanded, setIsExpanded] = useState(false);
   const [activePdfUrl, setActivePdfUrl] = useState<string | null>(null);
@@ -184,35 +186,26 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
           <ChevronRight className={cn("w-4 h-4 transition-transform", isExpanded && "rotate-90")} />
           <p className="text-left text-xs md:text-sm">{isExpanded ? t("hideDetail") : t("showDetail")}</p>
         </button>
-        {isExpanded && (items.length > 0 || pdfLink) && (
-          <div id={detailId} className="rounded-lg bg-foreground/5 p-4">
-            {items.length > 0 ? (
-              <ul className="list-disc list-inside -indent-5 pl-6">
-                {items.map((data, index) => (
-                  <li
-                    key={`exp-${id}-detail-${index}`}
-                    className="mb-1 text-sm font-normal text-foreground/80 last:mb-0 md:text-base"
-                  >
-                    {data}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-            {pdfLink ? (
-              <button
-                type="button"
-                onClick={() => setActivePdfUrl(pdfLink.href)}
-                className={cn(
-                  "flex items-center gap-2 rounded-lg border border-primary/20 bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-sm transition hover:border-primary/35 hover:bg-primary/5",
-                  items.length > 0 && "mt-4",
-                )}
-              >
-                <FileText className="h-4 w-4" />
-                {pdfLink.label}
-              </button>
-            ) : null}
-          </div>
-        )}
+        <AnimatePresence initial={false}>
+          {isExpanded ? (
+            <motion.div
+              key={detailId}
+              initial={{ height: 0, opacity: 0, y: -8 }}
+              animate={{ height: "auto", opacity: 1, y: 0 }}
+              exit={{ height: 0, opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <ExperienceDetailPanel
+                id={detailId}
+                items={items}
+                sections={detailSections}
+                pdfLink={pdfLink}
+                onOpenPdf={setActivePdfUrl}
+              />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>
       {activePdfUrl ? (
         <PdfViewerModal

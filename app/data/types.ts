@@ -57,6 +57,24 @@ export interface PdfDocumentSection {
   endPage: number;
 }
 
+export interface ExperienceDetailSection {
+  title: string;
+  items: string[];
+  highlights?: string[];
+  layout?: "list" | "paragraphs";
+  media?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    href?: string;
+    linkLabel?: string;
+    maxWidth?: number;
+    placement?: "top" | "left";
+  };
+  showPdf?: boolean;
+}
+
 export interface Experience {
   id: number;
   title: string;
@@ -64,6 +82,7 @@ export interface Experience {
   items: string[];
   links: ExperienceLink[];
   pdfSections?: PdfDocumentSection[];
+  detailSections?: ExperienceDetailSection[];
   is_active: boolean | null;
   sub_title: string | null;
   imageUrl?: string;
