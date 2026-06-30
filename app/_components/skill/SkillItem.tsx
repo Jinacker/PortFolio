@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 import cn from "classnames";
@@ -66,6 +66,15 @@ const SkillItem = ({
     label === "Slack" && "p-1",
     label === "GitHub Actions" && "p-1",
   );
+
+  useEffect(() => {
+    if (!tooltipPosition) return;
+
+    const hideTooltip = () => setTooltipPosition(null);
+
+    window.addEventListener("scroll", hideTooltip, true);
+    return () => window.removeEventListener("scroll", hideTooltip, true);
+  }, [tooltipPosition]);
 
   const showTooltip = (element: HTMLDivElement) => {
     const rect = element.getBoundingClientRect();
