@@ -183,17 +183,21 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
           aria-expanded={isExpanded}
           aria-controls={detailId}
         >
-          <ChevronRight className={cn("w-4 h-4 transition-transform", isExpanded && "rotate-90")} />
+          <ChevronRight className={cn("h-4 w-4 transition-transform duration-[400ms]", isExpanded && "rotate-90")} />
           <p className="text-left text-xs md:text-sm">{isExpanded ? t("hideDetail") : t("showDetail")}</p>
         </button>
         <AnimatePresence initial={false}>
           {isExpanded ? (
             <motion.div
               key={detailId}
-              initial={{ height: 0, opacity: 0, y: -8 }}
-              animate={{ height: "auto", opacity: 1, y: 0 }}
-              exit={{ height: 0, opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ height: 0, marginTop: "-0.75rem", opacity: 0 }}
+              animate={{ height: "auto", marginTop: 0, opacity: 1 }}
+              exit={{ height: 0, marginTop: "-0.75rem", opacity: 0 }}
+              transition={{
+                height: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                marginTop: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                opacity: { duration: 0.25, ease: "easeOut" },
+              }}
               className="overflow-hidden"
             >
               <ExperienceDetailPanel
