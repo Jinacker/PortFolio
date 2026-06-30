@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import SectionWatcher from "@/_components/SectionWatcher";
 import SkillItem from "@/_components/skill/SkillItem";
@@ -26,7 +26,7 @@ const competencies = [
   {
     id: "operation-driven",
     title: "운영 환경을 기준으로 영향 범위를 좁히는 개발",
-    images: ["/projects/operation_1.png"],
+    images: ["/projects/operation_metrics.png"],
     tools: ["Grafana", "Sentry", "Cloud Logging", "Cloud Monitoring", "Lighthouse"],
     highlights: [
       "현재 사용 중인 사용자, 업데이트하지 않은 사용자, 앞으로 확장될 기능",
@@ -124,6 +124,21 @@ function renderHighlightedText(text: string, highlights: readonly string[]) {
 
 export default function ProjectSection() {
   const [openId, setOpenId] = useState<string>(competencies[0].id);
+  const cardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  const openCard = (id: string) => {
+    setOpenId(id);
+
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const card = cardRefs.current[id];
+        card?.focus({ preventScroll: true });
+        card?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  };
 
   return (
     <SectionWatcher id="project">
@@ -147,10 +162,13 @@ export default function ProjectSection() {
             return (
               <button
                 key={id}
+                ref={element => {
+                  cardRefs.current[id] = element;
+                }}
                 type="button"
-                onClick={() => setOpenId(id)}
+                onClick={() => openCard(id)}
                 aria-expanded={isOpen}
-                className={`relative flex flex-col overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white text-left shadow-[0_10px_30px_-8px_rgba(15,23,42,0.18)] transition-[width,height,flex] duration-700 [transition-timing-function:cubic-bezier(.28,-.03,0,.99)] ${
+                className={`relative scroll-mt-20 flex flex-col overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white text-left shadow-[0_10px_30px_-8px_rgba(15,23,42,0.18)] transition-[width,height,flex] duration-700 [transition-timing-function:cubic-bezier(.28,-.03,0,.99)] ${
                   isOpen
                     ? "h-auto md:flex-1"
                     : "h-[60px] md:h-auto md:w-[76px] md:flex-none"
@@ -178,7 +196,7 @@ export default function ProjectSection() {
                 >
                   <div className="flex h-full w-full flex-col md:w-[500px]">
                     {images.length > 0 ? (
-                      <div className="mb-3">
+                      <div className="mb-4">
                         <div className="flex gap-2">
                           {images.map(src => (
                             <img
@@ -189,7 +207,7 @@ export default function ProjectSection() {
                             />
                           ))}
                         </div>
-                        <div className="mt-1.5 flex items-center justify-end">
+                        <div className="mt-0.5 flex items-center justify-end pr-2">
                           <p className="mr-2 shrink-0 whitespace-nowrap text-[10px] font-semibold text-foreground/35">활용툴</p>
                           <ul className="flex list-none flex-nowrap gap-2 p-0 indent-0">
                             {tools.map(tool => (
