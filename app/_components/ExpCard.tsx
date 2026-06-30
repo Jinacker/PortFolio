@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight } from "react-feather";
+import { ChevronRight, FileText } from "react-feather";
 
 import cn from "classnames";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import parse from "html-react-parser";
 import { useTranslations } from "next-intl";
@@ -12,6 +13,8 @@ import Shape from "@/assets/shape-sparkle.svg";
 import type { Experience, Skill } from "@/data/types";
 
 import SkillItem from "./skill/SkillItem";
+
+const PdfScrollamaModal = dynamic(() => import("./PdfScrollamaModal"), { ssr: false });
 
 interface ExpCardProps extends Omit<Experience, "skill_ids"> {
   skills: Skill[];
@@ -70,10 +73,12 @@ const formatPeriod = (period: string) => {
   );
 };
 
-const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, category, imageUrl }: ExpCardProps) => {
+const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links, category, imageUrl }: ExpCardProps) => {
   const t = useTranslations("Experience");
   const [isExpanded, setIsExpanded] = useState(false);
+  const [activePdfUrl, setActivePdfUrl] = useState<string | null>(null);
   const shapeColor = category === "WORK" ? "text-[#00C676]" : category === "OPEN_SOURCE" ? "text-amber-500" : is_active ? "text-primary" : "text-foreground/30";
+  const pdfLink = links.find(link => link.href.toLowerCase().endsWith(".pdf"));
   const hasDetailedBackendGroups = skills.some(skill =>
     ["DATA_AUTH", "VALIDATION_SECURITY", "CLOUD_INFRA", "MERMAID_CORE", "MERMAID_TEST_QUALITY", "MERMAID_BUILD_WORKFLOW"].includes(skill.category),
   );
@@ -179,19 +184,43 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, categ
           <ChevronRight className={cn("w-4 h-4 transition-transform", isExpanded && "rotate-90")} />
           <p className="text-left text-xs md:text-sm">{isExpanded ? t("hideDetail") : t("showDetail")}</p>
         </button>
-        {isExpanded && items.length > 0 && (
-          <ul id={detailId} className="list-disc list-inside bg-foreground/5 rounded-lg p-4 -indent-5 pl-10">
-            {items.map((data, index) => (
-              <li
-                key={`exp-${id}-detail-${index}`}
-                className="text-sm md:text-base font-normal mb-1 last:mb-0 text-foreground/80"
+        {isExpanded && (items.length > 0 || pdfLink) && (
+          <div id={detailId} className="rounded-lg bg-foreground/5 p-4">
+            {items.length > 0 ? (
+              <ul className="list-disc list-inside -indent-5 pl-6">
+                {items.map((data, index) => (
+                  <li
+                    key={`exp-${id}-detail-${index}`}
+                    className="mb-1 text-sm font-normal text-foreground/80 last:mb-0 md:text-base"
+                  >
+                    {data}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            {pdfLink ? (
+              <button
+                type="button"
+                onClick={() => setActivePdfUrl(pdfLink.href)}
+                className={cn(
+                  "flex items-center gap-2 rounded-lg border border-primary/20 bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-sm transition hover:border-primary/35 hover:bg-primary/5",
+                  items.length > 0 && "mt-4",
+                )}
               >
-                {data}
-              </li>
-            ))}
-          </ul>
+                <FileText className="h-4 w-4" />
+                {pdfLink.label}
+              </button>
+            ) : null}
+          </div>
         )}
       </div>
+      {activePdfUrl ? (
+        <PdfScrollamaModal
+          pdfUrl={activePdfUrl}
+          title={title}
+          onClose={() => setActivePdfUrl(null)}
+        />
+      ) : null}
     </div>
   );
 };
