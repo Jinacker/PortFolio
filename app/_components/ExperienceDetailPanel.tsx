@@ -41,6 +41,110 @@ function renderHighlightedText(text: string, highlights: readonly string[] = [])
   );
 }
 
+function MediaTextBlock({
+  media,
+  items,
+  highlights,
+  layout,
+  className,
+}: {
+  media?: ExperienceDetailSection["media"];
+  items: readonly string[];
+  highlights?: readonly string[];
+  layout?: ExperienceDetailSection["layout"];
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        media?.placement === "left" &&
+          "sm:grid sm:grid-cols-[220px_minmax(0,1fr)] sm:items-start sm:gap-4",
+        media?.placement === "right" &&
+          "sm:grid sm:grid-cols-[minmax(0,1fr)_360px] sm:items-start sm:gap-4",
+        className,
+      )}
+    >
+      {media ? (
+        <div
+          className={cn(
+            media.placement === "left" || media.placement === "right"
+              ? "mb-2.5 sm:mb-0"
+              : "mb-2.5",
+            media.placement === "right" && "sm:order-2",
+          )}
+          style={{ maxWidth: media.maxWidth }}
+        >
+          {media.href ? (
+            <a
+              href={media.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${media.alt} 링크 열기`}
+              className="block overflow-hidden rounded-md no-underline transition hover:opacity-90"
+            >
+              <Image
+                src={media.src}
+                alt={media.alt}
+                width={media.width}
+                height={media.height}
+                quality={95}
+                className="h-auto w-full"
+              />
+            </a>
+          ) : (
+            <Image
+              src={media.src}
+              alt={media.alt}
+              width={media.width}
+              height={media.height}
+              quality={95}
+              className="h-auto w-full rounded-md"
+            />
+          )}
+        </div>
+      ) : null}
+      <div className={cn(media?.placement === "right" && "sm:order-1")}>
+        {items.length > 0 ? (
+          layout === "paragraphs" ? (
+            <div className="space-y-2">
+              {items.map(data => (
+                <p
+                  key={data}
+                  className="break-keep text-sm font-normal leading-[1.6] text-foreground/75"
+                >
+                  {renderHighlightedText(data, highlights)}
+                </p>
+              ))}
+            </div>
+          ) : (
+            <ul className="list-disc space-y-0.5 pl-5">
+              {items.map(data => (
+                <li
+                  key={data}
+                  className="break-keep text-sm font-normal leading-[1.5] text-foreground/75"
+                >
+                  {renderHighlightedText(data, highlights)}
+                </li>
+              ))}
+            </ul>
+          )
+        ) : null}
+        {media?.href && media.linkLabel ? (
+          <a
+            href={media.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex w-full items-center justify-end gap-1 pr-3 text-xs font-semibold text-primary/75 no-underline transition hover:text-primary"
+          >
+            {media.linkLabel}
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 export default function ExperienceDetailPanel({
   id,
   items = [],
@@ -71,87 +175,21 @@ export default function ExperienceDetailPanel({
               <h4 className="mb-2 border-b border-slate-200 pb-1.5 text-sm font-bold text-foreground/85 md:text-base">
                 {section.title}
               </h4>
-              <div
-                className={cn(
-                  section.media?.placement === "left" &&
-                    "sm:grid sm:grid-cols-[220px_minmax(0,1fr)] sm:items-start sm:gap-4",
-                )}
-              >
-                {section.media ? (
-                  <div
-                    className={cn(
-                      section.media.placement === "left" ? "mb-2.5 sm:mb-0" : "mb-2.5",
-                    )}
-                    style={{ maxWidth: section.media.maxWidth }}
-                  >
-                    {section.media.href ? (
-                      <a
-                        href={section.media.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${section.media.alt} 링크 열기`}
-                        className="block overflow-hidden rounded-md no-underline transition hover:opacity-90"
-                      >
-                        <Image
-                          src={section.media.src}
-                          alt={section.media.alt}
-                          width={section.media.width}
-                          height={section.media.height}
-                          quality={95}
-                          className="h-auto w-full"
-                        />
-                      </a>
-                    ) : (
-                      <Image
-                        src={section.media.src}
-                        alt={section.media.alt}
-                        width={section.media.width}
-                        height={section.media.height}
-                        quality={95}
-                        className="h-auto w-full rounded-md"
-                      />
-                    )}
-                  </div>
-                ) : null}
-                <div>
-                  {section.items.length > 0 ? (
-                    section.layout === "paragraphs" ? (
-                      <div className="space-y-2">
-                        {section.items.map(data => (
-                          <p
-                            key={data}
-                            className="break-keep text-sm font-normal leading-[1.6] text-foreground/75"
-                          >
-                            {renderHighlightedText(data, section.highlights)}
-                          </p>
-                        ))}
-                      </div>
-                    ) : (
-                      <ul className="list-disc space-y-0.5 pl-5">
-                        {section.items.map(data => (
-                          <li
-                            key={data}
-                            className="break-keep text-sm font-normal leading-[1.5] text-foreground/75"
-                          >
-                            {renderHighlightedText(data, section.highlights)}
-                          </li>
-                        ))}
-                      </ul>
-                    )
-                  ) : null}
-                  {section.media?.href && section.media.linkLabel ? (
-                    <a
-                      href={section.media.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-4 flex w-full items-center justify-end gap-1 pr-3 text-xs font-semibold text-primary/75 no-underline transition hover:text-primary"
-                    >
-                      {section.media.linkLabel}
-                      <ArrowUpRight className="h-3.5 w-3.5" />
-                    </a>
-                  ) : null}
-                </div>
-              </div>
+              <MediaTextBlock
+                media={section.media}
+                items={section.items}
+                highlights={section.highlights}
+                layout={section.layout}
+              />
+              {section.extra ? (
+                <MediaTextBlock
+                  media={section.extra.media}
+                  items={section.extra.items}
+                  highlights={section.extra.highlights}
+                  layout={section.extra.layout}
+                  className="mt-4 border-t border-slate-100 pt-3.5"
+                />
+              ) : null}
               {section.showPdf && pdfLink ? (
                 <button
                   type="button"

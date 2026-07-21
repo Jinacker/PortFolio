@@ -131,6 +131,28 @@ const experiences: Record<Locale, Experience[]> = {
             maxWidth: 200,
             placement: "left",
           },
+          extra: {
+            items: [
+              "@mermaid-js/tiny@11.16.0 버전, 메이저 패치로 포함되어 정식 릴리즈",
+              "이제 전 세계 사용자가 그리는 Self Loop Edge는 내가 작업한 코드로 렌더링됨",
+            ],
+            highlights: [
+              "@mermaid-js/tiny@11.16.0",
+              "정식 릴리즈",
+              "Self Loop Edge",
+              "내가 작업한 코드",
+            ],
+            media: {
+              src: "/assets/experiences/mermaid-release-11-16-0.png",
+              alt: "Mermaid.js 11.16.0 릴리스 노트에 반영된 Self Loop Edge 개선",
+              width: 1246,
+              height: 450,
+              href: "https://github.com/mermaid-js/mermaid/releases/tag/%40mermaid-js%2Ftiny%4011.16.0",
+              linkLabel: "패치 바로가기",
+              maxWidth: 360,
+              placement: "right",
+            },
+          },
         },
         {
           title: "트러블 슈팅",
@@ -280,6 +302,29 @@ const experiences: Record<Locale, Experience[]> = {
             linkLabel: "View pull request",
             maxWidth: 200,
             placement: "left",
+          },
+          extra: {
+            items: [
+              "Shipped worldwide as a major patch in the official @mermaid-js/tiny@11.16.0 release",
+              "Every Self Loop Edge users draw now renders through the code I wrote",
+            ],
+            highlights: [
+              "@mermaid-js/tiny@11.16.0",
+              "major patch",
+              "worldwide",
+              "Self Loop Edge",
+              "the code I wrote",
+            ],
+            media: {
+              src: "/assets/experiences/mermaid-release-11-16-0.png",
+              alt: "Self Loop Edge improvement shipped in the Mermaid.js 11.16.0 release notes",
+              width: 1246,
+              height: 450,
+              href: "https://github.com/mermaid-js/mermaid/releases/tag/%40mermaid-js%2Ftiny%4011.16.0",
+              linkLabel: "View the release",
+              maxWidth: 360,
+              placement: "right",
+            },
           },
         },
         {

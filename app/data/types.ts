@@ -57,20 +57,28 @@ export interface PdfDocumentSection {
   endPage: number;
 }
 
+export interface ExperienceDetailMedia {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  href?: string;
+  linkLabel?: string;
+  maxWidth?: number;
+  placement?: "top" | "left" | "right";
+}
+
 export interface ExperienceDetailSection {
   title: string;
   items: string[];
   highlights?: string[];
   layout?: "list" | "paragraphs";
-  media?: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-    href?: string;
-    linkLabel?: string;
-    maxWidth?: number;
-    placement?: "top" | "left";
+  media?: ExperienceDetailMedia;
+  extra?: {
+    items: string[];
+    highlights?: string[];
+    layout?: "list" | "paragraphs";
+    media?: ExperienceDetailMedia;
   };
   showPdf?: boolean;
 }
