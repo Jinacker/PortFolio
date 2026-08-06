@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { ArrowUpRight, ChevronDown, FileText } from "react-feather";
 
 import cn from "classnames";
@@ -69,15 +69,23 @@ function MediaTextBlock({
   layout?: ExperienceDetailSection["layout"];
   className?: string;
 }) {
+  // Side media narrower than the default column (left 220px / right 360px)
+  // shrinks the column with it, so the text keeps the freed-up width.
+  const mediaColumnStyle =
+    (media?.placement === "left" || media?.placement === "right") && media.maxWidth
+      ? ({ "--media-col": `${media.maxWidth}px` } as CSSProperties)
+      : undefined;
+
   return (
     <div
       className={cn(
         media?.placement === "left" &&
-          "sm:grid sm:grid-cols-[220px_minmax(0,1fr)] sm:items-start sm:gap-4",
+          "sm:grid sm:grid-cols-[var(--media-col,220px)_minmax(0,1fr)] sm:items-start sm:gap-4",
         media?.placement === "right" &&
-          "sm:grid sm:grid-cols-[minmax(0,1fr)_360px] sm:items-start sm:gap-4",
+          "sm:grid sm:grid-cols-[minmax(0,1fr)_var(--media-col,360px)] sm:items-start sm:gap-4",
         className,
       )}
+      style={mediaColumnStyle}
     >
       {media ? (
         <div
@@ -163,10 +171,13 @@ function MediaTextBlock({
 function PdfButton({
   label,
   onClick,
+  compact,
   className,
 }: {
   label: string;
   onClick: () => void;
+  /** 좁은 자리에 들어갈 때 — 작은 글씨/패딩으로 축소 */
+  compact?: boolean;
   className?: string;
 }) {
   return (
@@ -174,11 +185,12 @@ function PdfButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex items-center gap-2 rounded-lg border border-primary/20 bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-sm transition hover:border-primary/35 hover:bg-primary/5",
+        "flex items-center gap-2 rounded-lg border border-primary/20 bg-white font-semibold text-primary shadow-sm transition hover:border-primary/35 hover:bg-primary/5",
+        compact ? "px-3 py-2 text-xs" : "px-4 py-2.5 text-sm",
         className,
       )}
     >
-      <FileText className="h-4 w-4" />
+      <FileText className={compact ? "h-3.5 w-3.5 shrink-0" : "h-4 w-4"} />
       {label}
     </button>
   );
@@ -207,21 +219,55 @@ function PanelSection({
         layout={section.layout}
       />
       {section.extra ? (
-        <MediaTextBlock
-          media={section.extra.media}
-          items={section.extra.items}
-          highlights={section.extra.highlights}
-          layout={section.extra.layout}
-          className="mt-4 border-t border-slate-100 pt-3.5"
-        />
+        sectionPdf?.inline ? (
+          // 마지막 항목만 PDF 버튼과 같은 줄에 — 앞 항목들은 전체 폭을 그대로 유지
+          <>
+            {section.extra.items.length > 1 ? (
+              <MediaTextBlock
+                media={section.extra.media}
+                items={section.extra.items.slice(0, -1)}
+                highlights={section.extra.highlights}
+                layout={section.extra.layout}
+                className="mt-4"
+              />
+            ) : null}
+            <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <MediaTextBlock
+                items={section.extra.items.slice(-1)}
+                highlights={section.extra.highlights}
+                layout={section.extra.layout}
+                className="min-w-0 sm:flex-1"
+              />
+              <PdfButton
+                label={sectionPdf.label}
+                onClick={() =>
+                  onOpenPdf({ href: sectionPdf.href, label: sectionPdf.label, sections: sectionPdf.sections })
+                }
+                compact
+                // 라벨의 \n을 그대로 살려 원하는 지점에서만 줄바꿈
+                className="shrink-0 whitespace-pre-line text-left sm:min-w-[220px]"
+              />
+            </div>
+          </>
+        ) : (
+          <MediaTextBlock
+            media={section.extra.media}
+            items={section.extra.items}
+            highlights={section.extra.highlights}
+            layout={section.extra.layout}
+            className={
+              section.extra.divider === false ? "mt-4" : "mt-4 border-t border-slate-100 pt-3.5"
+            }
+          />
+        )
       ) : null}
-      {sectionPdf ? (
+      {sectionPdf && !(sectionPdf.inline && section.extra) ? (
         <PdfButton
           label={sectionPdf.label}
           onClick={() =>
             onOpenPdf({ href: sectionPdf.href, label: sectionPdf.label, sections: sectionPdf.sections })
           }
-          className={cn(section.items.length > 0 && "mt-3")}
+          className={cn(section.items.length > 0 && "mt-3", sectionPdf.align === "right" && "ml-auto")}
         />
       ) : section.showPdf && pdfLink ? (
         <PdfButton

@@ -75,6 +75,10 @@ export interface ExperienceDetailPdf {
   href: string;
   label: string;
   sections?: PdfDocumentSection[];
+  /** 버튼 정렬 — 기본 왼쪽 */
+  align?: "left" | "right";
+  /** true면 버튼을 extra 블록과 같은 줄 오른쪽에 배치 (텍스트가 좁아져 줄바꿈됨) */
+  inline?: boolean;
 }
 
 export interface ExperienceDetailSection {
@@ -88,6 +92,8 @@ export interface ExperienceDetailSection {
     highlights?: string[];
     layout?: "list" | "paragraphs";
     media?: ExperienceDetailMedia;
+    /** false로 두면 본문과 extra 사이 구분선 없이 이어서 렌더 (기본 true) */
+    divider?: boolean;
   };
   pdf?: ExperienceDetailPdf;
   showPdf?: boolean;
