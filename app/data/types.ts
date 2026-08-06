@@ -68,6 +68,15 @@ export interface ExperienceDetailMedia {
   placement?: "top" | "left" | "right";
 }
 
+// A PDF attached to a single detail section, with its own viewer TOC.
+// (The legacy path — `showPdf` + the experience-level `links`/`pdfSections` —
+// still works for experiences with a single PDF, e.g. the Mermaid entry.)
+export interface ExperienceDetailPdf {
+  href: string;
+  label: string;
+  sections?: PdfDocumentSection[];
+}
+
 export interface ExperienceDetailSection {
   title: string;
   items: string[];
@@ -80,7 +89,16 @@ export interface ExperienceDetailSection {
     layout?: "list" | "paragraphs";
     media?: ExperienceDetailMedia;
   };
+  pdf?: ExperienceDetailPdf;
   showPdf?: boolean;
+}
+
+// A deep-dive card nested inside an experience's detail panel — rendered as an
+// accordion below the main sections (e.g. the SureSoftTech sub-projects).
+export interface ExperienceSubDetail {
+  id: string;
+  title: string;
+  sections: ExperienceDetailSection[];
 }
 
 export interface Experience {
@@ -91,6 +109,7 @@ export interface Experience {
   links: ExperienceLink[];
   pdfSections?: PdfDocumentSection[];
   detailSections?: ExperienceDetailSection[];
+  subDetails?: ExperienceSubDetail[];
   is_active: boolean | null;
   sub_title: string | null;
   imageUrl?: string;

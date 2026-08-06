@@ -1,21 +1,36 @@
 "use client";
 
-import { ArrowUpRight, FileText } from "react-feather";
+import { useState } from "react";
+import { ArrowUpRight, ChevronDown, FileText } from "react-feather";
 
 import cn from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import type {
   ExperienceDetailSection,
   ExperienceLink,
+  ExperienceSubDetail,
+  PdfDocumentSection,
 } from "@/data/types";
+
+// Payload for opening the PDF viewer — each PDF carries its own heading/TOC so
+// one experience can attach several documents (per-section `pdf`) while the
+// legacy single-PDF path (`showPdf` + links/pdfSections) keeps working.
+export interface ActivePdf {
+  href: string;
+  label: string;
+  sections?: readonly PdfDocumentSection[];
+}
 
 interface ExperienceDetailPanelProps {
   id?: string;
   items?: readonly string[];
   sections?: readonly ExperienceDetailSection[];
+  subDetails?: readonly ExperienceSubDetail[];
   pdfLink?: ExperienceLink;
-  onOpenPdf: (href: string) => void;
+  onOpenPdf: (pdf: ActivePdf) => void;
   className?: string;
 }
 
@@ -145,15 +160,160 @@ function MediaTextBlock({
   );
 }
 
+function PdfButton({
+  label,
+  onClick,
+  className,
+}: {
+  label: string;
+  onClick: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "flex items-center gap-2 rounded-lg border border-primary/20 bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-sm transition hover:border-primary/35 hover:bg-primary/5",
+        className,
+      )}
+    >
+      <FileText className="h-4 w-4" />
+      {label}
+    </button>
+  );
+}
+
+function PanelSection({
+  section,
+  pdfLink,
+  onOpenPdf,
+}: {
+  section: ExperienceDetailSection;
+  pdfLink?: ExperienceLink;
+  onOpenPdf: (pdf: ActivePdf) => void;
+}) {
+  const sectionPdf = section.pdf;
+
+  return (
+    <div className="py-3 first:pt-0 last:pb-0">
+      <h4 className="mb-2 border-b border-slate-200 pb-1.5 text-sm font-bold text-foreground/85 md:text-base">
+        {section.title}
+      </h4>
+      <MediaTextBlock
+        media={section.media}
+        items={section.items}
+        highlights={section.highlights}
+        layout={section.layout}
+      />
+      {section.extra ? (
+        <MediaTextBlock
+          media={section.extra.media}
+          items={section.extra.items}
+          highlights={section.extra.highlights}
+          layout={section.extra.layout}
+          className="mt-4 border-t border-slate-100 pt-3.5"
+        />
+      ) : null}
+      {sectionPdf ? (
+        <PdfButton
+          label={sectionPdf.label}
+          onClick={() =>
+            onOpenPdf({ href: sectionPdf.href, label: sectionPdf.label, sections: sectionPdf.sections })
+          }
+          className={cn(section.items.length > 0 && "mt-3")}
+        />
+      ) : section.showPdf && pdfLink ? (
+        <PdfButton
+          label={pdfLink.label}
+          onClick={() => onOpenPdf({ href: pdfLink.href, label: pdfLink.label })}
+          className={cn(section.items.length > 0 && "mt-3")}
+        />
+      ) : null}
+    </div>
+  );
+}
+
+// Deep-dive cards below the main sections — same accordion idiom as ProjectCases.
+function SubDetailList({
+  subDetails,
+  onOpenPdf,
+}: {
+  subDetails: readonly ExperienceSubDetail[];
+  onOpenPdf: (pdf: ActivePdf) => void;
+}) {
+  const t = useTranslations("Experience");
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  return (
+    <div className="mt-3 border-t border-slate-200 pt-3">
+      <p className="mb-2.5 text-xs font-semibold text-foreground/40">{t("subDetails")}</p>
+      <div className="flex flex-col gap-2.5">
+        {subDetails.map(sub => {
+          const isOpen = openId === sub.id;
+
+          return (
+            <div
+              key={sub.id}
+              className="overflow-hidden rounded-xl border border-foreground/10 bg-foreground/[0.02]"
+            >
+              <button
+                type="button"
+                onClick={() => setOpenId(isOpen ? null : sub.id)}
+                aria-expanded={isOpen}
+                className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03]"
+              >
+                <span className="min-w-0 flex-1 break-keep text-sm font-semibold text-foreground/85">
+                  {sub.title}
+                </span>
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 shrink-0 text-foreground/40 transition-transform",
+                    isOpen && "rotate-180",
+                  )}
+                  strokeWidth={1.5}
+                />
+              </button>
+              <AnimatePresence initial={false}>
+                {isOpen ? (
+                  <motion.div
+                    key="body"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-4 pb-4 pt-1">
+                      {sub.sections.map(section => (
+                        <PanelSection
+                          key={section.title}
+                          section={section}
+                          onOpenPdf={onOpenPdf}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function ExperienceDetailPanel({
   id,
   items = [],
   sections = [],
+  subDetails = [],
   pdfLink,
   onOpenPdf,
   className,
 }: ExperienceDetailPanelProps) {
-  if (items.length === 0 && sections.length === 0 && !pdfLink) {
+  if (items.length === 0 && sections.length === 0 && subDetails.length === 0 && !pdfLink) {
     return null;
   }
 
@@ -168,39 +328,12 @@ export default function ExperienceDetailPanel({
       {sections.length > 0 ? (
         <div>
           {sections.map(section => (
-            <div
+            <PanelSection
               key={section.title}
-              className="py-3 first:pt-0 last:pb-0"
-            >
-              <h4 className="mb-2 border-b border-slate-200 pb-1.5 text-sm font-bold text-foreground/85 md:text-base">
-                {section.title}
-              </h4>
-              <MediaTextBlock
-                media={section.media}
-                items={section.items}
-                highlights={section.highlights}
-                layout={section.layout}
-              />
-              {section.extra ? (
-                <MediaTextBlock
-                  media={section.extra.media}
-                  items={section.extra.items}
-                  highlights={section.extra.highlights}
-                  layout={section.extra.layout}
-                  className="mt-4 border-t border-slate-100 pt-3.5"
-                />
-              ) : null}
-              {section.showPdf && pdfLink ? (
-                <button
-                  type="button"
-                  onClick={() => onOpenPdf(pdfLink.href)}
-                  className="flex items-center gap-2 rounded-lg border border-primary/20 bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-sm transition hover:border-primary/35 hover:bg-primary/5"
-                >
-                  <FileText className="h-4 w-4" />
-                  {pdfLink.label}
-                </button>
-              ) : null}
-            </div>
+              section={section}
+              pdfLink={pdfLink}
+              onOpenPdf={onOpenPdf}
+            />
           ))}
         </div>
       ) : items.length > 0 ? (
@@ -217,17 +350,15 @@ export default function ExperienceDetailPanel({
       ) : null}
 
       {sections.length === 0 && pdfLink ? (
-        <button
-          type="button"
-          onClick={() => onOpenPdf(pdfLink.href)}
-          className={cn(
-            "flex items-center gap-2 rounded-lg border border-primary/20 bg-white px-4 py-2.5 text-sm font-semibold text-primary shadow-sm transition hover:border-primary/35 hover:bg-primary/5",
-            items.length > 0 && "mt-4",
-          )}
-        >
-          <FileText className="h-4 w-4" />
-          {pdfLink.label}
-        </button>
+        <PdfButton
+          label={pdfLink.label}
+          onClick={() => onOpenPdf({ href: pdfLink.href, label: pdfLink.label })}
+          className={cn(items.length > 0 && "mt-4")}
+        />
+      ) : null}
+
+      {subDetails.length > 0 ? (
+        <SubDetailList subDetails={subDetails} onOpenPdf={onOpenPdf} />
       ) : null}
     </div>
   );

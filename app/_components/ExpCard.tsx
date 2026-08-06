@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 import Shape from "@/assets/shape-sparkle.svg";
 import type { Experience, Skill } from "@/data/types";
 
-import ExperienceDetailPanel from "./ExperienceDetailPanel";
+import ExperienceDetailPanel, { type ActivePdf } from "./ExperienceDetailPanel";
 import SkillItem from "./skill/SkillItem";
 
 const PdfViewerModal = dynamic(() => import("./PdfViewerModal"), { ssr: false });
@@ -75,10 +75,10 @@ const formatPeriod = (period: string) => {
   );
 };
 
-const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links, pdfSections, detailSections, category, imageUrl }: ExpCardProps) => {
+const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links, pdfSections, detailSections, subDetails, category, imageUrl }: ExpCardProps) => {
   const t = useTranslations("Experience");
   const [isExpanded, setIsExpanded] = useState(false);
-  const [activePdfUrl, setActivePdfUrl] = useState<string | null>(null);
+  const [activePdf, setActivePdf] = useState<ActivePdf | null>(null);
   const shapeColor = category === "WORK" ? "text-[#00C676]" : category === "OPEN_SOURCE" ? "text-amber-500" : is_active ? "text-primary" : "text-foreground/30";
   const pdfLink = links.find(link => link.href.toLowerCase().endsWith(".pdf"));
   const hasDetailedBackendGroups = skills.some(skill =>
@@ -204,20 +204,23 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
                 id={detailId}
                 items={items}
                 sections={detailSections}
+                subDetails={subDetails}
                 pdfLink={pdfLink}
-                onOpenPdf={setActivePdfUrl}
+                // Legacy single-PDF experiences carry no per-PDF TOC — fall back
+                // to the experience-level pdfSections.
+                onOpenPdf={pdf => setActivePdf({ ...pdf, sections: pdf.sections ?? pdfSections })}
               />
             </motion.div>
           ) : null}
         </AnimatePresence>
       </div>
-      {activePdfUrl ? (
+      {activePdf ? (
         <PdfViewerModal
-          pdfUrl={activePdfUrl}
-          heading={pdfLink?.label ?? "PDF 보기"}
+          pdfUrl={activePdf.href}
+          heading={activePdf.label}
           subheading={title}
-          sections={pdfSections}
-          onClose={() => setActivePdfUrl(null)}
+          sections={activePdf.sections}
+          onClose={() => setActivePdf(null)}
         />
       ) : null}
     </div>

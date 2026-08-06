@@ -35,7 +35,8 @@
       "project": "Projects"
     },
     "showDetail": "View key responsibilities",
-    "hideDetail": "Hide key responsibilities"
+    "hideDetail": "Hide key responsibilities",
+    "subDetails": "Detailed work"
   },
   "Project": {
     "eyebrow": "Project Details",
