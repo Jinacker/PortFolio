@@ -66,6 +66,7 @@ const experiences: Record<Locale, Experience[]> = {
           pdf: {
             href: "/pdfs/vspice-ai-sdd-architecture.pdf",
             label: "상반기 성과 발표 자료로 보는\nV-SPICE와 나의 기여",
+            tone: "green",
             inline: true,
             sections: [
               { label: "배경·경쟁 구도", startPage: 1, endPage: 2 },
@@ -179,6 +180,13 @@ const experiences: Record<Locale, Experience[]> = {
         {
           id: "ct-api",
           title: "V-SPICE ↔ CT, 대용량 테스트케이스 연동 API 설계 및 개발",
+          media: {
+            src: "/assets/experiences/vspice-ct-integration.png",
+            alt: "V-SPICE와 동적·정적 테스팅 도구의 연동 구조",
+            width: 762,
+            height: 388,
+            maxWidth: 520,
+          },
           sections: [
             {
               title: "왜 필요했나",
@@ -293,6 +301,12 @@ const experiences: Record<Locale, Experience[]> = {
         {
           id: "sureflow",
           title: "SureFlow — 다이어그램 GUI 편집을 지원하는 사내 라이브러리 개발 및 제품 적용",
+          media: {
+            src: "/assets/experiences/sureflow-gif.gif",
+            alt: "V-SPICE에 적용된 SureFlow 플로우차트 편집 화면",
+            width: 1412,
+            height: 734,
+          },
           sections: [
             {
               title: "왜 필요했나",
@@ -379,7 +393,7 @@ const experiences: Record<Locale, Experience[]> = {
             {
               title: "결과",
               items: [
-                "순서도·시퀀스·컴포넌트 다이어그램 3종을 마우스로 편집하고, 셀프 루프 편집·문법 에러 줄 보존 등 공식 편집기에도 없는 기능 4종 구현",
+                "플로우차트·시퀀스·컴포넌트 다이어그램 3종을 마우스로 편집하고, 셀프 루프 편집·문법 에러 줄 보존 등 공식 편집기에도 없는 기능 4종 구현",
                 "시퀀스·컴포넌트 에디터가 제품 정식 코드에 merge되고 제품 로드맵에 포함",
                 "부품처럼 교체할 수 있게 설계해 화면당 파일 2개 수정만으로 제품 3개 화면에 탑재",
                 "README·임베드 매뉴얼과 함께 사내 라이브러리로 인수인계하고 팀 상반기 성과 발표의 핵심 기능으로 수록",
@@ -427,24 +441,30 @@ const experiences: Record<Locale, Experience[]> = {
         {
           id: "png-pipeline",
           title: "문서 이미지 누락 문제 분석 및 PNG 생성 구조 개선",
+          media: {
+            src: "/assets/experiences/png-pipeline-bug.png",
+            alt: "Import Design 프로젝트의 문서에서 플로우차트 PNG가 누락된 버그 현상",
+            width: 1628,
+            height: 720,
+          },
           sections: [
             {
               title: "왜 필요했나",
               items: [
-                "V-SPICE는 분석 결과를 함수별 순서도 이미지가 포함된 Word 설계 문서로 자동 생성",
-                "배포 패키지 QA 중 Import 경로로 만든 프로젝트의 문서에서 순서도가 전부 빈 칸으로 나오는 버그를 발견",
+                "V-SPICE는 분석 결과를 함수별 플로우차트 이미지가 포함된 Word 설계 문서로 자동 생성",
+                "배포 패키지 QA 중 Import 경로로 만든 프로젝트의 문서에서 플로우차트가 전부 빈 칸으로 나오는 버그를 발견",
                 "고객에게 전달되는 최종 산출물이 깨지는 문제라 리포트에 그치지 않고 직접 원인 분석과 해결까지 담당",
               ],
               highlights: [
                 "Word 설계 문서",
-                "순서도가 전부 빈 칸",
+                "플로우차트가 전부 빈 칸",
                 "직접 원인 분석과 해결까지 담당",
               ],
             },
             {
               title: "원인은 무엇이었나",
               items: [
-                "순서도 PNG는 원래 AI 서버가 분석할 때 생성하지만, Import 프로젝트에는 다이어그램 텍스트만 있고 이미지가 없었음",
+                "플로우차트 PNG는 원래 AI 서버가 분석할 때 생성하지만, Import 프로젝트에는 다이어그램 텍스트만 있고 이미지가 없었음",
                 "코드 오류가 아니라 이미지를 만들 주체가 없는 구조적 공백이 원인",
               ],
               highlights: [
@@ -489,17 +509,24 @@ const experiences: Record<Locale, Experience[]> = {
             // [빈 슬롯] "트러블 슈팅" 섹션 — PDF 확보 시 주석 해제 후 pdf 필드로 추가:
             //   png-raster-limit.pdf (확인 필요) / 버튼문구: 대형 다이어그램 raster 실패 분석 (2.6GB 캔버스 한계)
             {
-              title: "속도는 어떻게 확보했나",
+              title: "성능과 대용량 입력은 어떻게 대응했나",
               items: [
                 "함수별 이미지를 하나씩 만들면 느리고 전부 동시에 만들면 브라우저 자원을 초과하는 문제",
                 "JS 렌더링의 직렬성, 이미지당 약 12MB 메모리, 브라우저 동시 전송 한도 6개를 근거로 한 번에 5장씩 처리",
-                "배치 크기를 설정 파일로 분리해 고객 PC 사양에 따라 재배포 없이 조정 가능하도록 구성",
+                "배치 크기를 환경변수로 분리해 고객 PC 사양에 따라 재배포 없이 조정 가능하도록 구성",
+                "Mermaid 내부에서 500줄 이상 코드를 과도하게 긴 입력으로 판단해 렌더링을 차단하는 제한을 확인",
+                "고객사 대형 플로우차트를 처리할 수 있도록 제한을 500줄 → 1,500줄로 확장",
+                "1,500줄을 넘으면 브라우저 메모리가 감당하지 못하는 것을 확인해 안정적으로 처리 가능한 최대 한도로 설정",
               ],
               highlights: [
                 "이미지당 약 12MB",
                 "동시 전송 한도 6개",
                 "한 번에 5장씩",
-                "설정 파일로 분리",
+                "환경변수로 분리",
+                "500줄 이상",
+                "500줄 → 1,500줄",
+                "브라우저 메모리",
+                "최대 한도",
               ],
             },
             {
@@ -549,6 +576,12 @@ const experiences: Record<Locale, Experience[]> = {
         {
           id: "server-shutdown",
           title: "V-SPICE Server 프로세스 종료 지연 원인 분석 및 해결",
+          media: {
+            src: "/assets/experiences/server-shutdown-delay.png",
+            alt: "Windows 서비스 관리자에서 V-SPICE Server 종료가 지연되는 현상",
+            width: 1538,
+            height: 666,
+          },
           sections: [
             {
               title: "왜 이게 문제였나",
@@ -556,7 +589,7 @@ const experiences: Record<Locale, Experience[]> = {
                 "V-SPICE는 고객 PC에 직접 설치되어 Windows 서비스로 동작하는 제품",
                 "고객사 패치는 서버 종료 → 파일 교체 → 재기동 순서라 종료 지연만큼 현장 작업이 그대로 중단",
                 "서비스 중지에 231초, 최대 372초가 걸렸고 저사양 PC에서는 멈춰 재부팅까지 필요",
-                "과거에는 빨랐지만 어느 순간 느려진 원인 불명의 회귀 문제를 인턴 종료 직전에 담당",
+                "과거에는 빨랐지만 어느 순간 느려진 원인 불명의 회귀 문제 담당",
               ],
               highlights: [
                 "고객 PC에 직접 설치",
@@ -622,7 +655,7 @@ const experiences: Record<Locale, Experience[]> = {
                 "기동 후 정상 동작·수 초 내 종료·강제 종료 미진입 등 검증 항목 4가지를 로그와 함께 전부 통과",
                 "수정 코드가 실제로 포함됐는지 배포 산출물까지 직접 확인",
                 "한 모듈만 수정한 1차 시도의 실패 원인이 두 모듈의 프로세스 공유 구조임을 밝혀 실패 과정까지 기록",
-                "원인·검증·후속 과제를 인수인계 문서(PDF/PPT)로 남기고 퇴사",
+                "원인·검증·후속 과제를 인수인계 문서(PDF/PPT)로 남기고 인턴 종료",
               ],
               highlights: [
                 "231초 → 3~7초",
@@ -664,6 +697,12 @@ const experiences: Record<Locale, Experience[]> = {
         {
           id: "etc-quality",
           title: "QA를 통해 버그 19건+ 발굴하고 일부 이슈의 수정까지 담당",
+          media: {
+            src: "/assets/experiences/qa-sdd-bugs.png",
+            alt: "SDD 산출물 QA에서 발견한 데이터 순서 및 중복 버그",
+            width: 1452,
+            height: 562,
+          },
           sections: [
             {
               title: "어떤 활동인가",

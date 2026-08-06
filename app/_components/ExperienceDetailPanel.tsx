@@ -7,7 +7,7 @@ import {
   type CSSProperties,
   type MouseEvent as ReactMouseEvent,
 } from "react";
-import { ArrowUpRight, ChevronDown, FileText } from "react-feather";
+import { ArrowUpRight, ChevronDown, FileText, Loader } from "react-feather";
 
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
@@ -16,6 +16,7 @@ import { useTranslations } from "next-intl";
 
 import type {
   ExperienceDetailSection,
+  ExperienceDetailMedia,
   ExperienceLink,
   ExperienceSubDetail,
   PdfDocumentSection,
@@ -209,16 +210,55 @@ function MediaTextBlock({
   );
 }
 
+function SubDetailMedia({ media }: { media: ExperienceDetailMedia }) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div
+      className="relative mx-auto mb-4 w-full overflow-hidden rounded-md border border-foreground/10 bg-slate-50"
+      style={{
+        aspectRatio: `${media.width} / ${media.height}`,
+        maxWidth: media.maxWidth,
+      }}
+    >
+      <Image
+        src={media.src}
+        alt={media.alt}
+        width={media.width}
+        height={media.height}
+        loading="eager"
+        onLoad={() => setIsLoaded(true)}
+        className={cn(
+          "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+          isLoaded ? "opacity-100" : "opacity-0",
+        )}
+      />
+      <div
+        role="status"
+        aria-label="이미지 불러오는 중"
+        className={cn(
+          "absolute inset-0 grid place-items-center bg-slate-50 transition-opacity duration-200",
+          isLoaded && "pointer-events-none opacity-0",
+        )}
+      >
+        <Loader className="h-5 w-5 animate-spin text-[#FFD84D]" aria-hidden="true" />
+      </div>
+    </div>
+  );
+}
+
 function PdfButton({
   label,
   onClick,
   compact,
+  tone = "default",
   className,
 }: {
   label: string;
   onClick: () => void;
   /** 좁은 자리에 들어갈 때 — 작은 글씨/패딩으로 축소 */
   compact?: boolean;
+  tone?: "default" | "green";
   className?: string;
 }) {
   return (
@@ -226,7 +266,10 @@ function PdfButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex items-center gap-2 rounded-lg border border-primary/20 bg-white font-semibold text-primary shadow-sm transition hover:border-primary/35 hover:bg-primary/5",
+        "flex items-center gap-2 rounded-lg border bg-white font-semibold shadow-sm transition",
+        tone === "green"
+          ? "border-[#00C676]/30 text-[#00C676] hover:border-[#00C676]/60 hover:bg-[#00C676]/5"
+          : "border-primary/20 text-primary hover:border-primary/35 hover:bg-primary/5",
         compact ? "px-3 py-2 text-xs" : "px-4 py-2.5 text-sm",
         className,
       )}
@@ -287,6 +330,7 @@ function PanelSection({
                   onOpenPdf({ href: sectionPdf.href, label: sectionPdf.label, sections: sectionPdf.sections })
                 }
                 compact
+                tone={sectionPdf.tone}
                 // 라벨의 \n을 그대로 살려 원하는 지점에서만 줄바꿈
                 className="shrink-0 whitespace-pre-line text-left sm:min-w-[220px]"
               />
@@ -310,6 +354,7 @@ function PanelSection({
           onClick={() =>
             onOpenPdf({ href: sectionPdf.href, label: sectionPdf.label, sections: sectionPdf.sections })
           }
+          tone={sectionPdf.tone}
           className={cn(section.items.length > 0 && "mt-3", sectionPdf.align === "right" && "ml-auto")}
         />
       ) : section.showPdf && pdfLink ? (
@@ -388,7 +433,12 @@ function SubDetailList({
               ref={element => {
                 cardRefs.current[sub.id] = element;
               }}
-              className="scroll-mt-20 overflow-hidden rounded-xl border border-foreground/10 border-l-[3px] border-l-primary/50 bg-foreground/[0.02]"
+              className={cn(
+                "scroll-mt-20 overflow-hidden rounded-xl bg-foreground/[0.02] [transition-property:border-color,border-width] duration-300 ease-out",
+                isOpen
+                  ? "border-[3px] border-[#FFD84D]"
+                  : "border border-foreground/10 border-l-[3px] border-l-[#FFD84D]",
+              )}
             >
               <button
                 type="button"
@@ -418,6 +468,7 @@ function SubDetailList({
                     className="overflow-hidden"
                   >
                     <div className="px-4 pb-4 pt-1">
+                      {sub.media ? <SubDetailMedia media={sub.media} /> : null}
                       {sub.sections.map(section => (
                         <PanelSection
                           key={section.title}

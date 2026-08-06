@@ -75,6 +75,8 @@ export interface ExperienceDetailPdf {
   href: string;
   label: string;
   sections?: PdfDocumentSection[];
+  /** 버튼 강조색 */
+  tone?: "default" | "green";
   /** 버튼 정렬 — 기본 왼쪽 */
   align?: "left" | "right";
   /** true면 버튼을 extra 블록과 같은 줄 오른쪽에 배치 (텍스트가 좁아져 줄바꿈됨) */
@@ -106,6 +108,8 @@ export interface ExperienceDetailSection {
 export interface ExperienceSubDetail {
   id: string;
   title: string;
+  /** 아코디언을 열었을 때 본문 최상단에서 지연 로드할 대표 이미지 */
+  media?: ExperienceDetailMedia;
   sections: ExperienceDetailSection[];
 }
 
