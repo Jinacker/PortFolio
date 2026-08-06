@@ -311,7 +311,7 @@ function SubDetailList({
           return (
             <div
               key={sub.id}
-              className="overflow-hidden rounded-xl border border-foreground/10 bg-foreground/[0.02]"
+              className="overflow-hidden rounded-xl border border-foreground/10 border-l-[3px] border-l-primary/50 bg-foreground/[0.02]"
             >
               <button
                 type="button"
