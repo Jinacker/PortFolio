@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ChevronRight } from "react-feather";
 
 import cn from "classnames";
@@ -79,6 +79,7 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
   const t = useTranslations("Experience");
   const [isExpanded, setIsExpanded] = useState(false);
   const [activePdf, setActivePdf] = useState<ActivePdf | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const shapeColor = category === "WORK" ? "text-[#00C676]" : category === "OPEN_SOURCE" ? "text-amber-500" : is_active ? "text-primary" : "text-foreground/30";
   const pdfLink = links.find(link => link.href.toLowerCase().endsWith(".pdf"));
   const hasDetailedBackendGroups = skills.some(skill =>
@@ -86,13 +87,28 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
   );
 
   const toggleDetail = () => {
-    setIsExpanded(prev => !prev);
+    const shouldExpand = !isExpanded;
+    setIsExpanded(shouldExpand);
+
+    if (!shouldExpand || !window.matchMedia("(max-width: 767px)").matches) return;
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const card = cardRef.current;
+        card?.focus({ preventScroll: true });
+        card?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
   };
 
   const detailId = `experience-${id}-detail`;
 
   return (
-    <div className="grid sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-x-8 sm:items-start sm:pl-16">
+    <div
+      ref={cardRef}
+      tabIndex={-1}
+      className="grid scroll-mt-20 outline-none sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-x-8 sm:items-start sm:pl-16"
+    >
       <div className="flex gap-2.5 sm:justify-end items-start mb-3">
         <Shape className={cn(shapeColor)} />
         <p className="text-center text-sm md:text-base font-normal text-foreground/60">{formatPeriod(period)}</p>

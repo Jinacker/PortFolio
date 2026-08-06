@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import { ArrowUpRight, ChevronDown, FileText } from "react-feather";
 
 import cn from "classnames";
@@ -333,6 +339,39 @@ function SubDetailList({
 }) {
   const t = useTranslations("Experience");
   const [openId, setOpenId] = useState<string | null>(null);
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const toggleSubDetail = (
+    id: string,
+    isOpen: boolean,
+    event: ReactMouseEvent<HTMLButtonElement>,
+  ) => {
+    const shouldOpen = !isOpen;
+    const trigger = event.currentTarget;
+    setOpenId(shouldOpen ? id : null);
+
+    if (scrollTimerRef.current) {
+      clearTimeout(scrollTimerRef.current);
+      scrollTimerRef.current = null;
+    }
+
+    if (!shouldOpen || !window.matchMedia("(max-width: 767px)").matches) return;
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        trigger.focus({ preventScroll: true });
+        scrollTimerRef.current = setTimeout(() => {
+          cardRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
+          scrollTimerRef.current = null;
+        }, 250);
+      });
+    });
+  };
+
+  useEffect(() => () => {
+    if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+  }, []);
 
   return (
     <div className={plain ? "mt-2" : "mt-3 border-t border-slate-200 pt-3"}>
@@ -346,11 +385,14 @@ function SubDetailList({
           return (
             <div
               key={sub.id}
-              className="overflow-hidden rounded-xl border border-foreground/10 border-l-[3px] border-l-primary/50 bg-foreground/[0.02]"
+              ref={element => {
+                cardRefs.current[sub.id] = element;
+              }}
+              className="scroll-mt-20 overflow-hidden rounded-xl border border-foreground/10 border-l-[3px] border-l-primary/50 bg-foreground/[0.02]"
             >
               <button
                 type="button"
-                onClick={() => setOpenId(isOpen ? null : sub.id)}
+                onClick={event => toggleSubDetail(sub.id, isOpen, event)}
                 aria-expanded={isOpen}
                 className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03]"
               >
