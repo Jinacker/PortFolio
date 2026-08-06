@@ -22,7 +22,7 @@ const experiences: Record<Locale, Experience[]> = {
     },
     {
       id: 102,
-      title: "SureSoftTech. 시험자동화연구소 - VSPICE팀 인턴",
+      title: "SureSoftTech. 시험자동화연구소 - VSPICE팀 인턴 (풀스택 개발)",
       period: "2026.03 - 2026.06",
       items: [],
       links: [],

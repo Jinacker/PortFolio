@@ -261,7 +261,8 @@ export default function ExperienceSection() {
         ))}
 
         <p className="mx-auto mt-12 max-w-2xl text-center text-sm leading-relaxed text-foreground/60 md:text-base">
-          기능은 누구나 만들 수 있지만,
+          <strong className="font-semibold text-foreground">대 AI 시대, </strong>
+          기능은 누구나 만들 수 있지만
           <br />
           실제로 사람들에게{" "}
           <strong className="font-semibold text-foreground">선택받고 쓰이는 가치</strong>
