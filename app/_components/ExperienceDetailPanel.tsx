@@ -56,6 +56,50 @@ function renderHighlightedText(text: string, highlights: readonly string[] = [])
   );
 }
 
+// "## " 항목을 소제목으로 해석해, 뒤따르는 항목들을 별도 불릿 묶음으로 렌더한다.
+// 소제목은 ul 바깥의 일반 텍스트라 카드 콘텐츠 왼쪽 라인에 정확히 맞는다.
+function BulletList({
+  items,
+  highlights,
+}: {
+  items: readonly string[];
+  highlights?: readonly string[];
+}) {
+  const blocks: { heading?: string; rows: string[] }[] = [];
+  for (const item of items) {
+    if (item.startsWith("## ")) {
+      blocks.push({ heading: item.slice(3), rows: [] });
+    } else {
+      if (blocks.length === 0) blocks.push({ rows: [] });
+      blocks[blocks.length - 1].rows.push(item);
+    }
+  }
+
+  return (
+    <>
+      {blocks.map((block, index) => (
+        <div key={block.heading ?? `list-${index}`} className={cn(index > 0 && "mt-2.5")}>
+          {block.heading ? (
+            <p className="mb-1 break-keep text-sm font-semibold text-foreground/80">
+              {block.heading}
+            </p>
+          ) : null}
+          <ul className="list-disc space-y-0.5 pl-5">
+            {block.rows.map(row => (
+              <li
+                key={row}
+                className="break-keep text-sm font-normal leading-[1.5] text-foreground/75"
+              >
+                {renderHighlightedText(row, highlights)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </>
+  );
+}
+
 function MediaTextBlock({
   media,
   items,
@@ -140,16 +184,7 @@ function MediaTextBlock({
               ))}
             </div>
           ) : (
-            <ul className="list-disc space-y-0.5 pl-5">
-              {items.map(data => (
-                <li
-                  key={data}
-                  className="break-keep text-sm font-normal leading-[1.5] text-foreground/75"
-                >
-                  {renderHighlightedText(data, highlights)}
-                </li>
-              ))}
-            </ul>
+            <BulletList items={items} highlights={highlights} />
           )
         ) : null}
         {media?.href && media.linkLabel ? (

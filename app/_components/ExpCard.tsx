@@ -183,7 +183,7 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
           aria-expanded={isExpanded}
           aria-controls={detailId}
         >
-          <ChevronRight className={cn("h-4 w-4 transition-transform duration-[400ms]", isExpanded && "rotate-90")} />
+          <ChevronRight className={cn("h-4 w-4 transition-transform [transition-duration:400ms]", isExpanded && "rotate-90")} />
           <p className="text-left text-xs md:text-sm">{isExpanded ? t("hideDetail") : t("showDetail")}</p>
         </button>
         <AnimatePresence initial={false}>
