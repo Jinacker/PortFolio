@@ -199,10 +199,12 @@ function PdfButton({
 function PanelSection({
   section,
   pdfLink,
+  subDetails = [],
   onOpenPdf,
 }: {
   section: ExperienceDetailSection;
   pdfLink?: ExperienceLink;
+  subDetails?: readonly ExperienceSubDetail[];
   onOpenPdf: (pdf: ActivePdf) => void;
 }) {
   const sectionPdf = section.pdf;
@@ -276,6 +278,9 @@ function PanelSection({
           className={cn(section.items.length > 0 && "mt-3")}
         />
       ) : null}
+      {section.showSubDetails && subDetails.length > 0 ? (
+        <SubDetailList subDetails={subDetails} onOpenPdf={onOpenPdf} plain />
+      ) : null}
     </div>
   );
 }
@@ -284,16 +289,21 @@ function PanelSection({
 function SubDetailList({
   subDetails,
   onOpenPdf,
+  plain,
 }: {
   subDetails: readonly ExperienceSubDetail[];
   onOpenPdf: (pdf: ActivePdf) => void;
+  /** 섹션 안에 임베드될 때 — 상단 구분선/라벨 없이 카드만 */
+  plain?: boolean;
 }) {
   const t = useTranslations("Experience");
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="mt-3 border-t border-slate-200 pt-3">
-      <p className="mb-2.5 text-xs font-semibold text-foreground/40">{t("subDetails")}</p>
+    <div className={plain ? "mt-2" : "mt-3 border-t border-slate-200 pt-3"}>
+      {plain ? null : (
+        <p className="mb-2.5 text-xs font-semibold text-foreground/40">{t("subDetails")}</p>
+      )}
       <div className="flex flex-col gap-2.5">
         {subDetails.map(sub => {
           const isOpen = openId === sub.id;
@@ -378,6 +388,7 @@ export default function ExperienceDetailPanel({
               key={section.title}
               section={section}
               pdfLink={pdfLink}
+              subDetails={subDetails}
               onOpenPdf={onOpenPdf}
             />
           ))}
@@ -403,7 +414,8 @@ export default function ExperienceDetailPanel({
         />
       ) : null}
 
-      {subDetails.length > 0 ? (
+      {/* 어떤 섹션도 showSubDetails로 가져가지 않았을 때만 패널 하단에 표시 */}
+      {subDetails.length > 0 && !sections.some(section => section.showSubDetails) ? (
         <SubDetailList subDetails={subDetails} onOpenPdf={onOpenPdf} />
       ) : null}
     </div>

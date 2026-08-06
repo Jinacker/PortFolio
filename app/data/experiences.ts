@@ -107,30 +107,8 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           title: "핵심 작업",
-          items: [
-            "팀 최초의 REST API인 대용량 테스트케이스 연동 API 개발 — 같은 쿼리가 최대 111,002번 반복 실행되던 구조를 3번으로 줄이고, 응답 속도 1.2초 → 72ms(약 16배)",
-            "다이어그램을 코드 없이 마우스로 편집하는 GUI 에디터 SureFlow를 외부 라이브러리 없이 직접 개발 — 제품 정식 반영(Master merge)",
-            "개발 중 발견한 렌더링 버그를 파고들어 Mermaid.js 오픈소스에 기여 — GitHub Star 약 88k 프로젝트에 PR #7711 Merge, 정식 릴리즈 반영",
-            "문서 생성 시 다이어그램 이미지가 통째로 빠지는 버그를 PNG 사전 생성 파이프라인으로 해결 — 생성 시간 34.9% 단축",
-            "서버를 끄는 데 231초씩 걸리던 문제의 원인을 스레드 단위까지 추적해 3~7초로 해결",
-            "그 외 AI 산출물의 한글 깨짐 근본 해결, DB 구조 정량 분석·발표, QA 버그 리포트 19건+",
-          ],
-          highlights: [
-            "대용량 테스트케이스 연동 API",
-            "최대 111,002번",
-            "3번",
-            "1.2초 → 72ms",
-            "SureFlow",
-            "제품 정식 반영(Master merge)",
-            "Mermaid.js 오픈소스에 기여",
-            "PR #7711 Merge",
-            "PNG 사전 생성 파이프라인",
-            "34.9% 단축",
-            "231초",
-            "3~7초",
-            "한글 깨짐 근본 해결",
-            "버그 리포트 19건+",
-          ],
+          items: [],
+          showSubDetails: true,
         },
         {
           title: "결과",
@@ -191,8 +169,111 @@ const experiences: Record<Locale, Experience[]> = {
       ],
       subDetails: [
         {
+          id: "ct-api",
+          title: "V-SPICE ↔ CT, 대용량 테스트케이스 연동 API 설계 및 개발",
+          sections: [
+            {
+              title: "CT 연동 API란?",
+              items: [
+                "V-SPICE의 함수 명세·테스트케이스 데이터를 자사 테스팅 툴 CT에 전달하는 REST API 3종",
+                "CT 측의 AI 기반 테스트 코드 생성 기능이 이 데이터를 기반으로 동작",
+                "고객사 환경은 파일 수천 개, 테스트케이스 수십만 건 규모 — 처음부터 대용량을 전제로 설계",
+              ],
+              highlights: [
+                "CT",
+                "REST API 3종",
+                "AI 기반 테스트 코드 생성",
+                "테스트케이스 수십만 건",
+              ],
+            },
+            {
+              title: "개발 계기",
+              items: [
+                "기존 팀은 JSP 서버사이드 렌더링 중심이라 대외 REST API 표준 자체가 부재",
+                "이후 개발의 토대가 될 팀 첫 REST API를 인턴 1주차에 담당",
+                "CT 측 와이어프레임에서 사용자 시나리오를 직접 도출해 필요한 API 3종을 정의",
+              ],
+              highlights: [
+                "대외 REST API 표준",
+                "팀 첫 REST API",
+                "사용자 시나리오",
+              ],
+            },
+            {
+              title: "핵심 작업",
+              items: [
+                "응답 구조는 Nested/Flatten 2안을 만들어 CT팀과 협의로 확정, PK 비노출 등 피드백 반영",
+                "세 방향에서 성능 최적화 — 같은 쿼리가 반복 실행되던 구조(최대 111,002개)를 3개로 고정, 필터링을 DB로 옮겨 전송 데이터 약 88% 절감, 데이터 조립은 정렬 후 1회 순회 방식으로 교체",
+                "조건이 따로 적용돼 요청하지 않은 데이터까지 응답에 섞이는 버그를 스스로 발견해 복합키 매칭으로 수정",
+                "10만·100만 TC 시드를 직접 구성해 k6 부하 테스트, Grafana + Prometheus 모니터링 구축",
+              ],
+              highlights: [
+                "Nested/Flatten 2안",
+                "최대 111,002개",
+                "3개로 고정",
+                "약 88% 절감",
+                "1회 순회 방식",
+                "요청하지 않은 데이터까지 응답에 섞이는 버그",
+                "10만·100만 TC",
+                "k6 부하 테스트",
+                "Grafana + Prometheus",
+              ],
+            },
+            {
+              title: "결과",
+              items: [
+                "고객사 프로젝트 1.2s → 72ms(약 16배), 10만 TC 2s → 990ms, 소규모 프로젝트 197ms → 26ms",
+                "10만 TC 부하 테스트 평균 715ms, 오류율 0% 확인",
+                "응답 무결성 전수 검증(함수 57 / IO 876 / TC 771 / 값 8,654 일치) 후 CT 측 전달 완료",
+                "팀 최초의 REST API 표준과 부하 테스트·모니터링 인프라가 팀 자산으로 남음",
+              ],
+              highlights: [
+                "1.2s → 72ms",
+                "2s → 990ms",
+                "197ms → 26ms",
+                "715ms",
+                "0%",
+                "전수 검증",
+                "REST API 표준",
+              ],
+              // [빈 슬롯] 이미지 확보 시 media로 추가: ct-api-before-after.png (확인 필요) — 리팩토링 전후 응답 속도 비교 (위치: 위)
+            },
+            {
+              title: "작업 내용",
+              items: [],
+              pdf: {
+                href: "/pdfs/ct-api-design-implementation.pdf",
+                label: "CT API 구현·성능 개선 과정 자세히 보기",
+                sections: [
+                  { label: "서비스단 가공 최적화", startPage: 32, endPage: 36 },
+                  { label: "시드 구성·k6 부하 테스트", startPage: 37, endPage: 42 },
+                  { label: "병목 분석과 해결", startPage: 43, endPage: 46 },
+                  { label: "최종 성능 비교", startPage: 47, endPage: 49 },
+                ],
+              },
+            },
+            // [빈 슬롯] "트러블 슈팅" 섹션 — PDF 확보 시 주석 해제 후 pdf 필드로 추가:
+            //   ct-api-troubleshooting.pdf (확인 필요) / 버튼문구: 복합키 인덱스 무효화 병목 해결 과정 (1.2s → 72ms)
+            {
+              title: "경험을 통해 배운 점",
+              items: [
+                "인덱스는 있느냐가 아니라 타느냐의 문제 — 컬럼 연산 하나가 성능을 무너뜨린다는 것을 직접 경험",
+                "테스트 데이터가 버그를 숨긴다 — 고유한 시드 데이터 탓에 크로스 프로덕트 버그가 보이지 않았던 경험",
+                "성능 문제는 추측 대신 단계별 타이밍 로그로 구간을 측정하고 시작해야 한다는 것",
+                "타 부서가 소비하기 쉬운 JSON을 협의로 확정하는 과정 자체가 API 개발의 절반이라는 것",
+              ],
+              highlights: [
+                "타느냐",
+                "테스트 데이터가 버그를 숨긴다",
+                "단계별 타이밍 로그",
+                "협의로 확정",
+              ],
+            },
+          ],
+        },
+        {
           id: "sureflow",
-          title: "SureFlow — Mermaid 다이어그램 GUI 에디터 (사내 라이브러리)",
+          title: "SureFlow — 다이어그램 GUI 편집을 지원하는 사내 라이브러리 개발 및 제품 적용",
           sections: [
             {
               title: "SureFlow란?",
@@ -324,111 +405,8 @@ const experiences: Record<Locale, Experience[]> = {
           ],
         },
         {
-          id: "ct-api",
-          title: "V-SPICE ↔ CT 대용량 테스트케이스 연동 API",
-          sections: [
-            {
-              title: "CT 연동 API란?",
-              items: [
-                "V-SPICE의 함수 명세·테스트케이스 데이터를 자사 테스팅 툴 CT에 전달하는 REST API 3종",
-                "CT 측의 AI 기반 테스트 코드 생성 기능이 이 데이터를 기반으로 동작",
-                "고객사 환경은 파일 수천 개, 테스트케이스 수십만 건 규모 — 처음부터 대용량을 전제로 설계",
-              ],
-              highlights: [
-                "CT",
-                "REST API 3종",
-                "AI 기반 테스트 코드 생성",
-                "테스트케이스 수십만 건",
-              ],
-            },
-            {
-              title: "개발 계기",
-              items: [
-                "기존 팀은 JSP 서버사이드 렌더링 중심이라 대외 REST API 표준 자체가 부재",
-                "이후 개발의 토대가 될 팀 첫 REST API를 인턴 1주차에 담당",
-                "CT 측 와이어프레임에서 사용자 시나리오를 직접 도출해 필요한 API 3종을 정의",
-              ],
-              highlights: [
-                "대외 REST API 표준",
-                "팀 첫 REST API",
-                "사용자 시나리오",
-              ],
-            },
-            {
-              title: "핵심 작업",
-              items: [
-                "응답 구조는 Nested/Flatten 2안을 만들어 CT팀과 협의로 확정, PK 비노출 등 피드백 반영",
-                "세 방향에서 성능 최적화 — 같은 쿼리가 반복 실행되던 구조(최대 111,002개)를 3개로 고정, 필터링을 DB로 옮겨 전송 데이터 약 88% 절감, 데이터 조립은 정렬 후 1회 순회 방식으로 교체",
-                "조건이 따로 적용돼 요청하지 않은 데이터까지 응답에 섞이는 버그를 스스로 발견해 복합키 매칭으로 수정",
-                "10만·100만 TC 시드를 직접 구성해 k6 부하 테스트, Grafana + Prometheus 모니터링 구축",
-              ],
-              highlights: [
-                "Nested/Flatten 2안",
-                "최대 111,002개",
-                "3개로 고정",
-                "약 88% 절감",
-                "1회 순회 방식",
-                "요청하지 않은 데이터까지 응답에 섞이는 버그",
-                "10만·100만 TC",
-                "k6 부하 테스트",
-                "Grafana + Prometheus",
-              ],
-            },
-            {
-              title: "결과",
-              items: [
-                "고객사 프로젝트 1.2s → 72ms(약 16배), 10만 TC 2s → 990ms, 소규모 프로젝트 197ms → 26ms",
-                "10만 TC 부하 테스트 평균 715ms, 오류율 0% 확인",
-                "응답 무결성 전수 검증(함수 57 / IO 876 / TC 771 / 값 8,654 일치) 후 CT 측 전달 완료",
-                "팀 최초의 REST API 표준과 부하 테스트·모니터링 인프라가 팀 자산으로 남음",
-              ],
-              highlights: [
-                "1.2s → 72ms",
-                "2s → 990ms",
-                "197ms → 26ms",
-                "715ms",
-                "0%",
-                "전수 검증",
-                "REST API 표준",
-              ],
-              // [빈 슬롯] 이미지 확보 시 media로 추가: ct-api-before-after.png (확인 필요) — 리팩토링 전후 응답 속도 비교 (위치: 위)
-            },
-            {
-              title: "작업 내용",
-              items: [],
-              pdf: {
-                href: "/pdfs/ct-api-design-implementation.pdf",
-                label: "CT API 구현·성능 개선 과정 자세히 보기",
-                sections: [
-                  { label: "서비스단 가공 최적화", startPage: 32, endPage: 36 },
-                  { label: "시드 구성·k6 부하 테스트", startPage: 37, endPage: 42 },
-                  { label: "병목 분석과 해결", startPage: 43, endPage: 46 },
-                  { label: "최종 성능 비교", startPage: 47, endPage: 49 },
-                ],
-              },
-            },
-            // [빈 슬롯] "트러블 슈팅" 섹션 — PDF 확보 시 주석 해제 후 pdf 필드로 추가:
-            //   ct-api-troubleshooting.pdf (확인 필요) / 버튼문구: 복합키 인덱스 무효화 병목 해결 과정 (1.2s → 72ms)
-            {
-              title: "경험을 통해 배운 점",
-              items: [
-                "인덱스는 있느냐가 아니라 타느냐의 문제 — 컬럼 연산 하나가 성능을 무너뜨린다는 것을 직접 경험",
-                "테스트 데이터가 버그를 숨긴다 — 고유한 시드 데이터 탓에 크로스 프로덕트 버그가 보이지 않았던 경험",
-                "성능 문제는 추측 대신 단계별 타이밍 로그로 구간을 측정하고 시작해야 한다는 것",
-                "타 부서가 소비하기 쉬운 JSON을 협의로 확정하는 과정 자체가 API 개발의 절반이라는 것",
-              ],
-              highlights: [
-                "타느냐",
-                "테스트 데이터가 버그를 숨긴다",
-                "단계별 타이밍 로그",
-                "협의로 확정",
-              ],
-            },
-          ],
-        },
-        {
           id: "png-pipeline",
-          title: "문서 Generate PNG 파이프라인 구축·병렬화",
+          title: "문서 이미지 누락 문제 분석 및 PNG 생성 구조 개선",
           sections: [
             {
               title: "어떤 기능인가",
@@ -522,7 +500,7 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           id: "server-shutdown",
-          title: "VSPICE Server 종료 지연 트러블슈팅 (231초 → 3~7초)",
+          title: "V-SPICE Server 프로세스 종료 지연 원인 분석 및 해결",
           sections: [
             {
               title: "어떤 문제였나",
@@ -617,11 +595,11 @@ const experiences: Record<Locale, Experience[]> = {
           ],
         },
         {
-          id: "encoding-fix",
-          title: "AI 산출물 한글 인코딩 깨짐 해결 (EUC-KR → UTF-8)",
+          id: "etc-quality",
+          title: "그 외 AI 산출물 한글 깨짐 해결, DB 구조 정량 분석, QA 버그 리포트 19건+",
           sections: [
             {
-              title: "어떤 문제였나",
+              title: "한글 인코딩 — 어떤 문제였나",
               items: [
                 "AI 엔진(ALIRA)이 생성한 다이어그램에서 한글 주석이 \"ë¥¼\" 같은 깨진 문자로 표시",
                 "국내 고객 소스에는 한글 주석이 흔해 AI 분석 품질에 직접 영향",
@@ -634,7 +612,7 @@ const experiences: Record<Locale, Experience[]> = {
               ],
             },
             {
-              title: "원인 규명",
+              title: "한글 인코딩 — 원인 규명",
               items: [
                 "\"ë¥¼\"는 UTF-8 바이트를 Latin-1로 오해석한 전형적 mojibake 패턴 → 인코딩 불일치로 방향 설정",
                 "문제 소스 파일을 hex 덤프로 열어 b9cc(EUC-KR의 '만')를 확인 — 원본이 EUC-KR임을 추측이 아닌 증거로 확정",
@@ -648,7 +626,7 @@ const experiences: Record<Locale, Experience[]> = {
               ],
             },
             {
-              title: "해결 설계",
+              title: "한글 인코딩 — 해결 설계",
               items: [
                 "전송 직전 zip 생성 시에만 변환 — 읽기/저장 등 다른 경로 무영향",
                 "대상은 C 소스 확장자로 한정해 바이너리 오변환 위험 차단",
@@ -663,7 +641,7 @@ const experiences: Record<Locale, Experience[]> = {
               ],
             },
             {
-              title: "결과",
+              title: "한글 인코딩 — 결과",
               items: [
                 "EUC-KR 소스의 한글 주석이 AI 산출물에서 정상 표시 — 고질 버그의 근본 해결",
                 "국내 고객 소스에 대한 AI 분석 품질 정상화",
@@ -679,7 +657,7 @@ const experiences: Record<Locale, Experience[]> = {
             // [빈 슬롯] "트러블 슈팅" 섹션 — PDF 확보 시 주석 해제 후 pdf 필드로 추가:
             //   alira-encoding-fix.pdf (확인 필요) / 버튼문구: EUC-KR 한글 인코딩 깨짐 해결 과정 자세히 보기
             {
-              title: "경험을 통해 배운 점",
+              title: "한글 인코딩 — 배운 점",
               items: [
                 "인코딩 버그는 보이는 문자가 아니라 바이트로 판별한다는 것 — hex 덤프가 유일한 확정 증거",
                 "타 시스템의 가정을 바꿀 수 없다면 내 시스템의 출구에서 계약을 맞추면 된다는 것",
@@ -693,14 +671,8 @@ const experiences: Record<Locale, Experience[]> = {
                 "발견자에서 해결자로",
               ],
             },
-          ],
-        },
-        {
-          id: "analysis-quality",
-          title: "FK-LESS DB 구조 분석 & 배포 패키지 QA",
-          sections: [
             {
-              title: "어떤 활동인가",
+              title: "DB 구조 분석·QA — 어떤 활동인가",
               items: [
                 "V-SPICE의 DB는 테이블 간 외래키(FK)가 거의 없는 구조 — 연관 id를 일반 컬럼으로 두고 서비스 코드가 관계를 관리",
                 "API 개발 중 리버스엔지니어링 ERD에서 이 구조를 발견, FK 유무 장단점 리서치 과제로 확장해 분석·발표",
@@ -744,7 +716,7 @@ const experiences: Record<Locale, Experience[]> = {
               ],
             },
             {
-              title: "결과",
+              title: "DB 구조 분석·QA — 결과",
               items: [
                 "FK-LESS 분석을 8주차에 발표 — \"FK-LESS는 책임의 위치를 DB에서 서비스 코드로 옮긴 구조\"라는 결론",
                 "분석 결과가 실제 API 개발의 데이터 관계 유효성 검증 설계로 그대로 이어짐",
@@ -757,7 +729,7 @@ const experiences: Record<Locale, Experience[]> = {
               ],
             },
             {
-              title: "경험을 통해 배운 점",
+              title: "DB 구조 분석·QA — 배운 점",
               items: [
                 "레거시의 \"왜\"는 코드 증거로 재구성할 수 있다는 것 — 설정 파일 하나도 구조 선택의 방증",
                 "좋은 버그 리포트는 화면·현상·영향·재현 조건·원인 가설·해결안까지 갖춰야 한다는 것",

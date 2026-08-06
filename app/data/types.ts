@@ -97,6 +97,8 @@ export interface ExperienceDetailSection {
   };
   pdf?: ExperienceDetailPdf;
   showPdf?: boolean;
+  /** true면 경험의 subDetails 아코디언을 이 섹션 안에 렌더 (패널 하단 대신) */
+  showSubDetails?: boolean;
 }
 
 // A deep-dive card nested inside an experience's detail panel — rendered as an
