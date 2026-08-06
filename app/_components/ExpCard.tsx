@@ -75,13 +75,42 @@ const formatPeriod = (period: string) => {
   );
 };
 
-const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links, pdfSections, detailSections, subDetails, category, imageUrl }: ExpCardProps) => {
+const ExpCard = ({
+  id,
+  period,
+  is_active,
+  title,
+  sub_title,
+  skills,
+  items,
+  links,
+  pdfSections,
+  detailSections,
+  subDetails,
+  category,
+  imageUrl,
+  placeholderSlots,
+}: ExpCardProps) => {
   const t = useTranslations("Experience");
   const [isExpanded, setIsExpanded] = useState(false);
   const [activePdf, setActivePdf] = useState<ActivePdf | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const shapeColor = category === "WORK" ? "text-[#00C676]" : category === "OPEN_SOURCE" ? "text-amber-500" : is_active ? "text-primary" : "text-foreground/30";
+  const shapeColor =
+    category === "STARTUP"
+      ? "text-[#FFD84D]"
+      : category === "WORK" || category === "OPEN_SOURCE"
+        ? "text-[#00C676]"
+        : is_active
+          ? "text-primary"
+          : "text-foreground/30";
   const pdfLink = links.find(link => link.href.toLowerCase().endsWith(".pdf"));
+  const hasDetailContent =
+    items.length > 0 ||
+    links.length > 0 ||
+    Boolean(detailSections?.length) ||
+    Boolean(subDetails?.length);
+  const isDraft = Boolean(placeholderSlots && !hasDetailContent);
+  const showImageSlot = Boolean(imageUrl || placeholderSlots);
   const hasDetailedBackendGroups = skills.some(skill =>
     ["DATA_AUTH", "VALIDATION_SECURITY", "CLOUD_INFRA", "MERMAID_CORE", "MERMAID_TEST_QUALITY", "MERMAID_BUILD_WORKFLOW"].includes(skill.category),
   );
@@ -132,22 +161,41 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
               sizes="calc(100vw - 3rem)"
             />
           </button>
+        ) : placeholderSlots ? (
+          <div
+            role="img"
+            aria-label="이미지 입력 예정"
+            className="h-36 w-full rounded-md border border-dashed border-foreground/15 bg-foreground/[0.015] sm:hidden"
+          />
         ) : null}
 
-        <button
-          type="button"
-          onClick={toggleDetail}
-          aria-expanded={isExpanded}
-          aria-controls={detailId}
-          className="flex cursor-pointer flex-col gap-1 text-left"
-        >
-          <p className="text-base md:text-lg font-semibold ">{title}</p>
-          {sub_title && (
-            <p className="text-xs md:text-sm font-normal text-foreground/60 whitespace-pre-wrap">{parse(sub_title)}</p>
-          )}
-        </button>
+        {isDraft ? (
+          <div className="flex flex-col gap-1 text-left">
+            <p className="text-base font-semibold md:text-lg">{title}</p>
+            {sub_title ? (
+              <p className="whitespace-pre-wrap text-xs font-normal text-foreground/60 md:text-sm">
+                {parse(sub_title)}
+              </p>
+            ) : null}
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={toggleDetail}
+            aria-expanded={isExpanded}
+            aria-controls={detailId}
+            className="flex cursor-pointer flex-col gap-1 text-left"
+          >
+            <p className="text-base font-semibold md:text-lg">{title}</p>
+            {sub_title ? (
+              <p className="whitespace-pre-wrap text-xs font-normal text-foreground/60 md:text-sm">
+                {parse(sub_title)}
+              </p>
+            ) : null}
+          </button>
+        )}
 
-        <div className={cn("flex gap-1", imageUrl ? "items-start" : "flex-col")}>
+        <div className={cn("flex gap-1", showImageSlot ? "items-start" : "flex-col")}>
           {imageUrl ? (
             <button
               type="button"
@@ -165,10 +213,24 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
                 sizes="272px"
               />
             </button>
+          ) : placeholderSlots ? (
+            <div
+              role="img"
+              aria-label="이미지 입력 예정"
+              className="mt-3 hidden h-36 w-[17rem] shrink-0 rounded-md border border-dashed border-foreground/15 bg-foreground/[0.015] sm:block"
+            />
           ) : null}
-          {imageUrl ? <div className="ml-3 mt-3 hidden h-36 w-px shrink-0 bg-foreground/10 sm:block" /> : null}
+          {showImageSlot ? (
+            <div className="ml-3 mt-3 hidden h-36 w-px shrink-0 bg-foreground/10 sm:block" />
+          ) : null}
 
           <div className="ml-3 flex min-w-0 flex-1 flex-col gap-2">
+            {skills.length === 0 && placeholderSlots ? (
+              <div
+                aria-label="기술 스택 입력 예정"
+                className="h-16 w-full rounded-md border border-dashed border-foreground/15 bg-foreground/[0.015]"
+              />
+            ) : null}
             {skillGroups.map(({ label, categories }) => {
               const groupSkills = skills.filter(skill => categories.includes(skill.category));
 
@@ -192,43 +254,47 @@ const ExpCard = ({ id, period, is_active, title, sub_title, skills, items, links
           </div>
         </div>
 
-        <button
-          type="button"
-          className="text-primary/75 flex items-center gap-1 mt-2"
-          onClick={toggleDetail}
-          aria-expanded={isExpanded}
-          aria-controls={detailId}
-        >
-          <ChevronRight className={cn("h-4 w-4 transition-transform [transition-duration:400ms]", isExpanded && "rotate-90")} />
-          <p className="text-left text-xs md:text-sm">{isExpanded ? t("hideDetail") : t("showDetail")}</p>
-        </button>
-        <AnimatePresence initial={false}>
-          {isExpanded ? (
-            <motion.div
-              key={detailId}
-              initial={{ height: 0, marginTop: "-0.75rem", opacity: 0 }}
-              animate={{ height: "auto", marginTop: 0, opacity: 1 }}
-              exit={{ height: 0, marginTop: "-0.75rem", opacity: 0 }}
-              transition={{
-                height: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-                marginTop: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-                opacity: { duration: 0.25, ease: "easeOut" },
-              }}
-              className="overflow-hidden"
+        {isDraft ? null : (
+          <>
+            <button
+              type="button"
+              className="mt-2 flex items-center gap-1 text-primary/75"
+              onClick={toggleDetail}
+              aria-expanded={isExpanded}
+              aria-controls={detailId}
             >
-              <ExperienceDetailPanel
-                id={detailId}
-                items={items}
-                sections={detailSections}
-                subDetails={subDetails}
-                pdfLink={pdfLink}
-                // Legacy single-PDF experiences carry no per-PDF TOC — fall back
-                // to the experience-level pdfSections.
-                onOpenPdf={pdf => setActivePdf({ ...pdf, sections: pdf.sections ?? pdfSections })}
-              />
-            </motion.div>
-          ) : null}
-        </AnimatePresence>
+              <ChevronRight className={cn("h-4 w-4 transition-transform [transition-duration:400ms]", isExpanded && "rotate-90")} />
+              <p className="text-left text-xs md:text-sm">{isExpanded ? t("hideDetail") : t("showDetail")}</p>
+            </button>
+            <AnimatePresence initial={false}>
+              {isExpanded ? (
+                <motion.div
+                  key={detailId}
+                  initial={{ height: 0, marginTop: "-0.75rem", opacity: 0 }}
+                  animate={{ height: "auto", marginTop: 0, opacity: 1 }}
+                  exit={{ height: 0, marginTop: "-0.75rem", opacity: 0 }}
+                  transition={{
+                    height: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                    marginTop: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                    opacity: { duration: 0.25, ease: "easeOut" },
+                  }}
+                  className="overflow-hidden"
+                >
+                  <ExperienceDetailPanel
+                    id={detailId}
+                    items={items}
+                    sections={detailSections}
+                    subDetails={subDetails}
+                    pdfLink={pdfLink}
+                    // Legacy single-PDF experiences carry no per-PDF TOC — fall back
+                    // to the experience-level pdfSections.
+                    onOpenPdf={pdf => setActivePdf({ ...pdf, sections: pdf.sections ?? pdfSections })}
+                  />
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
+          </>
+        )}
       </div>
       {activePdf ? (
         <PdfViewerModal

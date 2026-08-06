@@ -235,7 +235,9 @@ export default function ExperienceSection() {
   const groups = [
     { key: "service", title: "실사용 서비스 운영", data: data.filter(({ category }) => category === "SERVICE") },
     { key: "work", title: "업무 경험", data: data.filter(({ category }) => category === "WORK") },
+    { key: "startup", title: "창업 경험", data: data.filter(({ category }) => category === "STARTUP") },
     { key: "open-source", title: "오픈소스 기여", data: data.filter(({ category }) => category === "OPEN_SOURCE") },
+    { key: "ai", title: "AI 활용 경험", data: data.filter(({ category }) => category === "AI") },
   ];
 
   return (

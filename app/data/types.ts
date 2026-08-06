@@ -125,6 +125,8 @@ export interface Experience {
   is_active: boolean | null;
   sub_title: string | null;
   imageUrl?: string;
+  /** 콘텐츠를 나중에 채울 카드에서 이미지·기술 스택 영역을 빈 슬롯으로 유지 */
+  placeholderSlots?: boolean;
   index: number;
   skill_ids: number[];
   category: string | null;
