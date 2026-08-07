@@ -18,6 +18,9 @@ export type Category =
   | "MERMAID_CORE"
   | "MERMAID_TEST_QUALITY"
   | "MERMAID_BUILD_WORKFLOW"
+  | "KKINI_AI_SERVER"
+  | "KKINI_CHATBOT"
+  | "KKINI_APP"
   | "INFRA_TEST"
   | "ENV"
   | "DESIGN"
@@ -98,6 +101,8 @@ export interface ExperienceDetailSection {
     divider?: boolean;
   };
   pdf?: ExperienceDetailPdf;
+  /** 소재별 문서 목록 — 카드형 버튼 리스트로 쌓이고, 각각 뷰어(.md는 MD 모달)로 열린다 */
+  docs?: ExperienceDetailPdf[];
   showPdf?: boolean;
   /** true면 경험의 subDetails 아코디언을 이 섹션 안에 렌더 (패널 하단 대신) */
   showSubDetails?: boolean;

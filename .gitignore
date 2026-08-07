@@ -30,3 +30,9 @@ core-competencies.md
 
 # local authoring docs
 /docs/
+
+# macOS
+.DS_Store
+
+# 로컬 원고
+/포트폴리오-끼니톡.md

@@ -348,6 +348,24 @@ function PanelSection({
           />
         )
       ) : null}
+      {section.docs?.length ? (
+        // 소재별 문서 버튼 리스트 — 서브 카드와 같은 톤, 클릭 시 모달로 열림
+        <div className={cn("flex flex-col gap-2", section.items.length > 0 && "mt-3")}>
+          {section.docs.map(doc => (
+            <button
+              key={doc.href}
+              type="button"
+              onClick={() => onOpenPdf({ href: doc.href, label: doc.label, sections: doc.sections })}
+              className="flex w-full items-center gap-3 rounded-xl border border-foreground/10 border-l-[3px] border-l-[#FFD84D] bg-foreground/[0.02] px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03]"
+            >
+              <span className="min-w-0 flex-1 break-keep text-sm font-semibold text-foreground/85">
+                {doc.label}
+              </span>
+              <FileText className="h-4 w-4 shrink-0 text-foreground/40" strokeWidth={1.5} />
+            </button>
+          ))}
+        </div>
+      ) : null}
       {sectionPdf && !(sectionPdf.inline && section.extra) ? (
         <PdfButton
           label={sectionPdf.label}

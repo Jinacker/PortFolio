@@ -17,6 +17,7 @@ import ExperienceDetailPanel, { type ActivePdf } from "./ExperienceDetailPanel";
 import SkillItem from "./skill/SkillItem";
 
 const PdfViewerModal = dynamic(() => import("./PdfViewerModal"), { ssr: false });
+const MarkdownViewerModal = dynamic(() => import("./MarkdownViewerModal"), { ssr: false });
 
 interface ExpCardProps extends Omit<Experience, "skill_ids"> {
   skills: Skill[];
@@ -34,6 +35,18 @@ const skillGroups = [
   {
     label: "Build & Workflow",
     categories: ["MERMAID_BUILD_WORKFLOW"],
+  },
+  {
+    label: "AI Eng",
+    categories: ["KKINI_AI_SERVER"],
+  },
+  {
+    label: "BackEnd",
+    categories: ["KKINI_CHATBOT"],
+  },
+  {
+    label: "FrontEnd",
+    categories: ["KKINI_APP"],
   },
   {
     label: "FrontEnd",
@@ -157,7 +170,7 @@ const ExpCard = ({
               src={imageUrl}
               alt={title}
               fill
-              className={title.includes("TradLab") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
+              className={title.includes("TradLab") || title.includes("끼니톡") || title.includes("Kkinni") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
               sizes="calc(100vw - 3rem)"
             />
           </button>
@@ -209,7 +222,7 @@ const ExpCard = ({
                 src={imageUrl}
                 alt={title}
                 fill
-                className={title.includes("TradLab") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
+                className={title.includes("TradLab") || title.includes("끼니톡") || title.includes("Kkinni") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
                 sizes="272px"
               />
             </button>
@@ -296,14 +309,24 @@ const ExpCard = ({
           </>
         )}
       </div>
+      {/* href가 .md면 마크다운 문서 모달, 아니면 PDF 뷰어 */}
       {activePdf ? (
-        <PdfViewerModal
-          pdfUrl={activePdf.href}
-          heading={activePdf.label}
-          subheading={title}
-          sections={activePdf.sections}
-          onClose={() => setActivePdf(null)}
-        />
+        activePdf.href.toLowerCase().endsWith(".md") ? (
+          <MarkdownViewerModal
+            url={activePdf.href}
+            heading={activePdf.label}
+            subheading={title}
+            onClose={() => setActivePdf(null)}
+          />
+        ) : (
+          <PdfViewerModal
+            pdfUrl={activePdf.href}
+            heading={activePdf.label}
+            subheading={title}
+            sections={activePdf.sections}
+            onClose={() => setActivePdf(null)}
+          />
+        )
       ) : null}
     </div>
   );
