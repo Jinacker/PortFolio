@@ -39,12 +39,17 @@ function MermaidDiagram({ code }: { code: string }) {
     void (async () => {
       try {
         const mermaid = (await import("mermaid")).default;
+        // 웹폰트 로드 전에 노드 크기를 재면 렌더 폰트와 어긋나 텍스트가 잘린다
+        await document.fonts.ready;
         mermaid.initialize({
           startOnLoad: false,
           // 원문 다이어그램이 <b>/<br/> HTML 라벨을 쓰므로 loose 필요
           securityLevel: "loose",
           theme: "neutral",
-          fontFamily: "inherit",
+          // "inherit"로 두면 노드 크기를 재는 폰트와 실제 렌더 폰트가 달라져
+          // 긴 텍스트가 노드 밖에서 잘린다 — 실제 페이지 폰트로 측정하게 명시
+          fontFamily: getComputedStyle(document.body).fontFamily || "sans-serif",
+          flowchart: { htmlLabels: true, wrappingWidth: 220 },
           suppressErrorRendering: true,
         });
         // 렌더 ID는 호출마다 새로 — StrictMode 이중 실행에서 같은 ID로 충돌하지 않게
