@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Loader, X } from "react-feather";
 
-import cn from "classnames";
 import Image from "next/image";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -26,8 +25,6 @@ function childrenToText(children: ReactNode): string {
   }
   return "";
 }
-
-const headingId = (text: string) => `md-${text.replace(/\s+/g, "-")}`;
 
 let mermaidSeq = 0;
 
@@ -112,17 +109,7 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
   const [isMounted, setIsMounted] = useState(false);
   const [content, setContent] = useState<string | null>(null);
   const [loadError, setLoadError] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  // "## 제목" 라인들이 목차가 된다.
-  const toc = useMemo(() => {
-    if (!content) return [];
-    return content
-      .split("\n")
-      .filter(line => line.startsWith("## "))
-      .map(line => line.slice(3).trim());
-  }, [content]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -162,38 +149,12 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
     return () => controller.abort();
   }, [url]);
 
-  const scrollToSection = (title: string) => {
-    const target = scrollRef.current?.querySelector<HTMLElement>(
-      `[id="${CSS.escape(headingId(title))}"]`,
-    );
-    target?.scrollIntoView({ behavior: "smooth", block: "start" });
-    setActiveSection(title);
-  };
-
-  // 스크롤 위치 기준으로 현재 섹션을 목차에 표시한다.
-  const handleScroll = () => {
-    const container = scrollRef.current;
-    if (!container || toc.length === 0) return;
-
-    let current: string | null = null;
-    for (const title of toc) {
-      const element = container.querySelector<HTMLElement>(`[id="${CSS.escape(headingId(title))}"]`);
-      if (element && element.offsetTop <= container.scrollTop + 96) {
-        current = title;
-      }
-    }
-    setActiveSection(current ?? toc[0] ?? null);
-  };
-
   const markdownComponents: Components = {
     h1: ({ children }) => (
       <h1 className="mb-4 mt-2 break-keep text-xl font-bold text-slate-900">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2
-        id={headingId(childrenToText(children))}
-        className="mb-3 mt-9 scroll-mt-4 break-keep border-b border-slate-200 pb-2 text-lg font-bold text-slate-900 first:mt-0"
-      >
+      <h2 className="mb-3 mt-9 break-keep border-b border-slate-200 pb-2 text-lg font-bold text-slate-900 first:mt-0">
         {children}
       </h2>
     ),
@@ -306,32 +267,8 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
           </button>
         </header>
 
-        {toc.length > 1 ? (
-          <nav
-            aria-label="문서 목차"
-            className="flex shrink-0 gap-1.5 overflow-x-auto border-b border-slate-100 px-4 py-2.5 [scrollbar-width:none] md:px-6 [&::-webkit-scrollbar]:hidden"
-          >
-            {toc.map(title => (
-              <button
-                key={title}
-                type="button"
-                onClick={() => scrollToSection(title)}
-                className={cn(
-                  "shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11.5px] font-medium transition",
-                  activeSection === title
-                    ? "border-primary/40 bg-primary/10 font-semibold text-primary"
-                    : "border-slate-200 text-slate-500 hover:border-slate-300 hover:text-slate-700",
-                )}
-              >
-                {title}
-              </button>
-            ))}
-          </nav>
-        ) : null}
-
         <div
           ref={scrollRef}
-          onScroll={handleScroll}
           className="flex-1 overflow-y-auto overscroll-contain px-4 py-5 md:px-8 md:py-6"
         >
           {loadError ? (

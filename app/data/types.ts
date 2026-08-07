@@ -86,12 +86,20 @@ export interface ExperienceDetailPdf {
   inline?: boolean;
 }
 
+// 섹션 본문에 넣는 간단한 표 — 셀 텍스트에도 highlights가 적용된다.
+export interface ExperienceDetailTable {
+  headers: string[];
+  rows: string[][];
+}
+
 export interface ExperienceDetailSection {
   title: string;
   items: string[];
   highlights?: string[];
   layout?: "list" | "paragraphs";
   media?: ExperienceDetailMedia;
+  /** items 아래에 렌더되는 표 */
+  table?: ExperienceDetailTable;
   extra?: {
     items: string[];
     highlights?: string[];

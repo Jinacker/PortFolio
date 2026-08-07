@@ -292,6 +292,7 @@ function PanelSection({
   onOpenPdf: (pdf: ActivePdf) => void;
 }) {
   const sectionPdf = section.pdf;
+  const sectionTable = section.table;
 
   return (
     <div className="py-3 first:pt-0 last:pb-0">
@@ -304,6 +305,46 @@ function PanelSection({
         highlights={section.highlights}
         layout={section.layout}
       />
+      {sectionTable ? (
+        <div
+          className={cn(
+            "overflow-x-auto rounded-lg border border-slate-200",
+            section.items.length > 0 && "mt-3",
+          )}
+        >
+          <table className="w-full border-collapse text-left">
+            <thead className="bg-slate-50">
+              <tr>
+                {sectionTable.headers.map(header => (
+                  <th
+                    key={header}
+                    className="break-keep border-b border-slate-200 px-3 py-2 text-xs font-semibold text-foreground/70"
+                  >
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sectionTable.rows.map((row, rowIndex) => (
+                <tr key={row[0] ?? rowIndex}>
+                  {row.map((cell, cellIndex) => (
+                    <td
+                      key={`${rowIndex}-${cellIndex}`}
+                      className={cn(
+                        "break-keep border-b border-slate-100 px-3 py-2 align-top text-[13px] leading-[1.6] text-foreground/75",
+                        rowIndex === sectionTable.rows.length - 1 && "border-b-0",
+                      )}
+                    >
+                      {renderHighlightedText(cell, section.highlights)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
       {section.extra ? (
         sectionPdf?.inline ? (
           // 마지막 항목만 PDF 버튼과 같은 줄에 — 앞 항목들은 전체 폭을 그대로 유지
