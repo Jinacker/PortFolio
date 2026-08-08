@@ -69,6 +69,8 @@ export interface ExperienceDetailMedia {
   linkLabel?: string;
   maxWidth?: number;
   placement?: "top" | "left" | "right";
+  /** 이미지가 카드를 가득 채우도록 자를 때 사용하는 프레임 비율 */
+  frameAspectRatio?: string;
 }
 
 // A PDF attached to a single detail section, with its own viewer TOC.
@@ -100,6 +102,9 @@ export interface ExperienceDetailAction {
   /** extra 본문 앞에 카드가 필요한 경우에만 사용 */
   position?: "beforeExtra" | "afterExtra";
   tone?: "yellow" | "green";
+  /** 활동 카드 아래에 이어지는 짧은 회고 문단 */
+  afterText?: string;
+  afterHighlights?: string[];
   href?: string;
   modalName?: string;
   modalImages?: string[];
@@ -139,6 +144,9 @@ export interface ExperienceSubDetail {
   /** 아코디언을 열었을 때 본문 최상단에서 지연 로드할 대표 이미지 */
   media?: ExperienceDetailMedia;
   sections: ExperienceDetailSection[];
+  /** 카드 본문 끝에 배치하는 마무리 회고 문단 */
+  afterText?: string;
+  afterHighlights?: string[];
 }
 
 export interface Experience {

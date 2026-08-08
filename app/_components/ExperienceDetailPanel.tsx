@@ -146,8 +146,9 @@ function MediaTextBlock({
               ? "mb-2.5 sm:mb-0"
               : "mb-2.5",
             media.placement === "right" && "sm:order-2",
+            media.frameAspectRatio && "overflow-hidden rounded-md",
           )}
-          style={{ maxWidth: media.maxWidth }}
+          style={{ maxWidth: media.maxWidth, aspectRatio: media.frameAspectRatio }}
         >
           {media.href ? (
             <a
@@ -155,7 +156,10 @@ function MediaTextBlock({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${media.alt} 링크 열기`}
-              className="block overflow-hidden rounded-md no-underline transition hover:opacity-90"
+              className={cn(
+                "block overflow-hidden rounded-md no-underline transition hover:opacity-90",
+                media.frameAspectRatio && "h-full",
+              )}
             >
               <Image
                 src={media.src}
@@ -163,7 +167,7 @@ function MediaTextBlock({
                 width={media.width}
                 height={media.height}
                 quality={95}
-                className="h-auto w-full"
+                className={cn(media.frameAspectRatio ? "h-full w-full object-cover" : "h-auto w-full")}
               />
             </a>
           ) : (
@@ -173,7 +177,9 @@ function MediaTextBlock({
               width={media.width}
               height={media.height}
               quality={95}
-              className="h-auto w-full rounded-md"
+              className={cn(
+                media.frameAspectRatio ? "h-full w-full object-cover" : "h-auto w-full rounded-md",
+              )}
             />
           )}
         </div>
@@ -297,6 +303,11 @@ function SectionActionCards({
           "flex w-full items-start gap-3 rounded-xl border border-foreground/10 border-l-[3px] bg-foreground/[0.02] px-4 py-3 text-left no-underline transition-colors hover:bg-foreground/[0.04]",
           action.tone === "green" ? "border-l-[#00C676]" : "border-l-[#FFD84D]",
         );
+        const afterText = action.afterText ? (
+          <p className="mt-3 break-keep px-1 text-sm font-normal leading-[1.6] text-foreground/75">
+            {renderHighlightedText(action.afterText, action.afterHighlights)}
+          </p>
+        ) : null;
         const content = (
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
@@ -317,36 +328,40 @@ function SectionActionCards({
 
         if (action.modalName && onOpenLegacyModal) {
           return (
-            <button
-              key={`${action.title}-${action.modalName}`}
-              type="button"
-              onClick={() => onOpenLegacyModal(action.modalName!, action.modalImages ?? [])}
-              className={cardClassName}
-            >
-              {content}
-            </button>
+            <div key={`${action.title}-${action.modalName}`}>
+              <button
+                type="button"
+                onClick={() => onOpenLegacyModal(action.modalName!, action.modalImages ?? [])}
+                className={cardClassName}
+              >
+                {content}
+              </button>
+              {afterText}
+            </div>
           );
         }
 
         if (action.href) {
           const isExternal = /^https?:\/\//.test(action.href);
           return (
-            <a
-              key={`${action.title}-${action.href}`}
-              href={action.href}
-              target={isExternal ? "_blank" : undefined}
-              rel={isExternal ? "noopener noreferrer" : undefined}
-              onClick={event => {
-                if (!action.href?.startsWith("#experience-")) return;
+            <div key={`${action.title}-${action.href}`}>
+              <a
+                href={action.href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                onClick={event => {
+                  if (!action.href?.startsWith("#experience-")) return;
 
-                event.preventDefault();
-                window.history.pushState(null, "", action.href);
-                window.dispatchEvent(new HashChangeEvent("hashchange"));
-              }}
-              className={cardClassName}
-            >
-              {content}
-            </a>
+                  event.preventDefault();
+                  window.history.pushState(null, "", action.href);
+                  window.dispatchEvent(new HashChangeEvent("hashchange"));
+                }}
+                className={cardClassName}
+              >
+                {content}
+              </a>
+              {afterText}
+            </div>
           );
         }
 
@@ -576,18 +591,18 @@ function SubDetailList({
           const isOpen = openId === sub.id;
 
           return (
-            <div
-              key={sub.id}
-              ref={element => {
-                cardRefs.current[sub.id] = element;
-              }}
-              className={cn(
-                "scroll-mt-20 overflow-hidden rounded-xl bg-foreground/[0.02] [transition-property:border-color,border-width] duration-300 ease-out",
-                isOpen
-                  ? "border-[3px] border-[#FFD84D]"
-                  : "border border-foreground/10 border-l-[3px] border-l-[#FFD84D]",
-              )}
-            >
+            <div key={sub.id} className="flex flex-col gap-3">
+              <div
+                ref={element => {
+                  cardRefs.current[sub.id] = element;
+                }}
+                className={cn(
+                  "scroll-mt-20 overflow-hidden rounded-xl bg-foreground/[0.02] [transition-property:border-color,border-width] duration-300 ease-out",
+                  isOpen
+                    ? "border-[3px] border-[#FFD84D]"
+                    : "border border-foreground/10 border-l-[3px] border-l-[#FFD84D]",
+                )}
+              >
               <button
                 type="button"
                 onClick={event => toggleSubDetail(sub.id, isOpen, event)}
@@ -629,6 +644,12 @@ function SubDetailList({
                   </motion.div>
                 ) : null}
               </AnimatePresence>
+              </div>
+              {sub.afterText ? (
+                <p className="break-keep px-1 text-sm font-normal leading-[1.6] text-foreground/75">
+                  {renderHighlightedText(sub.afterText, sub.afterHighlights)}
+                </p>
+              ) : null}
             </div>
           );
         })}
