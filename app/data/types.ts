@@ -92,6 +92,19 @@ export interface ExperienceDetailTable {
   rows: string[][];
 }
 
+export interface ExperienceDetailAction {
+  title: string;
+  period?: string;
+  description: string;
+  label?: string;
+  /** extra 본문 앞에 카드가 필요한 경우에만 사용 */
+  position?: "beforeExtra" | "afterExtra";
+  tone?: "yellow" | "green";
+  href?: string;
+  modalName?: string;
+  modalImages?: string[];
+}
+
 export interface ExperienceDetailSection {
   title: string;
   items: string[];
@@ -111,6 +124,8 @@ export interface ExperienceDetailSection {
   pdf?: ExperienceDetailPdf;
   /** 소재별 문서 목록 — 카드형 버튼 리스트로 쌓이고, 각각 뷰어(.md는 MD 모달)로 열린다 */
   docs?: ExperienceDetailPdf[];
+  /** 외부 링크 또는 레거시 프로젝트 모달로 이어지는 활동 카드 */
+  actions?: ExperienceDetailAction[];
   showPdf?: boolean;
   /** true면 경험의 subDetails 아코디언을 이 섹션 안에 렌더 (패널 하단 대신) */
   showSubDetails?: boolean;
@@ -130,6 +145,8 @@ export interface Experience {
   id: number;
   title: string;
   period: string;
+  /** 카드 왼쪽 타임라인에서 기간을 숨길 때 사용 */
+  hidePeriod?: boolean;
   items: string[];
   links: ExperienceLink[];
   pdfSections?: PdfDocumentSection[];
@@ -138,6 +155,8 @@ export interface Experience {
   is_active: boolean | null;
   sub_title: string | null;
   imageUrl?: string;
+  /** 대표 이미지 슬롯의 배경색 */
+  imageBackgroundColor?: string;
   /** 콘텐츠를 나중에 채울 카드에서 이미지·기술 스택 영역을 빈 슬롯으로 유지 */
   placeholderSlots?: boolean;
   index: number;

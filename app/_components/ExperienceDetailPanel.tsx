@@ -38,6 +38,7 @@ interface ExperienceDetailPanelProps {
   subDetails?: readonly ExperienceSubDetail[];
   pdfLink?: ExperienceLink;
   onOpenPdf: (pdf: ActivePdf) => void;
+  onOpenLegacyModal?: (modalName: string, images: string[]) => void;
   className?: string;
 }
 
@@ -280,19 +281,98 @@ function PdfButton({
   );
 }
 
+function SectionActionCards({
+  actions,
+  onOpenLegacyModal,
+}: {
+  actions?: ExperienceDetailSection["actions"];
+  onOpenLegacyModal?: (modalName: string, images: string[]) => void;
+}) {
+  if (!actions?.length) return null;
+
+  return (
+    <div className="mt-3 flex flex-col gap-2.5">
+      {actions.map(action => {
+        const cardClassName = cn(
+          "flex w-full items-start gap-3 rounded-xl border border-foreground/10 border-l-[3px] bg-foreground/[0.02] px-4 py-3 text-left no-underline transition-colors hover:bg-foreground/[0.04]",
+          action.tone === "green" ? "border-l-[#00C676]" : "border-l-[#FFD84D]",
+        );
+        const content = (
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <span className="break-keep text-sm font-semibold text-foreground/85">{action.title}</span>
+              {action.period ? (
+                <span className="text-[11px] font-medium text-foreground/40">{action.period}</span>
+              ) : null}
+            </div>
+            <p className="mt-1 break-keep text-xs leading-[1.55] text-foreground/60">{action.description}</p>
+            {action.label ? (
+              <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary/75">
+                {action.label}
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </span>
+            ) : null}
+          </div>
+        );
+
+        if (action.modalName && onOpenLegacyModal) {
+          return (
+            <button
+              key={`${action.title}-${action.modalName}`}
+              type="button"
+              onClick={() => onOpenLegacyModal(action.modalName!, action.modalImages ?? [])}
+              className={cardClassName}
+            >
+              {content}
+            </button>
+          );
+        }
+
+        if (action.href) {
+          const isExternal = /^https?:\/\//.test(action.href);
+          return (
+            <a
+              key={`${action.title}-${action.href}`}
+              href={action.href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noopener noreferrer" : undefined}
+              onClick={event => {
+                if (!action.href?.startsWith("#experience-")) return;
+
+                event.preventDefault();
+                window.history.pushState(null, "", action.href);
+                window.dispatchEvent(new HashChangeEvent("hashchange"));
+              }}
+              className={cardClassName}
+            >
+              {content}
+            </a>
+          );
+        }
+
+        return null;
+      })}
+    </div>
+  );
+}
+
 function PanelSection({
   section,
   pdfLink,
   subDetails = [],
   onOpenPdf,
+  onOpenLegacyModal,
 }: {
   section: ExperienceDetailSection;
   pdfLink?: ExperienceLink;
   subDetails?: readonly ExperienceSubDetail[];
   onOpenPdf: (pdf: ActivePdf) => void;
+  onOpenLegacyModal?: (modalName: string, images: string[]) => void;
 }) {
   const sectionPdf = section.pdf;
   const sectionTable = section.table;
+  const beforeExtraActions = section.actions?.filter(action => action.position === "beforeExtra");
+  const afterExtraActions = section.actions?.filter(action => action.position !== "beforeExtra");
 
   return (
     <div className="py-3 first:pt-0 last:pb-0">
@@ -345,6 +425,7 @@ function PanelSection({
           </table>
         </div>
       ) : null}
+      <SectionActionCards actions={beforeExtraActions} onOpenLegacyModal={onOpenLegacyModal} />
       {section.extra ? (
         sectionPdf?.inline ? (
           // 마지막 항목만 PDF 버튼과 같은 줄에 — 앞 항목들은 전체 폭을 그대로 유지
@@ -407,6 +488,7 @@ function PanelSection({
           ))}
         </div>
       ) : null}
+      <SectionActionCards actions={afterExtraActions} onOpenLegacyModal={onOpenLegacyModal} />
       {sectionPdf && !(sectionPdf.inline && section.extra) ? (
         <PdfButton
           label={sectionPdf.label}
@@ -424,7 +506,12 @@ function PanelSection({
         />
       ) : null}
       {section.showSubDetails && subDetails.length > 0 ? (
-        <SubDetailList subDetails={subDetails} onOpenPdf={onOpenPdf} plain />
+        <SubDetailList
+          subDetails={subDetails}
+          onOpenPdf={onOpenPdf}
+          onOpenLegacyModal={onOpenLegacyModal}
+          plain
+        />
       ) : null}
     </div>
   );
@@ -434,10 +521,12 @@ function PanelSection({
 function SubDetailList({
   subDetails,
   onOpenPdf,
+  onOpenLegacyModal,
   plain,
 }: {
   subDetails: readonly ExperienceSubDetail[];
   onOpenPdf: (pdf: ActivePdf) => void;
+  onOpenLegacyModal?: (modalName: string, images: string[]) => void;
   /** 섹션 안에 임베드될 때 — 상단 구분선/라벨 없이 카드만 */
   plain?: boolean;
 }) {
@@ -533,6 +622,7 @@ function SubDetailList({
                           key={section.title}
                           section={section}
                           onOpenPdf={onOpenPdf}
+                          onOpenLegacyModal={onOpenLegacyModal}
                         />
                       ))}
                     </div>
@@ -554,6 +644,7 @@ export default function ExperienceDetailPanel({
   subDetails = [],
   pdfLink,
   onOpenPdf,
+  onOpenLegacyModal,
   className,
 }: ExperienceDetailPanelProps) {
   if (items.length === 0 && sections.length === 0 && subDetails.length === 0 && !pdfLink) {
@@ -577,6 +668,7 @@ export default function ExperienceDetailPanel({
               pdfLink={pdfLink}
               subDetails={subDetails}
               onOpenPdf={onOpenPdf}
+              onOpenLegacyModal={onOpenLegacyModal}
             />
           ))}
         </div>
@@ -603,7 +695,11 @@ export default function ExperienceDetailPanel({
 
       {/* 어떤 섹션도 showSubDetails로 가져가지 않았을 때만 패널 하단에 표시 */}
       {subDetails.length > 0 && !sections.some(section => section.showSubDetails) ? (
-        <SubDetailList subDetails={subDetails} onOpenPdf={onOpenPdf} />
+        <SubDetailList
+          subDetails={subDetails}
+          onOpenPdf={onOpenPdf}
+          onOpenLegacyModal={onOpenLegacyModal}
+        />
       ) : null}
     </div>
   );

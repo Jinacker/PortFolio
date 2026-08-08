@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronRight } from "react-feather";
 
 import cn from "classnames";
@@ -18,6 +18,7 @@ import SkillItem from "./skill/SkillItem";
 
 const PdfViewerModal = dynamic(() => import("./PdfViewerModal"), { ssr: false });
 const MarkdownViewerModal = dynamic(() => import("./MarkdownViewerModal"), { ssr: false });
+const LegacyTimelineModals = dynamic(() => import("./LegacyTimelineModals"), { ssr: false });
 
 interface ExpCardProps extends Omit<Experience, "skill_ids"> {
   skills: Skill[];
@@ -35,6 +36,18 @@ const skillGroups = [
   {
     label: "Build & Workflow",
     categories: ["MERMAID_BUILD_WORKFLOW"],
+  },
+  {
+    label: "Model",
+    categories: ["AI_MODEL"],
+  },
+  {
+    label: "Agent",
+    categories: ["AI_AGENT"],
+  },
+  {
+    label: "AI Infra",
+    categories: ["AI_INFRA"],
   },
   {
     label: "AI Eng",
@@ -91,6 +104,7 @@ const formatPeriod = (period: string) => {
 const ExpCard = ({
   id,
   period,
+  hidePeriod,
   is_active,
   title,
   sub_title,
@@ -102,12 +116,15 @@ const ExpCard = ({
   subDetails,
   category,
   imageUrl,
+  imageBackgroundColor,
   placeholderSlots,
 }: ExpCardProps) => {
   const t = useTranslations("Experience");
   const [isExpanded, setIsExpanded] = useState(false);
   const [activePdf, setActivePdf] = useState<ActivePdf | null>(null);
+  const [activeLegacyModal, setActiveLegacyModal] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const hashOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shapeColor =
     category === "STARTUP"
       ? "text-[#FFD84D]"
@@ -144,16 +161,55 @@ const ExpCard = ({
   };
 
   const detailId = `experience-${id}-detail`;
+  const isAnimatedImage = Boolean(imageUrl?.toLowerCase().endsWith(".gif"));
+
+  useEffect(() => {
+    const openFromHash = () => {
+      if (window.location.hash !== `#experience-${id}`) return;
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          cardRef.current?.focus({ preventScroll: true });
+          cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      if (hashOpenTimerRef.current) clearTimeout(hashOpenTimerRef.current);
+      hashOpenTimerRef.current = setTimeout(() => {
+        setIsExpanded(true);
+        hashOpenTimerRef.current = null;
+      }, 650);
+    };
+
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+
+    return () => {
+      window.removeEventListener("hashchange", openFromHash);
+      if (hashOpenTimerRef.current) clearTimeout(hashOpenTimerRef.current);
+    };
+  }, [id]);
+
+  const openLegacyModal = (modalName: string, images: string[]) => {
+    images.forEach(src => {
+      const image = new window.Image();
+      image.src = src;
+    });
+    setActiveLegacyModal(modalName);
+  };
 
   return (
     <div
+      id={`experience-${id}`}
       ref={cardRef}
       tabIndex={-1}
       className="grid scroll-mt-20 outline-none sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-x-8 sm:items-start sm:pl-16"
     >
       <div className="flex gap-2.5 sm:justify-end items-start mb-3">
         <Shape className={cn(shapeColor)} />
-        <p className="text-center text-sm md:text-base font-normal text-foreground/60">{formatPeriod(period)}</p>
+        {hidePeriod ? null : (
+          <p className="text-center text-sm md:text-base font-normal text-foreground/60">{formatPeriod(period)}</p>
+        )}
       </div>
 
       <div className="pl-6 sm:pl-0 flex flex-col gap-3">
@@ -165,12 +221,14 @@ const ExpCard = ({
             aria-controls={detailId}
             aria-label={`${title} 자세히 보기`}
             className="relative h-36 w-full cursor-pointer overflow-hidden rounded-md border border-foreground/10 bg-white shadow-sm sm:hidden"
+            style={imageBackgroundColor ? { backgroundColor: imageBackgroundColor } : undefined}
           >
             <Image
               src={imageUrl}
               alt={title}
               fill
-              className={title.includes("TradLab") || title.includes("끼니톡") || title.includes("Kkinni") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
+              unoptimized={isAnimatedImage}
+              className={title.includes("TradLab") || title.includes("끼니톡") || title.includes("Kkinni") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : title === "AI, 모델에서 제품으로" ? "-translate-y-1 scale-[1.22] object-contain" : "object-contain"}
               sizes="calc(100vw - 3rem)"
             />
           </button>
@@ -217,12 +275,14 @@ const ExpCard = ({
               aria-controls={detailId}
               aria-label={`${title} 자세히 보기`}
               className="relative mt-3 hidden h-36 w-[17rem] shrink-0 cursor-pointer overflow-hidden rounded-md border border-foreground/10 bg-white shadow-sm sm:block"
+              style={imageBackgroundColor ? { backgroundColor: imageBackgroundColor } : undefined}
             >
               <Image
                 src={imageUrl}
                 alt={title}
                 fill
-                className={title.includes("TradLab") || title.includes("끼니톡") || title.includes("Kkinni") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : "object-contain"}
+                unoptimized={isAnimatedImage}
+                className={title.includes("TradLab") || title.includes("끼니톡") || title.includes("Kkinni") ? "object-cover" : title === "돈가스 지도" ? "scale-[1.06] object-contain" : title === "AI, 모델에서 제품으로" ? "-translate-y-1 scale-[1.22] object-contain" : "object-contain"}
                 sizes="272px"
               />
             </button>
@@ -302,6 +362,7 @@ const ExpCard = ({
                     // Legacy single-PDF experiences carry no per-PDF TOC — fall back
                     // to the experience-level pdfSections.
                     onOpenPdf={pdf => setActivePdf({ ...pdf, sections: pdf.sections ?? pdfSections })}
+                    onOpenLegacyModal={openLegacyModal}
                   />
                 </motion.div>
               ) : null}
@@ -327,6 +388,12 @@ const ExpCard = ({
             onClose={() => setActivePdf(null)}
           />
         )
+      ) : null}
+      {activeLegacyModal ? (
+        <LegacyTimelineModals
+          activeModal={activeLegacyModal}
+          closeModal={() => setActiveLegacyModal(null)}
+        />
       ) : null}
     </div>
   );
