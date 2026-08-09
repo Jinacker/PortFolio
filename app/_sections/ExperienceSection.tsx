@@ -235,7 +235,9 @@ export default function ExperienceSection() {
   const groups = [
     { key: "service", title: "실사용 서비스 운영", data: data.filter(({ category }) => category === "SERVICE") },
     { key: "work", title: "업무 경험", data: data.filter(({ category }) => category === "WORK") },
+    { key: "startup", title: "창업 경험", data: data.filter(({ category }) => category === "STARTUP") },
     { key: "open-source", title: "오픈소스 기여", data: data.filter(({ category }) => category === "OPEN_SOURCE") },
+    { key: "ai", title: "AI 활용 능력", data: data.filter(({ category }) => category === "AI") },
   ];
 
   return (
@@ -261,7 +263,8 @@ export default function ExperienceSection() {
         ))}
 
         <p className="mx-auto mt-12 max-w-2xl text-center text-sm leading-relaxed text-foreground/60 md:text-base">
-          기능은 누구나 만들 수 있지만,
+          <strong className="font-semibold text-foreground">대 AI 시대, </strong>
+          기능은 누구나 만들 수 있지만
           <br />
           실제로 사람들에게{" "}
           <strong className="font-semibold text-foreground">선택받고 쓰이는 가치</strong>

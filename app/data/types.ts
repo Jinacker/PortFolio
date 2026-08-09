@@ -18,6 +18,9 @@ export type Category =
   | "MERMAID_CORE"
   | "MERMAID_TEST_QUALITY"
   | "MERMAID_BUILD_WORKFLOW"
+  | "KKINI_AI_SERVER"
+  | "KKINI_CHATBOT"
+  | "KKINI_APP"
   | "INFRA_TEST"
   | "ENV"
   | "DESIGN"
@@ -57,35 +60,113 @@ export interface PdfDocumentSection {
   endPage: number;
 }
 
+export interface ExperienceDetailMedia {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  href?: string;
+  linkLabel?: string;
+  maxWidth?: number;
+  placement?: "top" | "left" | "right";
+  /** 이미지가 카드를 가득 채우도록 자를 때 사용하는 프레임 비율 */
+  frameAspectRatio?: string;
+}
+
+// A PDF attached to a single detail section, with its own viewer TOC.
+// (The legacy path — `showPdf` + the experience-level `links`/`pdfSections` —
+// still works for experiences with a single PDF, e.g. the Mermaid entry.)
+export interface ExperienceDetailPdf {
+  href: string;
+  label: string;
+  sections?: PdfDocumentSection[];
+  /** 버튼 강조색 */
+  tone?: "default" | "green";
+  /** 버튼 정렬 — 기본 왼쪽 */
+  align?: "left" | "right";
+  /** true면 버튼을 extra 블록과 같은 줄 오른쪽에 배치 (텍스트가 좁아져 줄바꿈됨) */
+  inline?: boolean;
+}
+
+// 섹션 본문에 넣는 간단한 표 — 셀 텍스트에도 highlights가 적용된다.
+export interface ExperienceDetailTable {
+  headers: string[];
+  rows: string[][];
+}
+
+export interface ExperienceDetailAction {
+  title: string;
+  period?: string;
+  description: string;
+  label?: string;
+  /** extra 본문 앞에 카드가 필요한 경우에만 사용 */
+  position?: "beforeExtra" | "afterExtra";
+  tone?: "yellow" | "green";
+  /** 활동 카드 아래에 이어지는 짧은 회고 문단 */
+  afterText?: string;
+  afterHighlights?: string[];
+  href?: string;
+  modalName?: string;
+  modalImages?: string[];
+}
+
 export interface ExperienceDetailSection {
   title: string;
   items: string[];
   highlights?: string[];
   layout?: "list" | "paragraphs";
-  media?: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-    href?: string;
-    linkLabel?: string;
-    maxWidth?: number;
-    placement?: "top" | "left";
+  media?: ExperienceDetailMedia;
+  /** items 아래에 렌더되는 표 */
+  table?: ExperienceDetailTable;
+  extra?: {
+    items: string[];
+    highlights?: string[];
+    layout?: "list" | "paragraphs";
+    media?: ExperienceDetailMedia;
+    /** false로 두면 본문과 extra 사이 구분선 없이 이어서 렌더 (기본 true) */
+    divider?: boolean;
   };
+  pdf?: ExperienceDetailPdf;
+  /** 소재별 문서 목록 — 카드형 버튼 리스트로 쌓이고, 각각 뷰어(.md는 MD 모달)로 열린다 */
+  docs?: ExperienceDetailPdf[];
+  /** 외부 링크 또는 레거시 프로젝트 모달로 이어지는 활동 카드 */
+  actions?: ExperienceDetailAction[];
   showPdf?: boolean;
+  /** true면 경험의 subDetails 아코디언을 이 섹션 안에 렌더 (패널 하단 대신) */
+  showSubDetails?: boolean;
+}
+
+// A deep-dive card nested inside an experience's detail panel — rendered as an
+// accordion below the main sections (e.g. the SureSoftTech sub-projects).
+export interface ExperienceSubDetail {
+  id: string;
+  title: string;
+  /** 아코디언을 열었을 때 본문 최상단에서 지연 로드할 대표 이미지 */
+  media?: ExperienceDetailMedia;
+  sections: ExperienceDetailSection[];
+  /** 카드 본문 끝에 배치하는 마무리 회고 문단 */
+  afterText?: string;
+  afterHighlights?: string[];
 }
 
 export interface Experience {
   id: number;
   title: string;
   period: string;
+  /** 카드 왼쪽 타임라인에서 기간을 숨길 때 사용 */
+  hidePeriod?: boolean;
   items: string[];
   links: ExperienceLink[];
   pdfSections?: PdfDocumentSection[];
   detailSections?: ExperienceDetailSection[];
+  subDetails?: ExperienceSubDetail[];
   is_active: boolean | null;
   sub_title: string | null;
   imageUrl?: string;
+  /** 대표 이미지 슬롯의 배경색 */
+  imageBackgroundColor?: string;
+  /** 콘텐츠를 나중에 채울 카드에서 이미지·기술 스택 영역을 빈 슬롯으로 유지 */
+  placeholderSlots?: boolean;
   index: number;
   skill_ids: number[];
   category: string | null;

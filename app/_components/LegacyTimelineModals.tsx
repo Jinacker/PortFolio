@@ -2637,6 +2637,31 @@ export default function LegacyTimelineModals({ activeModal, closeModal }: Legacy
                 </ul>
               </div>
 
+              {/* 프롬프트 예시 */}
+              <div className="mb-12">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">💬 프롬프트를 어떻게 설계했나</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  같은 리뷰를 입력하되, 예시와 출력 형식을 달리해 모델이 감성을 판단하는 방식과 결과를 비교했습니다.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Zero-shot — 기준만 제시</p>
+                    <pre className="whitespace-pre-wrap break-keep rounded border border-orange-100 bg-white p-3 text-xs leading-5 text-gray-700 font-mono">{"[System]\n당신은 NSMC 영화 리뷰 감성 분류기입니다.\n리뷰를 읽고 '긍정' 또는 '부정' 한 단어만 답하세요.\n설명이나 추가 문장은 출력하지 마세요.\n\n[User]\n리뷰: 이 영화는 정말 지루해서 끝까지 보기 힘들었다.\n\n[Assistant]"}</pre>
+                    <p className="mt-2 text-xs text-gray-500">예시 없이 역할·분류 기준·출력 제약만 전달해 기본 성능을 확인했습니다.</p>
+                  </div>
+                  <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Few-shot — NSMC 문체의 예시 추가</p>
+                    <pre className="whitespace-pre-wrap break-keep rounded border border-orange-100 bg-white p-3 text-xs leading-5 text-gray-700 font-mono">{"[System]\n리뷰의 감성을 '긍정' 또는 '부정'으로만 분류하세요.\n\n[User] 리뷰: 연출도 좋고 배우 연기도 좋았다.\n[Assistant] 긍정\n\n[User] 리뷰: 기대했는데 너무 지루하고 아쉽다.\n[Assistant] 부정\n\n[User] 리뷰: 이 영화는 정말 지루해서 끝까지 보기 힘들었다.\n[Assistant]"}</pre>
+                    <p className="mt-2 text-xs text-gray-500">NSMC처럼 짧고 감성이 분명한 리뷰를 예시로 넣어 분류 기준을 구체화했습니다.</p>
+                  </div>
+                  <div className="md:col-span-2 bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-800 mb-2">Reasoning SFT — 분류와 근거를 함께 학습</p>
+                    <pre className="whitespace-pre-wrap break-keep rounded border border-orange-100 bg-white p-3 text-xs leading-5 text-gray-700 font-mono">{"[Instruction]\n리뷰의 감성을 분류하고, 리뷰 속 표현을 근거로 한 문장으로 설명하세요.\n\n[Input]\n리뷰: 이 영화는 정말 지루해서 끝까지 보기 힘들었다.\n\n[Output]\n감성: 부정\n근거: '지루해서 끝까지 보기 힘들었다'는 부정적인 감정을 드러냅니다."}</pre>
+                    <p className="mt-2 text-xs text-gray-500">정답 라벨에 근거를 덧붙인 동일한 형식의 데이터를 학습해, 단순 분류를 넘어 판단 이유까지 출력하도록 실험했습니다.</p>
+                  </div>
+                </div>
+              </div>
+
               {/* 실험 구성 및 결과 */}
               <div className="mb-10">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">✨ 실험 구성 및 결과</h3>

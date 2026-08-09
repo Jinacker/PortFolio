@@ -143,6 +143,14 @@ export default function PdfViewerModal({
   const panY = useMotionValue(0);
   const [pageSize, setPageSize] = useState({ width: 1200, height: 675 });
   const [loadError, setLoadError] = useState(false);
+  const navigationStart =
+    sections.length > 0 && numPages > 0
+      ? Math.max(0, Math.min(numPages - 1, Math.min(...sections.map(section => section.startPage)) - 1))
+      : 0;
+  const navigationEnd =
+    sections.length > 0 && numPages > 0
+      ? Math.max(navigationStart, Math.min(numPages - 1, Math.max(...sections.map(section => section.endPage)) - 1))
+      : Math.max(0, numPages - 1);
 
   useEffect(() => {
     setIsMounted(true);
@@ -214,8 +222,32 @@ export default function PdfViewerModal({
     };
   }, [pdfUrl]);
 
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer || numPages <= 1 || navigationStart === 0) return;
+
+    programmaticPageRef.current = navigationStart;
+    setCurrentPage(navigationStart);
+    if (navigationUnlockTimerRef.current) {
+      clearTimeout(navigationUnlockTimerRef.current);
+    }
+
+    const animationFrame = requestAnimationFrame(() => {
+      scrollContainer.scrollTo({
+        top: navigationStart * window.innerHeight * 0.55 + 2,
+        behavior: "auto",
+      });
+
+      navigationUnlockTimerRef.current = setTimeout(() => {
+        programmaticPageRef.current = null;
+      }, 300);
+    });
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [navigationStart, numPages]);
+
   const goToPage = (pageIndex: number) => {
-    const nextIndex = Math.max(0, Math.min(pageIndex, numPages - 1));
+    const nextIndex = Math.max(navigationStart, Math.min(pageIndex, navigationEnd));
     const scrollContainer = scrollRef.current;
 
     if (!scrollContainer || numPages <= 1) return;
@@ -311,12 +343,16 @@ export default function PdfViewerModal({
 
     window.addEventListener("keydown", handlePageKeyDown);
     return () => window.removeEventListener("keydown", handlePageKeyDown);
-  }, [currentPage, numPages]);
+  }, [currentPage, navigationEnd, navigationStart, numPages]);
 
   if (!isMounted) return null;
 
   const pages = Array.from({ length: numPages }, (_, index) => index + 1);
-  const sliderProgress = numPages > 1 ? (currentPage / (numPages - 1)) * 100 : 100;
+  const sliderPage = Math.max(navigationStart, Math.min(currentPage, navigationEnd));
+  const sliderProgress =
+    navigationEnd > navigationStart
+      ? ((sliderPage - navigationStart) / (navigationEnd - navigationStart)) * 100
+      : 100;
 
   return createPortal(
     <div
@@ -419,7 +455,7 @@ export default function PdfViewerModal({
                           <button
                             type="button"
                             onClick={() => goToPage(currentPage - 1)}
-                            disabled={currentPage === 0}
+                            disabled={currentPage <= navigationStart}
                             aria-label="이전 PDF 페이지"
                             className="pdf-cursor-prev h-full w-[22%] disabled:cursor-default"
                           />
@@ -432,7 +468,7 @@ export default function PdfViewerModal({
                           <button
                             type="button"
                             onClick={() => goToPage(currentPage + 1)}
-                            disabled={currentPage >= numPages - 1}
+                            disabled={currentPage >= navigationEnd}
                             aria-label="다음 PDF 페이지"
                             className="pdf-cursor-next h-full w-[22%] disabled:cursor-default"
                           />
@@ -488,12 +524,12 @@ export default function PdfViewerModal({
               ) : null}
               <input
                 type="range"
-                min={0}
-                max={Math.max(0, numPages - 1)}
+                min={navigationStart}
+                max={navigationEnd}
                 step={1}
-                value={currentPage}
+                value={sliderPage}
                 onChange={event => goToPage(Number(event.target.value))}
-                disabled={numPages <= 1}
+                disabled={numPages <= 1 || navigationEnd <= navigationStart}
                 aria-label="PDF 페이지 이동"
                 className="pdf-page-slider mt-1 h-2 w-full cursor-pointer appearance-none rounded-full disabled:cursor-default"
                 style={{
@@ -504,7 +540,7 @@ export default function PdfViewerModal({
                 <button
                   type="button"
                   onClick={() => goToPage(currentPage - 1)}
-                  disabled={numPages <= 1 || currentPage === 0}
+                  disabled={numPages <= 1 || currentPage <= navigationStart}
                   aria-label="이전 페이지"
                   className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition enabled:hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-30"
                 >
@@ -516,7 +552,7 @@ export default function PdfViewerModal({
                 <button
                   type="button"
                   onClick={() => goToPage(currentPage + 1)}
-                  disabled={numPages <= 1 || currentPage >= numPages - 1}
+                  disabled={numPages <= 1 || currentPage >= navigationEnd}
                   aria-label="다음 페이지"
                   className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition enabled:hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-30"
                 >

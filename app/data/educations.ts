@@ -25,7 +25,7 @@ const educations: Record<Locale, Education[]> = {
       sub_title: "정보처리기사 · 측량 및 지형공간정보기사 · TOEIC Speaking",
       period: "2026",
       items: [
-        "정보처리기사 - 필기 합격 - 실기 준비중",
+        "정보처리기사 - 가채점 결과 합격 - 실기 결과 대기중",
         "측량 및 지형공간정보기사 - 필기 합격 - 실기 준비중",
         "TOEIC 및 TOEIC Speaking 준비중",
       ],

@@ -35,7 +35,8 @@
       "project": "프로젝트"
     },
     "showDetail": "자세히 보기",
-    "hideDetail": "접기"
+    "hideDetail": "접기",
+    "subDetails": "세부 경험"
   },
   "Project": {
     "eyebrow": "프로젝트 상세",
