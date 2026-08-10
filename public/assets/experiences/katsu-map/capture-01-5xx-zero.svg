@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="232" viewBox="0 0 1000 232">
+<rect width="1000" height="232" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">gcloud logging read — 5xx 서버 오류 (최근 30일) · katsu-map-api · 2026-08-09</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ gcloud logging read 'resource.type="cloud_run_revision"</text>
+<text x="20" y="99" fill="#79c0ff" xml:space="preserve">    AND resource.labels.service_name="katsu-map-api"</text>
+<text x="20" y="121" fill="#79c0ff" xml:space="preserve">    AND httpRequest.status&gt;=500' --freshness=30d --limit=300</text>
+<text x="20" y="143" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">5xx entries (30d, max 300): 0</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#8b949e" xml:space="preserve"># 같은 기간 404: 12건(봇 스캔), OOM/메모리 경고: 0건</text>
+</g>
+</svg>

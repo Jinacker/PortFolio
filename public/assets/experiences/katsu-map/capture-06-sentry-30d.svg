@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="364" viewBox="0 0 1000 364">
+<rect width="1000" height="364" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">Sentry API — 30일 종합 (org: katsu-map / project: react-native) · 2026-08-10</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ GET /organizations/katsu-map/sessions/?field=sum(session)&amp;statsPeriod=30d</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#7ee787" xml:space="preserve">  크래시프리 99.720%   (healthy 11,929 / errored 194 / crashed 34 / 총 12,160 세션)</text>
+<text x="20" y="143" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="165" fill="#79c0ff" xml:space="preserve">$ GET /organizations/katsu-map/events/?field=title&amp;field=count()&amp;statsPeriod=30d</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#e6e6e6" xml:space="preserve">  113 | AxiosError: Network Error              (오프라인·이동통신)</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve">   42 | AxiosError: timeout of 30000ms exceeded</text>
+<text x="20" y="253" fill="#f0c674" xml:space="preserve">   31 | AxiosError: status code 429            (푸시 버스트와 정합)</text>
+<text x="20" y="275" fill="#e6e6e6" xml:space="preserve">   14 | AxiosError: status code 401            (세션 만료 — 자동 복구 흐름)</text>
+<text x="20" y="297" fill="#f0c674" xml:space="preserve">   12 | AxiosError: status code 504            (단일 사용자 — 오탐 판정)</text>
+<text x="20" y="319" fill="#e6e6e6" xml:space="preserve">   10 | AxiosError: status code 409            (닉네임 중복 등 설계된 거부)</text>
+<text x="20" y="341" fill="#8b949e" xml:space="preserve">   소수 | Fabric viewState 예외 — 02 문서 항목 5 계열</text>
+</g>
+</svg>

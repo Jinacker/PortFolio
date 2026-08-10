@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="298" viewBox="0 0 1000 298">
+<rect width="1000" height="298" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">스타트업 ↔ 느린 일반 API 시각 대조 (30일) · 2026-08-10</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ gcloud logging read '... textPayload:"STARTUP TCP probe succeeded"' --freshness=30d</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">  일별 스타트업: 07-14:18  07-15:29  07-16:24  07-21:34  07-22:21  07-23:29</text>
+<text x="20" y="143" fill="#8b949e" xml:space="preserve">               07-27:16  07-28:17  07-29:13  07-30:3   08-06:1   (총 220회)</text>
+<text x="20" y="165" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve">  4초 이상 걸린 일반 API 49건(favorites·통계·추천 등)을 스타트업 시각과 대조:</text>
+<text x="20" y="209" fill="#7ee787" xml:space="preserve">  ▶ 스타트업 ±90초 이내: 47건 (96%)   |   무관: 2건</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="253" fill="#8b949e" xml:space="preserve">  # 트래픽 샘플(12-13h UTC): 07-15 442 → 07-22 716 → 08-05 422 → 08-08 490</text>
+<text x="20" y="275" fill="#8b949e" xml:space="preserve">  # 8월 트래픽이 오히려 적은데 스타트업 소멸 → 트래픽 증가 가설 배제</text>
+</g>
+</svg>

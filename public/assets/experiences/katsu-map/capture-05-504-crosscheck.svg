@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="342" viewBox="0 0 1000 342">
+<rect width="1000" height="342" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">Sentry 504 스파이크 ↔ 서버 로그 교차 검증 (2026-07-22 18:01~18:05 UTC)</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#f0c674" xml:space="preserve">  [Sentry]  AxiosError: Request failed with status code 504 — 12건</text>
+<text x="20" y="99" fill="#f0c674" xml:space="preserve">            전부 18:01~18:05 (KST 새벽 03시) 4분 창에 집중 → 장애?</text>
+<text x="20" y="121" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="143" fill="#79c0ff" xml:space="preserve">$ gcloud logging read '... timestamp&gt;="2026-07-22T17:55" &lt; "18:10"'</text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">  [서버]    http requests: 149건 — status 200 ×148, 201 ×1, 최대 지연 0.3s</text>
+<text x="20" y="187" fill="#7ee787" xml:space="preserve">            'no available instance' 로그: 0건  → 서버 완전 정상</text>
+<text x="20" y="209" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve">  [이벤트 상세] 기기: OnePlus 8 Pro (Android 11) · 앱 2.2.1</text>
+<text x="20" y="253" fill="#e6e6e6" xml:space="preserve">  breadcrumbs: GET /notices 200 → GET /restaurants 504 → GET /users 504</text>
+<text x="20" y="275" fill="#ff7b72" xml:space="preserve">  고유 사용자 수: 1명</text>
+<text x="20" y="297" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="319" fill="#7ee787" xml:space="preserve">  ▶ 판정: 서버 장애 아님 — 단일 사용자의 네트워크 경로 문제 (오탐 강등)</text>
+</g>
+</svg>
