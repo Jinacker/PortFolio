@@ -1409,7 +1409,7 @@ const experiences: Record<Locale, Experience[]> = {
     },
     {
       id: 105,
-      title: "끼니톡. 식단 분석부터 챗봇까지, 팀 내 AI 개발 전담",
+      title: "끼니톡. 어르신 식단·건강관리를 위한 AI 개발",
       period: "2026.07 - 현재",
       items: [],
       links: [],
@@ -1596,7 +1596,7 @@ const experiences: Record<Locale, Experience[]> = {
         },
       ],
       is_active: true,
-      sub_title: "‘모두의 창업’ 1라운드 진출, 2라운드를 위한 서비스 고도화를 진행 중인 경험",
+      sub_title: "‘모두의 창업’ 1라운드 선정 · 300만 원 투자 유치 · 2라운드 준비를 위한 서비스 고도화",
       imageUrl: "/assets/experiences/kkinitalk/kkini.png",
       index: 3,
       skill_ids: [83, 84, 85, 86, 99, 87, 89, 90, 91, 92, 94, 95, 96, 98],
@@ -1923,6 +1923,7 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           showSubDetails: true,
+          subDetailsMode: "modal",
         },
       ],
       subDetails: [

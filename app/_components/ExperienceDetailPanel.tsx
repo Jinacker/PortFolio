@@ -708,6 +708,7 @@ function PanelSection({
           onOpenPdf={onOpenPdf}
           onOpenLegacyModal={onOpenLegacyModal}
           plain
+          directToModal={section.subDetailsMode === "modal"}
         />
       ) : null}
     </div>
@@ -720,12 +721,15 @@ function SubDetailList({
   onOpenPdf,
   onOpenLegacyModal,
   plain,
+  directToModal,
 }: {
   subDetails: readonly ExperienceSubDetail[];
   onOpenPdf: (pdf: ActivePdf) => void;
   onOpenLegacyModal?: (modalName: string, images: string[]) => void;
   /** 섹션 안에 임베드될 때 — 상단 구분선/라벨 없이 카드만 */
   plain?: boolean;
+  /** 중간 아코디언 없이 subDetail의 문서를 모달로 바로 연다 */
+  directToModal?: boolean;
 }) {
   const t = useTranslations("Experience");
   const [openId, setOpenId] = useState<string | null>(null);
@@ -783,6 +787,40 @@ function SubDetailList({
             : isGreen
               ? "border-l-[#00C676]"
               : "border-l-[#FFD84D]";
+          const directDoc = directToModal
+            ? sub.sections.flatMap(section => section.docs ?? [])[0]
+            : undefined;
+
+          if (directToModal && directDoc) {
+            return (
+              <div key={sub.id} className="flex flex-col gap-3">
+                <button
+                  type="button"
+                  onClick={() =>
+                    onOpenPdf({
+                      href: directDoc.href,
+                      label: sub.title,
+                      sections: directDoc.sections,
+                    })
+                  }
+                  className={cn(
+                    "flex w-full items-center gap-3 rounded-xl border border-foreground/10 border-l-[3px] bg-foreground/[0.02] px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03]",
+                    accentLeftBorder,
+                  )}
+                >
+                  <span className="min-w-0 flex-1 break-keep text-sm font-semibold text-foreground/85">
+                    {sub.title}
+                  </span>
+                  <FileText className="h-4 w-4 shrink-0 text-foreground/40" strokeWidth={1.5} />
+                </button>
+                {sub.afterText ? (
+                  <p className="break-keep px-1 text-sm font-normal leading-[1.6] text-foreground/75">
+                    {renderHighlightedText(sub.afterText, sub.afterHighlights)}
+                  </p>
+                ) : null}
+              </div>
+            );
+          }
 
           return (
             <div key={sub.id} className="flex flex-col gap-3">

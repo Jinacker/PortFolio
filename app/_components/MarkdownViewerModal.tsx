@@ -250,7 +250,7 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
       role="dialog"
       aria-modal="true"
       aria-label={`${subheading} 문서 보기`}
-      className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/45 p-3 md:p-6"
+      className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/45 p-3 [font-family:Arial,Helvetica,sans-serif] md:p-6"
       onClick={event => {
         if (event.target === event.currentTarget) onClose();
       }}
