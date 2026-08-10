@@ -411,7 +411,7 @@ function PdfButton({
   onClick: () => void;
   /** 좁은 자리에 들어갈 때 — 작은 글씨/패딩으로 축소 */
   compact?: boolean;
-  tone?: "default" | "green";
+  tone?: "default" | "green" | "blue";
   className?: string;
 }) {
   return (
@@ -420,9 +420,11 @@ function PdfButton({
       onClick={onClick}
       className={cn(
         "flex items-center gap-2 rounded-lg border bg-white font-semibold shadow-sm transition",
-        tone === "green"
-          ? "border-[#00C676]/30 text-[#00C676] hover:border-[#00C676]/60 hover:bg-[#00C676]/5"
-          : "border-primary/20 text-primary hover:border-primary/35 hover:bg-primary/5",
+        tone === "blue"
+          ? "border-[#3B82F6]/30 text-[#3B82F6] hover:border-[#3B82F6]/60 hover:bg-[#3B82F6]/5"
+          : tone === "green"
+            ? "border-[#00C676]/30 text-[#00C676] hover:border-[#00C676]/60 hover:bg-[#00C676]/5"
+            : "border-primary/20 text-primary hover:border-primary/35 hover:bg-primary/5",
         compact ? "px-3 py-2 text-xs" : "px-4 py-2.5 text-sm",
         className,
       )}
@@ -655,7 +657,11 @@ function PanelSection({
               onClick={() => onOpenPdf({ href: doc.href, label: doc.label, sections: doc.sections })}
               className={cn(
                 "flex w-full items-center gap-3 rounded-xl border border-foreground/10 border-l-[3px] bg-foreground/[0.02] px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03]",
-                doc.tone === "green" ? "border-l-[#00C676]" : "border-l-[#FFD84D]",
+                doc.tone === "blue"
+                  ? "border-l-[#3B82F6]"
+                  : doc.tone === "green"
+                    ? "border-l-[#00C676]"
+                    : "border-l-[#FFD84D]",
               )}
             >
               <span className="min-w-0 flex-1 break-keep text-sm font-semibold text-foreground/85">
@@ -664,7 +670,11 @@ function PanelSection({
               <FileText
                 className={cn(
                   "h-4 w-4 shrink-0",
-                  doc.tone === "green" ? "text-[#00C676]/70" : "text-foreground/40",
+                  doc.tone === "blue"
+                    ? "text-[#3B82F6]/70"
+                    : doc.tone === "green"
+                      ? "text-[#00C676]/70"
+                      : "text-foreground/40",
                 )}
                 strokeWidth={1.5}
               />

@@ -205,7 +205,7 @@ const experiences: Record<Locale, Experience[]> = {
           showSubDetails: true,
         },
         {
-          title: "아키텍처 — 저장소 4개를 혼자 굴리는 구조",
+          title: "아키텍처 — 운영 부담을 줄이기 위한 선택들",
           items: [],
           media: {
             src: "/assets/experiences/katsu-map/katz-arch.png",
@@ -227,7 +227,7 @@ const experiences: Record<Locale, Experience[]> = {
             {
               href: "/mds/katsu-map/arch-decisions.md",
               label: "아키텍처 의사결정 — 왜 이렇게 설계했나",
-              tone: "green",
+              tone: "blue",
             },
           ],
         },
@@ -340,7 +340,7 @@ const experiences: Record<Locale, Experience[]> = {
         {
           id: "katsu-behind",
           title: "개발 비하인드 — 돈가스 지도를 만들고 키워온 이야기",
-          tone: "blue",
+          tone: "green",
           sections: [
             {
               title: "한 명이라도 실제로 사용하는 서비스를 만들고 싶었습니다",
