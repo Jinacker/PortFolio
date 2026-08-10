@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="276" viewBox="0 0 1000 276">
+<rect width="1000" height="276" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">이벤트 루프 실측 — 추론이 도는 동안 헬스체크가 응답하는가</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ python load_scenarios.py --scenario eventloop   # mock + 고정 지연 · 실 API 0회 · 비용 0원</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">                  폴링 성공        p50          p95          최악</text>
+<text x="20" y="143" fill="#7ee787" xml:space="preserve">  비블로킹            85회          3ms          5ms         17ms</text>
+<text x="20" y="165" fill="#ff7b72" xml:space="preserve">  블로킹(대조군)       4회      1,474ms      1,549ms      1,549ms   ◀ LB가 인스턴스를 죽이는 상태</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#e6e6e6" xml:space="preserve">  비블로킹을 증명하려면 블로킹도 재현해야 한다 — 대조군은 설정 스위치로 주입</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="253" fill="#7ee787" xml:space="preserve">  ▶ 85회·3ms 단독으로는 근거가 아니다 — 대조군 4회가 있어야 숫자가 의미를 가진다</text>
+</g>
+</svg>

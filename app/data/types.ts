@@ -18,6 +18,9 @@ export type Category =
   | "MERMAID_CORE"
   | "MERMAID_TEST_QUALITY"
   | "MERMAID_BUILD_WORKFLOW"
+  | "AI_MODEL"
+  | "AI_AGENT"
+  | "AI_INFRA"
   | "KKINI_AI_SERVER"
   | "KKINI_CHATBOT"
   | "KKINI_APP"
@@ -68,9 +71,17 @@ export interface ExperienceDetailMedia {
   href?: string;
   linkLabel?: string;
   maxWidth?: number;
-  placement?: "top" | "left" | "right";
+  placement?: "top" | "bottom" | "left" | "right";
+  /** 좌/우 배치일 때 본문과의 가로 간격(px) — 기본 16 */
+  gap?: number;
   /** 이미지가 카드를 가득 채우도록 자를 때 사용하는 프레임 비율 */
   frameAspectRatio?: string;
+  /** 여러 이미지를 나란히 놓을 때 원본 비율과 관계없이 같은 너비로 배치 */
+  equalWidth?: boolean;
+  /** "circle"이면 정사각형으로 잘라 원형으로 렌더 */
+  shape?: "circle";
+  /** 이미지 아래에 붙는 짧은 설명 — 링크가 있으면 링크처럼 보인다 */
+  caption?: string;
 }
 
 // A PDF attached to a single detail section, with its own viewer TOC.
@@ -81,11 +92,22 @@ export interface ExperienceDetailPdf {
   label: string;
   sections?: PdfDocumentSection[];
   /** 버튼 강조색 */
-  tone?: "default" | "green";
+  tone?: "default" | "green" | "blue";
   /** 버튼 정렬 — 기본 왼쪽 */
   align?: "left" | "right";
   /** true면 버튼을 extra 블록과 같은 줄 오른쪽에 배치 (텍스트가 좁아져 줄바꿈됨) */
   inline?: boolean;
+}
+
+// 섹션의 이미지 슬롯 — 배열로 주면 한 줄에 나란히 놓인다.
+// 폭은 각 이미지의 가로세로 비율대로 나뉘어 높이가 서로 맞춰지고,
+// 줄 전체의 placement와 maxWidth는 첫 이미지의 값을 따른다.
+export type ExperienceSectionMedia = ExperienceDetailMedia | ExperienceDetailMedia[];
+
+// 앱 마켓 설치 링크 — 섹션 본문 아래에 스토어 배지 버튼으로 렌더된다.
+export interface ExperienceStoreLink {
+  store: "appstore" | "playstore";
+  href: string;
 }
 
 // 섹션 본문에 넣는 간단한 표 — 셀 텍스트에도 highlights가 적용된다.
@@ -110,22 +132,30 @@ export interface ExperienceDetailAction {
   modalImages?: string[];
 }
 
+// 섹션 본문 뒤에 이어 붙는 보조 블록.
+export interface ExperienceDetailExtra {
+  items: string[];
+  highlights?: string[];
+  layout?: "list" | "paragraphs";
+  media?: ExperienceSectionMedia;
+  /** false로 두면 앞 블록과 구분선 없이 이어서 렌더 (기본 true) */
+  divider?: boolean;
+}
+
 export interface ExperienceDetailSection {
   title: string;
   items: string[];
   highlights?: string[];
   layout?: "list" | "paragraphs";
-  media?: ExperienceDetailMedia;
+  media?: ExperienceSectionMedia;
+  /** 본문 아래 한 줄로 강조하는 슬로건 — 따옴표와 강조색이 자동으로 붙는다 */
+  slogan?: string;
+  /** 본문 끝에 붙는 앱 마켓 설치 버튼 (media가 좌/우면 텍스트 칼럼 안에 들어간다) */
+  storeLinks?: ExperienceStoreLink[];
   /** items 아래에 렌더되는 표 */
   table?: ExperienceDetailTable;
-  extra?: {
-    items: string[];
-    highlights?: string[];
-    layout?: "list" | "paragraphs";
-    media?: ExperienceDetailMedia;
-    /** false로 두면 본문과 extra 사이 구분선 없이 이어서 렌더 (기본 true) */
-    divider?: boolean;
-  };
+  /** 배열로 주면 여러 덩어리가 순서대로 이어져, 문단·이미지·문단처럼 엮을 수 있다 */
+  extra?: ExperienceDetailExtra | ExperienceDetailExtra[];
   pdf?: ExperienceDetailPdf;
   /** 소재별 문서 목록 — 카드형 버튼 리스트로 쌓이고, 각각 뷰어(.md는 MD 모달)로 열린다 */
   docs?: ExperienceDetailPdf[];
@@ -134,6 +164,8 @@ export interface ExperienceDetailSection {
   showPdf?: boolean;
   /** true면 경험의 subDetails 아코디언을 이 섹션 안에 렌더 (패널 하단 대신) */
   showSubDetails?: boolean;
+  /** subDetails 카드를 펼치지 않고 연결된 문서 모달로 바로 열기 */
+  subDetailsMode?: "accordion" | "modal";
 }
 
 // A deep-dive card nested inside an experience's detail panel — rendered as an
@@ -141,6 +173,8 @@ export interface ExperienceDetailSection {
 export interface ExperienceSubDetail {
   id: string;
   title: string;
+  /** 아코디언 강조 테두리 색 — 기본 노랑 */
+  tone?: "yellow" | "green" | "blue";
   /** 아코디언을 열었을 때 본문 최상단에서 지연 로드할 대표 이미지 */
   media?: ExperienceDetailMedia;
   sections: ExperienceDetailSection[];

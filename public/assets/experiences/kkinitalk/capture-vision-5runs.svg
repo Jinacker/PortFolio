@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="320" viewBox="0 0 1000 320">
+<rect width="1000" height="320" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">같은 사진 5회 분석 — 라벨도 나트륨도 매번 다르다</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ python consistency_probe.py --runs 5   # 같은 사진 · 같은 설정 · 5회 반복</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">                 결과 종류    라벨 Jaccard    음식 수     지연 p50</text>
+<text x="20" y="143" fill="#e6e6e6" xml:space="preserve">  돌솥비빔밥         1종         100%           1        2.1초</text>
+<text x="20" y="165" fill="#ff7b72" xml:space="preserve">  한정식 상차림      5종        27.0%         6~7     8,665ms   ◀ 5회 모두 다른 답</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#8b949e" xml:space="preserve">  상차림 영양소 흔들림 (5회)</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve">  칼로리   평균   913.3     범위  822.5 ~ 1042.0     변동계수 10.6%</text>
+<text x="20" y="253" fill="#ff7b72" xml:space="preserve">  나트륨   평균 2,189.9     범위 1452.5 ~ 2942.5     변동계수 22.2%   ◀ 최소·최대 2배</text>
+<text x="20" y="275" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="297" fill="#7ee787" xml:space="preserve">  ▶ 면적 비중은 1인분 배율(0.65/1.0/1.35)의 입력 — 흔들리면 판정이 뒤집힌다</text>
+</g>
+</svg>

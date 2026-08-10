@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="364" viewBox="0 0 1000 364">
+<rect width="1000" height="364" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">gcloud logging read — 429 버스트 vs 푸시 브로드캐스트 시각 대조 (30일) · 2026-08-10</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ gcloud logging read '... httpRequest.status=429' --freshness=30d   # 42건</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">  시간대(UTC)        429 수    같은 시간대 push/send</text>
+<text x="20" y="143" fill="#e6e6e6" xml:space="preserve">  07-14T09              3      09:36:58  8.72s (브로드캐스트)</text>
+<text x="20" y="165" fill="#e6e6e6" xml:space="preserve">  07-16T06              8      -</text>
+<text x="20" y="187" fill="#ff7b72" xml:space="preserve">  07-23T10             28      10:47:55 10.49s (브로드캐스트)  ◀ 전체의 2/3</text>
+<text x="20" y="209" fill="#e6e6e6" xml:space="preserve">  07-25T02              3      -</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="253" fill="#8b949e" xml:space="preserve">  대상 URL: /notices 16, /messages 5, /users/me 3 ... (앱 시작 호출 세트)</text>
+<text x="20" y="275" fill="#8b949e" xml:space="preserve">  UA: iOS 앱(CFNetwork) 15, Android 앱(okhttp) 13 — 실사용자</text>
+<text x="20" y="297" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="319" fill="#7ee787" xml:space="preserve">  ▶ 인과: 브로드캐스트 → 수분 내 동시 복귀 → 앱 시작 병렬 호출이 1초 10회 제한 도달</text>
+<text x="20" y="341" fill="#8b949e" xml:space="preserve">  # Sentry 교차: 같은 날 앱 에러 32건(월 최대), 'status code 429' 30일 합계 31건</text>
+</g>
+</svg>

@@ -144,7 +144,8 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();
       })
-      .then(text => setContent(text))
+      // HTML 주석(작성자용 메모)은 react-markdown이 텍스트로 노출하므로 제거
+      .then(text => setContent(text.replace(/<!--[\s\S]*?-->/g, "")))
       .catch(error => {
         if (error instanceof DOMException && error.name === "AbortError") return;
         console.error("Markdown loading failed:", error);
@@ -249,7 +250,7 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
       role="dialog"
       aria-modal="true"
       aria-label={`${subheading} 문서 보기`}
-      className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/45 p-3 md:p-6"
+      className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/45 p-3 [font-family:Arial,Helvetica,sans-serif] md:p-6"
       onClick={event => {
         if (event.target === event.currentTarget) onClose();
       }}

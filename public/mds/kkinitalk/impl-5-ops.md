@@ -2,7 +2,7 @@
 
 > 코드가 맞는 것과 서버가 살아 있는 것은 다른 문제라, 죽는 경로를 먼저 세어 보고 각각에 장치를 붙인 기록
 
-<!-- 사진 자리: 콜드스타트 중 /health는 200이고 /ready는 503을 반환하는 두 응답을 나란히 놓은 터미널 캡처 -->
+![콜드스타트 중 /health 200 vs /ready 503 응답 비교](/assets/experiences/kkinitalk/capture-coldstart-ready.svg)
 
 ## 한눈에
 
