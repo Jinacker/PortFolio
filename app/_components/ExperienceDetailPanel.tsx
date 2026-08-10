@@ -187,6 +187,7 @@ function SloganLine({ text, className }: { text: string; className?: string }) {
 }
 
 function MediaImage({ media }: { media: ExperienceDetailMedia }) {
+  const isCircle = media.shape === "circle";
   const image = (
     <Image
       src={media.src}
@@ -195,26 +196,47 @@ function MediaImage({ media }: { media: ExperienceDetailMedia }) {
       height={media.height}
       quality={95}
       className={cn(
-        media.frameAspectRatio ? "h-full w-full object-cover" : "h-auto w-full rounded-md",
+        isCircle
+          ? "aspect-square h-auto w-full rounded-full border border-foreground/10 object-cover"
+          : media.frameAspectRatio
+            ? "h-full w-full object-cover"
+            : "h-auto w-full rounded-md",
       )}
     />
   );
 
-  if (!media.href) return image;
-
-  return (
+  const linked = media.href ? (
     <a
       href={media.href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${media.alt} 링크 열기`}
       className={cn(
-        "block overflow-hidden rounded-md no-underline transition hover:opacity-90",
-        media.frameAspectRatio && "h-full",
+        "block overflow-hidden no-underline transition hover:opacity-85",
+        isCircle ? "rounded-full" : "rounded-md",
+        !isCircle && media.frameAspectRatio && "h-full",
       )}
     >
       {image}
     </a>
+  ) : (
+    image
+  );
+
+  if (!media.caption) return linked;
+
+  return (
+    <div>
+      {linked}
+      <p
+        className={cn(
+          "mt-1.5 break-keep text-center text-[11px] font-medium leading-snug",
+          media.href ? "text-primary/70" : "text-foreground/50",
+        )}
+      >
+        {media.caption}
+      </p>
+    </div>
   );
 }
 
@@ -238,7 +260,10 @@ function MediaTextBlock({
   // 한 장이든 여러 장이든 같은 슬롯으로 다루고, 줄 전체의 배치는 첫 이미지를 따른다.
   const mediaItems = media ? (Array.isArray(media) ? media : [media]) : [];
   const rowMedia = mediaItems[0];
-  const mediaRatioSum = mediaItems.reduce((sum, item) => sum + item.width / item.height, 0);
+  // 원형은 정사각으로 잘리므로 비율을 1로 본다
+  const mediaRatio = (item: ExperienceDetailMedia) =>
+    item.shape === "circle" ? 1 : item.width / item.height;
+  const mediaRatioSum = mediaItems.reduce((sum, item) => sum + mediaRatio(item), 0);
 
   // Side media narrower than the default column (left 220px / right 360px)
   // shrinks the column with it, so the text keeps the freed-up width.
@@ -289,7 +314,7 @@ function MediaTextBlock({
                 <div
                   key={item.src}
                   className="min-w-0"
-                  style={{ flex: `${item.width / item.height / mediaRatioSum} 1 0%` }}
+                  style={{ flex: `${mediaRatio(item) / mediaRatioSum} 1 0%` }}
                 >
                   <MediaImage media={item} />
                 </div>
@@ -719,6 +744,7 @@ function SubDetailList({
       <div className="flex flex-col gap-2.5">
         {subDetails.map(sub => {
           const isOpen = openId === sub.id;
+          const isGreen = sub.tone === "green";
 
           return (
             <div key={sub.id} className="flex flex-col gap-3">
@@ -729,8 +755,11 @@ function SubDetailList({
                 className={cn(
                   "scroll-mt-20 overflow-hidden rounded-xl bg-foreground/[0.02] [transition-property:border-color,border-width] duration-300 ease-out",
                   isOpen
-                    ? "border-[3px] border-[#FFD84D]"
-                    : "border border-foreground/10 border-l-[3px] border-l-[#FFD84D]",
+                    ? cn("border-[3px]", isGreen ? "border-[#00C676]" : "border-[#FFD84D]")
+                    : cn(
+                        "border border-foreground/10 border-l-[3px]",
+                        isGreen ? "border-l-[#00C676]" : "border-l-[#FFD84D]",
+                      ),
                 )}
               >
               <button
