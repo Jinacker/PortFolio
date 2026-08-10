@@ -16,6 +16,10 @@ export default function LegacyTimelineModals({ activeModal, closeModal }: Legacy
   return createPortal(
     <>
       <style jsx global>{`
+        .legacy-timeline-modal {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
         .legacy-timeline-modal ul {
           list-style: disc;
           padding-left: 1.35rem;

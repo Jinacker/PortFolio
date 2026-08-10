@@ -2083,7 +2083,7 @@ const experiences: Record<Locale, Experience[]> = {
       imageUrl: "/assets/experiences/ai-agent/clawd-building.gif",
       imageBackgroundColor: "#3e4345",
       index: 5,
-      skill_ids: [103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113],
+      skill_ids: [103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114],
       category: "AI",
     },
   ],
