@@ -167,7 +167,7 @@ export interface ExperienceSubDetail {
   id: string;
   title: string;
   /** 아코디언 강조 테두리 색 — 기본 노랑 */
-  tone?: "yellow" | "green";
+  tone?: "yellow" | "green" | "blue";
   /** 아코디언을 열었을 때 본문 최상단에서 지연 로드할 대표 이미지 */
   media?: ExperienceDetailMedia;
   sections: ExperienceDetailSection[];

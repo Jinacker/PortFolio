@@ -642,18 +642,32 @@ function PanelSection({
       )}
       {section.docs?.length ? (
         // 소재별 문서 버튼 리스트 — 서브 카드와 같은 톤, 클릭 시 모달로 열림
-        <div className={cn("flex flex-col gap-2", section.items.length > 0 && "mt-3")}>
+        <div
+          className={cn(
+            "flex flex-col gap-2",
+            sectionTable ? "mt-4" : section.items.length > 0 && "mt-3",
+          )}
+        >
           {section.docs.map(doc => (
             <button
               key={doc.href}
               type="button"
               onClick={() => onOpenPdf({ href: doc.href, label: doc.label, sections: doc.sections })}
-              className="flex w-full items-center gap-3 rounded-xl border border-foreground/10 border-l-[3px] border-l-[#FFD84D] bg-foreground/[0.02] px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03]"
+              className={cn(
+                "flex w-full items-center gap-3 rounded-xl border border-foreground/10 border-l-[3px] bg-foreground/[0.02] px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03]",
+                doc.tone === "green" ? "border-l-[#00C676]" : "border-l-[#FFD84D]",
+              )}
             >
               <span className="min-w-0 flex-1 break-keep text-sm font-semibold text-foreground/85">
                 {doc.label}
               </span>
-              <FileText className="h-4 w-4 shrink-0 text-foreground/40" strokeWidth={1.5} />
+              <FileText
+                className={cn(
+                  "h-4 w-4 shrink-0",
+                  doc.tone === "green" ? "text-[#00C676]/70" : "text-foreground/40",
+                )}
+                strokeWidth={1.5}
+              />
             </button>
           ))}
         </div>
@@ -745,6 +759,17 @@ function SubDetailList({
         {subDetails.map(sub => {
           const isOpen = openId === sub.id;
           const isGreen = sub.tone === "green";
+          const isBlue = sub.tone === "blue";
+          const accentBorder = isBlue
+            ? "border-[#3B82F6]"
+            : isGreen
+              ? "border-[#00C676]"
+              : "border-[#FFD84D]";
+          const accentLeftBorder = isBlue
+            ? "border-l-[#3B82F6]"
+            : isGreen
+              ? "border-l-[#00C676]"
+              : "border-l-[#FFD84D]";
 
           return (
             <div key={sub.id} className="flex flex-col gap-3">
@@ -755,10 +780,10 @@ function SubDetailList({
                 className={cn(
                   "scroll-mt-20 overflow-hidden rounded-xl bg-foreground/[0.02] [transition-property:border-color,border-width] duration-300 ease-out",
                   isOpen
-                    ? cn("border-[3px]", isGreen ? "border-[#00C676]" : "border-[#FFD84D]")
+                    ? cn("border-[3px]", accentBorder)
                     : cn(
                         "border border-foreground/10 border-l-[3px]",
-                        isGreen ? "border-l-[#00C676]" : "border-l-[#FFD84D]",
+                        accentLeftBorder,
                       ),
                 )}
               >

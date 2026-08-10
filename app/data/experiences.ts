@@ -205,29 +205,31 @@ const experiences: Record<Locale, Experience[]> = {
           showSubDetails: true,
         },
         {
-          // 사진 자리: 아키텍처 다이어그램 — 앱(RN) ↔ 서버(NestJS/Cloud Run) ↔ DB(Supabase), WebView 지도(Vercel), 어드민(Vercel) 관계도
           title: "아키텍처 — 저장소 4개를 혼자 굴리는 구조",
-          items: [
-            "React Native 앱, NestJS + Prisma 서버(Cloud Run), React 관리자 웹(Vercel), 그리고 앱이 WebView로 띄우는 Kakao 지도 정적 웹(Vercel)로 나뉩니다",
-            "지도를 웹으로 분리한 덕에 핵심 화면의 개선을 앱 심사 없이 배포할 수 있고, 관리자 웹은 인플루언서 파트너가 직접 맛집 등록·푸시 발송·통계 확인에 씁니다",
-          ],
-          highlights: [
-            "React Native 앱",
-            "NestJS + Prisma 서버",
-            "React 관리자 웹",
-            "WebView로 띄우는 Kakao 지도 정적 웹",
-            "앱 심사 없이 배포",
-            "파트너가 직접",
-          ],
+          items: [],
+          media: {
+            src: "/assets/experiences/katsu-map/katz-arch.png",
+            alt: "돈가스 지도 아키텍처 — React Native 앱, NestJS 서버, 관리자 웹, Kakao 지도 웹과 데이터 인프라의 관계",
+            width: 1476,
+            height: 978,
+            placement: "top",
+          },
           table: {
-            headers: ["저장소", "역할", "배포"],
+            headers: ["구성요소", "역할", "배포"],
             rows: [
-              ["앱 (Expo RN)", "지도 탐색 · 시식 기록 · 커뮤니티 · 푸시", "App Store / Play Store"],
-              ["서버 (NestJS + Prisma)", "API · 인증 · 추천 · 알림 · PostgreSQL", "Cloud Run + Supabase"],
-              ["관리자 웹 (React)", "맛집 등록(AI 파싱) · 푸시 발송 · 방문 통계", "Vercel"],
+              ["앱 (Expo RN)", "지도 탐색 · 시식 기록 · 커뮤니티 · 푸시 알림", "App Store / Play Store"],
+              ["서버 (NestJS)", "API · 인증 · 추천 · 알림 · PostgreSQL", "Cloud Run + Supabase"],
+              ["관리자 웹 (React)", "맛집 등록 · 푸시 발송 · 방문 통계 · 문의 관리", "Vercel"],
               ["지도 웹 (Kakao Maps)", "핀 · 클러스터링 · 권역 — 앱과 postMessage 통신", "Vercel (3버전 동시 서빙)"],
             ],
           },
+          docs: [
+            {
+              href: "/mds/katsu-map/arch-decisions.md",
+              label: "아키텍처 의사결정 — 왜 이렇게 설계했나",
+              tone: "green",
+            },
+          ],
         },
         {
           title: "이 서비스의 제1 제약 — 이미 쓰는 사람이 있다",
@@ -338,7 +340,7 @@ const experiences: Record<Locale, Experience[]> = {
         {
           id: "katsu-behind",
           title: "개발 비하인드 — 돈가스 지도를 만들고 키워온 이야기",
-          tone: "green",
+          tone: "blue",
           sections: [
             {
               title: "한 명이라도 실제로 사용하는 서비스를 만들고 싶었습니다",
@@ -425,6 +427,38 @@ const experiences: Record<Locale, Experience[]> = {
                 "기능을 만드는 것과 사람을 움직이게 하는 것은 정말 다른 일",
               ],
               layout: "paragraphs",
+            },
+            {
+              title: "기능만큼, 쓰기 편한 경험도 계속 다듬었습니다",
+              items: [
+                "실제 유저가 생기고 나서는 기능을 추가하는 것만큼 어떻게 하면 더 쉽고 편하게 쓸 수 있을지도 많이 고민했습니다.",
+                "초기에는 별도의 베타테스트 방을 운영하며 직접 피드백을 받았고, 지금은 앱 문의로 들어오는 의견과 불편 사항을 꾸준히 확인해 업데이트에 반영하고 있습니다. 버튼 위치나 입력 과정처럼 작은 불편도 반복해서 들어오면 직접 사용 흐름을 다시 살펴보고 수정합니다.",
+              ],
+              media: {
+                src: "/assets/experiences/katsu-map/ux-typography-study.png",
+                alt: "돈가스 지도와 토스 화면을 텍스트 위계(XL·L·M·S) 단위로 나눠 비교한 공부 기록",
+                width: 1942,
+                height: 1096,
+                placement: "bottom",
+              },
+              highlights: [
+                "어떻게 하면 더 쉽고 편하게 쓸 수 있을지",
+                "베타테스트 방을 운영하며 직접 피드백",
+                "작은 불편도 반복해서 들어오면 직접 사용 흐름을 다시 살펴보고 수정",
+              ],
+              layout: "paragraphs",
+              extra: {
+                items: [
+                  "저 혼자 판단하지 않기 위해 토스, 캐치테이블처럼 사용성이 좋은 서비스를 꾸준히 참고하며, 정보 배치나 화면 전환, 사용자가 다음 행동을 자연스럽게 이해하게 만드는 방식을 많이 공부하고 있습니다.",
+                  "완벽한 UI를 한 번에 만드는 것보다, 유저가 실제로 불편해하는 지점을 하나씩 줄여가는 방식으로 돈가스 지도의 사용 경험을 계속 개선하고 있습니다.",
+                ],
+                highlights: [
+                  "토스, 캐치테이블처럼 사용성이 좋은 서비스",
+                  "유저가 실제로 불편해하는 지점을 하나씩 줄여가는 방식",
+                ],
+                layout: "paragraphs",
+                divider: false,
+              },
             },
             {
               title: "서울에서 전국으로 — 새로운 전환점",
