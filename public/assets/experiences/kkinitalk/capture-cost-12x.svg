@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="320" viewBox="0 0 1000 320">
+<rect width="1000" height="320" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">gpt-4o-mini Vision 건당 비용 실측 — detail 기본 vs low</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ python measure_cost.py   # 같은 사진 1장, 서버와 동일 경로로 호출해 usage 확인</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">  설정              입력 토큰       건당 비용</text>
+<text x="20" y="143" fill="#e6e6e6" xml:space="preserve">  기본(고해상)        37,009        약 8.08원</text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">  detail: low          3,007        약 0.68원   ◀ 약 12배 절감, 인식 품질 유지</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#8b949e" xml:space="preserve">  자체 서빙 대안: GPU 상시 확보 시 월 15만~38만 원 고정 지출</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve">  손익분기: 월 약 44만 건 — 그 전까지는 API가 싸다</text>
+<text x="20" y="253" fill="#8b949e" xml:space="preserve">  # 절감 전(8.08원)이면 월 3.7만 건에서 역전 — 12배가 아키텍처 결정을 뒤집었다</text>
+<text x="20" y="275" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="297" fill="#7ee787" xml:space="preserve">  ▶ 결론: 운영은 GPT Vision. ANALYZER_BACKEND 환경변수 하나로 자체 모델 전환 가능</text>
+</g>
+</svg>

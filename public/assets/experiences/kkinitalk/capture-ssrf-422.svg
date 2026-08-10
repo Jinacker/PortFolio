@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="342" viewBox="0 0 1000 342">
+<rect width="1000" height="342" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">SSRF 방어 검증 — 금지 입력 3종과 DNS 실패의 응답 코드가 갈린다</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ python ssrf_probe.py   # 입력 URL별로 분석 요청을 보내 응답 코드 확인</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">  입력 URL                                     응답</text>
+<text x="20" y="143" fill="#e6e6e6" xml:space="preserve">  http://192.168.0.10/x.jpg                → 422  사설 IP로 해석됨</text>
+<text x="20" y="165" fill="#e6e6e6" xml:space="preserve">  http://169.254.169.254/latest            → 422  메타데이터 주소</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve">  file:///etc/passwd                       → 422  비-HTTP 스킴</text>
+<text x="20" y="209" fill="#8b949e" xml:space="preserve">  http://none.invalid/a.jpg                → 502  DNS 해석 실패 — 재시도 가치</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="253" fill="#e6e6e6" xml:space="preserve">  422 = 재시도해도 같은 금지 입력 · 502 = 재시도할 가치가 있는 업스트림 문제</text>
+<text x="20" y="275" fill="#8b949e" xml:space="preserve">  # 리다이렉트 자동 추적 OFF — 수동 루프로 매 hop마다 재검증 (최대 5회)</text>
+<text x="20" y="297" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="319" fill="#7ee787" xml:space="preserve">  ▶ 9계층 직렬 검증 — 한 계층을 잘못 써도 나머지가 남는다</text>
+</g>
+</svg>

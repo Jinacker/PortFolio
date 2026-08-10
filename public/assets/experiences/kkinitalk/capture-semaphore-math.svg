@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="342" viewBox="0 0 1000 342">
+<rect width="1000" height="342" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">세마포어 큐잉 산술 증명 — mock 고정 지연 1.0초 · 동시 6건</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ python load_scenarios.py --scenario queueing   # 실 API 0회 — 지연을 알면 결과는 산술이 된다</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">  조건                         기대        실측</text>
+<text x="20" y="143" fill="#e6e6e6" xml:space="preserve">  동시성 1 × 6건               약 6초      6.15초</text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">  동시성 3 × 6건               약 2초      2.09초   ◀ 큐잉이 산술로 드러난다</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#8b949e" xml:space="preserve">  타임아웃 시나리오</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve">  지연 4초 &gt; 전체 타임아웃 2초              → 504 at 2.01초</text>
+<text x="20" y="253" fill="#e6e6e6" xml:space="preserve">  동시 3건 · 지연 1.5초 · 타임아웃 2초      → [200, 504, 504]</text>
+<text x="20" y="275" fill="#8b949e" xml:space="preserve">  # 지연 1.5초 &lt; 2초인데 두 건이 504 — 세마포어 대기까지 타임아웃에 포함 (의도한 동작)</text>
+<text x="20" y="297" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="319" fill="#7ee787" xml:space="preserve">  ▶ 운영 관계식 단언: 전체 60초 &gt; 다운로드 10초 + 호출 30초 — 하위 타임아웃이 사는 조건</text>
+</g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="298" viewBox="0 0 1000 298">
+<rect width="1000" height="298" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">응급 가드 지표 재측정 — 정답 세트 46건 (양성 24 · 음성 22)</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ python eval_emergency_guard.py   # 라벨 근거: 안전 정책 · 119 신고 기준</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">              재현율      정밀도      F1        특이도      정확도</text>
+<text x="20" y="143" fill="#ff7b72" xml:space="preserve">  개선 전     45.8%      100.0%     62.9%     100.0%      71.7%   ◀ 위음성 13건</text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">  개선 후    100.0%      100.0%    100.0%     100.0%     100.0%</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#e6e6e6" xml:space="preserve">  운영 음성 인식이 실제로 돌려준 문장 4건: 1/4 → 4/4 격상</text>
+<text x="20" y="231" fill="#8b949e" xml:space="preserve">  # 위양성 0 — 띄운 것은 다 맞았지만 절반을 안 띄웠다</text>
+<text x="20" y="253" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="275" fill="#7ee787" xml:space="preserve">  ▶ 안전장치에서 재현율 45.8%는 실패 — 오탐을 감수하는 방향으로 기준을 세웠다</text>
+</g>
+</svg>

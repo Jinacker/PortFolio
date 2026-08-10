@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="298" viewBox="0 0 1000 298">
+<rect width="1000" height="298" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">계약 하네스 — 떠 있는 실서버에 밖에서 HTTP 왕복 검증</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ python contract_harness.py http://localhost:8000   # 표준 라이브러리만, 구현과 독립</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">  검사 항목</text>
+<text x="20" y="143" fill="#e6e6e6" xml:space="preserve">  영양소 5키 스키마 · 에러 응답 형태 · 라벨 101개 독립 사본 대조</text>
+<text x="20" y="165" fill="#e6e6e6" xml:space="preserve">  배율 경계 4지점 — 0.79 → small · 0.8 → regular · 1.2 → regular · 1.21 → large</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#7ee787" xml:space="preserve">  결과: 34/34 PASS   (3 SKIP — 인증 키 제공 시 37/37)</text>
+<text x="20" y="231" fill="#8b949e" xml:space="preserve">  # 별도 층: pytest 105개 통과 — 구현 관점 화이트박스</text>
+<text x="20" y="253" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="275" fill="#7ee787" xml:space="preserve">  ▶ 규약: 하네스 실패는 계약 위반 — 하네스를 고치지 말고 서버를 고친다</text>
+</g>
+</svg>

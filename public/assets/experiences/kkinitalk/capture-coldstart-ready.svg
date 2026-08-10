@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="298" viewBox="0 0 1000 298">
+<rect width="1000" height="298" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">콜드스타트 — 살아 있음(/health)과 일할 수 있음(/ready)의 분리</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ curl -s -o /dev/null -w &quot;%{http_code}&quot; localhost:8000/health   # 기동 직후</text>
+<text x="20" y="99" fill="#7ee787" xml:space="preserve">  200   프로세스는 살아 있다 — 로드밸런서가 죽이면 안 되는 상태</text>
+<text x="20" y="121" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="143" fill="#79c0ff" xml:space="preserve">$ curl -s -o /dev/null -w &quot;%{http_code}&quot; localhost:8000/ready</text>
+<text x="20" y="165" fill="#ff7b72" xml:space="preserve">  503   모델 로딩 중 — 트래픽은 아직 보내면 안 되는 상태</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#e6e6e6" xml:space="preserve">  데이터는 동기 로드, 모델은 백그라운드 로드 + 더미 이미지 1회 워밍업</text>
+<text x="20" y="231" fill="#8b949e" xml:space="preserve">  # 신호 구분: 준비 안 됨 503 · 이미지 문제 502 · 처리 능력 초과 504</text>
+<text x="20" y="253" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="275" fill="#7ee787" xml:space="preserve">  ▶ 떠 있다 ≠ 일할 수 있다 — 두 신호를 분리해야 콜드스타트에 트래픽이 안 들어온다</text>
+</g>
+</svg>
