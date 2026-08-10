@@ -144,7 +144,8 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();
       })
-      .then(text => setContent(text))
+      // HTML 주석(작성자용 메모)은 react-markdown이 텍스트로 노출하므로 제거
+      .then(text => setContent(text.replace(/<!--[\s\S]*?-->/g, "")))
       .catch(error => {
         if (error instanceof DOMException && error.name === "AbortError") return;
         console.error("Markdown loading failed:", error);
