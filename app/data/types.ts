@@ -73,6 +73,8 @@ export interface ExperienceDetailMedia {
   gap?: number;
   /** 이미지가 카드를 가득 채우도록 자를 때 사용하는 프레임 비율 */
   frameAspectRatio?: string;
+  /** 여러 이미지를 나란히 놓을 때 원본 비율과 관계없이 같은 너비로 배치 */
+  equalWidth?: boolean;
   /** "circle"이면 정사각형으로 잘라 원형으로 렌더 */
   shape?: "circle";
   /** 이미지 아래에 붙는 짧은 설명 — 링크가 있으면 링크처럼 보인다 */

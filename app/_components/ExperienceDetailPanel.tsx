@@ -307,14 +307,17 @@ function MediaTextBlock({
           {mediaItems.length === 1 ? (
             <MediaImage media={rowMedia} />
           ) : (
-            // 비율대로 폭을 나눠 여러 장의 높이를 맞춘다.
-            // grow 값의 합이 1이 되게 정규화해야 남는 폭 없이 줄을 꽉 채운다.
+            // 기본은 비율대로 폭을 나눠 높이를 맞추고, equalWidth면 같은 폭으로 배치한다.
             <div className="flex items-start gap-2">
               {mediaItems.map(item => (
                 <div
                   key={item.src}
                   className="min-w-0"
-                  style={{ flex: `${mediaRatio(item) / mediaRatioSum} 1 0%` }}
+                  style={{
+                    flex: rowMedia.equalWidth
+                      ? "1 1 0%"
+                      : `${mediaRatio(item) / mediaRatioSum} 1 0%`,
+                  }}
                 >
                   <MediaImage media={item} />
                 </div>
