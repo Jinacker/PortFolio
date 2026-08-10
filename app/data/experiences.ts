@@ -15,30 +15,86 @@ const experiences: Record<Locale, Experience[]> = {
       links: [],
       detailSections: [
         {
-          // 사진 자리: 앱 스토어 페이지 또는 홈 지도 화면 스크린샷 — 핀이 찍힌 지도와 바텀시트가 함께 보이는 상태
           title: "돈가스 지도는 어떤 서비스인가",
           items: [
-            "전국 돈가스 맛집을 지도에서 찾고, 다녀온 가게를 시식 기록으로 남기고, 커뮤니티로 공유하는 앱입니다. App Store와 Play Store에서 운영 중입니다",
-            "돈가스를 좋아해서 혼자 만들기 시작한 서비스가 실사용자를 받으며 자랐고, 지금은 돈가스 인플루언서 카츠헌터와 협업해 전국 맛집 데이터를 함께 확장하고 있습니다",
+            "전국의 돈가스 맛집을 한눈에 탐색하고, 유저들의 제보와 기록으로 함께 완성해가는 지도 서비스입니다.",
+            "처음에는 서울의 몇몇 맛집을 보여주는 작은 지도에서 시작했습니다. 지금은 유저분들이 꾸준히 제보해주신 덕분에 전국 850곳 이상의 돈가스 맛집을 담고 있습니다.",
+            "지금 바로 앱에서 만나보세요!",
           ],
           highlights: [
-            "지도에서 찾고",
-            "시식 기록",
-            "커뮤니티로 공유",
-            "App Store와 Play Store에서 운영 중",
-            "혼자 만들기 시작한",
-            "실사용자를 받으며",
-            "인플루언서 카츠헌터와 협업",
+            "한눈에 탐색",
+            "유저들의 제보와 기록으로 함께 완성",
+            "작은 지도에서 시작",
+            "전국 850곳 이상의 돈가스 맛집",
+            "지금 바로 앱에서 만나보세요!",
           ],
-          table: {
-            headers: ["운영 지표", "수치"],
-            rows: [
-              ["누적 사용자", "6,000명+ (2025.11 출시, 운영 9개월+)"],
-              ["하루 방문", "150~250명"],
-              ["안정성 (최근 30일 로그 실측)", "서버 5xx 0건 · 앱 크래시프리 99.72%"],
-              ["규모", "저장소 4개 (앱·서버·관리자 웹·지도 웹) · 1인 개발"],
-            ],
-          },
+          layout: "paragraphs",
+          slogan: "돈가스에 진심인 당신을 위한, 단 하나의 지도.",
+          media: [
+            {
+              src: "/assets/experiences/katsu-map/map.PNG",
+              alt: "돈가스 지도 홈 화면 — 전국 맛집이 지역별로 묶여 표시된 지도",
+              width: 1206,
+              height: 2622,
+              maxWidth: 290,
+              placement: "left",
+              gap: 10,
+            },
+            {
+              src: "/assets/experiences/katsu-map/community.PNG",
+              alt: "돈가스 지도 커뮤니티 화면",
+              width: 1206,
+              height: 2622,
+            },
+          ],
+          storeLinks: [
+            {
+              store: "appstore",
+              href: "https://apps.apple.com/kr/app/%EB%8F%88%EA%B0%80%EC%8A%A4-%EC%A7%80%EB%8F%84/id6755211452",
+            },
+            { store: "playstore", href: "https://play.google.com/store/apps/details?id=com.katsumap.app" },
+          ],
+          extra: [
+            {
+              items: [
+                "하루 평균 200명 정도가 앱을 사용하고, 40명 가까이 새로 가입하며, 5건 안팎의 맛집 제보가 들어옵니다.",
+              ],
+              highlights: [
+                "하루 평균 200명",
+                "40명 가까이 새로 가입",
+                "5건 안팎의 맛집 제보",
+              ],
+              layout: "paragraphs",
+              media: [
+                {
+                  src: "/assets/experiences/katsu-map/user-act2.png",
+                  alt: "일별 방문 잔디 — 12주간 방문 추이, 푸시 발송일 하루 최대 342명",
+                  width: 638,
+                  height: 420,
+                  placement: "bottom",
+                },
+                {
+                  src: "/assets/experiences/katsu-map/user-act.png",
+                  alt: "관리자 웹 대시보드 — 전체 사용자 6,151명, 등록 맛집 852곳, 오늘 접속 150명",
+                  width: 1206,
+                  height: 432,
+                },
+              ],
+              divider: false,
+            },
+            {
+              items: [
+                "현재 6,000명이 넘는 유저분들이 돈가스 지도를 이용해주고 있습니다. 제가 이 숫자를 특히 소중하게 생각하는 이유는 단순한 페이지 조회수가 아니라, 한 분 한 분 직접 앱을 설치하고 실제로 사용해주시는 사람들의 숫자이기 때문입니다.",
+              ],
+              highlights: [
+                "6,000명이 넘는 유저분들",
+                "단순한 페이지 조회수가 아니라",
+                "한 분 한 분 직접 앱을 설치하고 실제로 사용해주시는 사람들의 숫자",
+              ],
+              layout: "paragraphs",
+              divider: false,
+            },
+          ],
         },
         {
           // 사진 자리: 아키텍처 다이어그램 — 앱(RN) ↔ 서버(NestJS/Cloud Run) ↔ DB(Supabase), WebView 지도(Vercel), 어드민(Vercel) 관계도

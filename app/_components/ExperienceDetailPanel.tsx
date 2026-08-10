@@ -18,6 +18,7 @@ import type {
   ExperienceDetailSection,
   ExperienceDetailMedia,
   ExperienceLink,
+  ExperienceStoreLink,
   ExperienceSubDetail,
   PdfDocumentSection,
 } from "@/data/types";
@@ -108,83 +109,202 @@ function BulletList({
   );
 }
 
+const STORE_BADGES = {
+  appstore: {
+    name: "App Store",
+    caption: "iPhone",
+    logo: (
+      <svg viewBox="0 0 24 24" aria-hidden className="h-[18px] w-[18px] fill-white">
+        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+      </svg>
+    ),
+  },
+  playstore: {
+    name: "Google Play",
+    caption: "Android",
+    logo: (
+      <svg viewBox="0 0 24 24" aria-hidden className="h-[18px] w-[18px]">
+        <path d="M3.18 1.94A1.5 1.5 0 0 0 3 2.66v18.68c0 .27.07.52.18.72l10.1-10.06z" fill="#00A0FF" />
+        <path d="M16.63 15.4l-3.35-3.34v-.13l3.35-3.34.08.05 3.97 2.25c1.13.64 1.13 1.69 0 2.34l-3.97 2.25z" fill="#FFBC00" />
+        <path d="M16.71 15.33L13.28 12 3.18 22.06c.37.4.99.45 1.68.06z" fill="#FF3A44" />
+        <path d="M16.71 8.67L4.86 1.88C4.17 1.49 3.55 1.54 3.18 1.94L13.28 12z" fill="#00D46A" />
+      </svg>
+    ),
+  },
+} as const;
+
+// 앱 마켓 설치 버튼 — 실제 스토어 배지와 같은 다크 필 형태
+function StoreLinkButtons({
+  links,
+  className,
+}: {
+  links?: readonly ExperienceStoreLink[];
+  className?: string;
+}) {
+  if (!links?.length) return null;
+
+  return (
+    <div className={cn("flex flex-wrap gap-2", className)}>
+      {links.map(link => {
+        const badge = STORE_BADGES[link.store];
+
+        return (
+          <a
+            key={link.store}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 rounded-xl bg-[#1b1b1f] px-3.5 py-2 no-underline transition hover:bg-[#2c2c31]"
+          >
+            {badge.logo}
+            <span className="flex flex-col leading-none">
+              <span className="text-[9px] font-medium tracking-wide text-white/55">
+                {badge.caption}
+              </span>
+              <span className="mt-1 text-[13px] font-semibold text-white">{badge.name}</span>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
+// 서비스 한 줄 슬로건 — 따옴표와 브랜드 강조색으로 본문과 확실히 구분한다
+function SloganLine({ text, className }: { text: string; className?: string }) {
+  return (
+    <p
+      className={cn(
+        "break-keep text-[15px] font-bold leading-[1.5] text-[#D9432F]",
+        className,
+      )}
+    >
+      <span className="mr-0.5 text-[#D9432F]/45">&ldquo;</span>
+      {text}
+      <span className="ml-0.5 text-[#D9432F]/45">&rdquo;</span>
+    </p>
+  );
+}
+
+function MediaImage({ media }: { media: ExperienceDetailMedia }) {
+  const image = (
+    <Image
+      src={media.src}
+      alt={media.alt}
+      width={media.width}
+      height={media.height}
+      quality={95}
+      className={cn(
+        media.frameAspectRatio ? "h-full w-full object-cover" : "h-auto w-full rounded-md",
+      )}
+    />
+  );
+
+  if (!media.href) return image;
+
+  return (
+    <a
+      href={media.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${media.alt} 링크 열기`}
+      className={cn(
+        "block overflow-hidden rounded-md no-underline transition hover:opacity-90",
+        media.frameAspectRatio && "h-full",
+      )}
+    >
+      {image}
+    </a>
+  );
+}
+
 function MediaTextBlock({
   media,
   items,
   highlights,
   layout,
+  slogan,
+  storeLinks,
   className,
 }: {
   media?: ExperienceDetailSection["media"];
   items: readonly string[];
   highlights?: readonly string[];
   layout?: ExperienceDetailSection["layout"];
+  slogan?: string;
+  storeLinks?: readonly ExperienceStoreLink[];
   className?: string;
 }) {
+  // 한 장이든 여러 장이든 같은 슬롯으로 다루고, 줄 전체의 배치는 첫 이미지를 따른다.
+  const mediaItems = media ? (Array.isArray(media) ? media : [media]) : [];
+  const rowMedia = mediaItems[0];
+  const mediaRatioSum = mediaItems.reduce((sum, item) => sum + item.width / item.height, 0);
+
   // Side media narrower than the default column (left 220px / right 360px)
   // shrinks the column with it, so the text keeps the freed-up width.
-  const mediaColumnStyle =
-    (media?.placement === "left" || media?.placement === "right") && media.maxWidth
-      ? ({ "--media-col": `${media.maxWidth}px` } as CSSProperties)
-      : undefined;
+  const isSideMedia = rowMedia?.placement === "left" || rowMedia?.placement === "right";
+  const mediaColumnStyle = isSideMedia
+    ? ({
+        ...(rowMedia.maxWidth ? { "--media-col": `${rowMedia.maxWidth}px` } : {}),
+        // 가로 간격만 덮어쓴다 — 모바일에서는 그리드가 아니라 영향이 없다
+        ...(rowMedia.gap !== undefined ? { columnGap: rowMedia.gap } : {}),
+      } as CSSProperties)
+    : undefined;
 
   return (
     <div
       className={cn(
-        media?.placement === "left" &&
+        rowMedia?.placement === "left" &&
           "sm:grid sm:grid-cols-[var(--media-col,220px)_minmax(0,1fr)] sm:items-start sm:gap-4",
-        media?.placement === "right" &&
+        rowMedia?.placement === "right" &&
           "sm:grid sm:grid-cols-[minmax(0,1fr)_var(--media-col,360px)] sm:items-start sm:gap-4",
+        rowMedia?.placement === "bottom" && "flex flex-col",
         className,
       )}
       style={mediaColumnStyle}
     >
-      {media ? (
+      {rowMedia ? (
         <div
           className={cn(
-            media.placement === "left" || media.placement === "right"
+            rowMedia.placement === "left" || rowMedia.placement === "right"
               ? "mb-2.5 sm:mb-0"
-              : "mb-2.5",
-            media.placement === "right" && "sm:order-2",
-            media.frameAspectRatio && "overflow-hidden rounded-md",
+              : rowMedia.placement === "bottom"
+                ? "order-2 mt-3"
+                : "mb-2.5",
+            rowMedia.placement === "right" && "sm:order-2",
+            mediaItems.length === 1 && rowMedia.frameAspectRatio && "overflow-hidden rounded-md",
           )}
-          style={{ maxWidth: media.maxWidth, aspectRatio: media.frameAspectRatio }}
+          style={{
+            maxWidth: rowMedia.maxWidth,
+            aspectRatio: mediaItems.length === 1 ? rowMedia.frameAspectRatio : undefined,
+          }}
         >
-          {media.href ? (
-            <a
-              href={media.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${media.alt} 링크 열기`}
-              className={cn(
-                "block overflow-hidden rounded-md no-underline transition hover:opacity-90",
-                media.frameAspectRatio && "h-full",
-              )}
-            >
-              <Image
-                src={media.src}
-                alt={media.alt}
-                width={media.width}
-                height={media.height}
-                quality={95}
-                className={cn(media.frameAspectRatio ? "h-full w-full object-cover" : "h-auto w-full")}
-              />
-            </a>
+          {mediaItems.length === 1 ? (
+            <MediaImage media={rowMedia} />
           ) : (
-            <Image
-              src={media.src}
-              alt={media.alt}
-              width={media.width}
-              height={media.height}
-              quality={95}
-              className={cn(
-                media.frameAspectRatio ? "h-full w-full object-cover" : "h-auto w-full rounded-md",
-              )}
-            />
+            // 비율대로 폭을 나눠 여러 장의 높이를 맞춘다.
+            // grow 값의 합이 1이 되게 정규화해야 남는 폭 없이 줄을 꽉 채운다.
+            <div className="flex items-start gap-2">
+              {mediaItems.map(item => (
+                <div
+                  key={item.src}
+                  className="min-w-0"
+                  style={{ flex: `${item.width / item.height / mediaRatioSum} 1 0%` }}
+                >
+                  <MediaImage media={item} />
+                </div>
+              ))}
+            </div>
           )}
         </div>
       ) : null}
-      <div className={cn(media?.placement === "right" && "sm:order-1")}>
+      <div
+        className={cn(
+          rowMedia?.placement === "right" && "sm:order-1",
+          rowMedia?.placement === "bottom" && "order-1",
+        )}
+      >
+        {slogan ? <SloganLine text={slogan} className={items.length > 0 ? "mb-2.5" : undefined} /> : null}
         {items.length > 0 ? (
           layout === "paragraphs" ? (
             <div className="space-y-2">
@@ -201,17 +321,18 @@ function MediaTextBlock({
             <BulletList items={items} highlights={highlights} />
           )
         ) : null}
-        {media?.href && media.linkLabel ? (
+        {rowMedia?.href && rowMedia.linkLabel ? (
           <a
-            href={media.href}
+            href={rowMedia.href}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 flex w-full items-center justify-end gap-1 pr-3 text-xs font-semibold text-primary/75 no-underline transition hover:text-primary"
           >
-            {media.linkLabel}
+            {rowMedia.linkLabel}
             <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
         ) : null}
+        <StoreLinkButtons links={storeLinks} className={items.length > 0 || slogan ? "mt-3.5" : undefined} />
       </div>
     </div>
   );
@@ -386,6 +507,14 @@ function PanelSection({
 }) {
   const sectionPdf = section.pdf;
   const sectionTable = section.table;
+  // extra는 한 덩어리로도, 여러 덩어리를 이어 붙이는 배열로도 쓸 수 있다.
+  const extraBlocks = section.extra
+    ? Array.isArray(section.extra)
+      ? section.extra
+      : [section.extra]
+    : [];
+  // PDF 버튼을 본문 마지막 줄에 끼워 넣는 레거시 경로는 단일 extra에서만 쓴다.
+  const inlinePdfExtra = sectionPdf?.inline ? extraBlocks[0] : undefined;
   const beforeExtraActions = section.actions?.filter(action => action.position === "beforeExtra");
   const afterExtraActions = section.actions?.filter(action => action.position !== "beforeExtra");
 
@@ -399,6 +528,8 @@ function PanelSection({
         items={section.items}
         highlights={section.highlights}
         layout={section.layout}
+        slogan={section.slogan}
+        storeLinks={section.storeLinks}
       />
       {sectionTable ? (
         <div
@@ -441,50 +572,49 @@ function PanelSection({
         </div>
       ) : null}
       <SectionActionCards actions={beforeExtraActions} onOpenLegacyModal={onOpenLegacyModal} />
-      {section.extra ? (
-        sectionPdf?.inline ? (
-          // 마지막 항목만 PDF 버튼과 같은 줄에 — 앞 항목들은 전체 폭을 그대로 유지
-          <>
-            {section.extra.items.length > 1 ? (
-              <MediaTextBlock
-                media={section.extra.media}
-                items={section.extra.items.slice(0, -1)}
-                highlights={section.extra.highlights}
-                layout={section.extra.layout}
-                className="mt-4"
-              />
-            ) : null}
-            <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <MediaTextBlock
-                items={section.extra.items.slice(-1)}
-                highlights={section.extra.highlights}
-                layout={section.extra.layout}
-                className="min-w-0 sm:flex-1"
-              />
-              <PdfButton
-                label={sectionPdf.label}
-                onClick={() =>
-                  onOpenPdf({ href: sectionPdf.href, label: sectionPdf.label, sections: sectionPdf.sections })
-                }
-                compact
-                tone={sectionPdf.tone}
-                // 라벨의 \n을 그대로 살려 원하는 지점에서만 줄바꿈
-                className="shrink-0 whitespace-pre-line text-left sm:min-w-[220px]"
-              />
-            </div>
-          </>
-        ) : (
+      {inlinePdfExtra ? (
+        // 마지막 항목만 PDF 버튼과 같은 줄에 — 앞 항목들은 전체 폭을 그대로 유지
+        <>
+          {inlinePdfExtra.items.length > 1 ? (
+            <MediaTextBlock
+              media={inlinePdfExtra.media}
+              items={inlinePdfExtra.items.slice(0, -1)}
+              highlights={inlinePdfExtra.highlights}
+              layout={inlinePdfExtra.layout}
+              className="mt-4"
+            />
+          ) : null}
+          <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <MediaTextBlock
+              items={inlinePdfExtra.items.slice(-1)}
+              highlights={inlinePdfExtra.highlights}
+              layout={inlinePdfExtra.layout}
+              className="min-w-0 sm:flex-1"
+            />
+            <PdfButton
+              label={sectionPdf!.label}
+              onClick={() =>
+                onOpenPdf({ href: sectionPdf!.href, label: sectionPdf!.label, sections: sectionPdf!.sections })
+              }
+              compact
+              tone={sectionPdf!.tone}
+              // 라벨의 \n을 그대로 살려 원하는 지점에서만 줄바꿈
+              className="shrink-0 whitespace-pre-line text-left sm:min-w-[220px]"
+            />
+          </div>
+        </>
+      ) : (
+        extraBlocks.map((block, index) => (
           <MediaTextBlock
-            media={section.extra.media}
-            items={section.extra.items}
-            highlights={section.extra.highlights}
-            layout={section.extra.layout}
-            className={
-              section.extra.divider === false ? "mt-4" : "mt-4 border-t border-slate-100 pt-3.5"
-            }
+            key={block.items[0] ?? `extra-${index}`}
+            media={block.media}
+            items={block.items}
+            highlights={block.highlights}
+            layout={block.layout}
+            className={block.divider === false ? "mt-4" : "mt-4 border-t border-slate-100 pt-3.5"}
           />
-        )
-      ) : null}
+        ))
+      )}
       {section.docs?.length ? (
         // 소재별 문서 버튼 리스트 — 서브 카드와 같은 톤, 클릭 시 모달로 열림
         <div className={cn("flex flex-col gap-2", section.items.length > 0 && "mt-3")}>
@@ -504,7 +634,7 @@ function PanelSection({
         </div>
       ) : null}
       <SectionActionCards actions={afterExtraActions} onOpenLegacyModal={onOpenLegacyModal} />
-      {sectionPdf && !(sectionPdf.inline && section.extra) ? (
+      {sectionPdf && !inlinePdfExtra ? (
         <PdfButton
           label={sectionPdf.label}
           onClick={() =>
