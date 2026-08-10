@@ -161,6 +161,7 @@ const experiences: Record<Locale, Experience[]> = {
             { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전체가 느려졌다 — 404 응답 속도로 인프라 가설부터 배제한 조사" },
             { href: "/mds/katsu-map/ts-3-push-dup.md", label: "재설치하면 알림이 두 번 왔다 — 유령 계정과 토큰 유니크 범위, 해법 3개 비교" },
             { href: "/mds/katsu-map/ts-4-sentry504.md", label: "장애처럼 보였지만 장애가 아니었다 — 조치를 \"안 한 것\"이 결론인 504 오탐 판정" },
+            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "5분인 줄 알았던 캐시가 0.3초였다 — 라이브러리 드리프트 감사·수정·HIT 실측" },
           ],
         },
         {

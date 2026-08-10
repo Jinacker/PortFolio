@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="386" viewBox="0 0 1000 386">
+<rect width="1000" height="386" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">캐시 TTL 드리프트 — 감사·수정·배포 후 실측 (2026-08-10)</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#8b949e" xml:space="preserve">  [발견] cache-manager v7은 TTL을 ms로 해석 — 코드는 초 단위 시절 값 그대로</text>
+<text x="20" y="99" fill="#ff7b72" xml:space="preserve">  @CacheTTL(300)   주석: '5분 캐싱'   →   실제: 0.3초</text>
+<text x="20" y="121" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="143" fill="#8b949e" xml:space="preserve">  [수정] MINUTE 상수로 단위 명시 + 클래스 전체 → 공개 GET 선별 + 쓰기 시 무효화</text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">  @CacheTTL(1 * MINUTE)   // 60,000ms — 단위가 코드에 보인다</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="209" fill="#8b949e" xml:space="preserve">  [부팅 로그] 미사용 Redis 연결 시도 분기 제거</text>
+<text x="20" y="231" fill="#f0c674" xml:space="preserve">  이전:  'Attempting to connect to Redis...' → ECONNREFUSED (매 부팅)</text>
+<text x="20" y="253" fill="#7ee787" xml:space="preserve">  이후:  (소멸 — 코드 순감소 -204줄)</text>
+<text x="20" y="275" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="297" fill="#8b949e" xml:space="preserve">  [배포 후 실측] 동일 URL 2회 호출 TTFB (리비전 00072, 2026-08-10)</text>
+<text x="20" y="319" fill="#7ee787" xml:space="preserve">  /restaurants (448KB 목록)   MISS 0.253s  →  HIT 0.101s</text>
+<text x="20" y="341" fill="#7ee787" xml:space="preserve">  /restaurants/:id (상세)     MISS 0.292s  →  HIT 0.089s</text>
+<text x="20" y="363" fill="#8b949e" xml:space="preserve">  ※ 왕복 지연 약 0.08s 포함 — HIT의 서버 처리 시간은 사실상 0 · 배포 후 에러 0건</text>
+</g>
+</svg>
