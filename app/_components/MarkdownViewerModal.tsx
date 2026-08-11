@@ -226,11 +226,13 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
       //   #w=320            → 표시 폭 제한 (가운데 정렬)
       //   #size=406x884     → 실제 픽셀 크기 — 세로 사진의 예약 비율을 맞춰 레이아웃 틀어짐 방지
       //   #...&left         → 왼쪽에 붙이고 본문이 오른쪽으로 흐름
+      //   #...&half         → 2열 그리드 한 칸 — 같은 줄에 쓴 이미지 둘이 나란히 배치됨
       const [cleanSrc, hash] = src.split("#");
       const params = new URLSearchParams(hash ?? "");
       const maxWidth = params.get("w") ? Number(params.get("w")) : undefined;
       const sizeMatch = /^(\d+)x(\d+)$/.exec(params.get("size") ?? "");
       const floatLeft = params.has("left");
+      const half = params.has("half");
       return (
         <Image
           src={cleanSrc}
@@ -238,9 +240,11 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
           width={sizeMatch ? Number(sizeMatch[1]) : 1280}
           height={sizeMatch ? Number(sizeMatch[2]) : 860}
           className={
-            floatLeft
-              ? "float-left mb-3 mr-5 mt-1 h-auto w-full rounded-md border border-slate-200"
-              : "mx-auto my-2 h-auto w-full rounded-md border border-slate-200"
+            half
+              ? "my-1 inline-block h-auto w-[48.5%] rounded-md border border-slate-200 align-top [&+img]:ml-[2%]"
+              : floatLeft
+                ? "float-left mb-3 mr-5 mt-1 h-auto w-full rounded-md border border-slate-200"
+                : "mx-auto my-2 h-auto w-full rounded-md border border-slate-200"
           }
           style={maxWidth ? { maxWidth } : undefined}
           // 터미널 캡처 등 SVG는 최적화 불필요 + Next 14.2 인식 버그가 있어 우회
