@@ -241,10 +241,10 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/katsu-map/impl-1-auth.md", label: "구버전 앱을 끊지 않고 인증 체계 교체 — 3단계 공존 가드와 무중단 전환" },
-            { href: "/mds/katsu-map/impl-2-compat.md", label: "\"컬럼 하나 추가\"가 한 줄이 아닌 이유 — 하위 호환 4원칙으로 마이그레이션 25건 파괴적 변경 0건" },
-            { href: "/mds/katsu-map/impl-3-map-versions.md", label: "지도를 세 버전 동시에 제공하는 이유 — 구버전 화면을 유지하며 앱 심사 없이 개선했습니다" },
-            { href: "/mds/katsu-map/impl-4-recommend.md", label: "취향 추천 — 다섯 개 대안 중 800행 이하 사전 집계를 선택했습니다" },
+            { href: "/mds/katsu-map/impl-1-auth.md", label: "구버전 앱을 유지하며 인증 체계를 교체했습니다" },
+            { href: "/mds/katsu-map/impl-2-compat.md", label: "운영 중에도 기존 앱을 깨뜨리지 않는 DB 변경" },
+            { href: "/mds/katsu-map/impl-3-map-versions.md", label: "구버전 앱의 지도를 유지하며 새 지도 기능을 배포했습니다" },
+            { href: "/mds/katsu-map/impl-4-recommend.md", label: "시식 기록을 바탕으로 취향에 맞는 식당을 추천했습니다" },
           ],
         },
         {
@@ -258,11 +258,11 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시 직후 발생한 429를 줄였습니다 — 28건→0건, 발송 응답 11.43초→0.18초" },
-            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연을 줄였습니다 — 404 응답으로 인프라를 배제하고 DB 요청 구조를 개선했습니다" },
-            { href: "/mds/katsu-map/ts-3-push-dup.md", label: "재설치 뒤 알림이 두 번 온 원인을 데이터 구조에서 해결했습니다" },
-            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "504 오류 12건을 서버 장애로 오인하지 않았습니다 — 같은 시간대 로그 149건을 대조했습니다" },
-            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "5분인 줄 알았던 캐시가 0.3초였습니다 — 목록 응답 0.253초→0.101초" },
+            { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시 발송 직후 몰리던 요청을 분산해 오류를 줄였습니다" },
+            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연 원인을 찾아 DB 요청 구조를 개선했습니다" },
+            { href: "/mds/katsu-map/ts-3-push-dup.md", label: "앱 재설치 후 알림이 두 번 오는 문제를 해결했습니다" },
+            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "앱에서 발생한 504 오류가 서버 장애가 아님을 확인했습니다" },
+            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "잘못 설정된 캐시 만료 시간을 바로잡아 응답 속도를 개선했습니다" },
           ],
         },
         {
