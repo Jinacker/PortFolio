@@ -160,7 +160,7 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
       <h1 className="mb-4 mt-2 break-keep text-xl font-bold text-slate-900">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="mb-3 mt-9 break-keep border-b border-slate-200 pb-2 text-lg font-bold text-slate-900 first:mt-0">
+      <h2 className="mb-3 mt-9 clear-both break-keep border-b border-slate-200 pb-2 text-lg font-bold text-slate-900 first:mt-0">
         {children}
       </h2>
     ),
@@ -215,23 +215,39 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
         return <MermaidDiagram code={mermaidCode} />;
       }
       return (
-        <pre className="my-3 overflow-x-auto rounded-lg bg-slate-50 p-3.5 text-slate-700">
+        <pre className="clear-both my-3 overflow-x-auto rounded-lg bg-slate-50 p-3.5 text-slate-700">
           {children}
         </pre>
       );
     },
-    img: ({ src, alt }) =>
-      src ? (
+    img: ({ src, alt }) => {
+      if (!src || typeof src !== "string") return null;
+      // 해시 힌트로 표시를 제어한다 (해시는 요청 전에 제거되므로 파일 경로에 영향 없음)
+      //   #w=320            → 표시 폭 제한 (가운데 정렬)
+      //   #size=406x884     → 실제 픽셀 크기 — 세로 사진의 예약 비율을 맞춰 레이아웃 틀어짐 방지
+      //   #...&left         → 왼쪽에 붙이고 본문이 오른쪽으로 흐름
+      const [cleanSrc, hash] = src.split("#");
+      const params = new URLSearchParams(hash ?? "");
+      const maxWidth = params.get("w") ? Number(params.get("w")) : undefined;
+      const sizeMatch = /^(\d+)x(\d+)$/.exec(params.get("size") ?? "");
+      const floatLeft = params.has("left");
+      return (
         <Image
-          src={src}
+          src={cleanSrc}
           alt={alt ?? ""}
-          width={1280}
-          height={860}
-          className="my-2 h-auto w-full rounded-md border border-slate-200"
+          width={sizeMatch ? Number(sizeMatch[1]) : 1280}
+          height={sizeMatch ? Number(sizeMatch[2]) : 860}
+          className={
+            floatLeft
+              ? "float-left mb-3 mr-5 mt-1 h-auto w-full rounded-md border border-slate-200"
+              : "mx-auto my-2 h-auto w-full rounded-md border border-slate-200"
+          }
+          style={maxWidth ? { maxWidth } : undefined}
           // 터미널 캡처 등 SVG는 최적화 불필요 + Next 14.2 인식 버그가 있어 우회
-          unoptimized={typeof src === "string" && src.endsWith(".svg")}
+          unoptimized={cleanSrc.endsWith(".svg")}
         />
-      ) : null,
+      );
+    },
     a: ({ children, href }) => (
       <a
         href={href}

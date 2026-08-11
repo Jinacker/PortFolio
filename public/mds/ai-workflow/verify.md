@@ -48,27 +48,35 @@ flowchart TB
 
 하네스는 떠 있는 서버에 밖에서 실제 요청을 보내, 응답이 계약대로인지 확인하는 독립 스크립트입니다. 핵심은 **구현 코드와 상수를 공유하지 않는 것.** 구현이 바뀌어도 하네스의 기준은 그대로라서, "구현과 함께 틀려지는 테스트"가 되지 않습니다.
 
-```python
-# contract_harness.py (예시) — 표준 라이브러리만 사용, 구현과 독립
-EXPECTED_KEYS = {"calories", "carbs", "protein", "fat", "sodium"}  # 계약 사본
+아래는 끼니톡 AI 서버의 실제 하네스(`kkinitalk_ai_harness.py`, 328줄) 앞부분입니다. 규칙이 docstring에 명문화되어 있습니다.
 
-def check_meal_analysis():
-    res = post("/api/v1/meals/analyze", SAMPLE_IMAGE)
-    assert res.status == 200, f"FAIL: status {res.status}"
-    for food in res.json()["foods"]:
-        missing = EXPECTED_KEYS - set(food["nutrition"])
-        assert not missing, f"FAIL: 계약 필드 누락 {missing}"
-    print("PASS: 응답이 계약대로다")
+```python
+"""끼니톡 AI 서버 계약 검증 하네스.
+
+서버를 띄운 상태에서 저장소 루트에서 실행한다:
+
+    python kkinitalk_ai_harness.py                  # 전체 검증
+    python kkinitalk_ai_harness.py --only analyze   # 분석만
+    python kkinitalk_ai_harness.py --api-key <값>   # auth 그룹 검증
+
+표준 라이브러리만 사용한다. 실패 항목은 계약 위반이므로
+이 스크립트가 아니라 서버를 고친다.
+종료 코드: 전부 통과 0 / 실패 있음 1.
+"""
+# 계약 상수 (CLAUDE.md — 변경 금지)
+NUTRIENT_KEYS = {"calories", "carbsG", "proteinG", "fatG", "sodiumMg"}
+PORTIONS = {"small", "regular", "large"}
+MULTIPLIERS = (0.65, 1.0, 1.35)
 ```
 
-돌리면 이런 결과가 나옵니다. FAIL이 나왔을 때가 중요합니다.
+돌리면 검사 항목별로 PASS/FAIL이 찍힙니다. FAIL이 나왔을 때가 중요합니다.
 
 ```text
-$ python contract_harness.py http://localhost:8000
+$ python kkinitalk_ai_harness.py
 
-[PASS] 응답 스키마 — 필수 키 5종 존재
-[PASS] 에러 형태 — 잘못된 입력에 422
-[FAIL] 배율 경계 — 0.8을 small로 판정 (계약: regular)
+  [PASS] 영양소 5키 존재 (calories · carbsG · proteinG · fatG · sodiumMg)
+  [PASS] 해석 불가 호스트 = 502 IMAGE_FETCH_FAILED
+  [FAIL] 배율 경계 — 0.8을 small로 판정 (계약: regular)
 
 → 하네스가 틀린 게 아니라 서버가 계약을 어긴 것.
   하네스를 고치지 말고 서버를 고칩니다.
