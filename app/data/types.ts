@@ -74,6 +74,8 @@ export interface ExperienceDetailMedia {
   placement?: "top" | "bottom" | "left" | "right";
   /** 좌/우 배치일 때 본문과의 가로 간격(px) — 기본 16 */
   gap?: number;
+  /** 좌/우 배치일 때 텍스트 칼럼만 아래로 내리는 여백(px) — 이미지 위치는 그대로 */
+  textOffset?: number;
   /** 이미지가 카드를 가득 채우도록 자를 때 사용하는 프레임 비율 */
   frameAspectRatio?: string;
   /** 여러 이미지를 나란히 놓을 때 원본 비율과 관계없이 같은 너비로 배치 */

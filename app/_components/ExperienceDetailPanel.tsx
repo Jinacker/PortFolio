@@ -276,6 +276,9 @@ function MediaTextBlock({
         ...(rowMedia.maxWidth ? { "--media-col": `${rowMedia.maxWidth}px` } : {}),
         // 가로 간격만 덮어쓴다 — 모바일에서는 그리드가 아니라 영향이 없다
         ...(rowMedia.gap !== undefined ? { columnGap: rowMedia.gap } : {}),
+        ...(rowMedia.textOffset !== undefined
+          ? { "--text-offset": `${rowMedia.textOffset}px` }
+          : {}),
       } as CSSProperties)
     : undefined;
 
@@ -333,6 +336,8 @@ function MediaTextBlock({
         className={cn(
           rowMedia?.placement === "right" && "sm:order-1",
           rowMedia?.placement === "bottom" && "order-1",
+          // 좌/우 배치에서 텍스트만 아래로 — 모바일(세로 적층)에서는 적용하지 않는다
+          isSideMedia && rowMedia.textOffset !== undefined && "sm:pt-[var(--text-offset,0px)]",
         )}
       >
         {heading ? (
