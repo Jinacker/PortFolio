@@ -2075,27 +2075,30 @@ const experiences: Record<Locale, Experience[]> = {
           // 사진 자리(media): 실제 CLAUDE.md 규칙 부분 캡처 또는 Headroom이 컨텍스트를 압축한 로그 캡처
           sections: [
             {
-              title: "Headroom · working.md · CLAUDE.md · Prompt / Tool Logging",
+              title: "Headroom · working.md · CLAUDE.md · settings.json",
               items: [
-                "Headroom으로 불필요한 도구 출력과 로그를 압축해 긴 세션에서도 핵심 컨텍스트를 유지하고, 같은 구조를 반복해서 읽히는 토큰 비용을 줄입니다.",
+                "Headroom 프록시로 세션을 감싸, 도구 출력과 스키마가 모델에 닿기 전에 로컬에서 압축합니다. 실측으로 요청당 약 1.6만 토큰이 전송에서 빠졌고 프롬프트 캐시 적중률은 99%로 유지됐습니다. 압축된 원본은 로컬에 보관되어 필요하면 복원합니다.",
                 "최신 요구사항과 설계는 working.md에 유지하고 중요한 시점은 v1·v2로 버전화합니다. 수시로 바뀌는 요구사항과 예전 설계를 분리해 관리할 수 있습니다.",
                 "과거 AI에 작업을 과도하게 맡겼다가 운영 DB 데이터를 잃은 뒤, CLAUDE.md에 수정 금지 파일, API 응답 변경 제한, DB 변경 시 사전 확인, 필수 테스트, 에이전트별 역할을 명시합니다. 운영 DB 변경은 에이전트가 직접 수행하지 않고 제가 검토한 뒤 수동으로 반영합니다.",
-                "프롬프트와 도구 사용 로그를 남겨, 문제가 생겼을 때 어떤 지시로 어떤 변경이 일어났는지 추적할 수 있게 합니다.",
               ],
               highlights: [
-                "핵심 컨텍스트를 유지",
-                "반복해서 읽히는 토큰 비용",
+                "모델에 닿기 전에 로컬에서 압축",
+                "요청당 약 1.6만 토큰",
+                "캐시 적중률은 99%로 유지",
                 "working.md",
                 "v1·v2로 버전화",
                 "운영 DB 데이터를 잃은 뒤",
                 "수정 금지 파일, API 응답 변경 제한, DB 변경 시 사전 확인",
                 "제가 검토한 뒤 수동으로 반영",
-                "프롬프트와 도구 사용 로그",
               ],
               docs: [
                 {
                   href: "/mds/ai-workflow/context.md",
                   label: "에이전트가 아는 것과 할 수 있는 것 — CLAUDE.md와 문서 버전 관리",
+                },
+                {
+                  href: "/mds/ai-workflow/headroom-judgment.md",
+                  label: "Headroom 딥다이브 — '줄여도 되는 정보'는 어떻게 판별하나",
                 },
               ],
             },
