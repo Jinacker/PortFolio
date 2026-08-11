@@ -134,6 +134,8 @@ export interface ExperienceDetailAction {
 
 // 섹션 본문 뒤에 이어 붙는 보조 블록.
 export interface ExperienceDetailExtra {
+  /** 블록 맨 위(이미지보다 위)에 오는 소제목 */
+  heading?: string;
   items: string[];
   highlights?: string[];
   layout?: "list" | "paragraphs";

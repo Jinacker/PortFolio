@@ -1410,12 +1410,19 @@ const experiences: Record<Locale, Experience[]> = {
     {
       id: 105,
       title: "끼니톡. 어르신 식단·건강관리를 위한 AI 개발",
-      period: "2026.07 - 현재",
+      period: "2026.06 - 현재",
       items: [],
       links: [],
       detailSections: [
         {
           title: "끼니톡은 어떤 서비스인가",
+          media: {
+            src: "/assets/experiences/kkinitalk/service-flow.jpg",
+            alt: "사진 한 장으로 시작되는 영양 돌봄 — 촬영 → AI 분석 → 보호자 알림 → 맞춤 식단 제안",
+            width: 1262,
+            height: 714,
+            placement: "top",
+          },
           items: [
             "혼자 사시는 어르신의 식사 불균형·복약 누락을 가족이 제때 알아차리기 어렵습니다. 끼니톡은 어르신 앱과 보호자 앱을 연결해 그 정보를 공유합니다",
             "직접 검색하고 기록하는 대신 사진 한 장과 말 한마디만으로 남도록, AI가 입력 과정을 대신합니다",
@@ -1440,6 +1447,92 @@ const experiences: Record<Locale, Experience[]> = {
               ["식단몰", "배송된 도시락 수령", "부족 영양소 기반 도시락 추천"],
             ],
           },
+        },
+        {
+          title: "사용자별 3가지 인터페이스로 구성",
+          media: {
+            src: "/assets/experiences/kkinitalk/three-interfaces.png",
+            alt: "어르신 앱·보호자 앱·요양시설 웹 대시보드 세 가지 화면",
+            width: 1600,
+            height: 824,
+            placement: "top",
+          },
+          items: [
+            "어르신 | 간편한 기록 — 사진·음성으로 식사를 기록하고, AI 식단 추천과 복용 주의사항을 확인",
+            "보호자 | 지속적인 돌봄 — 식사·영양 상태를 확인하고, 필요한 식단을 직접 선물",
+            "요양시설 | 통합 관리 — 입소자별 식사·복약·영양 현황을 확인하고, 위험 신호를 빠르게 파악",
+          ],
+          highlights: [
+            "어르신 | 간편한 기록",
+            "보호자 | 지속적인 돌봄",
+            "요양시설 | 통합 관리",
+          ],
+        },
+        {
+          title: "아이디어에서 투자 유치까지",
+          media: {
+            src: "/assets/experiences/kkinitalk/revenue-model.jpg",
+            alt: "수익 창출 구조 — 건강정보 수집에서 맞춤 식단 배송까지",
+            width: 1600,
+            height: 815,
+            placement: "top",
+          },
+          items: [],
+          extra: [
+            {
+              heading: "최종 심사 평가",
+              items: [
+                "아이디어를 넘어, 실제 검증 가능한 서비스로",
+                "최종 심사에서는 끼니톡이 명확한 사용자 문제를 AI로 해결하고, 실제 돌봄 현장까지 확장할 수 있다는 점을 긍정적으로 평가받았습니다.",
+              ],
+              highlights: [
+                "아이디어를 넘어, 실제 검증 가능한 서비스로",
+                "명확한 사용자 문제를 AI로 해결",
+                "실제 돌봄 현장까지 확장할 수 있다는 점",
+              ],
+              layout: "paragraphs",
+              divider: false,
+            },
+            {
+              items: [
+                "## 01. 명확한 문제와 차별성",
+                "보호자가 어르신의 실제 식사 상태를 알기 어렵다는 문제를 포착하고, AI 영양 분석과 보호자 확인을 연결한 점을 높게 평가받았습니다.",
+                "## 02. 돌봄 서비스로의 확장성",
+                "단순 식단 분석을 넘어 어르신·보호자·요양시설을 연결하는 돌봄 데이터 서비스로 확장할 수 있다는 점을 인정받았습니다.",
+                "## 03. 실행 가능성과 사업화 가능성",
+                "앱·웹 프로토타입 자체 개발과 함께 전문가 자문과 노인복지시설 파일럿 협의까지 진행해, 실제 검증 단계로 이어질 준비도를 긍정적으로 평가받았습니다.",
+              ],
+              highlights: [
+                "AI 영양 분석과 보호자 확인을 연결한 점",
+                "돌봄 데이터 서비스로 확장할 수 있다는 점",
+                "앱·웹 프로토타입 자체 개발",
+                "전문가 자문과 노인복지시설 파일럿 협의",
+              ],
+              divider: false,
+            },
+            {
+              heading: "\u2018모두의 창업\u2019에서 서비스 검증 단계로",
+              items: [
+                "서비스의 문제의식·차별성·사업화 가능성을 긍정적으로 평가",
+                "\u2018모두의 창업\u2019 1라운드 진출",
+                "300만 원 투자 유치",
+                "투자금을 바탕으로 2라운드 진출을 위한 서비스 고도화",
+                "Google Play 앱 출시 및 베타테스트 진행 중",
+                "실제 사용자 피드백을 반영하며 서비스 개선 진행",
+              ],
+              highlights: ["\u2018모두의 창업\u2019 1라운드 진출"],
+              media: {
+                src: "/assets/experiences/kkinitalk/startup-certificate.png",
+                alt: "중소벤처기업부 모두의 창업 창업경력 증명서 — 1라운드 진출",
+                width: 1292,
+                height: 1162,
+                maxWidth: 350,
+                placement: "right",
+                gap: 16,
+              },
+              divider: false,
+            },
+          ],
         },
         {
           title: "아키텍처",
@@ -1596,7 +1689,7 @@ const experiences: Record<Locale, Experience[]> = {
         },
       ],
       is_active: true,
-      sub_title: "‘모두의 창업’ 1라운드 선정 · 300만 원 투자 유치 · 2라운드 준비를 위한 서비스 고도화",
+      sub_title: "‘모두의 창업’ 1라운드 선정 및 투자금 300만 원 유치 · 2라운드 준비 중",
       imageUrl: "/assets/experiences/kkinitalk/kkini.png",
       index: 3,
       skill_ids: [83, 84, 85, 86, 99, 87, 89, 90, 91, 92, 94, 95, 96, 98],
