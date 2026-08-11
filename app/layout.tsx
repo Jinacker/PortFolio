@@ -20,30 +20,31 @@ const tmoneyRoundWind = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://jin-portfolio-eta.vercel.app"),
   title: "Jin Portfolio",
   description: "개발자 꿈나무 김진의 포트폴리오",
   generator: "v0.dev",
   openGraph: {
     title: "Jin Portfolio",
     description: "개발자 꿈나무 김진의 포트폴리오",
-    url: "https://jinportfolio.vercel.app",
+    url: "https://jin-portfolio-eta.vercel.app",
     siteName: "Jin Portfolio",
     images: [
       {
-        url: "/favicon-32x32.png",
-        width: 32,
-        height: 32,
-        alt: "Jin Portfolio Logo",
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Jin Portfolio",
       },
     ],
     locale: "ko_KR",
     type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Jin Portfolio",
     description: "개발자 꿈나무 김진의 포트폴리오",
-    images: ["/favicon-32x32.png"],
+    images: ["/og-image.jpg"],
   },
 }
 
