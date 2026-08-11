@@ -1526,7 +1526,7 @@ const experiences: Record<Locale, Experience[]> = {
                 alt: "중소벤처기업부 모두의 창업 창업경력 증명서 — 1라운드 진출",
                 width: 1292,
                 height: 1162,
-                maxWidth: 350,
+                maxWidth: 325,
                 placement: "right",
                 gap: 16,
               },
