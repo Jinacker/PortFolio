@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="320" viewBox="0 0 1000 320">
+<rect width="1000" height="320" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">해결 후 재측정 — 같은 잣대로 전/후를 비교</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ node measure-firstload.js   # 고치고 같은 스크립트로 재측정</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#8b949e" xml:space="preserve">  항목        전            후          조치</text>
+<text x="20" y="143" fill="#7ee787" xml:space="preserve">  폰트      10.5MB   →    0.7MB      한글 서브셋 + woff2 변환 (화면 동일)</text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">  파비콘     1.9MB   →    3KB        1024px 원본을 실제 크기로 리사이즈</text>
+<text x="20" y="187" fill="#e6e6e6" xml:space="preserve">  이미지     8.6MB   →    8.1MB      스크린샷 33장 리사이즈 (50.6→30.9MB, 첫 화면 몫은 일부)</text>
+<text x="20" y="209" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="231" fill="#7ee787" xml:space="preserve">  첫 진입 총량: 31.8MB → 19.8MB</text>
+<text x="20" y="253" fill="#8b949e" xml:space="preserve">  # 스크립트 10.7MB는 개발 서버 전용 — 배포 빌드에서는 축소됨</text>
+<text x="20" y="275" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="297" fill="#8b949e" xml:space="preserve">  남은 과제: 사진성 PNG의 WebP 전환 · GIF 2종의 영상 전환 (측정으로 확인된 다음 순서)</text>
+</g></svg>

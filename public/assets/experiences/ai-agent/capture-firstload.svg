@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="342" viewBox="0 0 1000 342">
+<rect width="1000" height="342" rx="10" fill="#0d1117"/>
+<rect width="1000" height="36" rx="10" fill="#161b22"/>
+<rect y="26" width="1000" height="14" fill="#161b22"/>
+<circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">첫 진입 성능 분석 — 에이전트가 직접 재서 원인을 분해</text>
+<g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="20" y="77" fill="#79c0ff" xml:space="preserve">$ node measure-firstload.js   # 헤드리스 크롬으로 첫 진입 네트워크 캡처</text>
+<text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="121" fill="#e6e6e6" xml:space="preserve">  load 이벤트까지 3,765ms · 요청 19건 · 총 31.8MB</text>
+<text x="20" y="143" fill="#8b949e" xml:space="preserve">  타입별: 폰트 10.5MB · 스크립트 10.7MB · 이미지 8.6MB · 기타 1.9MB</text>
+<text x="20" y="165" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="187" fill="#8b949e" xml:space="preserve">  용량 상위</text>
+<text x="20" y="209" fill="#ff7b72" xml:space="preserve">  6,407KB  폰트     한글 TTF 원본 — 서브셋 없이 전체 자모</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve">  4,333KB  폰트     두 번째 TTF</text>
+<text x="20" y="253" fill="#e6e6e6" xml:space="preserve">  1,561KB  이미지   /projects/2025-1.png — 원본 그대로 (unoptimized)</text>
+<text x="20" y="275" fill="#ff7b72" xml:space="preserve">  1,251KB  파비콘   favicon-32x32.png — 실제 픽셀은 1024×1024</text>
+<text x="20" y="297" fill="#e6e6e6" xml:space="preserve"></text>
+<text x="20" y="319" fill="#7ee787" xml:space="preserve">  ▶ 결론: 느린 원인은 파일 위치(S3 여부)가 아니라 용량 — 폰트 서브셋·이미지 압축이 답</text>
+</g></svg>
