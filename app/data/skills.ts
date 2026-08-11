@@ -769,7 +769,7 @@ const skills: Skill[] = [
     category: "AI_AGENT",
     items: [],
     item: "CodeRabbit",
-    blobUrl: "/assets/skills/coderabbit.jpg",
+    blobUrl: "https://cdn.simpleicons.org/coderabbit",
   },
   {
     id: 111,
