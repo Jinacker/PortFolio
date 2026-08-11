@@ -220,7 +220,7 @@ const experiences: Record<Locale, Experience[]> = {
               ["앱 (Expo RN)", "지도 탐색 · 시식 기록 · 커뮤니티 · 푸시 알림", "App Store / Play Store"],
               ["서버 (NestJS)", "API · 인증 · 추천 · 알림 · PostgreSQL", "Cloud Run + Supabase"],
               ["관리자 웹 (React)", "맛집 등록 · 푸시 발송 · 방문 통계 · 문의 관리", "Vercel"],
-              ["지도 웹 (Kakao Maps)", "핀 · 클러스터링 · 권역 — 앱과 postMessage 통신", "Vercel (3버전 동시 서빙)"],
+              ["지도 웹 (Kakao Maps)", "핀 · 클러스터링 · 권역 — 앱과 postMessage 통신", "Vercel (3버전 동시 제공)"],
             ],
           },
           docs: [
@@ -242,27 +242,27 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/katsu-map/impl-1-auth.md", label: "구버전 앱을 끊지 않고 인증 체계 교체 — 3단계 공존 가드와 무중단 전환" },
-            { href: "/mds/katsu-map/impl-2-compat.md", label: "\"컬럼 하나 추가\"가 한 줄이 아닌 이유 — 하위호환 4원칙, 마이그레이션 25건 파괴 0건" },
-            { href: "/mds/katsu-map/impl-3-map-versions.md", label: "지도를 세 버전 동시에 서빙하는 이유 — 앱 바이너리에 박힌 URL과 구버전 사용자" },
-            { href: "/mds/katsu-map/impl-4-recommend.md", label: "취향 추천 — 다섯 개 대안을 놓고 사전집계를 골랐다 (pgvector는 왜 보류했나)" },
+            { href: "/mds/katsu-map/impl-2-compat.md", label: "\"컬럼 하나 추가\"가 한 줄이 아닌 이유 — 하위 호환 4원칙으로 마이그레이션 25건 파괴적 변경 0건" },
+            { href: "/mds/katsu-map/impl-3-map-versions.md", label: "지도를 세 버전 동시에 제공하는 이유 — 구버전 화면을 유지하며 앱 심사 없이 개선했습니다" },
+            { href: "/mds/katsu-map/impl-4-recommend.md", label: "취향 추천 — 다섯 개 대안 중 800행 이하 사전 집계를 선택했습니다" },
           ],
         },
         {
           // 사진 자리: 어드민 방문 히트맵(잔디) 화면 캡처 — 푸시 발송일 링이 보이면 가장 좋음
-          title: "운영 트러블슈팅",
+          title: "로그와 지표로 운영 문제를 추적하고 검증했습니다",
           items: [
-            "운영 중 마주친 문제를 로그와 지표로 발견하고, 원인을 좁혀 해결한 과정을 정리했습니다. 문제 발견부터 수정, 배포, 전후 실측까지 직접 확인하며 해결한 사례들입니다.",
+            "운영 중 발생한 429·응답 지연·중복 알림·504 오류·캐시 문제를 로그와 지표로 재현했습니다. 원인을 좁힌 뒤 수정 전후 수치를 비교했고, 서버 장애가 아닌 경우에는 조치하지 않는 판단의 근거도 남겼습니다.",
           ],
           highlights: [
-            "로그와 지표로 발견하고, 원인을 좁혀 해결한 과정",
+            "원인을 좁힌 뒤 수정 전후 수치를 비교",
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시를 보내면 서버가 사용자를 거부하고 있었다 — 발견부터 전/후 실측까지 풀사이클" },
-            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전체가 느려졌다 — 404 응답 속도로 인프라 가설부터 배제한 조사" },
-            { href: "/mds/katsu-map/ts-3-push-dup.md", label: "재설치하면 알림이 두 번 왔다 — 유령 계정과 토큰 유니크 범위, 해법 3개 비교" },
-            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "장애처럼 보였지만 장애가 아니었다 — 조치를 \"안 한 것\"이 결론인 504 오탐 판정" },
-            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "5분인 줄 알았던 캐시가 0.3초였다 — 라이브러리 드리프트 감사·수정·HIT 실측" },
+            { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시 직후 발생한 429를 줄였습니다 — 28건→0건, 발송 응답 11.43초→0.18초" },
+            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연을 줄였습니다 — 404 응답으로 인프라를 배제하고 DB 요청 구조를 개선했습니다" },
+            { href: "/mds/katsu-map/ts-3-push-dup.md", label: "재설치 뒤 알림이 두 번 온 원인을 데이터 구조에서 해결했습니다" },
+            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "504 오류 12건을 서버 장애로 오인하지 않았습니다 — 같은 시간대 로그 149건을 대조했습니다" },
+            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "5분인 줄 알았던 캐시가 0.3초였습니다 — 목록 응답 0.253초→0.101초" },
           ],
         },
         {
