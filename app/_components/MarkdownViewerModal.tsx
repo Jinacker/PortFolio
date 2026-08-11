@@ -232,6 +232,7 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
       const maxWidth = params.get("w") ? Number(params.get("w")) : undefined;
       const sizeMatch = /^(\d+)x(\d+)$/.exec(params.get("size") ?? "");
       const floatLeft = params.has("left");
+      const pairLeft = params.has("pair-left");
       const half = params.has("half");
       return (
         <Image
@@ -244,6 +245,8 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
               ? "my-1 inline-block h-auto w-[48.5%] rounded-md border border-slate-200 align-top [&+img]:ml-[2%]"
               : floatLeft
                 ? "float-left mb-3 mr-5 mt-1 h-auto w-full rounded-md border border-slate-200"
+                : pairLeft
+                  ? "mx-auto mb-3 mt-1 h-auto w-full rounded-md border border-slate-200 md:float-left md:mx-0 md:mr-5"
                 : "mx-auto my-2 h-auto w-full rounded-md border border-slate-200"
           }
           style={maxWidth ? { maxWidth } : undefined}
