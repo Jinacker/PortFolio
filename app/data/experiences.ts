@@ -2010,7 +2010,7 @@ const experiences: Record<Locale, Experience[]> = {
       subDetails: [
         {
           id: "agent-plan",
-          title: "계획하고 개발하기 — 바로 구현시키지 않고, 전체 흐름부터 잡습니다",
+          title: "계획하고 개발하기 — Plan-first · Task 체크리스트 · 승인 게이트",
           // 사진 자리(media): 실제 프로젝트의 단계 계획(S0~S9) 문서 또는 Task 체크리스트 캡처 — 완료 조건·"하지 않을 것"이 보이는 부분
           sections: [
             {
@@ -2040,7 +2040,7 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           id: "agent-roles",
-          title: "역할을 나눠 개발하기 — 한 에이전트에게 계획·구현·검증을 모두 맡기지 않습니다",
+          title: "역할을 나눠 개발하기 — 멀티 에이전트 구성 · 구현과 검증 분리",
           // 사진 자리(media): 서브 에이전트 여러 개가 병렬로 실행 중인 세션 캡처 — 프론트/백 작업이 동시에 도는 화면
           sections: [
             {
@@ -2069,7 +2069,7 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           id: "agent-context",
-          title: "맥락과 작업 범위 관리하기 — 기억은 유지하고, 행동 범위는 제한합니다",
+          title: "맥락과 작업 범위 관리하기 — Headroom · working.md · CLAUDE.md",
           // 사진 자리(media): 실제 CLAUDE.md 규칙 부분 캡처 또는 Headroom이 컨텍스트를 압축한 로그 캡처
           sections: [
             {
@@ -2101,7 +2101,7 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           id: "agent-verify",
-          title: "여러 번 검증하기 — AI가 만들었다고 완료로 보지 않습니다",
+          title: "여러 번 검증하기 — 검증 하네스 · CodeRabbit · Playwright 실측",
           // 사진 자리(media): CodeRabbit PR 리뷰 코멘트 캡처 또는 검증 하네스 실행 결과(PASS/FAIL 목록) 터미널 캡처
           sections: [
             {
@@ -2110,6 +2110,7 @@ const experiences: Record<Locale, Experience[]> = {
                 "Task를 작성할 때부터 테스트를 완료 조건에 포함합니다. 구현이 끝나면 테스트·린트·타입 체크 → 검증 하네스 → 리뷰어 에이전트 → CodeRabbit PR 리뷰 → 직접 실행 순서로 확인하고, 문제가 있으면 이전 단계로 돌아갑니다.",
                 "하나의 AI 판단을 다른 AI 판단으로 덮는 것이 아니라, 자동화된 기준과 독립 리뷰, 직접 실행을 함께 사용합니다.",
                 "끼니톡에서는 단위 테스트와 별도로 계약·AI 출력·지표·부하 하네스를 만들어 비결정적인 LLM 응답과 실제 외부 API 동작을 검증했습니다.",
+                "마지막 층인 직접 실행은 에이전트가 헤드리스 크롬으로 대신합니다. 화면을 열어 스크린샷과 실측값으로 보고하고, 첫 로딩 성능 같은 문제도 같은 방식으로 분해합니다.",
               ],
               highlights: [
                 "테스트를 완료 조건에 포함",
@@ -2117,6 +2118,8 @@ const experiences: Record<Locale, Experience[]> = {
                 "자동화된 기준과 독립 리뷰, 직접 실행",
                 "계약·AI 출력·지표·부하 하네스",
                 "비결정적인 LLM 응답",
+                "에이전트가 헤드리스 크롬으로 대신합니다",
+                "스크린샷과 실측값으로 보고",
               ],
               docs: [
                 {
@@ -2128,32 +2131,8 @@ const experiences: Record<Locale, Experience[]> = {
           ],
         },
         {
-          id: "agent-browser",
-          title: "브라우저로 직접 확인하기 — 코드가 아니라 화면으로 검증합니다",
-          sections: [
-            {
-              title: "Playwright · 헤드리스 크롬 · 스크린샷 검증 · 실측 분석",
-              items: [
-                "UI를 바꾸는 모든 작업의 마지막 단계는 코드 저장이 아니라 브라우저 확인입니다. 에이전트가 헤드리스 크롬으로 페이지를 열어 클릭하고, 스크린샷과 실측값으로 결과를 보고합니다.",
-                "렌더 크기·색상·강조 적용 여부를 숫자로 재고, 첫 진입 네트워크를 캡처해 로딩이 느린 원인도 같은 방식으로 분해합니다.",
-              ],
-              highlights: [
-                "코드 저장이 아니라 브라우저 확인",
-                "스크린샷과 실측값으로 결과를 보고",
-                "로딩이 느린 원인도 같은 방식으로 분해",
-              ],
-              docs: [
-                {
-                  href: "/mds/ai-workflow/browser-verify.md",
-                  label: "에이전트에게 브라우저를 쥐여주다 — 스크린샷 검증과 첫 로딩 실측 분석",
-                },
-              ],
-            },
-          ],
-        },
-        {
           id: "agent-ops",
-          title: "운영에도 활용하기 — 읽기 전용으로 맡기고, 조치는 사람이 결정합니다",
+          title: "운영에도 활용하기 — 읽기 전용 에이전트 · 로그 트리아지",
           // 사진 자리(media): 에이전트가 운영 로그를 집계·분석한 세션 캡처 — 읽기 전용 명령과 출력 기록이 보이는 화면
           sections: [
             {
