@@ -6,12 +6,12 @@ import "./globals.css"
 const tmoneyRoundWind = localFont({
   src: [
     {
-      path: "../font_ttf/TmoneyRoundWindRegular.ttf",
+      path: "../font_ttf/TmoneyRoundWindRegular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../font_ttf/TmoneyRoundWindExtraBold.ttf",
+      path: "../font_ttf/TmoneyRoundWindExtraBold.woff2",
       weight: "800",
       style: "normal",
     },
