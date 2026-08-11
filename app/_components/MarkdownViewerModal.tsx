@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Loader, X } from "react-feather";
 
@@ -24,6 +24,19 @@ function childrenToText(children: ReactNode): string {
     return childrenToText((children as { props: { children?: ReactNode } }).props.children);
   }
   return "";
+}
+
+function childrenHaveImageHint(children: ReactNode, hint: string): boolean {
+  const list = Array.isArray(children) ? children : [children];
+  return list.some(child => {
+    if (!child || typeof child !== "object" || !("props" in child)) return false;
+    const props = (child as { props: { src?: unknown; children?: ReactNode } }).props;
+    if (typeof props.src === "string") {
+      const [, hash] = props.src.split("#");
+      if (new URLSearchParams(hash ?? "").has(hint)) return true;
+    }
+    return childrenHaveImageHint(props.children, hint);
+  });
 }
 
 let mermaidSeq = 0;
@@ -170,9 +183,14 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
     h4: ({ children }) => (
       <h4 className="mb-1.5 mt-4 break-keep text-sm font-semibold text-slate-700">{children}</h4>
     ),
-    p: ({ children }) => (
-      <p className="my-2 break-keep text-sm leading-[1.7] text-slate-600">{children}</p>
-    ),
+    p: ({ children }) => {
+      const centerImageRow = childrenHaveImageHint(children, "center-row");
+      return (
+        <p className={`my-2 break-keep text-sm leading-[1.7] text-slate-600${centerImageRow ? " text-center" : ""}`}>
+          {children}
+        </p>
+      );
+    },
     ul: ({ children }) => <ul className="my-2 list-disc space-y-1 pl-5">{children}</ul>,
     ol: ({ children }) => <ol className="my-2 list-decimal space-y-1 pl-5">{children}</ol>,
     li: ({ children }) => (
@@ -225,15 +243,24 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
       // 해시 힌트로 표시를 제어한다 (해시는 요청 전에 제거되므로 파일 경로에 영향 없음)
       //   #w=320            → 표시 폭 제한 (가운데 정렬)
       //   #size=406x884     → 실제 픽셀 크기 — 세로 사진의 예약 비율을 맞춰 레이아웃 틀어짐 방지
+      //   #crop=406x700     → 지정한 비율로 맞추고 넘치는 아래쪽을 잘라 표시
       //   #...&left         → 왼쪽에 붙이고 본문이 오른쪽으로 흐름
       //   #...&half         → 2열 그리드 한 칸 — 같은 줄에 쓴 이미지 둘이 나란히 배치됨
       const [cleanSrc, hash] = src.split("#");
       const params = new URLSearchParams(hash ?? "");
       const maxWidth = params.get("w") ? Number(params.get("w")) : undefined;
       const sizeMatch = /^(\d+)x(\d+)$/.exec(params.get("size") ?? "");
+      const cropMatch = /^(\d+)x(\d+)$/.exec(params.get("crop") ?? "");
       const floatLeft = params.has("left");
       const pairLeft = params.has("pair-left");
       const half = params.has("half");
+      const imageStyle: CSSProperties = {};
+      if (maxWidth) imageStyle.maxWidth = maxWidth;
+      if (cropMatch) {
+        imageStyle.aspectRatio = `${cropMatch[1]} / ${cropMatch[2]}`;
+        imageStyle.objectFit = "cover";
+        imageStyle.objectPosition = "top";
+      }
       return (
         <Image
           src={cleanSrc}
@@ -249,7 +276,7 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
                   ? "mx-auto mb-3 mt-1 h-auto w-full rounded-md border border-slate-200 md:float-left md:mx-0 md:mr-5"
                 : "mx-auto my-2 h-auto w-full rounded-md border border-slate-200"
           }
-          style={maxWidth ? { maxWidth } : undefined}
+          style={Object.keys(imageStyle).length > 0 ? imageStyle : undefined}
           // 터미널 캡처 등 SVG는 최적화 불필요 + Next 14.2 인식 버그가 있어 우회
           unoptimized={cleanSrc.endsWith(".svg")}
         />

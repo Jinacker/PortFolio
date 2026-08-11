@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-labelledby="title desc">
+  <title id="title">내 취향과 후보 식당의 5가지 점수를 비교한 레이더 차트</title>
+  <desc id="desc">풍미, 부드러움, 육즙, 바삭함, 두께감 점수를 비교하고 유클리드 거리 0.433을 일치율 96퍼센트로 변환하는 계산 예시</desc>
+  <rect width="1000" height="480" rx="24" fill="#fffdf9"/>
+  <rect x="1" y="1" width="998" height="478" rx="23" fill="none" stroke="#e7e2da" stroke-width="2"/>
+
+  <g font-family="Arial, 'Apple SD Gothic Neo', sans-serif">
+    <text x="38" y="44" font-size="22" font-weight="700" fill="#1f2937">5가지 취향의 모양이 비슷할수록 가깝습니다</text>
+    <text x="38" y="70" font-size="14" fill="#64748b">내 취향과 후보 식당 A를 같은 축에 놓고 항목별 차이를 비교했습니다.</text>
+
+    <g>
+      <polygon points="260,218 286.6,236.4 276.5,267.9 243.5,267.9 233.4,236.4" fill="none" stroke="#ddd8d0"/>
+      <polygon points="260,190 313.3,226.8 293,289.3 227,289.3 206.7,226.8" fill="none" stroke="#ddd8d0"/>
+      <polygon points="260,162 339.9,217.0 309.4,311.9 210.6,311.9 180.1,217.0" fill="none" stroke="#ddd8d0"/>
+      <polygon points="260,134 366.5,207.7 325.8,334.3 194.2,334.3 153.5,207.7" fill="none" stroke="#ddd8d0"/>
+      <polygon points="260,106 393.1,198.7 342.3,356.2 177.7,356.2 126.9,198.7" fill="none" stroke="#c9c3ba" stroke-width="1.5"/>
+
+      <line x1="260" y1="246" x2="260" y2="106" stroke="#d6d1ca"/>
+      <line x1="260" y1="246" x2="393.1" y2="198.7" stroke="#d6d1ca"/>
+      <line x1="260" y1="246" x2="342.3" y2="356.2" stroke="#d6d1ca"/>
+      <line x1="260" y1="246" x2="177.7" y2="356.2" stroke="#d6d1ca"/>
+      <line x1="260" y1="246" x2="126.9" y2="198.7" stroke="#d6d1ca"/>
+
+      <polygon points="260,134 366.5,207.7 325.8,334.3 194.2,334.3 153.5,207.7" fill="#f59e0b" fill-opacity="0.14" stroke="#f59e0b" stroke-width="3"/>
+      <polygon points="260,127 373.2,205.8 325.8,334.3 190,339.8 153.5,207.7" fill="#d6483e" fill-opacity="0.20" stroke="#d6483e" stroke-width="3"/>
+
+      <circle cx="260" cy="127" r="4" fill="#d6483e"/>
+      <circle cx="373.2" cy="205.8" r="4" fill="#d6483e"/>
+      <circle cx="325.8" cy="334.3" r="4" fill="#d6483e"/>
+      <circle cx="190" cy="339.8" r="4" fill="#d6483e"/>
+      <circle cx="153.5" cy="207.7" r="4" fill="#d6483e"/>
+
+      <text x="260" y="94" text-anchor="middle" font-size="15" font-weight="700" fill="#374151">풍미</text>
+      <text x="414" y="197" font-size="15" font-weight="700" fill="#374151">부드러움</text>
+      <text x="350" y="378" font-size="15" font-weight="700" fill="#374151">육즙</text>
+      <text x="128" y="378" text-anchor="end" font-size="15" font-weight="700" fill="#374151">바삭함</text>
+      <text x="106" y="197" text-anchor="end" font-size="15" font-weight="700" fill="#374151">두께감</text>
+
+      <circle cx="177" cy="425" r="6" fill="#d6483e"/>
+      <text x="190" y="430" font-size="14" font-weight="700" fill="#374151">내 취향</text>
+      <circle cx="270" cy="425" r="6" fill="#f59e0b"/>
+      <text x="283" y="430" font-size="14" font-weight="700" fill="#374151">후보 식당 A</text>
+    </g>
+
+    <g>
+      <rect x="500" y="96" width="462" height="338" rx="20" fill="#ffffff" stroke="#e7e2da"/>
+      <text x="530" y="134" font-size="18" font-weight="700" fill="#1f2937">실제 계산 예시</text>
+
+      <text x="530" y="170" font-size="14" fill="#64748b">내 취향</text>
+      <text x="620" y="170" font-size="14" font-weight="700" fill="#d6483e">[4.25, 4.25, 4.0, 4.25, 4.0]</text>
+      <text x="530" y="198" font-size="14" fill="#64748b">식당 A</text>
+      <text x="620" y="198" font-size="14" font-weight="700" fill="#d68b08">[4.0, 4.0, 4.0, 4.0, 4.0]</text>
+
+      <line x1="530" y1="222" x2="932" y2="222" stroke="#eee9e2"/>
+      <text x="530" y="255" font-size="14" fill="#64748b">항목별 차이</text>
+      <text x="530" y="283" font-size="15" font-weight="700" fill="#374151">0.25 · 0.25 · 0 · 0.25 · 0</text>
+
+      <rect x="530" y="305" width="402" height="48" rx="12" fill="#f8f5f0"/>
+      <text x="550" y="335" font-size="15" font-weight="700" fill="#374151">√(0.25² + 0.25² + 0² + 0.25² + 0²) = 0.433</text>
+
+      <text x="530" y="382" font-size="14" fill="#64748b">가능한 최대 거리 √125 ≈ 11.18</text>
+      <text x="530" y="412" font-size="17" font-weight="700" fill="#d6483e">거리 0.433 → 취향 일치율 96%</text>
+    </g>
+  </g>
+</svg>

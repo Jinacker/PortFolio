@@ -217,7 +217,7 @@ const experiences: Record<Locale, Experience[]> = {
           table: {
             headers: ["구성요소", "역할", "배포"],
             rows: [
-              ["앱 (Expo RN)", "지도 탐색 · 시식 기록 · 커뮤니티 · 푸시 알림", "App Store / Play Store"],
+              ["앱 (Expo RN)", "지도 탐색 · 돈가스 테이스팅 기록 · 커뮤니티 · 푸시 알림", "App Store / Play Store"],
               ["서버 (NestJS)", "API · 인증 · 추천 · 알림 · PostgreSQL", "Cloud Run + Supabase"],
               ["관리자 웹 (React)", "맛집 등록 · 푸시 발송 · 방문 통계 · 문의 관리", "Vercel"],
               ["지도 웹 (Kakao Maps)", "핀 · 클러스터링 · 권역 — 앱과 postMessage 통신", "Vercel (3버전 동시 제공)"],
@@ -244,7 +244,7 @@ const experiences: Record<Locale, Experience[]> = {
             { href: "/mds/katsu-map/impl-1-auth.md", label: "구버전 앱을 유지하며 인증 체계를 교체했습니다" },
             { href: "/mds/katsu-map/impl-2-compat.md", label: "운영 중에도 기존 앱을 깨뜨리지 않는 DB 변경" },
             { href: "/mds/katsu-map/impl-3-map-versions.md", label: "구버전 앱의 지도를 유지하며 새 지도 기능을 배포했습니다" },
-            { href: "/mds/katsu-map/impl-4-recommend.md", label: "시식 기록을 바탕으로 취향에 맞는 식당을 추천했습니다" },
+            { href: "/mds/katsu-map/impl-4-recommend.md", label: "돈가스 테이스팅 기록을 바탕으로 취향에 맞는 식당을 추천하는 기능을 만들었습니다" },
           ],
         },
         {
