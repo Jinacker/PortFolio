@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { NextIntlClientProvider } from "next-intl"
 import { ArrowUpRight, BookOpen, Code, Code2, GraduationCap, Mail, Trophy, User, Users } from "lucide-react"
 import dynamic from "next/dynamic"
@@ -251,9 +252,12 @@ function RecordSection() {
                 style={{ animationDelay: MEMOIR_ANIMATION_DELAYS[index] }}
                 className={`record-float-card absolute w-[34%] rounded-md border border-foreground/10 bg-background/90 p-2 no-underline shadow-sm backdrop-blur transition duration-300 hover:z-10 hover:border-primary/30 hover:shadow-md sm:w-44 sm:p-2.5 ${MEMOIR_POSITIONS[index]}`}
               >
-                <img
+                <Image
                   src={post.image}
                   alt={post.title}
+                  width={352}
+                  height={160}
+                  sizes="176px"
                   className="h-14 w-full rounded object-cover sm:h-20"
                 />
                 <p className="mt-1.5 truncate text-[10px] font-bold text-foreground sm:mt-2 sm:text-xs">{post.title}</p>

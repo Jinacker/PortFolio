@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image"
 import React, { useState } from "react";
 
 import { ChevronDown, Loader2 } from "lucide-react";
@@ -170,7 +171,16 @@ function TimelineColumn({
                   </div>
                   {item.image ? (
                     <div className="ml-3 flex h-24 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-300 bg-gray-100">
-                      <img src={item.image} alt={item.title} loading="lazy" className="h-full w-full object-contain" />
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        width={192}
+                        height={192}
+                        sizes="96px"
+                        className="h-full w-full object-contain"
+                        // Next 14.2 최적화기의 SVG 인식 버그 우회
+                        unoptimized={item.image.endsWith(".svg")}
+                      />
                     </div>
                   ) : null}
                 </div>
