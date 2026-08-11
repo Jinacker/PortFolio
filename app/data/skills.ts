@@ -261,6 +261,13 @@ const skills: Skill[] = [
     blobUrl: "/assets/skills/kakao-maps.svg",
   },
   {
+    id: 115,
+    category: "FRONTEND",
+    items: [],
+    item: "Sentry",
+    blobUrl: "https://cdn.simpleicons.org/sentry",
+  },
+  {
     id: 37,
     category: "INFRA_TEST",
     items: [],

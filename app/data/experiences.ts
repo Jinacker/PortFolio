@@ -217,10 +217,10 @@ const experiences: Record<Locale, Experience[]> = {
           table: {
             headers: ["구성요소", "역할", "배포"],
             rows: [
-              ["앱 (Expo RN)", "지도 탐색 · 시식 기록 · 커뮤니티 · 푸시 알림", "App Store / Play Store"],
+              ["앱 (Expo RN)", "지도 탐색 · 돈가스 테이스팅 기록 · 커뮤니티 · 푸시 알림", "App Store / Play Store"],
               ["서버 (NestJS)", "API · 인증 · 추천 · 알림 · PostgreSQL", "Cloud Run + Supabase"],
               ["관리자 웹 (React)", "맛집 등록 · 푸시 발송 · 방문 통계 · 문의 관리", "Vercel"],
-              ["지도 웹 (Kakao Maps)", "핀 · 클러스터링 · 권역 — 앱과 postMessage 통신", "Vercel (3버전 동시 서빙)"],
+              ["지도 웹 (Kakao Maps)", "핀 · 클러스터링 · 권역 — 앱과 postMessage 통신", "Vercel (3버전 동시 제공)"],
             ],
           },
           docs: [
@@ -241,28 +241,28 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/katsu-map/impl-1-auth.md", label: "구버전 앱을 끊지 않고 인증 체계 교체 — 3단계 공존 가드와 무중단 전환" },
-            { href: "/mds/katsu-map/impl-2-compat.md", label: "\"컬럼 하나 추가\"가 한 줄이 아닌 이유 — 하위호환 4원칙, 마이그레이션 25건 파괴 0건" },
-            { href: "/mds/katsu-map/impl-3-map-versions.md", label: "지도를 세 버전 동시에 서빙하는 이유 — 앱 바이너리에 박힌 URL과 구버전 사용자" },
-            { href: "/mds/katsu-map/impl-4-recommend.md", label: "취향 추천 — 다섯 개 대안을 놓고 사전집계를 골랐다 (pgvector는 왜 보류했나)" },
+            { href: "/mds/katsu-map/impl-1-auth.md", label: "구버전 앱을 유지하며 인증 체계를 교체했습니다" },
+            { href: "/mds/katsu-map/impl-2-compat.md", label: "운영 중에도 기존 앱을 깨뜨리지 않는 DB 변경" },
+            { href: "/mds/katsu-map/impl-3-map-versions.md", label: "구버전 앱의 지도를 유지하며 새 지도 기능을 배포했습니다" },
+            { href: "/mds/katsu-map/impl-4-recommend.md", label: "돈가스 테이스팅 기록을 바탕으로 취향에 맞는 식당을 추천하는 기능을 만들었습니다" },
           ],
         },
         {
           // 사진 자리: 어드민 방문 히트맵(잔디) 화면 캡처 — 푸시 발송일 링이 보이면 가장 좋음
           title: "운영 트러블슈팅",
           items: [
-            "운영 중 마주친 문제를 로그와 지표로 발견하고, 원인을 좁혀 해결한 과정을 정리했습니다. 문제 발견부터 수정, 배포, 전후 실측까지 직접 확인하며 해결한 사례들입니다.",
+            "실사용자가 생기면서 개발 환경에서는 예상하지 못했던 문제들도 마주했습니다. 로그와 지표를 함께 보며 원인을 좁히고, 필요한 부분만 수정한 뒤 실제 운영 환경에서 다시 확인했습니다.",
           ],
           highlights: [
-            "로그와 지표로 발견하고, 원인을 좁혀 해결한 과정",
+            "로그와 지표를 함께 보며 원인을 좁히고, 필요한 부분만 수정한 뒤 실제 운영 환경에서 다시 확인했습니다.",
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시를 보내면 서버가 사용자를 거부하고 있었다 — 발견부터 전/후 실측까지 풀사이클" },
-            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전체가 느려졌다 — 404 응답 속도로 인프라 가설부터 배제한 조사" },
-            { href: "/mds/katsu-map/ts-3-push-dup.md", label: "재설치하면 알림이 두 번 왔다 — 유령 계정과 토큰 유니크 범위, 해법 3개 비교" },
-            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "장애처럼 보였지만 장애가 아니었다 — 조치를 \"안 한 것\"이 결론인 504 오탐 판정" },
-            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "5분인 줄 알았던 캐시가 0.3초였다 — 라이브러리 드리프트 감사·수정·HIT 실측" },
+            { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시 발송 직후 몰리던 요청을 분산해 오류를 줄였습니다" },
+            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연 원인을 찾아 DB 요청 구조를 개선했습니다" },
+            { href: "/mds/katsu-map/ts-3-push-dup.md", label: "앱 재설치 후 중복 알림의 원인을 푸시 토큰 연결에서 찾아 수정했습니다" },
+            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "504 오류를 서버 장애로 단정하지 않고 로그로 원인 범위를 좁혔습니다" },
+            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "잘못 설정된 캐시 만료 시간을 바로잡아 응답 속도를 개선했습니다" },
           ],
         },
         {
@@ -507,7 +507,7 @@ const experiences: Record<Locale, Experience[]> = {
       sub_title: "1인 개발로 시작한 앱 서비스가 유저 6,000명을 넘기고, 인플루언서와 협업해 현재도 확장중인 경험",
       imageUrl: "/assets/projects/katsu-map-app-store.png",
       index: 0,
-      skill_ids: [30, 31, 5, 36, 39, 32, 33, 34, 35, 18, 37, 38],
+      skill_ids: [30, 31, 5, 36, 115, 39, 32, 33, 34, 35, 18, 37, 38],
       category: "SERVICE",
     },
     {
@@ -1678,7 +1678,7 @@ const experiences: Record<Locale, Experience[]> = {
       ],
       is_active: true,
       sub_title: "‘모두의 창업’ 1라운드 선정 및 투자금 300만 원 유치 · 2라운드 준비 중",
-      imageUrl: "/assets/experiences/kkinitalk/kkini.png",
+      imageUrl: "/assets/experiences/kkinitalk/kkini-card.png",
       index: 3,
       skill_ids: [83, 84, 85, 86, 99, 87, 89, 90, 91, 92, 94, 95, 96, 98],
       category: "STARTUP",
@@ -2040,28 +2040,30 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           id: "agent-roles",
-          title: "역할을 나눠 개발하기 — 멀티 에이전트 구성 · 구현과 검증 분리",
+          title: "역할을 나눠 개발하기 — 멀티 에이전트 구성 · 구현과 검증 분리 · .claude/agents",
           // 사진 자리(media): 서브 에이전트 여러 개가 병렬로 실행 중인 세션 캡처 — 프론트/백 작업이 동시에 도는 화면
           sections: [
             {
-              title: "Main Agent · Frontend / Backend · Researcher · Planner · Reviewer",
+              title: "Main이 조율하고, 독립 작업은 병렬로, Reviewer는 읽기 전용으로",
               items: [
-                "메인 에이전트는 전체 계획 관리와 프론트·백 결과 연결, 통합 테스트를 맡고, 경계가 분명한 구현은 프론트엔드·백엔드 서브 에이전트에 나눠 병렬로 진행합니다.",
-                "리서처는 기존 구조 조사, 플래너는 영향 범위와 작업 계획, 리뷰어는 구현 결과 검토를 맡습니다. 리뷰어가 직접 코드를 고치면 또 하나의 구현자가 되어 검증자가 사라지므로, 구현과 검증 역할은 분리합니다.",
-                "나누기 전에 공통 타입·API 계약·완료 조건부터 정합니다. 작업은 분산하지만 전체 방향과 통합 판단은 한곳에서 관리합니다.",
+                "끼니톡에서는 같은 Task와 API 계약을 기준으로 백엔드와 앱 작업을 별도 서브 에이전트에 맡겨 동시에 진행했습니다. 각 에이전트는 지정된 저장소만 수정하고, 결과 연결과 통합 테스트는 Main Agent가 담당했습니다.",
+                "기존 구조 조사와 계획 수립은 필요할 때 Explore·Plan 에이전트에 분리합니다. 모든 작업에 고정된 역할을 붙이기보다, 서로 독립적으로 진행할 수 있는 일만 나눕니다.",
+                "구현 후에는 파일 수정 도구가 없는 Reviewer Agent가 하위호환성·테스트 누락·운영 위험만 보고합니다. Reviewer의 지적을 반영할지는 Main Agent와 제가 판단해 구현과 검증의 책임을 분리합니다.",
+                "이 역할들은 프롬프트가 아니라 저장소의 .claude/agents/*.md 파일과 권한 설정으로 고정했고, 리뷰어 실호출과 전후 git diff 비교로 '읽기 전용'이 실제로 지켜지는 것까지 확인했습니다.",
               ],
               highlights: [
-                "전체 계획 관리와 프론트·백 결과 연결, 통합 테스트",
-                "서브 에이전트에 나눠 병렬로",
-                "또 하나의 구현자가 되어 검증자가 사라지므로",
-                "구현과 검증 역할은 분리",
-                "공통 타입·API 계약·완료 조건",
-                "전체 방향과 통합 판단은 한곳에서",
+                "백엔드와 앱 작업을 별도 서브 에이전트에 맡겨 동시에 진행",
+                "지정된 저장소만 수정",
+                "결과 연결과 통합 테스트는 Main Agent가 담당",
+                "서로 독립적으로 진행할 수 있는 일만",
+                "파일 수정 도구가 없는 Reviewer Agent",
+                "구현과 검증의 책임을 분리",
+                ".claude/agents/*.md 파일과 권한 설정으로 고정",
               ],
               docs: [
                 {
                   href: "/mds/ai-workflow/roles.md",
-                  label: "멀티 에이전트 분업 — 역할 경계와 한 작업이 흘러가는 사이클",
+                  label: "멀티 에이전트 분업 — 실제 BE·FE 병렬 작업과 읽기 전용 리뷰",
                 },
               ],
             },
@@ -2073,27 +2075,30 @@ const experiences: Record<Locale, Experience[]> = {
           // 사진 자리(media): 실제 CLAUDE.md 규칙 부분 캡처 또는 Headroom이 컨텍스트를 압축한 로그 캡처
           sections: [
             {
-              title: "Headroom · working.md · CLAUDE.md · Prompt / Tool Logging",
+              title: "Headroom · working.md · CLAUDE.md · settings.json",
               items: [
-                "Headroom으로 불필요한 도구 출력과 로그를 압축해 긴 세션에서도 핵심 컨텍스트를 유지하고, 같은 구조를 반복해서 읽히는 토큰 비용을 줄입니다.",
+                "Headroom 프록시로 세션을 감싸, 도구 출력과 스키마가 모델에 닿기 전에 로컬에서 압축합니다. 실측으로 요청당 약 1.6만 토큰이 전송에서 빠졌고 프롬프트 캐시 적중률은 99%로 유지됐습니다. 압축된 원본은 로컬에 보관되어 필요하면 복원합니다.",
                 "최신 요구사항과 설계는 working.md에 유지하고 중요한 시점은 v1·v2로 버전화합니다. 수시로 바뀌는 요구사항과 예전 설계를 분리해 관리할 수 있습니다.",
                 "과거 AI에 작업을 과도하게 맡겼다가 운영 DB 데이터를 잃은 뒤, CLAUDE.md에 수정 금지 파일, API 응답 변경 제한, DB 변경 시 사전 확인, 필수 테스트, 에이전트별 역할을 명시합니다. 운영 DB 변경은 에이전트가 직접 수행하지 않고 제가 검토한 뒤 수동으로 반영합니다.",
-                "프롬프트와 도구 사용 로그를 남겨, 문제가 생겼을 때 어떤 지시로 어떤 변경이 일어났는지 추적할 수 있게 합니다.",
               ],
               highlights: [
-                "핵심 컨텍스트를 유지",
-                "반복해서 읽히는 토큰 비용",
+                "모델에 닿기 전에 로컬에서 압축",
+                "요청당 약 1.6만 토큰",
+                "캐시 적중률은 99%로 유지",
                 "working.md",
                 "v1·v2로 버전화",
                 "운영 DB 데이터를 잃은 뒤",
                 "수정 금지 파일, API 응답 변경 제한, DB 변경 시 사전 확인",
                 "제가 검토한 뒤 수동으로 반영",
-                "프롬프트와 도구 사용 로그",
               ],
               docs: [
                 {
                   href: "/mds/ai-workflow/context.md",
                   label: "에이전트가 아는 것과 할 수 있는 것 — CLAUDE.md와 문서 버전 관리",
+                },
+                {
+                  href: "/mds/ai-workflow/headroom-judgment.md",
+                  label: "Headroom 딥다이브 — '줄여도 되는 정보'는 어떻게 판별하나",
                 },
               ],
             },
@@ -2101,7 +2106,7 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           id: "agent-verify",
-          title: "여러 번 검증하기 — 검증 하네스 · CodeRabbit · Playwright 실측",
+          title: "여러 단계로 테스트하기 — 검증 하네스 · CodeRabbit · Playwright 실측",
           // 사진 자리(media): CodeRabbit PR 리뷰 코멘트 캡처 또는 검증 하네스 실행 결과(PASS/FAIL 목록) 터미널 캡처
           sections: [
             {
@@ -2110,6 +2115,7 @@ const experiences: Record<Locale, Experience[]> = {
                 "Task를 작성할 때부터 테스트를 완료 조건에 포함합니다. 구현이 끝나면 테스트·린트·타입 체크 → 검증 하네스 → 리뷰어 에이전트 → CodeRabbit PR 리뷰 → 직접 실행 순서로 확인하고, 문제가 있으면 이전 단계로 돌아갑니다.",
                 "하나의 AI 판단을 다른 AI 판단으로 덮는 것이 아니라, 자동화된 기준과 독립 리뷰, 직접 실행을 함께 사용합니다.",
                 "끼니톡에서는 단위 테스트와 별도로 계약·AI 출력·지표·부하 하네스를 만들어 비결정적인 LLM 응답과 실제 외부 API 동작을 검증했습니다.",
+                "PR에는 CodeRabbit을 붙여 내부 기준 밖의 시선을 더합니다. 실제로 DTO 계약과 컨트롤러 구현의 불일치를 지적받았고, 지적은 에이전트용 프롬프트로 받아 그대로 수정 작업에 넘깁니다.",
                 "마지막 층인 직접 실행은 에이전트가 헤드리스 크롬으로 대신합니다. 화면을 열어 스크린샷과 실측값으로 보고하고, 첫 로딩 성능 같은 문제도 같은 방식으로 분해합니다.",
               ],
               highlights: [
@@ -2118,6 +2124,8 @@ const experiences: Record<Locale, Experience[]> = {
                 "자동화된 기준과 독립 리뷰, 직접 실행",
                 "계약·AI 출력·지표·부하 하네스",
                 "비결정적인 LLM 응답",
+                "내부 기준 밖의 시선",
+                "지적은 에이전트용 프롬프트로 받아",
                 "에이전트가 헤드리스 크롬으로 대신합니다",
                 "스크린샷과 실측값으로 보고",
               ],
@@ -2132,20 +2140,20 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           id: "agent-ops",
-          title: "운영에도 활용하기 — 읽기 전용 에이전트 · 로그 트리아지",
+          title: "운영에도 활용하기 — AI는 관측하고, 조치는 사람이 결정합니다",
           // 사진 자리(media): 에이전트가 운영 로그를 집계·분석한 세션 캡처 — 읽기 전용 명령과 출력 기록이 보이는 화면
           sections: [
             {
-              title: "읽기 전용 권한 · 로그 수집/집계 · 가설 배제 · 트리아지 플로우",
+              title: "읽기 전용 관측 · 사람의 조치 결정 · 같은 기준으로 재검증",
               items: [
-                "돈가스 지도를 1인으로 운영하며 생기는 관측 공백을 AI 에이전트로 메웠습니다. 읽기 전용 권한만 주고 로그 수집·집계·가설 배제를 맡기되, 조치 결정과 운영 환경 변경은 반드시 사람이 합니다.",
-                "운영 트러블슈팅의 발견은 전부 이 플로우에서 나왔고, 에이전트가 남긴 명령·출력 기록이 그대로 각 사건의 증거 자료가 됐습니다.",
+                "1인 운영에서 생기는 관측 공백은 AI 에이전트가 읽기 전용 로그 조회·집계·이상 징후 탐색으로 메우고, 원인 판단과 배포·설정·DB 변경은 사람이 직접 결정합니다.",
+                "429 버스트 발견, 504 오탐 판정, 콜드 스타트와 지연의 관계 분석처럼 어떤 조건에서 문제가 발생하는지까지 로그로 좁혔습니다. 조치 후에는 같은 조건으로 다시 조회해 결과를 확인합니다.",
               ],
               highlights: [
-                "관측 공백을 AI 에이전트로",
-                "읽기 전용 권한만",
-                "조치 결정과 운영 환경 변경은 반드시 사람",
-                "명령·출력 기록이 그대로 각 사건의 증거",
+                "AI 에이전트가 읽기 전용 로그 조회·집계·이상 징후 탐색",
+                "원인 판단과 배포·설정·DB 변경은 사람이 직접 결정",
+                "429 버스트 발견, 504 오탐 판정, 콜드 스타트와 지연의 관계 분석",
+                "같은 조건으로 다시 조회해 결과를 확인",
               ],
               docs: [
                 {
@@ -2182,7 +2190,7 @@ const experiences: Record<Locale, Experience[]> = {
       sub_title: "A live service started as a solo project and grown to 3,000 MAU",
       imageUrl: "/assets/projects/katsu-map-app-store.png",
       index: 0,
-      skill_ids: [30, 31, 5, 36, 39, 32, 33, 34, 35, 18, 37, 38],
+      skill_ids: [30, 31, 5, 36, 115, 39, 32, 33, 34, 35, 18, 37, 38],
       category: "SERVICE",
     },
     {
@@ -2219,7 +2227,7 @@ const experiences: Record<Locale, Experience[]> = {
       links: [],
       is_active: true,
       sub_title: "Owned everything AI — diet-analysis server, chatbot integration, and verification — while advancing to Round 1 of Everyone's Startup",
-      imageUrl: "/assets/experiences/kkinitalk/kkini.png",
+      imageUrl: "/assets/experiences/kkinitalk/kkini-card.png",
       placeholderSlots: true,
       index: 3,
       skill_ids: [],

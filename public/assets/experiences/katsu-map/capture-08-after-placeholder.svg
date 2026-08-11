@@ -3,16 +3,16 @@
 <rect width="1000" height="36" rx="10" fill="#161b22"/>
 <rect y="26" width="1000" height="14" fill="#161b22"/>
 <circle cx="22" cy="18" r="6" fill="#ff5f56"/><circle cx="42" cy="18" r="6" fill="#ffbd2e"/><circle cx="62" cy="18" r="6" fill="#27c93f"/>
-<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">검증표 최종 — 푸시 202 비동기화·점진 발송 (전량 2,320명 실측 · 2026-08-10)</text>
+<text x="82" y="23" fill="#8b949e" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13">다음 전체 푸시 발송 검증 — 2,320개 메시지 · 2026-08-10</text>
 <g font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14">
 <text x="20" y="77" fill="#8b949e" xml:space="preserve">  지표                        적용 전 (실측)            적용 후 (리비전 00067, 실측)</text>
-<text x="20" y="99" fill="#7ee787" xml:space="preserve">  push/send 요청 지연         11.43s (08-07)            0.180s · 202  (2,320명 전량)</text>
+<text x="20" y="99" fill="#7ee787" xml:space="preserve">  push/send 요청 지연         11.43s (08-07)            0.180s · 202</text>
 <text x="20" y="121" fill="#7ee787" xml:space="preserve">  발송 직후 429               28건 (07-23)              0건  (유입 피크 분당 205 요청 포함)</text>
-<text x="20" y="143" fill="#7ee787" xml:space="preserve">  Sentry 에러 (당일)          32건 스파이크             0건</text>
-<text x="20" y="165" fill="#7ee787" xml:space="preserve">  발송 완주                   기록 없음                 dispatchId=2075d2b0... 24청크</text>
-<text x="20" y="187" fill="#7ee787" xml:space="preserve">                                                        failedChunks=0 durationMs=33633</text>
-<text x="20" y="209" fill="#e6e6e6" xml:space="preserve">  앱 429 재시도               -                         다음 릴리즈 합류 (추가 안전망)</text>
+<text x="20" y="143" fill="#7ee787" xml:space="preserve">  분당 요청 수                -                         6 → 136 → 205 → 164</text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">  발송 완주                   기록 없음                 dispatchId=2075d2b0... 24묶음</text>
+<text x="20" y="187" fill="#7ee787" xml:space="preserve">                                                        실패 0 · 33.6초</text>
+<text x="20" y="209" fill="#e6e6e6" xml:space="preserve">  주요 검증 기준              -                         서버 429 로그 · 발송 완료 기록</text>
 <text x="20" y="231" fill="#e6e6e6" xml:space="preserve"></text>
-<text x="20" y="253" fill="#f0c674" xml:space="preserve">  발견(로그) → 인과 규명 → 설계 → 배포 → 전/후 실측 완결 · CPU 스로틀 설정 없이 완주(비용 0)</text>
+<text x="20" y="253" fill="#f0c674" xml:space="preserve">  운영 로그에서 발견 → 발송 시각 대조 → 서버 변경 → 다음 전체 발송에서 같은 지표 재측정</text>
 </g>
 </svg>
