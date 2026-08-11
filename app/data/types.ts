@@ -74,6 +74,8 @@ export interface ExperienceDetailMedia {
   placement?: "top" | "bottom" | "left" | "right";
   /** 좌/우 배치일 때 본문과의 가로 간격(px) — 기본 16 */
   gap?: number;
+  /** 좌/우 배치일 때 텍스트 칼럼만 아래로 내리는 여백(px) — 이미지 위치는 그대로 */
+  textOffset?: number;
   /** 이미지가 카드를 가득 채우도록 자를 때 사용하는 프레임 비율 */
   frameAspectRatio?: string;
   /** 여러 이미지를 나란히 놓을 때 원본 비율과 관계없이 같은 너비로 배치 */
@@ -134,6 +136,8 @@ export interface ExperienceDetailAction {
 
 // 섹션 본문 뒤에 이어 붙는 보조 블록.
 export interface ExperienceDetailExtra {
+  /** 블록 맨 위(이미지보다 위)에 오는 소제목 */
+  heading?: string;
   items: string[];
   highlights?: string[];
   layout?: "list" | "paragraphs";

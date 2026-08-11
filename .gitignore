@@ -31,6 +31,9 @@ core-competencies.md
 # local authoring docs
 /docs/
 
+# 에이전트 로컬 설정·지침
+/.claude/
+
 # macOS
 .DS_Store
 
