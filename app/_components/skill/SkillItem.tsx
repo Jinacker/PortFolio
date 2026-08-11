@@ -103,6 +103,9 @@ const SkillItem = ({
           src={imageUrl}
           alt={label}
           sizes={generateSizeSet(size)}
+          // Next 14.2 최적화기가 <svg로 시작하는 파일을 인식 못 해 400을 내므로 SVG는 우회
+          // (simpleicons는 확장자 없는 URL로 SVG를 반환)
+          unoptimized={imageUrl.endsWith(".svg") || imageUrl.includes("simpleicons.org")}
         />
       </div>
       {tooltipPosition && typeof document !== "undefined"

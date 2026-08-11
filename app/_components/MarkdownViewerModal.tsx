@@ -228,6 +228,8 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
           width={1280}
           height={860}
           className="my-2 h-auto w-full rounded-md border border-slate-200"
+          // 터미널 캡처 등 SVG는 최적화 불필요 + Next 14.2 인식 버그가 있어 우회
+          unoptimized={typeof src === "string" && src.endsWith(".svg")}
         />
       ) : null,
     a: ({ children, href }) => (

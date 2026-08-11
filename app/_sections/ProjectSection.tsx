@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image"
 import { useRef, useState } from "react";
 
 import SectionWatcher from "@/_components/SectionWatcher";
@@ -199,11 +200,16 @@ export default function ProjectSection() {
                       <div className="mb-4">
                         <div className="flex gap-2">
                           {images.map(src => (
-                            <img
+                            <Image
                               key={src}
                               src={src}
                               alt=""
+                              width={640}
+                              height={256}
+                              sizes="(max-width: 768px) 90vw, 420px"
                               className="h-32 flex-1 rounded-lg border border-black/5 object-cover object-[50%_18%]"
+                              // Next 14.2 최적화기의 SVG 인식 버그 우회
+                              unoptimized={src.endsWith(".svg")}
                             />
                           ))}
                         </div>
