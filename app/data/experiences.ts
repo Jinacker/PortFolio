@@ -249,19 +249,19 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           // 사진 자리: 어드민 방문 히트맵(잔디) 화면 캡처 — 푸시 발송일 링이 보이면 가장 좋음
-          title: "로그와 지표로 운영 문제를 추적하고 검증했습니다",
+          title: "운영 트러블슈팅",
           items: [
-            "운영 중 발생한 429·응답 지연·중복 알림·504 오류·캐시 문제를 로그와 지표로 재현했습니다. 원인을 좁힌 뒤 수정 전후 수치를 비교했고, 서버 장애가 아닌 경우에는 조치하지 않는 판단의 근거도 남겼습니다.",
+            "실사용자가 생기면서 개발 환경에서는 예상하지 못했던 문제들도 마주했습니다. 로그와 지표를 함께 보며 원인을 좁히고, 필요한 부분만 수정한 뒤 실제 운영 환경에서 다시 확인했습니다.",
           ],
           highlights: [
-            "원인을 좁힌 뒤 수정 전후 수치를 비교",
+            "로그와 지표를 함께 보며 원인을 좁히고, 필요한 부분만 수정한 뒤 실제 운영 환경에서 다시 확인했습니다.",
           ],
           layout: "paragraphs",
           docs: [
             { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시 발송 직후 몰리던 요청을 분산해 오류를 줄였습니다" },
             { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연 원인을 찾아 DB 요청 구조를 개선했습니다" },
-            { href: "/mds/katsu-map/ts-3-push-dup.md", label: "앱 재설치 후 알림이 두 번 오는 문제를 해결했습니다" },
-            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "앱에서 발생한 504 오류가 서버 장애가 아님을 확인했습니다" },
+            { href: "/mds/katsu-map/ts-3-push-dup.md", label: "앱 재설치 후 중복 알림의 원인을 푸시 토큰 연결에서 찾아 수정했습니다" },
+            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "504 오류를 서버 장애로 단정하지 않고 로그로 원인 범위를 좁혔습니다" },
             { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "잘못 설정된 캐시 만료 시간을 바로잡아 응답 속도를 개선했습니다" },
           ],
         },
@@ -507,7 +507,7 @@ const experiences: Record<Locale, Experience[]> = {
       sub_title: "1인 개발로 시작한 앱 서비스가 유저 6,000명을 넘기고, 인플루언서와 협업해 현재도 확장중인 경험",
       imageUrl: "/assets/projects/katsu-map-app-store.png",
       index: 0,
-      skill_ids: [30, 31, 5, 36, 39, 32, 33, 34, 35, 18, 37, 38],
+      skill_ids: [30, 31, 5, 36, 115, 39, 32, 33, 34, 35, 18, 37, 38],
       category: "SERVICE",
     },
     {
@@ -2190,7 +2190,7 @@ const experiences: Record<Locale, Experience[]> = {
       sub_title: "A live service started as a solo project and grown to 3,000 MAU",
       imageUrl: "/assets/projects/katsu-map-app-store.png",
       index: 0,
-      skill_ids: [30, 31, 5, 36, 39, 32, 33, 34, 35, 18, 37, 38],
+      skill_ids: [30, 31, 5, 36, 115, 39, 32, 33, 34, 35, 18, 37, 38],
       category: "SERVICE",
     },
     {

@@ -13,11 +13,11 @@
 <text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
 <text x="20" y="209" fill="#8b949e" xml:space="preserve">  [부팅 로그] 미사용 Redis 연결 시도 분기 제거</text>
 <text x="20" y="231" fill="#f0c674" xml:space="preserve">  이전:  'Attempting to connect to Redis...' → ECONNREFUSED (매 부팅)</text>
-<text x="20" y="253" fill="#7ee787" xml:space="preserve">  이후:  (소멸 — 코드 순감소 -204줄)</text>
+<text x="20" y="253" fill="#7ee787" xml:space="preserve">  이후:  (소멸 — 인메모리 캐시만 명시적으로 사용)</text>
 <text x="20" y="275" fill="#e6e6e6" xml:space="preserve"></text>
 <text x="20" y="297" fill="#8b949e" xml:space="preserve">  [배포 후 실측] 동일 URL 2회 호출 TTFB (리비전 00072, 2026-08-10)</text>
-<text x="20" y="319" fill="#7ee787" xml:space="preserve">  /restaurants (448KB 목록)   MISS 0.253s  →  HIT 0.101s</text>
-<text x="20" y="341" fill="#7ee787" xml:space="preserve">  /restaurants/:id (상세)     MISS 0.292s  →  HIT 0.089s</text>
-<text x="20" y="363" fill="#8b949e" xml:space="preserve">  ※ 왕복 지연 약 0.08s 포함 — HIT의 서버 처리 시간은 사실상 0 · 배포 후 에러 0건</text>
+<text x="20" y="319" fill="#7ee787" xml:space="preserve">  /restaurants (448KB 목록)   MISS 253ms  →  HIT 101ms</text>
+<text x="20" y="341" fill="#7ee787" xml:space="preserve">  /restaurants/:id (상세)     MISS 292ms  →  HIT 89ms</text>
+<text x="20" y="363" fill="#8b949e" xml:space="preserve">  ※ 왕복 지연 약 80ms 포함 · 동일 URL을 연속 호출해 MISS/HIT 확인</text>
 </g>
 </svg>
