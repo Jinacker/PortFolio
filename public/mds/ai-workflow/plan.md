@@ -98,7 +98,7 @@ sequenceDiagram
 
 대화로만 계획하면 세션이 끝날 때 같이 사라집니다. 그래서 계획·작업·결과가 전부 레포 안의 파일로 존재합니다. 아래는 끼니톡 백엔드의 실제 `.claude/` 작업 공간입니다.
 
-![끼니톡 백엔드의 실제 .claude 작업 공간 — plan 3종과 task 11개](/assets/experiences/ai-agent/claude-workspace-tree.png#size=406x884&w=170&left)
+![끼니톡 백엔드의 실제 .claude 작업 공간 — agents 3종·plan 3종·task 11개](/assets/experiences/ai-agent/claude-workspace-tree.png#size=340x789&w=150&left)
 
 | 파일 | 역할 |
 |---|---|
