@@ -1581,44 +1581,20 @@ const experiences: Record<Locale, Experience[]> = {
         },
         {
           // 사진 자리: 앱의 식단 분석 결과 화면 — 사진 위에 인식된 음식 영역과 영양소 수치가 함께 보이는 스크린샷
-          title: "식단 사진 영양소 분석 구현",
+          title: "핵심 구현 — 식단 분석 서버와 챗봇 연동",
           items: [
-            "사진 한 장으로 음식·양·영양소를 분석하는 AI 파이프라인을 구현했습니다.",
-            "자체 모델과 GPT Vision을 비교하고, 비용·성능과 향후 교체 가능성까지 고려해 구조를 설계했습니다.",
+            "사진 한 장으로 음식·양·영양소를 분석하는 AI 서버와 건강 상담 챗봇 연동을 구현했습니다.",
+            "인식 비용은 직접 호출해 실측한 뒤 구조를 정했고, 벤더 API는 문서 대신 실제 응답으로 검증하고 연동했습니다.",
           ],
           highlights: [
-            "사진 한 장으로 음식·양·영양소를 분석하는 AI 파이프라인",
-            "비용·성능과 향후 교체 가능성까지 고려해 구조를 설계",
+            "사진 한 장으로 음식·양·영양소를 분석하는 AI 서버",
+            "직접 호출해 실측한 뒤 구조를 정했고",
+            "문서 대신 실제 응답으로 검증",
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/kkinitalk/impl-1-model.md", label: "자체 모델과 GPT Vision 사이에서 — 비용을 재고 교체 가능하게 설계했다" },
-            { href: "/mds/kkinitalk/impl-2-pipeline.md", label: "사진 한 장에서 영양소까지 — 4단계 파이프라인과 계약 설계" },
-            { href: "/mds/kkinitalk/impl-3-nutrition.md", label: "한식이 전부 \"영양 정보 미등록\"으로 떨어졌다 — 하이브리드와 점진 승격" },
-            { href: "/mds/kkinitalk/impl-4-llm.md", label: "지병·복약을 반영한 AI 문구 생성 — 비결정 출력을 계약으로 묶기" },
-            { href: "/mds/kkinitalk/impl-5-ops.md", label: "추론 서버가 죽는 네 가지 방식을 막기 — 콜드스타트·GPU 메모리·타임아웃" },
-            { href: "/mds/kkinitalk/impl-6-failure.md", label: "AI가 죽었을 때 화면을 어디까지 지킬까 — 실패 정책 4등급" },
-            { href: "/mds/kkinitalk/impl-7-cache.md", label: "같은 사진을 두 번 분석하지 않는다 — 캐시를 일관성 장치로 쓰기" },
-            { href: "/mds/kkinitalk/impl-8-ssrf.md", label: "사진 URL을 받는 서버의 SSRF 방어 — 9계층 검증과 프라이버시" },
-          ],
-        },
-        {
-          // 사진 자리: 앱의 음성 건강대화 화면 — 마이크 버튼과 대화 말풍선, 119 안내가 떠 있는 상태면 가장 좋음
-          title: "건강 상담 챗봇 연동",
-          items: [
-            "외부에서 개발된 건강 상담 챗봇을 직접 검증한 뒤 실제 서비스에 연동했습니다.",
-            "건강정보를 다루는 만큼 응급 상황과 잘못된 AI 출력을 보완하는 안전장치를 함께 설계했습니다.",
-          ],
-          highlights: [
-            "직접 검증한 뒤 실제 서비스에 연동",
-            "응급 상황과 잘못된 AI 출력을 보완하는 안전장치",
-          ],
-          layout: "paragraphs",
-          docs: [
-            { href: "/mds/kkinitalk/chat-1-where.md", label: "벤더 챗봇을 어디에 붙일까 — 앱 직접 호출 vs AI 서버 vs 백엔드 프록시" },
-            { href: "/mds/kkinitalk/chat-2-recon.md", label: "문서를 믿지 않고 API를 먼저 호출했다 — 모순 3건, 미문서화 동작 2건" },
-            { href: "/mds/kkinitalk/chat-3-gate.md", label: "AI가 만든 건강정보를 바로 쓰지 않는다 — 격리 저장과 보호자 승인 게이트" },
-            { href: "/mds/kkinitalk/chat-4-voice.md", label: "어르신 음성 대화 화면 — 말이 끊기면 알아서 전송되는 UX" },
+            { href: "/mds/kkinitalk/impl-1-model.md", label: "자체 모델과 GPT Vision 사이에서 — 건당 비용 12배를 실측해 구조를 정했다" },
+            { href: "/mds/kkinitalk/chat-1-where.md", label: "벤더 챗봇을 어디에 붙일까 — 연동 위치를 정한 것은 토큰의 성격이었다" },
           ],
         },
         {
@@ -1626,18 +1602,15 @@ const experiences: Record<Locale, Experience[]> = {
           title: "AI를 어떻게 검증했나",
           items: [
             "결과가 매번 달라질 수 있는 AI를 위해 일반적인 단위 테스트와 다른 검증 방식을 설계했습니다.",
-            "출력의 정확성뿐 아니라 안전성·일관성·성능까지 직접 측정하고 검증했습니다.",
+            "안전장치는 코드에 있다는 것과 동작한다는 것을 구분해, 지표와 부하로 직접 증명했습니다.",
           ],
           highlights: [
             "일반적인 단위 테스트와 다른 검증 방식",
-            "안전성·일관성·성능까지 직접 측정하고 검증",
+            "코드에 있다는 것과 동작한다는 것을 구분",
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/kkinitalk/verify-1-method.md", label: "같은 답이 안 나오는 AI를 어떻게 테스트하나 — 불변식·메타모픽·적대적" },
-            { href: "/mds/kkinitalk/verify-2-layers.md", label: "2층 검증 체계 — 단위 테스트와 계약 하네스가 잡는 것이 서로 다르다" },
-            { href: "/mds/kkinitalk/verify-3-emergency.md", label: "응급 신호 가드레일 — 정답 세트 46건으로 재현율 45.8%에서 100%로" },
-            { href: "/mds/kkinitalk/verify-4-vision.md", label: "같은 사진 5회에 5가지 답 — Vision 일관성을 수치로 재기" },
+            { href: "/mds/kkinitalk/verify-3-emergency.md", label: "응급 신호 안전장치 — 정답 세트 46건으로 재현율 45.8%에서 100%로" },
             { href: "/mds/kkinitalk/verify-5-load.md", label: "코드에만 있던 안전장치를 처음으로 증명 — 부하·동시성 실측" },
           ],
         },
@@ -1654,10 +1627,8 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/kkinitalk/ts-1-fake.md", label: "모든 지표가 초록인데 사용자는 가짜 AI와 대화하고 있었다" },
-            { href: "/mds/kkinitalk/ts-2-guard.md", label: "타이핑으로만 검증한 안전장치가 음성에서 4분의 3을 놓쳤다" },
-            { href: "/mds/kkinitalk/ts-3-agent.md", label: "AI로 개발하며 생긴 검증 공백 — 결함을 잡아낸 것은 누구였나" },
-            { href: "/mds/kkinitalk/ts-4-audio.md", label: "안드로이드에서만 음성이 안 됐다 — 두 번의 실험으로 원인 좁히기" },
             { href: "/mds/kkinitalk/ts-5-latency.md", label: "LLM 응답 3~4초를 1.5~2.5초로 — 원인을 출력 토큰 생성으로 특정" },
+            { href: "/mds/kkinitalk/ts-4-audio.md", label: "안드로이드에서만 음성이 안 됐다 — 두 번의 실험으로 원인 좁히기" },
           ],
         },
         {
