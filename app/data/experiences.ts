@@ -1595,7 +1595,7 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/kkinitalk/impl-1-model.md", label: "식사 사진을 영양 정보로 바꾸는 AI 분석 서버를 만들었습니다" },
-            { href: "/mds/kkinitalk/chat-1-where.md", label: "서비스 토큰을 보호하기 위해 챗봇을 백엔드에서 연동했습니다" },
+            { href: "/mds/kkinitalk/chat-1-where.md", label: "외주로 제작한 건강 상담 챗봇을 검증해 서비스에 연동했습니다" },
           ],
         },
         {
@@ -1613,8 +1613,8 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/kkinitalk/verify-1-method.md", label: "납품된 챗봇을 19개 항목으로 검증해 계약에 없던 안전 요구사항을 찾았습니다" },
-            { href: "/mds/kkinitalk/verify-3-emergency.md", label: "응급 발화 46건으로 안전장치가 놓치던 절반을 찾아 개선했습니다" },
+            { href: "/mds/kkinitalk/verify-1-method.md", label: "납품된 챗봇을 19개 항목으로 검증해 빠진 안전 요구사항을 찾았습니다" },
+            { href: "/mds/kkinitalk/verify-3-emergency.md", label: "실제 STT 문장으로 응급 안내가 놓치는 표현을 찾아 보완했습니다" },
             { href: "/mds/kkinitalk/verify-5-load.md", label: "부하 테스트로 AI 서버의 동시 실행 제한과 타임아웃을 검증했습니다" },
           ],
         },
