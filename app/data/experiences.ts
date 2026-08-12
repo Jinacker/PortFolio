@@ -790,7 +790,7 @@ const experiences: Record<Locale, Experience[]> = {
           id: "sureflow",
           title: "SureFlow — 다이어그램 GUI 편집을 지원하는 사내 라이브러리 개발 및 제품 적용",
           media: {
-            src: "/assets/experiences/sureflow-gif.gif",
+            src: "/assets/experiences/sureflow.mp4",
             alt: "V-SPICE에 적용된 SureFlow 플로우차트 편집 화면",
             width: 1412,
             height: 734,
