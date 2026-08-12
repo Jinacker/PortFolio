@@ -1632,8 +1632,8 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/kkinitalk/ts-1-fake.md", label: "운영 환경에서 개발용 가짜 챗봇이 노출되지 않도록 막았습니다" },
-            { href: "/mds/kkinitalk/ts-5-latency.md", label: "AI 문구의 출력 길이를 줄여 응답 시간을 개선했습니다" },
-            { href: "/mds/kkinitalk/ts-4-audio.md", label: "안드로이드 음성 실패 원인을 오디오 형식에서 찾았습니다" },
+            { href: "/mds/kkinitalk/ts-5-latency.md", label: "추천·복약 안내의 출력 범위를 줄여 GPT 응답 시간을 단축했습니다" },
+            { href: "/mds/kkinitalk/ts-4-audio.md", label: "안드로이드 음성 상담이 503으로 실패한 원인을 오디오 형식에서 찾았습니다" },
           ],
         },
         {
