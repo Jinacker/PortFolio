@@ -103,7 +103,7 @@ const skills: Skill[] = [
     id: 8,
     category: "FRONTEND_LIBRARY",
     items: [],
-    item: "Tanstack-query",
+    item: "TanStack Query",
     blobUrl: "/assets/skills/Tanstack-query.png",
   },
   {
@@ -247,6 +247,13 @@ const skills: Skill[] = [
     blobUrl: "/assets/skills/postgresql.png",
   },
   {
+    id: 116,
+    category: "BACKEND",
+    items: [],
+    item: "Supabase",
+    blobUrl: "/assets/skills/supabase.jpeg",
+  },
+  {
     id: 35,
     category: "INFRA_TEST",
     items: [],
@@ -262,7 +269,7 @@ const skills: Skill[] = [
   },
   {
     id: 115,
-    category: "FRONTEND",
+    category: "INFRA_TEST",
     items: [],
     item: "Sentry",
     blobUrl: "https://cdn.simpleicons.org/sentry",

@@ -9,12 +9,12 @@
 <text x="20" y="99" fill="#e6e6e6" xml:space="preserve"></text>
 <text x="20" y="121" fill="#8b949e" xml:space="preserve">  설정              입력 토큰       건당 비용</text>
 <text x="20" y="143" fill="#e6e6e6" xml:space="preserve">  기본(고해상)        37,009        약 8.08원</text>
-<text x="20" y="165" fill="#7ee787" xml:space="preserve">  detail: low          3,007        약 0.68원   ◀ 약 12배 절감, 인식 품질 유지</text>
+<text x="20" y="165" fill="#7ee787" xml:space="preserve">  detail: low          3,007        약 0.68원   ◀ 약 12배 절감, 동일 사진 인식 확인</text>
 <text x="20" y="187" fill="#e6e6e6" xml:space="preserve"></text>
-<text x="20" y="209" fill="#8b949e" xml:space="preserve">  자체 서빙 대안: GPU 상시 확보 시 월 15만~38만 원 고정 지출</text>
-<text x="20" y="231" fill="#e6e6e6" xml:space="preserve">  손익분기: 월 약 44만 건 — 그 전까지는 API가 싸다</text>
-<text x="20" y="253" fill="#8b949e" xml:space="preserve">  # 절감 전(8.08원)이면 월 3.7만 건에서 역전 — 12배가 아키텍처 결정을 뒤집었다</text>
+<text x="20" y="209" fill="#8b949e" xml:space="preserve">  로컬 분석 대안: GPU 상시 확보 시 월 15만~38만 원 고정 지출</text>
+<text x="20" y="231" fill="#e6e6e6" xml:space="preserve">  손익분기: GPU 월 30만 원 기준 약 44만 건 (단순 비용 비교)</text>
+<text x="20" y="253" fill="#8b949e" xml:space="preserve">  # 실제 전환 시점은 GPU 비용과 운영 요청량에 따라 달라진다</text>
 <text x="20" y="275" fill="#e6e6e6" xml:space="preserve"></text>
-<text x="20" y="297" fill="#7ee787" xml:space="preserve">  ▶ 결론: 운영은 GPT Vision. ANALYZER_BACKEND 환경변수 하나로 자체 모델 전환 가능</text>
+<text x="20" y="297" fill="#7ee787" xml:space="preserve">  ▶ 결론: 초기 운영은 GPT Vision. 이후 로컬 분석 모델로 교체 가능</text>
 </g>
 </svg>

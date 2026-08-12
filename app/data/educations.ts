@@ -26,6 +26,7 @@ const educations: Record<Locale, Education[]> = {
       period: "2026",
       items: [
         "한국사능력검정 심화 1급",
+        "GA4(Google Analytics 4)",
         "정보처리기사 - 가채점 결과 합격 - 실기 결과 대기중",
         "측량 및 지형공간정보기사 - 필기 합격 - 실기 준비중",
         "TOEIC 및 TOEIC Speaking 준비중",
@@ -53,6 +54,7 @@ const educations: Record<Locale, Education[]> = {
       period: "2026",
       items: [
         "Korean History Proficiency Test (Advanced) Level 1",
+        "GA4 (Google Analytics 4)",
         "Engineer Information Processing - written exam passed - practical exam in progress",
         "Surveying & Geospatial Information Engineer - written exam passed - practical exam in progress",
         "TOEIC Speaking in progress",

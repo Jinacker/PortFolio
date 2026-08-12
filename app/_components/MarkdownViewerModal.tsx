@@ -185,8 +185,9 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
     ),
     p: ({ children }) => {
       const centerImageRow = childrenHaveImageHint(children, "center-row");
+      const wrapImageRow = childrenHaveImageHint(children, "wrap-row");
       return (
-        <p className={`my-2 break-keep text-sm leading-[1.7] text-slate-600${centerImageRow ? " text-center" : ""}`}>
+        <p className={`my-2 break-keep text-sm leading-[1.7] text-slate-600${centerImageRow ? " text-center" : ""}${wrapImageRow ? " flow-root" : ""}`}>
           {children}
         </p>
       );
@@ -245,7 +246,9 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
       //   #size=406x884     → 실제 픽셀 크기 — 세로 사진의 예약 비율을 맞춰 레이아웃 틀어짐 방지
       //   #crop=406x700     → 지정한 비율로 맞추고 넘치는 아래쪽을 잘라 표시
       //   #...&left         → 왼쪽에 붙이고 본문이 오른쪽으로 흐름
+      //   #...&wrap-row     → 이미지와 같은 문단을 묶어 다음 요소가 아래에서 시작
       //   #...&half         → 2열 그리드 한 칸 — 같은 줄에 쓴 이미지 둘이 나란히 배치됨
+      //   #...&third        → 3열 이미지 행 한 칸
       const [cleanSrc, hash] = src.split("#");
       const params = new URLSearchParams(hash ?? "");
       const maxWidth = params.get("w") ? Number(params.get("w")) : undefined;
@@ -254,6 +257,7 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
       const floatLeft = params.has("left");
       const pairLeft = params.has("pair-left");
       const half = params.has("half");
+      const third = params.has("third");
       const imageStyle: CSSProperties = {};
       if (maxWidth) imageStyle.maxWidth = maxWidth;
       if (cropMatch) {
@@ -268,7 +272,9 @@ export default function MarkdownViewerModal({ url, heading, subheading, onClose 
           width={sizeMatch ? Number(sizeMatch[1]) : 1280}
           height={sizeMatch ? Number(sizeMatch[2]) : 860}
           className={
-            half
+            third
+              ? "my-1 inline-block h-auto w-[31%] rounded-md border border-slate-200 align-top [&+img]:ml-[3.5%]"
+              : half
               ? "my-1 inline-block h-auto w-[48.5%] rounded-md border border-slate-200 align-top [&+img]:ml-[2%]"
               : floatLeft
                 ? "float-left mb-3 mr-5 mt-1 h-auto w-full rounded-md border border-slate-200"

@@ -186,22 +186,39 @@ function SloganLine({ text, className }: { text: string; className?: string }) {
   );
 }
 
+// 애니메이션은 GIF 대신 mp4로 넣는다 — Next 최적화기가 GIF는 원본 그대로 내보낸다.
+const isVideoSrc = (src: string) => src.toLowerCase().endsWith(".mp4");
+
 function MediaImage({ media }: { media: ExperienceDetailMedia }) {
   const isCircle = media.shape === "circle";
-  const image = (
+  const shared = cn(
+    isCircle
+      ? "aspect-square h-auto w-full rounded-full border border-foreground/10 object-cover"
+      : media.frameAspectRatio
+        ? "h-full w-full object-cover"
+        : "h-auto w-full rounded-md",
+  );
+  const image = isVideoSrc(media.src) ? (
+    <video
+      src={media.src}
+      width={media.width}
+      height={media.height}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="metadata"
+      aria-label={media.alt}
+      className={shared}
+    />
+  ) : (
     <Image
       src={media.src}
       alt={media.alt}
       width={media.width}
       height={media.height}
       quality={95}
-      className={cn(
-        isCircle
-          ? "aspect-square h-auto w-full rounded-full border border-foreground/10 object-cover"
-          : media.frameAspectRatio
-            ? "h-full w-full object-cover"
-            : "h-auto w-full rounded-md",
-      )}
+      className={shared}
     />
   );
 
@@ -388,18 +405,37 @@ function SubDetailMedia({ media }: { media: ExperienceDetailMedia }) {
         maxWidth: media.maxWidth,
       }}
     >
-      <Image
-        src={media.src}
-        alt={media.alt}
-        width={media.width}
-        height={media.height}
-        loading="eager"
-        onLoad={() => setIsLoaded(true)}
-        className={cn(
-          "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
-          isLoaded ? "opacity-100" : "opacity-0",
-        )}
-      />
+      {isVideoSrc(media.src) ? (
+        <video
+          src={media.src}
+          width={media.width}
+          height={media.height}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-label={media.alt}
+          onLoadedData={() => setIsLoaded(true)}
+          className={cn(
+            "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+            isLoaded ? "opacity-100" : "opacity-0",
+          )}
+        />
+      ) : (
+        <Image
+          src={media.src}
+          alt={media.alt}
+          width={media.width}
+          height={media.height}
+          loading="eager"
+          onLoad={() => setIsLoaded(true)}
+          className={cn(
+            "absolute inset-0 h-full w-full object-contain transition-opacity duration-300",
+            isLoaded ? "opacity-100" : "opacity-0",
+          )}
+        />
+      )}
       <div
         role="status"
         aria-label="이미지 불러오는 중"
