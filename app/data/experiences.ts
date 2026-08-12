@@ -1614,7 +1614,7 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/kkinitalk/verify-1-method.md", label: "납품된 챗봇을 19개 항목으로 검증해 빠진 안전 요구사항을 찾았습니다" },
-            { href: "/mds/kkinitalk/verify-3-emergency.md", label: "실제 STT 문장으로 응급 안내가 놓치는 표현을 찾아 보완했습니다" },
+            { href: "/mds/kkinitalk/verify-3-emergency.md", label: "음성 인식 결과에서 놓치던 응급 표현을 찾아 보완했습니다" },
             { href: "/mds/kkinitalk/verify-5-load.md", label: "부하 테스트로 AI 서버의 동시 실행 제한과 타임아웃을 검증했습니다" },
           ],
         },
