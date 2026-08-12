@@ -103,7 +103,7 @@ const skills: Skill[] = [
     id: 8,
     category: "FRONTEND_LIBRARY",
     items: [],
-    item: "Tanstack-query",
+    item: "TanStack Query",
     blobUrl: "/assets/skills/Tanstack-query.png",
   },
   {
@@ -262,7 +262,7 @@ const skills: Skill[] = [
   },
   {
     id: 115,
-    category: "FRONTEND",
+    category: "INFRA_TEST",
     items: [],
     item: "Sentry",
     blobUrl: "https://cdn.simpleicons.org/sentry",

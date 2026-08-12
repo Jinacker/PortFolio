@@ -507,7 +507,7 @@ const experiences: Record<Locale, Experience[]> = {
       sub_title: "1인 개발로 시작한 앱 서비스가 유저 6,000명을 넘기고, 인플루언서와 협업해 현재도 확장중인 경험",
       imageUrl: "/assets/projects/katsu-map-app-store.png",
       index: 0,
-      skill_ids: [30, 31, 5, 36, 115, 39, 32, 33, 34, 35, 18, 37, 38],
+      skill_ids: [30, 31, 36, 8, 11, 39, 32, 33, 34, 35, 18, 115, 38],
       category: "SERVICE",
     },
     {
@@ -2182,7 +2182,7 @@ const experiences: Record<Locale, Experience[]> = {
       sub_title: "A live service started as a solo project and grown to 3,000 MAU",
       imageUrl: "/assets/projects/katsu-map-app-store.png",
       index: 0,
-      skill_ids: [30, 31, 5, 36, 115, 39, 32, 33, 34, 35, 18, 37, 38],
+      skill_ids: [30, 31, 36, 8, 11, 39, 32, 33, 34, 35, 18, 115, 38],
       category: "SERVICE",
     },
     {
