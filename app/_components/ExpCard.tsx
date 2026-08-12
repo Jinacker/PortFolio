@@ -24,6 +24,9 @@ interface ExpCardProps extends Omit<Experience, "skill_ids"> {
   skills: Skill[];
 }
 
+// #experience-<id> 로 들어왔을 때, 카드로 이동한 뒤 상세를 펼치기까지의 간격
+const HASH_OPEN_DELAY_MS = 500;
+
 const skillGroups = [
   {
     label: "Core",
@@ -164,21 +167,27 @@ const ExpCard = ({
   const isAnimatedImage = Boolean(imageUrl?.toLowerCase().endsWith(".gif"));
 
   useEffect(() => {
-    const openFromHash = () => {
-      if (window.location.hash !== `#experience-${id}`) return;
-
+    const scrollToCard = () => {
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => {
           cardRef.current?.focus({ preventScroll: true });
           cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       });
+    };
+
+    const openFromHash = () => {
+      if (window.location.hash !== `#experience-${id}`) return;
+
+      scrollToCard();
 
       if (hashOpenTimerRef.current) clearTimeout(hashOpenTimerRef.current);
       hashOpenTimerRef.current = setTimeout(() => {
         setIsExpanded(true);
         hashOpenTimerRef.current = null;
-      }, 650);
+        // 펼치면서 생긴 레이아웃 변화를 반영해 카드 상단으로 다시 맞춘다.
+        scrollToCard();
+      }, HASH_OPEN_DELAY_MS);
     };
 
     openFromHash();
