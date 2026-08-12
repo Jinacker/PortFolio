@@ -247,6 +247,13 @@ const skills: Skill[] = [
     blobUrl: "/assets/skills/postgresql.png",
   },
   {
+    id: 116,
+    category: "BACKEND",
+    items: [],
+    item: "Supabase",
+    blobUrl: "/assets/skills/supabase.jpeg",
+  },
+  {
     id: 35,
     category: "INFRA_TEST",
     items: [],
