@@ -308,6 +308,10 @@ export default function NewPortfolioPage() {
       window.history.scrollRestoration = "manual"
     }
 
+    // 대표 경험 딥링크(#experience-101 등)로 들어온 경우에는 해시를 지우지 않는다.
+    // ExpCard가 이 해시를 보고 해당 카드로 이동한 뒤 상세를 펼친다.
+    if (window.location.hash.startsWith("#experience-")) return
+
     if (window.location.hash) {
       window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`)
     }
