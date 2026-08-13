@@ -596,7 +596,7 @@ function PanelSection({
   const afterExtraActions = section.actions?.filter(action => action.position !== "beforeExtra");
 
   return (
-    <div className="py-3 first:pt-0 last:pb-0">
+    <div className="py-3 first:pt-0 last:pb-0" data-section-title={section.title}>
       <h4 className="mb-2 border-b border-slate-200 pb-1.5 text-sm font-bold text-foreground/85 md:text-base">
         {section.title}
       </h4>
@@ -705,6 +705,7 @@ function PanelSection({
             <button
               key={doc.href}
               type="button"
+              data-doc-href={doc.href}
               onClick={() => onOpenPdf({ href: doc.href, label: doc.label, sections: doc.sections })}
               className={cn(
                 "flex w-full items-center gap-3 rounded-xl border border-foreground/10 border-l-[3px] bg-foreground/[0.02] px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03]",
@@ -844,6 +845,7 @@ function SubDetailList({
               <div key={sub.id} className="flex flex-col gap-3">
                 <button
                   type="button"
+                  data-doc-href={directDoc.href}
                   onClick={() =>
                     onOpenPdf({
                       href: directDoc.href,

@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 
 import Shape from "@/assets/shape-sparkle.svg";
 import type { Experience, Skill } from "@/data/types";
+import { EXPERIENCE_DEEP_LINK_TARGETS } from "@/utils/experienceDeepLinks";
 
 import ExperienceDetailPanel, { type ActivePdf } from "./ExperienceDetailPanel";
 import SkillItem from "./skill/SkillItem";
@@ -26,6 +27,10 @@ interface ExpCardProps extends Omit<Experience, "skill_ids"> {
 
 // #experience-<id> 로 들어왔을 때, 카드로 이동한 뒤 상세를 펼치기까지의 간격
 const HASH_OPEN_DELAY_MS = 500;
+// 상세 패널 펼침 애니메이션 길이 — 이 뒤에 소재 위치가 확정된다
+const PANEL_EXPAND_DURATION_MS = 400;
+// scrollend를 지원하지 않는 브라우저에서 스크롤이 끝났다고 보는 최대 대기 시간
+const SCROLL_SETTLE_MAX_MS = 900;
 
 const skillGroups = [
   {
@@ -128,6 +133,9 @@ const ExpCard = ({
   const [activeLegacyModal, setActiveLegacyModal] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const hashOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const deepLinkScrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scrollSettleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const removeScrollEndListenerRef = useRef<(() => void) | null>(null);
   const shapeColor =
     category === "STARTUP"
       ? "text-[#FFD84D]"
@@ -176,6 +184,37 @@ const ExpCard = ({
       });
     };
 
+    const scrollToDeepLinkTarget = (selector: string, block: ScrollLogicalPosition = "center") => {
+      const target = cardRef.current?.querySelector(selector);
+
+      if (target) target.scrollIntoView({ behavior: "smooth", block });
+      else cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    // 스크롤이 실제로 멈춘 뒤에 이어서 실행한다.
+    // scrollend를 지원하지 않는 브라우저에서는 최대 대기 시간이 지나면 진행한다.
+    const runAfterScrollEnd = (run: () => void) => {
+      const scrollTarget: EventTarget = window;
+      let hasRun = false;
+
+      const finish = () => {
+        if (hasRun) return;
+        hasRun = true;
+        scrollTarget.removeEventListener("scrollend", finish);
+        if (scrollSettleTimerRef.current) clearTimeout(scrollSettleTimerRef.current);
+        scrollSettleTimerRef.current = null;
+        run();
+      };
+
+      scrollTarget.addEventListener("scrollend", finish);
+      scrollSettleTimerRef.current = setTimeout(finish, SCROLL_SETTLE_MAX_MS);
+      removeScrollEndListenerRef.current = () => {
+        scrollTarget.removeEventListener("scrollend", finish);
+      };
+    };
+
+    const deepLinkTarget = EXPERIENCE_DEEP_LINK_TARGETS[id];
+
     const openFromHash = () => {
       if (window.location.hash !== `#experience-${id}`) return;
 
@@ -185,8 +224,28 @@ const ExpCard = ({
       hashOpenTimerRef.current = setTimeout(() => {
         setIsExpanded(true);
         hashOpenTimerRef.current = null;
-        // 펼치면서 생긴 레이아웃 변화를 반영해 카드 상단으로 다시 맞춘다.
-        scrollToCard();
+
+        if (!deepLinkTarget) {
+          // 펼치면서 생긴 레이아웃 변화를 반영해 카드 상단으로 다시 맞춘다.
+          scrollToCard();
+          return;
+        }
+
+        // 패널이 다 펼쳐진 뒤 → 그 소재까지 내려가고 → 다 내려간 다음 모달을 연다.
+        if (deepLinkScrollTimerRef.current) clearTimeout(deepLinkScrollTimerRef.current);
+        deepLinkScrollTimerRef.current = setTimeout(() => {
+          deepLinkScrollTimerRef.current = null;
+
+          if (deepLinkTarget.kind === "section") {
+            scrollToDeepLinkTarget(`[data-section-title="${deepLinkTarget.title}"]`, "start");
+            return;
+          }
+
+          scrollToDeepLinkTarget(`[data-doc-href="${deepLinkTarget.href}"]`);
+          runAfterScrollEnd(() => {
+            setActivePdf({ href: deepLinkTarget.href, label: deepLinkTarget.label });
+          });
+        }, PANEL_EXPAND_DURATION_MS);
       }, HASH_OPEN_DELAY_MS);
     };
 
@@ -196,6 +255,9 @@ const ExpCard = ({
     return () => {
       window.removeEventListener("hashchange", openFromHash);
       if (hashOpenTimerRef.current) clearTimeout(hashOpenTimerRef.current);
+      if (deepLinkScrollTimerRef.current) clearTimeout(deepLinkScrollTimerRef.current);
+      if (scrollSettleTimerRef.current) clearTimeout(scrollSettleTimerRef.current);
+      removeScrollEndListenerRef.current?.();
     };
   }, [id]);
 
