@@ -17,10 +17,10 @@ export const EXPERIENCE_DEEP_LINK_TARGETS: Record<number, ExperienceDeepLinkTarg
     href: "/mds/katsu-map/impl-4-recommend.md",
     label: "돈가스 테이스팅 기록을 바탕으로 취향에 맞는 식당을 추천하는 기능을 만들었습니다",
   },
-  // 슈어소프트테크 인턴 → 핵심 작업 섹션까지만 (아래 카드는 펼치지 않는다)
+  // 슈어소프트테크 인턴 → 무슨 일을 맡았나 섹션까지만 (아래 카드는 펼치지 않는다)
   102: {
     kind: "section",
-    title: "핵심 작업",
+    title: "무슨 일을 맡았나",
   },
   // 끼니톡 → 식단 분석 AI 서버 문서
   105: {

@@ -14,7 +14,7 @@
 
 ## 쌓인 기록을 새로운 식당 발견으로 연결했습니다
 
-![내 돈가스 취향과 추천 식당 화면](/assets/experiences/katsu-map/IMG_9415.jpg#size=1206x2186&w=290&crop=1206x1831&half&center-row)![돈가스 테이스팅 기록 화면](</assets/experiences/katsu-map/스크린샷, 2026-08-12 오전 1.05.39.png#size=1206x1831&w=290&half>)
+![내 돈가스 취향과 추천 식당 화면](/assets/experiences/katsu-map/IMG_9415.jpg#size=1206x2186&w=290&crop=1206x1831&half&center-row)![돈가스 테이스팅 기록 화면](/assets/experiences/katsu-map/tasting-note.png#size=800x1214&w=290&half)
 
 기존 화면은 사용자의 테이스팅 기록을 평균 내어 취향 그래프로 보여주고, **이미 방문한 식당을 취향이 가까운 순서로 다시 정렬**했습니다. 사용자의 취향은 보여줬지만 새로운 식당을 발견하게 해주는 추천은 아니었습니다.
 
