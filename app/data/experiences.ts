@@ -1609,7 +1609,7 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/kkinitalk/verify-1-method.md", label: "납품된 챗봇을 19개 항목으로 검증해 빠진 안전 요구사항을 찾았습니다" },
+            { href: "/mds/kkinitalk/verify-1-method.md", label: "납품된 챗봇을 19개 조건으로 검증하고, 의미 일관성은 메타모픽 테스트로 확인했습니다" },
             { href: "/mds/kkinitalk/verify-3-emergency.md", label: "건강 상담 챗봇이 놓치던 응급 표현을 찾아 보완했습니다" },
             { href: "/mds/kkinitalk/verify-5-load.md", label: "식단분석 AI 요청이 몰릴 때를 대비해 동시 실행 제한과 타임아웃을 적용했습니다" },
           ],
