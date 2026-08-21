@@ -143,14 +143,11 @@ export default function PdfViewerModal({
   const panY = useMotionValue(0);
   const [pageSize, setPageSize] = useState({ width: 1200, height: 675 });
   const [loadError, setLoadError] = useState(false);
-  const navigationStart =
-    sections.length > 0 && numPages > 0
-      ? Math.max(0, Math.min(numPages - 1, Math.min(...sections.map(section => section.startPage)) - 1))
-      : 0;
-  const navigationEnd =
-    sections.length > 0 && numPages > 0
-      ? Math.max(navigationStart, Math.min(numPages - 1, Math.max(...sections.map(section => section.endPage)) - 1))
-      : Math.max(0, numPages - 1);
+  // `sections`는 목차이므로 문서에서 이동 가능한 범위를 제한하면 안 된다.
+  // 일부 문서(CT API 등)는 목차가 중간 페이지부터 시작하는데, 그 최솟값을
+  // 시작 페이지로 사용하면 PDF를 열자마자 앞부분을 건너뛰게 된다.
+  const navigationStart = 0;
+  const navigationEnd = Math.max(0, numPages - 1);
 
   useEffect(() => {
     setIsMounted(true);
@@ -221,30 +218,6 @@ export default function PdfViewerModal({
       }
     };
   }, [pdfUrl]);
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer || numPages <= 1 || navigationStart === 0) return;
-
-    programmaticPageRef.current = navigationStart;
-    setCurrentPage(navigationStart);
-    if (navigationUnlockTimerRef.current) {
-      clearTimeout(navigationUnlockTimerRef.current);
-    }
-
-    const animationFrame = requestAnimationFrame(() => {
-      scrollContainer.scrollTo({
-        top: navigationStart * window.innerHeight * 0.55 + 2,
-        behavior: "auto",
-      });
-
-      navigationUnlockTimerRef.current = setTimeout(() => {
-        programmaticPageRef.current = null;
-      }, 300);
-    });
-
-    return () => cancelAnimationFrame(animationFrame);
-  }, [navigationStart, numPages]);
 
   const goToPage = (pageIndex: number) => {
     const nextIndex = Math.max(navigationStart, Math.min(pageIndex, navigationEnd));
