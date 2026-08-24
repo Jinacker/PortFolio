@@ -241,10 +241,11 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
+            { href: "/mds/katsu-map/impl-4-recommend.md", label: "돈가스 테이스팅 기록을 바탕으로 취향에 맞는 식당을 추천하는 기능을 만들었습니다" },
+            { href: "/mds/katsu-map/impl-5-traffic.md", label: "트래픽이 몰리는 점심·저녁 시간대에 대비해 서버와 캐시 구조를 구성했습니다" },
             { href: "/mds/katsu-map/impl-1-auth.md", label: "구버전 앱을 유지하며 인증 체계를 교체했습니다" },
             { href: "/mds/katsu-map/impl-2-compat.md", label: "운영 중에도 기존 앱을 깨뜨리지 않는 DB 변경" },
             { href: "/mds/katsu-map/impl-3-map-versions.md", label: "구버전 앱의 지도를 유지하며 새 지도 기능을 배포했습니다" },
-            { href: "/mds/katsu-map/impl-4-recommend.md", label: "돈가스 테이스팅 기록을 바탕으로 취향에 맞는 식당을 추천하는 기능을 만들었습니다" },
           ],
         },
         {
@@ -259,10 +260,9 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시 발송 직후 몰리던 요청을 분산해 오류를 줄였습니다" },
-            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연 원인을 찾아 DB 요청 구조를 개선했습니다" },
+            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 응답 지연을 분석해 병목 구간을 개선했습니다" },
+            { href: "/mds/katsu-map/ts-2-analytics-batch.md", label: "이용 통계 수집이 서비스 부하로 이어지지 않도록 배치 수집 구조로 설계했습니다" },
             { href: "/mds/katsu-map/ts-3-push-dup.md", label: "앱 재설치 후 중복 알림의 원인을 푸시 토큰 연결에서 찾아 수정했습니다" },
-            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "504 오류를 서버 장애로 단정하지 않고 로그로 원인 범위를 좁혔습니다" },
-            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "잘못 설정된 캐시 만료 시간을 바로잡아 응답 속도를 개선했습니다" },
           ],
         },
         {
@@ -710,23 +710,36 @@ const experiences: Record<Locale, Experience[]> = {
                 "## 쿼리 구조 — CTE 통합 vs Java 조립",
                 "구조가 고정된 목록 API는 1쿼리 통합, 요청마다 조합이 달라지는 상세 API는 3쿼리 + Java 조립으로 API 성격에 따라 분리",
                 "## 병목 해결 — 인덱스를 살리는 역할 분담",
-                "고객사 프로젝트의 1.2초 응답에 구간별 로그를 심어 전체 시간의 91%를 차지하는 쿼리를 특정",
-                "문자열 결합 조건이 인덱스를 무효화하는 문제를 확인하고, DB는 인덱스 범위 조회, Java는 정밀 필터링을 맡도록 변경",
+                "구간별 로그로 병목 쿼리를 특정해 문자열 결합 조건이 인덱스를 무효화하는 것을 확인하고, DB는 인덱스 범위 조회, Java는 정밀 필터링을 맡도록 변경",
                 "전송량이 조금 늘어나는 대신 전체 스캔을 제거하는 트레이드오프를 선택",
               ],
               highlights: [
                 "CT팀과 비교",
                 "1쿼리 통합",
                 "3쿼리 + Java 조립",
-                "전체 시간의 91%",
                 "DB는 인덱스 범위 조회",
                 "Java는 정밀 필터링",
                 "트레이드오프",
               ],
             },
             {
-              title: "작업 내용",
-              items: [],
+              title: "작업 내용 — 세 단계 성능 최적화",
+              items: [
+                "대용량 조회 구조의 쿼리 폭증 가능성을 미리 식별하고, DB → Service → JSON 직렬화 전 구간을 병목 후보로 두고 세 단계로 나눠 최적화",
+                "## ① 조회 횟수 최적화",
+                "같은 쿼리가 반복되는 N+1 구조를 제거하고, 분산된 조회를 CTE(WITH 절) 기반 쿼리로 통합해 DB 왕복을 최소화",
+                "## ② 조회 데이터 양 최적화",
+                "테스트케이스가 있는 함수만 조회하도록 쿼리를 재설계해 불필요한 row를 DB 단계에서 미리 제거",
+                "## ③ 서비스 단 가공 최적화",
+                "Map 다중 구조 대신 정렬된 flat 데이터를 순차 조립하는 방식으로 바꿔 이중 반복문과 중간 자료구조를 제거",
+              ],
+              highlights: [
+                "DB → Service → JSON 직렬화 전 구간",
+                "N+1 구조를 제거",
+                "CTE(WITH 절) 기반 쿼리로 통합",
+                "불필요한 row를 DB 단계에서 미리 제거",
+                "이중 반복문과 중간 자료구조를 제거",
+              ],
               pdf: {
                 href: "/pdfs/ct-api-design-implementation.pdf",
                 label: "CT API 구현·성능 개선 과정 자세히 보기",
@@ -748,19 +761,15 @@ const experiences: Record<Locale, Experience[]> = {
             {
               title: "결과 — 측정으로 검증",
               items: [
-                "고객사 프로젝트 응답 속도 1.2초 → 72ms(약 16배)",
-                "DB 조회 수 최대 111,002번 → 3번, 전송 데이터 약 88% 절감",
-                "10만·100만 건 테스트 데이터를 직접 만들어 k6 부하 테스트 — 10만 건 평균 715ms, 오류율 0%",
+                "요청당 DB 조회를 목록 1번·상세 3번으로 고정하고, 고객사 프로젝트 데이터 기준 응답 속도 100ms 안팎을 확인",
+                "10만·100만 건 테스트 데이터를 직접 만들어 k6 부하 테스트 — 10만 건 평균 715ms 확인",
                 "응답 데이터와 원본을 전수 대조한 뒤 CT팀에 전달 및 제품 탑재",
               ],
               highlights: [
-                "1.2초 → 72ms",
-                "111,002번 → 3번",
-                "약 88% 절감",
+                "목록 1번·상세 3번",
+                "100ms 안팎",
                 "10만 건 평균 715ms",
-                "오류율 0%",
                 "전수 대조",
-                "팀 자산",
               ],
               // [빈 슬롯] 이미지 확보 시 media로 추가: ct-api-before-after.png (확인 필요) — 리팩토링 전후 응답 속도 비교 (위치: 위)
             },
@@ -889,7 +898,7 @@ const experiences: Record<Locale, Experience[]> = {
                 "시퀀스·컴포넌트 에디터가 제품 정식 코드에 merge되고 제품 로드맵에 포함",
                 "부품처럼 교체할 수 있게 설계해 화면당 파일 2개 수정만으로 제품 3개 화면에 탑재",
                 "README·임베드 매뉴얼과 함께 사내 라이브러리로 인수인계하고 팀 상반기 성과 발표의 핵심 기능으로 수록",
-                "추가 요청 패치 4회 동안 Critical 버그 0건, 렌더링 버그 수정은 Mermaid.js 오픈소스 PR merge로 연결",
+                "인수인계 후 추가 요청 패치 4회를 반영했고, 렌더링 버그 수정은 Mermaid.js 오픈소스 PR merge로 이어짐",
               ],
               highlights: [
                 "다이어그램 3종",
@@ -897,7 +906,6 @@ const experiences: Record<Locale, Experience[]> = {
                 "제품 정식 코드에 merge",
                 "화면당 파일 2개 수정",
                 "사내 라이브러리로 인수인계",
-                "Critical 버그 0건",
                 "Mermaid.js 오픈소스 PR merge",
               ],
               // [빈 슬롯] 이미지 확보 시 media로 추가: sureflow-editor.png (확인 필요) — 시퀀스·컴포넌트 다이어그램 편집 화면 (위치: 위)
@@ -1413,7 +1421,7 @@ const experiences: Record<Locale, Experience[]> = {
     },
     {
       id: 105,
-      title: "끼니톡. 어르신 식단·건강관리를 위한 AI 개발",
+      title: "끼니톡. 어르신 식단·건강관리를 위한 AI 서비스 개발",
       period: "2026.06 - 현재",
       items: [],
       links: [],
@@ -1597,6 +1605,7 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/kkinitalk/impl-1-model.md", label: "식사 사진을 영양 정보로 바꾸는 AI 분석 서버를 만들었습니다" },
+            { href: "/mds/kkinitalk/impl-9-json-contract.md", label: "AI 출력을 5단계로 검증해 API 응답 계약을 고정했습니다" },
             { href: "/mds/kkinitalk/chat-1-where.md", label: "외주로 제작한 건강 상담 챗봇을 검증해 서비스에 연동했습니다" },
           ],
         },
@@ -1613,7 +1622,7 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/kkinitalk/verify-1-method.md", label: "납품된 챗봇을 19개 조건으로 검증하고, 의미 일관성은 메타모픽 테스트로 확인했습니다" },
+            { href: "/mds/kkinitalk/verify-1-method.md", label: "답이 매번 달라지는 챗봇, 19개 검사를 자동 실행하는 하네스로 검증했습니다" },
             { href: "/mds/kkinitalk/verify-3-emergency.md", label: "건강 상담 챗봇이 놓치던 응급 표현을 찾아 보완했습니다" },
             { href: "/mds/kkinitalk/verify-5-load.md", label: "식단분석 AI 요청이 몰릴 때를 대비해 동시 실행 제한과 타임아웃을 적용했습니다" },
           ],
@@ -1659,7 +1668,7 @@ const experiences: Record<Locale, Experience[]> = {
       ],
       is_active: true,
       sub_title: "‘모두의 창업’ 1라운드 선정 및 투자금 300만 원 유치 · 2라운드 준비 중",
-      imageUrl: "/assets/experiences/kkinitalk/kkini-card.png",
+      imageUrl: "/assets/experiences/kkinitalk/kkini-card-mark.png",
       index: 3,
       skill_ids: [83, 84, 85, 86, 99, 87, 89, 90, 91, 92, 94, 95, 96, 98],
       category: "STARTUP",
@@ -2083,13 +2092,13 @@ const experiences: Record<Locale, Experience[]> = {
           // 사진 자리(media): CodeRabbit PR 리뷰 코멘트 캡처 또는 검증 하네스 실행 결과(PASS/FAIL 목록) 터미널 캡처
           sections: [
             {
-              title: "자동 테스트 · 검증 하네스 · Reviewer Agent · CodeRabbit · 직접 실행",
+              title: "단계별 자동 테스트 · AI 검증 · 독립 리뷰 · 직접 확인",
               items: [
-                "Task를 작성할 때부터 테스트를 완료 조건에 포함합니다. 구현이 끝나면 테스트·린트·타입 체크 → 검증 하네스 → 리뷰어 에이전트 → CodeRabbit PR 리뷰 → 직접 실행 순서로 확인하고, 문제가 있으면 이전 단계로 돌아갑니다.",
+                "Task를 작성할 때부터 테스트를 완료 조건에 포함합니다. 구현이 끝나면 정적 검사 → Unit → Integration → System → Acceptance 테스트 순서로 자동 검증하고, 문제가 있으면 이전 단계로 돌아갑니다.",
                 "하나의 AI 판단을 다른 AI 판단으로 덮는 것이 아니라, 자동화된 기준과 독립 리뷰, 직접 실행을 함께 사용합니다.",
                 "끼니톡에서는 단위 테스트와 별도로 계약·AI 출력·지표·부하 하네스를 만들어 비결정적인 LLM 응답과 실제 외부 API 동작을 검증했습니다.",
                 "PR에는 CodeRabbit을 붙여 내부 기준 밖의 시선을 더합니다. 실제로 DTO 계약과 컨트롤러 구현의 불일치를 지적받았고, 지적은 에이전트용 프롬프트로 받아 그대로 수정 작업에 넘깁니다.",
-                "마지막 층인 직접 실행은 에이전트가 헤드리스 크롬으로 대신합니다. 화면을 열어 스크린샷과 실측값으로 보고하고, 첫 로딩 성능 같은 문제도 같은 방식으로 분해합니다.",
+                "마지막 인수 테스트는 에이전트가 헤드리스 크롬으로 대신합니다. 화면을 열어 스크린샷과 실측값으로 보고하고, 첫 로딩 성능 같은 문제도 같은 방식으로 분해합니다.",
               ],
               highlights: [
                 "테스트를 완료 조건에 포함",
@@ -2105,7 +2114,7 @@ const experiences: Record<Locale, Experience[]> = {
               docs: [
                 {
                   href: "/mds/ai-workflow/verify.md",
-                  label: "다층 검증 파이프라인 — 각 층이 잡는 결함과 하네스 예시",
+                  label: "Unit부터 인수 테스트까지 자동화해 AI 작업의 완료 조건으로 사용합니다",
                 },
               ],
             },
@@ -2200,7 +2209,7 @@ const experiences: Record<Locale, Experience[]> = {
       links: [],
       is_active: true,
       sub_title: "Owned everything AI — diet-analysis server, chatbot integration, and verification — while advancing to Round 1 of Everyone's Startup",
-      imageUrl: "/assets/experiences/kkinitalk/kkini-card.png",
+      imageUrl: "/assets/experiences/kkinitalk/kkini-card-mark.png",
       placeholderSlots: true,
       index: 3,
       skill_ids: [],
