@@ -241,11 +241,11 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
+            { href: "/mds/katsu-map/impl-4-recommend.md", label: "돈가스 테이스팅 기록을 바탕으로 취향에 맞는 식당을 추천하는 기능을 만들었습니다" },
+            { href: "/mds/katsu-map/impl-5-traffic.md", label: "트래픽이 몰리는 점심·저녁 시간대에 대비해 서버와 캐시 구조를 구성했습니다" },
             { href: "/mds/katsu-map/impl-1-auth.md", label: "구버전 앱을 유지하며 인증 체계를 교체했습니다" },
             { href: "/mds/katsu-map/impl-2-compat.md", label: "운영 중에도 기존 앱을 깨뜨리지 않는 DB 변경" },
             { href: "/mds/katsu-map/impl-3-map-versions.md", label: "구버전 앱의 지도를 유지하며 새 지도 기능을 배포했습니다" },
-            { href: "/mds/katsu-map/impl-4-recommend.md", label: "돈가스 테이스팅 기록을 바탕으로 취향에 맞는 식당을 추천하는 기능을 만들었습니다" },
-            { href: "/mds/katsu-map/impl-5-traffic.md", label: "트래픽이 몰리는 점심·저녁 시간대에 대비해 서버와 캐시 구조를 구성했습니다" },
           ],
         },
         {
@@ -260,7 +260,7 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시 발송 직후 몰리던 요청을 분산해 오류를 줄였습니다" },
-            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연 원인을 찾아 DB 요청 구조를 개선했습니다" },
+            { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 응답 지연을 분석해 병목 구간을 개선했습니다" },
             { href: "/mds/katsu-map/ts-2-analytics-batch.md", label: "이용 통계 수집이 서비스 부하로 이어지지 않도록 배치 수집 구조로 설계했습니다" },
             { href: "/mds/katsu-map/ts-3-push-dup.md", label: "앱 재설치 후 중복 알림의 원인을 푸시 토큰 연결에서 찾아 수정했습니다" },
           ],
