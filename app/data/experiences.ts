@@ -1413,7 +1413,7 @@ const experiences: Record<Locale, Experience[]> = {
     },
     {
       id: 105,
-      title: "끼니톡. 어르신 식단·건강관리를 위한 AI 개발",
+      title: "끼니톡. 어르신 식단·건강관리를 위한 AI 서비스 개발",
       period: "2026.06 - 현재",
       items: [],
       links: [],
@@ -1597,6 +1597,7 @@ const experiences: Record<Locale, Experience[]> = {
           layout: "paragraphs",
           docs: [
             { href: "/mds/kkinitalk/impl-1-model.md", label: "식사 사진을 영양 정보로 바꾸는 AI 분석 서버를 만들었습니다" },
+            { href: "/mds/kkinitalk/impl-9-json-contract.md", label: "AI 출력을 5단계로 검증해 API 응답 계약을 고정했습니다" },
             { href: "/mds/kkinitalk/chat-1-where.md", label: "외주로 제작한 건강 상담 챗봇을 검증해 서비스에 연동했습니다" },
           ],
         },
@@ -1613,7 +1614,7 @@ const experiences: Record<Locale, Experience[]> = {
           ],
           layout: "paragraphs",
           docs: [
-            { href: "/mds/kkinitalk/verify-1-method.md", label: "납품된 챗봇을 19개 조건으로 검증하고, 의미 일관성은 메타모픽 테스트로 확인했습니다" },
+            { href: "/mds/kkinitalk/verify-1-method.md", label: "답이 매번 달라지는 챗봇, 19개 검사를 자동 실행하는 하네스로 검증했습니다" },
             { href: "/mds/kkinitalk/verify-3-emergency.md", label: "건강 상담 챗봇이 놓치던 응급 표현을 찾아 보완했습니다" },
             { href: "/mds/kkinitalk/verify-5-load.md", label: "식단분석 AI 요청이 몰릴 때를 대비해 동시 실행 제한과 타임아웃을 적용했습니다" },
           ],
@@ -1659,7 +1660,7 @@ const experiences: Record<Locale, Experience[]> = {
       ],
       is_active: true,
       sub_title: "‘모두의 창업’ 1라운드 선정 및 투자금 300만 원 유치 · 2라운드 준비 중",
-      imageUrl: "/assets/experiences/kkinitalk/kkini-card.png",
+      imageUrl: "/assets/experiences/kkinitalk/kkini-card-mark.png",
       index: 3,
       skill_ids: [83, 84, 85, 86, 99, 87, 89, 90, 91, 92, 94, 95, 96, 98],
       category: "STARTUP",
@@ -2200,7 +2201,7 @@ const experiences: Record<Locale, Experience[]> = {
       links: [],
       is_active: true,
       sub_title: "Owned everything AI — diet-analysis server, chatbot integration, and verification — while advancing to Round 1 of Everyone's Startup",
-      imageUrl: "/assets/experiences/kkinitalk/kkini-card.png",
+      imageUrl: "/assets/experiences/kkinitalk/kkini-card-mark.png",
       placeholderSlots: true,
       index: 3,
       skill_ids: [],
