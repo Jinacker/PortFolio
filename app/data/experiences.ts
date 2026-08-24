@@ -261,9 +261,9 @@ const experiences: Record<Locale, Experience[]> = {
           docs: [
             { href: "/mds/katsu-map/ts-1-push429.md", label: "푸시 발송 직후 몰리던 요청을 분산해 오류를 줄였습니다" },
             { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연 원인을 찾아 DB 요청 구조를 개선했습니다" },
+            { href: "/mds/katsu-map/ts-2-analytics-batch.md", label: "이후 추가한 이용 통계도 요청마다 전송하지 않도록 설계했습니다" },
             { href: "/mds/katsu-map/ts-3-push-dup.md", label: "앱 재설치 후 중복 알림의 원인을 푸시 토큰 연결에서 찾아 수정했습니다" },
             { href: "/mds/katsu-map/ts-4-sentry504.md", label: "504 오류를 서버 장애로 단정하지 않고 로그로 원인 범위를 좁혔습니다" },
-            { href: "/mds/katsu-map/ts-5-cache-drift.md", label: "잘못 설정된 캐시 만료 시간을 바로잡아 응답 속도를 개선했습니다" },
           ],
         },
         {
