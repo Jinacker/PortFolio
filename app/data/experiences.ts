@@ -245,6 +245,7 @@ const experiences: Record<Locale, Experience[]> = {
             { href: "/mds/katsu-map/impl-2-compat.md", label: "운영 중에도 기존 앱을 깨뜨리지 않는 DB 변경" },
             { href: "/mds/katsu-map/impl-3-map-versions.md", label: "구버전 앱의 지도를 유지하며 새 지도 기능을 배포했습니다" },
             { href: "/mds/katsu-map/impl-4-recommend.md", label: "돈가스 테이스팅 기록을 바탕으로 취향에 맞는 식당을 추천하는 기능을 만들었습니다" },
+            { href: "/mds/katsu-map/impl-5-traffic.md", label: "트래픽이 몰리는 점심·저녁 시간대에 대비해 서버와 캐시 구조를 구성했습니다" },
           ],
         },
         {
