@@ -263,7 +263,6 @@ const experiences: Record<Locale, Experience[]> = {
             { href: "/mds/katsu-map/ts-2-slowdown.md", label: "앱 전반의 지연 원인을 찾아 DB 요청 구조를 개선했습니다" },
             { href: "/mds/katsu-map/ts-2-analytics-batch.md", label: "이용 통계 수집이 서비스 부하로 이어지지 않도록 배치 수집 구조로 설계했습니다" },
             { href: "/mds/katsu-map/ts-3-push-dup.md", label: "앱 재설치 후 중복 알림의 원인을 푸시 토큰 연결에서 찾아 수정했습니다" },
-            { href: "/mds/katsu-map/ts-4-sentry504.md", label: "504 오류를 서버 장애로 단정하지 않고 로그로 원인 범위를 좁혔습니다" },
           ],
         },
         {
