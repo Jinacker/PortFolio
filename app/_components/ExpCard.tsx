@@ -172,11 +172,11 @@ const ExpCard = ({
   const isAnimatedImage = Boolean(imageUrl?.toLowerCase().endsWith(".gif"));
 
   useEffect(() => {
-    const scrollToCard = () => {
+    const scrollToCard = (block: ScrollLogicalPosition = "start") => {
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => {
           cardRef.current?.focus({ preventScroll: true });
-          cardRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          cardRef.current?.scrollIntoView({ behavior: "smooth", block });
         });
       });
     };
@@ -233,14 +233,14 @@ const ExpCard = ({
 
       if (window.location.hash !== defaultHash && !isCardOnlyDeepLink) return;
 
-      scrollToCard();
+      // 접힌 카드를 헤더 아래가 아니라 화면 중앙에 먼저 위치시킨다.
+      scrollToCard("center");
 
       runAfterScrollEnd(() => {
         setIsExpanded(true);
 
         if (isCardOnlyDeepLink || !deepLinkTarget) {
-          // 펼치면서 생긴 레이아웃 변화를 반영해 카드 상단으로 다시 맞춘다.
-          scrollToCard();
+          // 상세는 카드 아래로 펼쳐지므로 현재 포커스 위치를 그대로 유지한다.
           return;
         }
 
