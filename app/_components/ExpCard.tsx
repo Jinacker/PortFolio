@@ -25,7 +25,8 @@ interface ExpCardProps extends Omit<Experience, "skill_ids"> {
   skills: Skill[];
 }
 
-// #experience-<id> 로 들어왔을 때, 카드로 이동한 뒤 상세를 펼치기까지의 간격
+// #experience-<id> 또는 #experience-<id>-card 로 들어왔을 때,
+// 카드로 이동한 뒤 상세를 펼치기까지의 간격
 const HASH_OPEN_DELAY_MS = 500;
 // 상세 패널 펼침 애니메이션 길이 — 이 뒤에 소재 위치가 확정된다
 const PANEL_EXPAND_DURATION_MS = 400;
@@ -216,7 +217,11 @@ const ExpCard = ({
     const deepLinkTarget = EXPERIENCE_DEEP_LINK_TARGETS[id];
 
     const openFromHash = () => {
-      if (window.location.hash !== `#experience-${id}`) return;
+      const defaultHash = `#experience-${id}`;
+      const cardOnlyHash = `${defaultHash}-card`;
+      const isCardOnlyDeepLink = window.location.hash === cardOnlyHash;
+
+      if (window.location.hash !== defaultHash && !isCardOnlyDeepLink) return;
 
       scrollToCard();
 
@@ -225,7 +230,7 @@ const ExpCard = ({
         setIsExpanded(true);
         hashOpenTimerRef.current = null;
 
-        if (!deepLinkTarget) {
+        if (isCardOnlyDeepLink || !deepLinkTarget) {
           // 펼치면서 생긴 레이아웃 변화를 반영해 카드 상단으로 다시 맞춘다.
           scrollToCard();
           return;
