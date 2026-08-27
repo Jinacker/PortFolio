@@ -25,13 +25,10 @@ interface ExpCardProps extends Omit<Experience, "skill_ids"> {
   skills: Skill[];
 }
 
-// #experience-<id> 또는 #experience-<id>-card 로 들어왔을 때,
-// 카드로 이동한 뒤 상세를 펼치기까지의 간격
-const HASH_OPEN_DELAY_MS = 500;
 // 상세 패널 펼침 애니메이션 길이 — 이 뒤에 소재 위치가 확정된다
 const PANEL_EXPAND_DURATION_MS = 400;
-// scrollend를 지원하지 않는 브라우저에서 스크롤이 끝났다고 보는 최대 대기 시간
-const SCROLL_SETTLE_MAX_MS = 900;
+// scrollend를 지원하지 않는 브라우저에서 마지막 scroll 이벤트 뒤 기다리는 시간
+const SCROLL_SETTLE_DELAY_MS = 120;
 
 const skillGroups = [
   {
@@ -133,7 +130,6 @@ const ExpCard = ({
   const [activePdf, setActivePdf] = useState<ActivePdf | null>(null);
   const [activeLegacyModal, setActiveLegacyModal] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const hashOpenTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const deepLinkScrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scrollSettleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const removeScrollEndListenerRef = useRef<(() => void) | null>(null);
@@ -193,23 +189,37 @@ const ExpCard = ({
     };
 
     // 스크롤이 실제로 멈춘 뒤에 이어서 실행한다.
-    // scrollend를 지원하지 않는 브라우저에서는 최대 대기 시간이 지나면 진행한다.
+    // scrollend를 지원하지 않는 브라우저에서는 마지막 scroll 이벤트를 기준으로 판정한다.
     const runAfterScrollEnd = (run: () => void) => {
       const scrollTarget: EventTarget = window;
       let hasRun = false;
 
+      removeScrollEndListenerRef.current?.();
+      removeScrollEndListenerRef.current = null;
+      if (scrollSettleTimerRef.current) clearTimeout(scrollSettleTimerRef.current);
+      scrollSettleTimerRef.current = null;
+
       const finish = () => {
         if (hasRun) return;
         hasRun = true;
+        scrollTarget.removeEventListener("scroll", scheduleFallback);
         scrollTarget.removeEventListener("scrollend", finish);
         if (scrollSettleTimerRef.current) clearTimeout(scrollSettleTimerRef.current);
         scrollSettleTimerRef.current = null;
+        removeScrollEndListenerRef.current = null;
         run();
       };
 
+      const scheduleFallback = () => {
+        if (scrollSettleTimerRef.current) clearTimeout(scrollSettleTimerRef.current);
+        scrollSettleTimerRef.current = setTimeout(finish, SCROLL_SETTLE_DELAY_MS);
+      };
+
+      scrollTarget.addEventListener("scroll", scheduleFallback, { passive: true });
       scrollTarget.addEventListener("scrollend", finish);
-      scrollSettleTimerRef.current = setTimeout(finish, SCROLL_SETTLE_MAX_MS);
+      scheduleFallback();
       removeScrollEndListenerRef.current = () => {
+        scrollTarget.removeEventListener("scroll", scheduleFallback);
         scrollTarget.removeEventListener("scrollend", finish);
       };
     };
@@ -225,10 +235,8 @@ const ExpCard = ({
 
       scrollToCard();
 
-      if (hashOpenTimerRef.current) clearTimeout(hashOpenTimerRef.current);
-      hashOpenTimerRef.current = setTimeout(() => {
+      runAfterScrollEnd(() => {
         setIsExpanded(true);
-        hashOpenTimerRef.current = null;
 
         if (isCardOnlyDeepLink || !deepLinkTarget) {
           // 펼치면서 생긴 레이아웃 변화를 반영해 카드 상단으로 다시 맞춘다.
@@ -251,7 +259,7 @@ const ExpCard = ({
             setActivePdf({ href: deepLinkTarget.href, label: deepLinkTarget.label });
           });
         }, PANEL_EXPAND_DURATION_MS);
-      }, HASH_OPEN_DELAY_MS);
+      });
     };
 
     openFromHash();
@@ -259,7 +267,6 @@ const ExpCard = ({
 
     return () => {
       window.removeEventListener("hashchange", openFromHash);
-      if (hashOpenTimerRef.current) clearTimeout(hashOpenTimerRef.current);
       if (deepLinkScrollTimerRef.current) clearTimeout(deepLinkScrollTimerRef.current);
       if (scrollSettleTimerRef.current) clearTimeout(scrollSettleTimerRef.current);
       removeScrollEndListenerRef.current?.();
